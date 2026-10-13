@@ -147,6 +147,7 @@ async function render() {
   side.innerHTML = '';
   layers.places.clearLayers(); layers.route.clearLayers();
   drawStart();
+  map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다
   const first = lastStep === 0;
   if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] }); return; }
   const entering = step !== lastStep; lastStep = step;
@@ -330,4 +331,5 @@ function renderStep3(side, entering) {
 }
 
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
+window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
 render();
