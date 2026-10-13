@@ -1,0 +1,10 @@
+{
+  "name": "route-planner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "validate": "node scripts/validate-data.js",
+    "serve": "python3 -m http.server 8080"
+  }
+}
