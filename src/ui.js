@@ -74,7 +74,7 @@ function renderSettings(side) {
     row1.appendChild(b);
   }
   p.appendChild(row1);
-  const row2 = $('div', 'row');
+  const row2 = $('div', 'grid');
   row2.append($('span', 'muted', '일수'), stepper(state.d, d => setState({ d: Math.max(1, Math.min(10, state.d + d)) })));
   row2.append($('span', 'muted', '하루 시작'), stepper(state.t, d => setState({ t: Math.max(0, Math.min(state.e - 60, state.t + d * 30)) }), hm));
   row2.append($('span', 'muted', '하루 끝'), stepper(state.e, d => setState({ e: Math.max(state.t + 60, Math.min(1440, state.e + d * 30)) }), hm));
@@ -84,7 +84,6 @@ function renderSettings(side) {
     const b = $('button', 'btn' + (state.v === v ? ' primary' : ''), label); b.type = 'button';
     b.onclick = () => setState({ v }); row3.appendChild(b);
   }
-  row3.appendChild($('span', 'muted', '2km 넘는 구간. 구간마다 결과에서 따로 바꿀 수 있다.'));
   p.appendChild(row3);
   const row4 = $('div', 'row'); row4.appendChild($('span', 'muted', '출발점'));
   const pick = $('button', 'btn' + (pickStart ? ' primary' : ''), pickStart ? '지도를 클릭해라…' : (state.s ? '출발점 옮기기' : '지도에서 출발점(숙소) 찍기'));
@@ -95,7 +94,7 @@ function renderSettings(side) {
   p.appendChild(row4);
   side.appendChild(d);
 }
-let settingsOpen = true;
+let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
 
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
@@ -111,25 +110,25 @@ function renderInfo(side) {
   if (state.tab === 'pack') {
     const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 준비물`));
     p.appendChild($('p', null, '동선과 무관하게 챙길 것. 짐은 가볍게, 겹옷으로.'));
-    for (const x of city.pack) p.appendChild($('p', null, `<b>${esc(x.item)}</b> <span class="muted">— ${esc(x.why)}</span>`));
+    for (const x of city.pack) p.appendChild($('div', 'item', `<b>${esc(x.item)}</b><span>${esc(x.why)}</span>`));
     side.appendChild(p);
   }
   if (state.tab === 'photo') {
     const g = $('div', 'panel'); g.appendChild($('h2', null, `${esc(city.name)} 사진 — 공통`));
-    for (const t of city.photo.general) g.appendChild($('p', null, esc(t)));
+    for (const t of city.photo.general) g.appendChild($('div', 'item', `<span>${esc(t)}</span>`));
     side.appendChild(g);
     const mine = city.places.filter(pl => chosen.has(pl.id)), rest = city.places.filter(pl => !chosen.has(pl.id));
     for (const [title, list, hint] of [['내가 고른 곳', mine, '플랜에서 고른 장소만. 지도의 진한 점이 이 곳들이다.'], ['나머지 장소', rest, '고르지 않은 곳도 참고용으로.']]) {
       if (!list.length) continue;
       const p = $('div', 'panel'); p.appendChild($('h2', null, title)); p.appendChild($('p', null, hint));
-      for (const pl of list) p.appendChild($('p', null, `<b>${esc(pl.name)}</b> <span class="muted">— ${esc(city.photo.places[pl.id] || '')}</span>`));
+      for (const pl of list) p.appendChild($('div', 'item', `<b>${esc(pl.name)}</b><span>${esc(city.photo.places[pl.id] || '')}</span>`));
       side.appendChild(p);
     }
   }
   if (state.tab === 'gift') {
     const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 기념품`));
     p.appendChild($('p', null, '가볍고 안 깨지고 다른 데서 못 사는 것 순서.'));
-    for (const x of city.gift) p.appendChild($('p', null, `<b>${esc(x.item)}</b> <span class="muted">· ${esc(x.where)}</span><br><span class="muted">${esc(x.note)}</span>`));
+    for (const x of city.gift) p.appendChild($('div', 'item', `<b>${esc(x.item)}</b><span class="muted">${esc(x.where)}</span><span>${esc(x.note)}</span>`));
     side.appendChild(p);
   }
   // 지도엔 고른 곳만 진하게 표시해 둔다
@@ -229,6 +228,7 @@ function renderStep2(side, entering) {
   });
 }
 const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 안 넣는다)
+let editing = false;        // 순서·이동수단 조정 도구를 보일지 — 기본은 읽기만
 
 function renderStep3(side, entering) {
   const places = resolvePlaces(state, city);
@@ -251,7 +251,8 @@ function renderStep3(side, entering) {
   const copy = $('button', 'btn primary', '링크 복사'); copy.type = 'button';
   copy.onclick = async () => { try { await navigator.clipboard.writeText(location.href); copy.textContent = '복사됨'; } catch { prompt('이 주소를 복사하세요', location.href); } };
   const back = $('button', 'btn', '← 장소 고치기'); back.type = 'button'; back.onclick = () => goStep(2);
-  row.append(copy, back);
+  const ed = $('button', 'btn' + (editing ? ' primary' : ''), editing ? '조정 끝' : '순서·이동 조정'); ed.type = 'button'; ed.onclick = () => { editing = !editing; render(); };
+  row.append(copy, back, ed);
   result.days.forEach((_, i) => {
     const b = $('button', 'btn', `${i + 1}일차`); b.type = 'button';
     b.style.borderColor = `var(${DAY_COLORS[i]})`; b.style.color = hidden.has(i) ? '' : `var(${DAY_COLORS[i]})`;
@@ -274,47 +275,58 @@ function renderStep3(side, entering) {
       });
     }
     const panel = $('div', 'panel'); panel.style.borderLeft = `3px solid ${col}`;
-    panel.appendChild($('h2', null, `${i + 1}일차 <span class="muted" style="font-weight:500">· ${esc(day.why)}${day.stops.length ? ` · 끝 ${hm(day.end)} · 이동 ${day.moveMin}분 · 도보 ${day.walkKm}km` : ''}</span>`));
+    panel.appendChild($('h2', null, `${i + 1}일차`));
+    panel.appendChild($('p', 'meta', `${esc(day.why)}${day.stops.length ? ` · ${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분 · 도보 ${day.walkKm}km` : ''}`));
     if (!day.stops.length) panel.appendChild($('p', null, '이 날에 묶인 곳이 전부 예산을 넘겨 빠졌다. 아래 「뺀 것」을 보고 일수를 늘리거나 체류를 줄여라.'));
     if (day.over) panel.appendChild($('p', null, `<b style="color:var(--warn)">⚠ 꼭 가기만 남았는데도 ${hm(state.e)}을 넘긴다. 일수를 늘리거나 체류를 줄여라.</b>`));
     const layout = () => result.days.map(d => d.stops.map(s => s.place.id));   // 현재 배정을 o로
     const commit = o => setState({ o: o.filter(d => d.length) });
     let prevId = 'start';
     day.stops.forEach((s, k) => {
-      const r = $('div', 'row');
-      // 이동 구간 (이 정류장으로 오는 길)
+      // 이동 구간 (이 정류장으로 오는 길) — 읽기 모드에선 글자, 편집 모드에선 셀렉트
       const key = `${prevId}>${s.place.id}`; prevId = s.place.id;
-      const leg = $('select'); leg.title = '이 구간 이동수단';
-      for (const [v, label] of [['', `자동`], ['walk', '도보'], ['metro', '지하철'], ['taxi', '택시'], ['custom', '직접 입력']]) {
-        const op = $('option', null, v === '' ? `↑ ${MODE[s.travelMode]} ${s.travelMin}분` : label); op.value = v;
-        const cur = state.l[key]; op.selected = v === '' ? cur == null : (typeof cur === 'number' ? v === 'custom' : cur === v);
-        leg.appendChild(op);
-      }
-      leg.onchange = () => {
-        const l = { ...state.l };
-        if (leg.value === '') delete l[key];
-        else if (leg.value === 'custom') { const n = parseInt(prompt('이 구간 이동시간(분)', String(s.travelMin))); if (!(n > 0)) { render(); return; } l[key] = n; }
-        else l[key] = leg.value;
-        setState({ l });
-      };
-      r.appendChild(leg);
-      r.appendChild($('span', null, `<b style="font-variant-numeric:tabular-nums">${hm(s.arrive)}</b> ${esc(s.place.name)}${s.place.must ? ' <span class="muted">꼭</span>' : ''}`));
+      const legRow = $('div', 'leg');
+      if (editing) {
+        const leg = $('select', 'quiet'); leg.title = '이 구간 이동수단';
+        for (const [v, label] of [['', `자동 — ${MODE[s.travelMode]} ${s.travelMin}분`], ['walk', '도보'], ['metro', '지하철'], ['taxi', '택시'], ['custom', '직접 입력']]) {
+          const op = $('option', null, label); op.value = v;
+          const cur = state.l[key]; op.selected = v === '' ? cur == null : (typeof cur === 'number' ? v === 'custom' : cur === v);
+          leg.appendChild(op);
+        }
+        leg.onchange = () => {
+          const l = { ...state.l };
+          if (leg.value === '') delete l[key];
+          else if (leg.value === 'custom') { const n = parseInt(prompt('이 구간 이동시간(분)', String(s.travelMin))); if (!(n > 0)) { render(); return; } l[key] = n; }
+          else l[key] = leg.value;
+          setState({ l });
+        };
+        legRow.append(leg, $('span', null, Object.hasOwn(state.l, key) ? ` → ${MODE[s.travelMode]} ${s.travelMin}분` : ''));
+      } else legRow.textContent = `${MODE[s.travelMode]} ${s.travelMin}분`;
+      panel.appendChild(legRow);
+
+      const r = $('div', 'stop');
+      r.appendChild($('div', 't', hm(s.arrive)));
+      const body = $('div', 'body');
+      body.appendChild($('div', 'name', `${esc(s.place.name)}${s.place.must ? ' <span class="tag">꼭</span>' : ''}`));
       if (!s.place.user) {
-        const sel = $('select');
+        const sel = $('select', 'quiet'); sel.title = '머무는 방식';
         s.place.opts.forEach((o, k2) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = k2; op.selected = s.place.opt === k2; sel.appendChild(op); });
         sel.onchange = () => setState({ p: { ...state.p, [s.place.id]: Number(sel.value) } });
-        r.appendChild(sel);
+        body.appendChild(sel);
+      } else body.appendChild($('div', 'muted', `머물기 · ${esc(s.place.opts[0].min)}분`));
+      if (editing) {
+        const tools = $('div', 'tools');
+        const up = $('button', 'btn sm', '↑'); up.type = 'button'; up.disabled = k === 0;
+        up.onclick = () => { const o = layout(); [o[i][k - 1], o[i][k]] = [o[i][k], o[i][k - 1]]; commit(o); };
+        const dn = $('button', 'btn sm', '↓'); dn.type = 'button'; dn.disabled = k === day.stops.length - 1;
+        dn.onclick = () => { const o = layout(); [o[i][k], o[i][k + 1]] = [o[i][k + 1], o[i][k]]; commit(o); };
+        const mv = $('select'); mv.title = '다른 날로';
+        result.days.forEach((_, j) => { const op = $('option', null, `${j + 1}일차`); op.value = j; op.selected = j === i; mv.appendChild(op); });
+        const nw = $('option', null, '새 날'); nw.value = result.days.length; mv.appendChild(nw);
+        mv.onchange = () => { const o = layout(); const id = o[i].splice(k, 1)[0]; const j = Number(mv.value); (o[j] ||= []).push(id); commit(o); };
+        tools.append(up, dn, mv); body.appendChild(tools);
       }
-      // 순서 조정
-      const up = $('button', 'btn sm', '↑'); up.type = 'button'; up.disabled = k === 0;
-      up.onclick = () => { const o = layout(); [o[i][k - 1], o[i][k]] = [o[i][k], o[i][k - 1]]; commit(o); };
-      const dn = $('button', 'btn sm', '↓'); dn.type = 'button'; dn.disabled = k === day.stops.length - 1;
-      dn.onclick = () => { const o = layout(); [o[i][k], o[i][k + 1]] = [o[i][k + 1], o[i][k]]; commit(o); };
-      const mv = $('select'); mv.title = '다른 날로';
-      result.days.forEach((_, j) => { const op = $('option', null, `${j + 1}일차`); op.value = j; op.selected = j === i; mv.appendChild(op); });
-      const nw = $('option', null, '새 날'); nw.value = result.days.length; mv.appendChild(nw);
-      mv.onchange = () => { const o = layout(); const id = o[i].splice(k, 1)[0]; const j = Number(mv.value); (o[j] ||= []).push(id); commit(o); };
-      r.append(up, dn, mv);
+      r.appendChild(body);
       panel.appendChild(r);
     });
     side.appendChild(panel);
