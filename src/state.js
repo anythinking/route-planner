@@ -1,7 +1,7 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
-export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan' };
-export const TABS = ['plan', 'pack', 'photo', 'gift'];   // 플랜 · 준비물 · 사진 · 기념품
+export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null };
+export const TABS = ['plan', 'pack', 'photo', 'gift', 'mine'];   // 플랜 · 준비물 · 사진 · 기념품 · 내 여행
 const ID = /^[a-z0-9_]+$/, MODES = ['walk', 'metro', 'taxi'];
 
 export function encode(st) {
@@ -17,6 +17,7 @@ export function encode(st) {
   if (lk.length) q.set('l', lk.map(k => `${k}:${st.l[k]}`).join(','));
   if (st.o && st.o.length) q.set('o', st.o.map(ids => ids.join(',')).join('|'));
   if (st.tab && st.tab !== 'plan') q.set('tab', st.tab);
+  if (st.pr) q.set('pr', st.pr);
   return q.toString();
 }
 
@@ -61,6 +62,7 @@ export function decode(hash) {
     st.o = days.length ? days : null;
   }
   if (TABS.includes(q.get('tab'))) st.tab = q.get('tab');
+  if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
   return st;
 }
 

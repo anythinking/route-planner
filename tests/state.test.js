@@ -85,3 +85,11 @@ test('tab: 기본은 plan이고 해시에 안 쓴다, 모르는 값은 plan으�
   assert.ok(!encode({ ...DEFAULTS }).includes('tab='));
   assert.ok(encode({ ...DEFAULTS, tab: 'photo' }).includes('tab=photo'));
 });
+
+test('pr: 열어 둔 여행 id — 영숫자만, 기본은 없음', () => {
+  assert.equal(decode('').pr, null);
+  assert.equal(decode('#pr=abc123').pr, 'abc123');
+  assert.equal(decode('#pr=../x').pr, null);
+  assert.ok(encode({ ...DEFAULTS, pr: 'abc123' }).includes('pr=abc123'));
+  assert.ok(!encode({ ...DEFAULTS }).includes('pr='));
+});

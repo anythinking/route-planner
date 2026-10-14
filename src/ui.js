@@ -2,10 +2,13 @@ import { plan, hm } from './engine.js';
 import { decode, encode, DEFAULTS, TABS, resolvePlaces } from './state.js';
 import { esc } from './html.js';
 import { search } from './search.js';
+import { LocalStore } from './store.js';
+import { renderMine } from './mine.js';
 
 const CITIES = { london: '런던', paris: '파리' };
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
-const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품' };
+const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
+const store = new LocalStore();   // 계정 서버가 붙으면 여기만 바꾼다
 const DAY_COLORS = ['--d1','--d2','--d3','--d4','--d5','--d6','--d7','--d8','--d9','--d10'];
 const $ = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
@@ -14,6 +17,7 @@ let step = 2;                // 2 장소 고르기 · 3 결과 (설정은 항상
 let lastStep = 0;            // 0 = 첫 렌더. 단계가 바뀔 때만 지도 뷰를 맞춘다
 let pickStart = false;       // 켜지면 다음 지도 클릭이 출발점이 된다
 let city = null;                 // data/<c>.json 내용
+let curUser = null;              // 로그인한 사람 (store.user())
 const cache = {};
 const map = L.map('map', { zoomControl: true });
 // 배경은 Esri 연회색 캔버스 — 키 없이 쓸 수 있고 글자·도로가 적어 마커가 산다. (OSM 기본 타일은 필터를 걸어도 글자가 너무 많았다)
@@ -48,6 +52,8 @@ function renderTabs() {
     b.setAttribute('aria-pressed', state.tab === t); b.onclick = () => setState({ tab: t });
     host.appendChild(b);
   }
+  const who = document.getElementById('who'); who.innerHTML = '';
+  if (curUser) { const b = $('button', 'btn sm', esc(curUser.name)); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   const sub = document.getElementById('steps'); sub.innerHTML = '';
   if (state.tab !== 'plan') return;
   [[2, '장소 고르기'], [3, '결과']].forEach(([n, label]) => {
@@ -129,7 +135,16 @@ function renderInfo(side) {
   if (state.tab === 'gift') {
     const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 기념품`));
     p.appendChild($('p', null, '가볍고 안 깨지고 다른 데서 못 사는 것 순서.'));
-    for (const x of city.gift) p.appendChild($('div', 'item', `<b>${esc(x.item)}</b><span class="muted">${esc(x.where)}</span><span>${esc(x.note)}</span>`));
+    for (const x of city.gift) {
+      const it = $('div', 'item', `<b>${esc(x.item)}</b><span class="muted">${esc(x.where)}</span><span>${esc(x.note)}</span>`);
+      if (state.pr && curUser) {
+        const b = $('button', 'btn sm', '살 것에 담기'); b.type = 'button';
+        b.onclick = async () => { const pr = await store.getProject(state.pr); if (!pr) return; await store.updateProject(pr.id, { shopping: [...pr.shopping, { text: x.item, done: false }] }); b.textContent = '담김'; b.disabled = true; };
+        it.appendChild(b);
+      }
+      p.appendChild(it);
+    }
+    if (!state.pr) p.appendChild($('p', 'muted', '「내 여행」에서 여행을 열어 두면 항목마다 「살 것에 담기」가 생긴다.'));
     side.appendChild(p);
   }
   // 지도엔 고른 곳만 진하게 표시해 둔다
@@ -140,6 +155,7 @@ function renderInfo(side) {
 async function render() {
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
+  curUser = await store.user();
   try { city = await loadCity(state.c); }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
@@ -151,6 +167,17 @@ async function render() {
   drawStart();
   map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다
   const first = lastStep === 0;
+  if (state.tab === 'mine') {
+    lastStep = -1;
+    const projects = curUser ? await store.listProjects() : [];
+    const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
+    if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
+    renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L });
+    for (const pl of city.places) layers.places.addLayer(placeMarker(pl, Object.hasOwn(state.p, pl.id), state.m.includes(pl.id)));
+    bindMapClick(null);
+    if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] });
+    restoreScroll(side, sy, st); return;
+  }
   if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] }); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   renderSettings(side);
@@ -304,7 +331,11 @@ function renderStep3(side, entering) {
   copy.onclick = async () => { try { await navigator.clipboard.writeText(location.href); copy.textContent = '복사됨'; } catch { prompt('이 주소를 복사하세요', location.href); } };
   const back = $('button', 'btn', '← 장소 고치기'); back.type = 'button'; back.onclick = () => goStep(2);
   const ed = $('button', 'btn' + (editing ? ' primary' : ''), editing ? '조정 끝' : '순서·이동 조정'); ed.type = 'button'; ed.onclick = () => { editing = !editing; render(); };
-  row.append(copy, back, ed);
+  if (state.pr && curUser) {
+    const sv = $('button', 'btn', '이 여행에 저장'); sv.type = 'button';
+    sv.onclick = async () => { await store.updateProject(state.pr, { city: state.c, hash: encode({ ...state, tab: 'plan', pr: null }) }); sv.textContent = '저장됨'; };
+    row.append(copy, sv, back, ed);
+  } else row.append(copy, back, ed);
   result.days.forEach((_, i) => {
     const b = $('button', 'btn', `${i + 1}일차`); b.type = 'button';
     b.style.borderColor = `var(${DAY_COLORS[i]})`; b.style.color = hidden.has(i) ? '' : `var(${DAY_COLORS[i]})`;
