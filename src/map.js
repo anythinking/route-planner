@@ -1,5 +1,6 @@
 // 지도 — MapLibre GL + OpenFreeMap(키 없음, 벡터 타일, 건물 높이 포함) 래퍼. 화면은 이 API만 쓴다.
 //   createMap(id) → { circle, html, line, clear, fitBounds, setView, onClick, resize, setSun, set3D, is3D }
+import { shadowPolygons } from './shadow.js';
 const STYLE = 'https://tiles.openfreemap.org/styles/liberty';   // 컬러. 'bright'·'positron'도 있다
 
 export function createMap(containerId) {
@@ -8,6 +9,28 @@ export function createMap(containerId) {
   const groups = { places: [], route: [], start: [] };      // 그룹별 마커
   const lines = { places: [], route: [], start: [] };       // 그룹별 선(GeoJSON feature)
   let clickFn = null, ready = false, pending = [];
+  let sunPos = null, shadowsOn = true;                       // 마지막 해 위치, 그림자 켬
+  // 그림자 — 건물 발자국(벡터 타일의 building 층)을 해 반대 방향으로 h/tan(고도)만큼 밀어 만든 다각형. 줌 15.5 이상에서만.
+  function updateShadows() {
+    if (!ready || !map.getSource('shadows')) return;
+    const empty = { type: 'FeatureCollection', features: [] };
+    if (!shadowsOn || !sunPos || sunPos.altitude <= 2 || map.getZoom() < 15.5) { map.getSource('shadows').setData(empty); return; }
+    const lat0 = map.getCenter().lat;
+    const feats = map.querySourceFeatures('openmaptiles', { sourceLayer: 'building' });
+    const out = [], seen = new Set();
+    for (const f of feats) {
+      if (out.length > 6000) break;
+      const h = Math.max(3, f.properties.render_height || 8);
+      const g = f.geometry; const polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
+      for (const poly of polys) {
+        const ring = poly[0]; if (!ring || ring.length < 4) continue;
+        const key = ring[0][0].toFixed(6) + ',' + ring[0][1].toFixed(6) + ':' + ring.length; if (seen.has(key)) continue; seen.add(key);
+        for (const coords of shadowPolygons(ring, h, sunPos, lat0)) out.push({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: coords } });
+      }
+    }
+    map.getSource('shadows').setData({ type: 'FeatureCollection', features: out });
+  }
+  map.on('moveend', updateShadows);
   const whenReady = fn => ready ? fn() : pending.push(fn);
   map.on('load', () => {
     for (const g of Object.keys(lines)) {
@@ -15,7 +38,12 @@ export function createMap(containerId) {
       map.addLayer({ id: 'lines-' + g, type: 'line', source: 'lines-' + g, layout: { 'line-cap': 'round' },
         paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': ['get', 'opacity'], 'line-dasharray': [2, 2] } });
     }
+    // 그림자 층 — 건물 발자국 아래, 땅 위
+    map.addSource('shadows', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    const before = map.getLayer('building') ? 'building' : undefined;
+    map.addLayer({ id: 'shadows', type: 'fill', source: 'shadows', paint: { 'fill-color': '#1a1a2e', 'fill-opacity': 0.18, 'fill-antialias': false } }, before);
     ready = true; pending.forEach(f => f()); pending = [];
+    updateShadows();
   });
   map.on('error', e => console.warn('지도 오류', e?.error?.message || e));
   window.__algoMap = map;   // 디버그용
@@ -58,11 +86,14 @@ export function createMap(containerId) {
       const az = (pos.azimuth * 180 / Math.PI + 180) % 360;            // 북 기준 시계방향
       const alt = pos.altitude * 180 / Math.PI;
       const up = alt > 0;
-      whenReady(() => map.setLight({ anchor: 'map', position: [1.5, az, Math.max(0, Math.min(89, 90 - alt))], intensity: up ? 0.55 : 0.1, color: up ? (alt < 10 ? '#ffd9a0' : '#ffffff') : '#8aa0c0' }));
+      sunPos = { azimuth: az, altitude: alt };
+      whenReady(() => { map.setLight({ anchor: 'map', position: [1.5, az, Math.max(0, Math.min(89, 90 - alt))], intensity: up ? 0.55 : 0.1, color: up ? (alt < 10 ? '#ffd9a0' : '#ffffff') : '#8aa0c0' }); updateShadows(); });
       const t = SunCalc.getTimes(date, latlng.lat, latlng.lng);
       return { azimuth: az, altitude: alt, up, sunrise: t.sunrise, sunset: t.sunset, goldenHour: t.goldenHour, goldenHourEnd: t.goldenHourEnd };
     },
     set3D(on) { map.jumpTo({ pitch: on ? 58 : 0, bearing: on ? -17 : 0 }); whenReady(() => { if (map.getLayer('building-3d')) map.setLayoutProperty('building-3d', 'visibility', on ? 'visible' : 'none'); }); },
     is3D() { return map.getPitch() > 10; },
+    setShadows(on) { shadowsOn = on; updateShadows(); },
+    shadowInfo() { return { on: shadowsOn, zoomOk: map.getZoom() >= 15.5, sun: sunPos }; },
   };
 }

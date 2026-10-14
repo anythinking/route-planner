@@ -34,6 +34,7 @@ const cache = {};
 // 지도: MapLibre + OpenFreeMap 컬러 벡터 타일(키 없음) — 건물 높이(3D)와 해 위치(빛)를 쓴다. src/map.js 참고
 const map = createMap('map');
 let sunTime = null;   // 결과 화면의 해 시각(분) — null이면 하루 시작
+let shadowsOn = true; // 건물 그림자 (화면 상태)
 document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
 export function setState(patch) {
@@ -158,7 +159,12 @@ function renderSun(result, start) {
   const show = v => { const s2 = map.setSun(zoned(dayIdx, v), start); out.innerHTML = s2 ? `<b style="font-variant-numeric:tabular-nums">${hm(v)}</b> <span class="muted">${s2.up ? `고도 ${Math.round(s2.altitude)}° · ${dir(s2.azimuth)}쪽` : '해 진 뒤'}</span>` : hm(v); };
   sl.oninput = () => { sunTime = Number(sl.value); show(sunTime); };
   r2.append(sl, out); p.appendChild(r2); show(t);
-  if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든아워 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)} — 지도 오른쪽 위 「3D」를 켜면 건물에 이 빛이 든다.`));
+  if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든아워 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)}`));
+  const r3 = $('div', 'row');
+  const cb = $('input'); cb.type = 'checkbox'; cb.id = 'cb-shadow'; cb.checked = shadowsOn; cb.onchange = () => { shadowsOn = cb.checked; map.setShadows(shadowsOn); };
+  const lab = $('label', null, '건물 그림자'); lab.htmlFor = cb.id;
+  r3.append(cb, lab, $('span', 'muted', '지도를 건물이 보일 만큼 확대(줌 15.5+)하면 이 시각의 해로 그림자가 깔린다. 「3D」와 같이 보면 가장 잘 보인다.'));
+  p.appendChild(r3);
   return p;
 }
 let homeQuery = '';
