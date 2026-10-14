@@ -5,6 +5,7 @@ import { search } from './search.js';
 import { LocalStore } from './store.js';
 import { renderMine } from './mine.js';
 import { SUPABASE } from './config.js';
+import { createMap } from './map.js';
 
 // 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
 const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));
@@ -30,11 +31,10 @@ let city = null;                 // data/<c>.json 내용
 let curUser = null;              // 로그인한 사람 (store.user())
 export let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
 const cache = {};
-const map = L.map('map', { zoomControl: true });
-// 배경은 Esri 연회색 캔버스 — 키 없이 쓸 수 있고 글자·도로가 적어 마커가 산다. (OSM 기본 타일은 필터를 걸어도 글자가 너무 많았다)
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 16, attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ' }).addTo(map);
-const layers = { places: L.layerGroup().addTo(map), route: L.layerGroup().addTo(map), start: L.layerGroup().addTo(map) };
+// 지도: MapLibre + OpenFreeMap 컬러 벡터 타일(키 없음) — 건물 높이(3D)와 해 위치(빛)를 쓴다. src/map.js 참고
+const map = createMap('map');
+let sunTime = null;   // 결과 화면의 해 시각(분) — null이면 하루 시작
+document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
 export function setState(patch) {
   if ('c' in patch && patch.c !== state.c) regionOpen = null;
@@ -78,10 +78,9 @@ function renderTabs() {
 }
 
 function drawStart() {
-  layers.start.clearLayers();
+  map.clear('start');
   const s = state.s || { lat: city.center[0], lng: city.center[1] };
-  L.circleMarker(s, { radius: 8, color: '#22201c', fillColor: '#fff', fillOpacity: 1, weight: 2, bubblingMouseEvents: false })
-    .bindTooltip(state.s ? '출발점(숙소)' : '출발점(도심 기본값)').addTo(layers.start);
+  map.circle('start', s, { radius: 8, color: '#22201c', fillColor: '#fff', weight: 2, title: state.s ? '출발점(숙소)' : '출발점(도심 기본값)' });
 }
 
 function renderSettings(side) {
@@ -127,6 +126,41 @@ function renderSettings(side) {
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
 let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
 let resumeDismissed = false;
+
+// 해 — 첫날 날짜(dt)와 시각 슬라이더로 지도 빛을 맞추고 고도·방위·일출·일몰을 보여준다. 날짜가 없으면 오늘.
+function renderSun(result, start) {
+  const p = $('div', 'panel sun');
+  const firstVisible = result.days.findIndex((_, i) => !hidden.has(i)); const dayIdx = firstVisible < 0 ? 0 : firstVisible;
+  const tz = INDEX.cities[state.c]?.tz || 'UTC';
+  // 날짜 문자열(YYYY-MM-DD) + 분 → 그 도시 시간대의 실제 시각. 브라우저가 어디에 있든 파리 9:30은 파리 9:30이다.
+  const ymd = state.dt || new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(new Date());
+  const [y, mo, da] = ymd.split('-').map(Number);
+  const zoned = (dayOffset, minutes) => {
+    const guess = new Date(Date.UTC(y, mo - 1, da + dayOffset, Math.floor(minutes / 60), minutes % 60));
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(guess).filter(p => p.type !== 'literal').map(p => [p.type, Number(p.value)]));
+    const shown = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour % 24, parts.minute);
+    return new Date(guess.getTime() - (shown - guess.getTime()));   // 표시가 어긋난 만큼 되돌린다
+  };
+  const t = sunTime ?? state.t;
+  const sun = map.setSun(zoned(dayIdx, t), start);
+  const dir = a => ['북', '북동', '동', '남동', '남', '남서', '서', '북서'][Math.round(a / 45) % 8];
+  const fmt = d => d && !Number.isNaN(d.getTime()) ? new Intl.DateTimeFormat('ko-KR', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: false }).format(d) : '—';
+  const r1 = $('div', 'row');
+  r1.appendChild($('span', null, `<b>☀ ${dayIdx + 1}일차</b> <span class="muted">${esc(tz.split('/')[1] || tz)} 시간</span>`));
+  const di = $('input', 'text'); di.type = 'date'; di.value = state.dt || ''; di.title = '1일차 날짜'; di.style.width = 'auto';
+  di.onchange = () => setState({ dt: di.value || null });
+  r1.appendChild(di);
+  if (!state.dt) r1.appendChild($('span', 'muted', '날짜를 넣으면 그날 해로 계산한다 (지금은 오늘)'));
+  p.appendChild(r1);
+  const r2 = $('div', 'row');
+  const sl = $('input'); sl.type = 'range'; sl.min = 0; sl.max = 1439; sl.step = 10; sl.value = t; sl.style.flex = '1';
+  const out = $('span', null, '');
+  const show = v => { const s2 = map.setSun(zoned(dayIdx, v), start); out.innerHTML = s2 ? `<b style="font-variant-numeric:tabular-nums">${hm(v)}</b> <span class="muted">${s2.up ? `고도 ${Math.round(s2.altitude)}° · ${dir(s2.azimuth)}쪽` : '해 진 뒤'}</span>` : hm(v); };
+  sl.oninput = () => { sunTime = Number(sl.value); show(sunTime); };
+  r2.append(sl, out); p.appendChild(r2); show(t);
+  if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든아워 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)} — 지도 오른쪽 위 「3D」를 켜면 건물에 이 빛이 든다.`));
+  return p;
+}
 let homeQuery = '';
 
 // 홈 — 어디로 가세요? + 도시 카드 + (로그인) 내 여행
@@ -202,8 +236,7 @@ async function renderResume(side) {
 
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
-  map.off('click');
-  map.on('click', e => {
+  map.onClick(e => {
     if (pickStart) { pickStart = false; setState({ s: { lat: e.latlng.lat, lng: e.latlng.lng } }); return; }
     if (fallback) fallback(e);
   });
@@ -267,9 +300,9 @@ async function render() {
   const sy = window.scrollY, st = side.scrollTop;        // 다시 그리는 동안 스크롤 자리를 지킨다
   side.style.minHeight = side.offsetHeight + 'px';
   side.innerHTML = '';
-  layers.places.clearLayers(); layers.route.clearLayers();
+  map.clear('places'); map.clear('route');
   drawStart();
-  if (state.tab === 'plan') map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다 (지도가 숨겨진 탭에선 재지 않는다)
+  if (state.tab === 'plan') map.resize();   // 숨겼다 보일 때 크기를 다시 잰다
   const first = lastStep === 0;
   if (state.tab === 'home') {
     lastStep = -1;
@@ -284,14 +317,14 @@ async function render() {
     if (seq !== renderSeq) return;
     const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
-    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; } });
+    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; } });
     if (seq !== renderSeq) return;
     if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
   if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
-  if (entering) requestAnimationFrame(() => map.invalidateSize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
+  if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   await renderResume(side); if (seq !== renderSeq) return;
   renderSettings(side);
   if (step === 2) renderStep2(side, entering);
@@ -308,12 +341,9 @@ const WEIGHT_LABEL = { 1: '1순위 — 이 도시를 대표', 2: '2순위', 3: '
 
 function placeMarker(pl, chosen, must) {
   // 안 고른 곳은 작고 흐리게, 고른 곳만 진하게. 1순위는 흐린 상태에서도 조금 크다.
-  const m = L.circleMarker([pl.lat, pl.lng], chosen
-    ? { radius: 8, weight: must ? 3 : 1.5, color: must ? '#22201c' : '#15696c', fillColor: '#15696c', fillOpacity: 1, bubblingMouseEvents: false }
-    : { radius: pl.weight === 1 ? 5 : 3.5, weight: 1, color: '#b5b0a6', fillColor: '#fff', fillOpacity: 0.9, bubblingMouseEvents: false }
-  ).bindTooltip(esc(pl.name));
-  m.on('click', () => togglePlace(pl.id));
-  return m;
+  return map.circle('places', pl, chosen
+    ? { radius: 8, weight: must ? 3 : 1.5, color: must ? '#22201c' : '#15696c', fillColor: '#15696c', title: pl.name, onClick: () => togglePlace(pl.id) }
+    : { radius: pl.weight === 1 ? 5 : 3.5, weight: 1, color: '#b5b0a6', fillColor: '#fff', title: pl.name, onClick: () => togglePlace(pl.id) });
 }
 function togglePlace(id) {
   const p = { ...state.p }, m = state.m.filter(x => x !== id);
@@ -352,7 +382,7 @@ function renderStep2(side, entering) {
       }
       panel.appendChild(row);
       if (chosen) { const note = $('p', 'muted', pl.note); note.dataset.name = row.dataset.name; panel.appendChild(note); }
-      layers.places.addLayer(placeMarker(pl, chosen, must));
+      placeMarker(pl, chosen, must);
     }
     panel.classList.add('group'); side.appendChild(panel);
   }
@@ -364,14 +394,14 @@ function renderStep2(side, entering) {
       const row = $('div', 'row', `<b>${esc(u.name)}</b> <span class="muted">${esc(u.min)}분</span>`);
       const del = $('button', 'btn', '삭제'); del.type = 'button'; del.onclick = () => setState({ u: state.u.filter((_, j) => j !== i), o: null });
       row.appendChild(del); panel.appendChild(row);
-      layers.places.addLayer(L.circleMarker([u.lat, u.lng], { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', fillOpacity: 1, bubblingMouseEvents: false }).bindTooltip(esc(u.name) + ' (내 장소)'));
+      map.circle('places', u, { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', title: u.name + ' (내 장소)' });
     });
     side.appendChild(panel);
   }
 
   if (entering) {
     const pts = [...city.places.map(p => [p.lat, p.lng]), ...state.u.map(u => [u.lat, u.lng])];
-    map.fitBounds(pts, { padding: [20, 20] });
+    map.fitBounds(pts, 20);
   }
   bindMapClick(e => {
     const name = prompt('장소 이름'); if (!name) return;
@@ -413,7 +443,7 @@ function renderSearch() {
       const add = $('button', 'btn sm', '추가 · 60분'); add.type = 'button';
       add.onclick = () => { results = null; query = ''; setState({ u: [...state.u, { name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min: 60 }], o: null }); };
       r.appendChild(add); p.appendChild(r);
-      layers.places.addLayer(L.circleMarker([c.lat, c.lng], { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', fillOpacity: 1, dashArray: '2 2', bubblingMouseEvents: false }).bindTooltip(esc(c.name) + ' (검색 결과)'));
+      map.circle('places', c, { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', dashed: true, title: c.name + ' (검색 결과)' });
     }
     if (results.length) p.appendChild($('p', 'muted', '검색: OpenStreetMap Nominatim. 추가한 장소는 「내 장소」로 들어가고 머무는 시간은 60분으로 잡힌다 — 필요하면 지도의 빈 곳을 클릭해 다른 시간으로 다시 넣어라.'));
   }
@@ -465,17 +495,16 @@ function renderStep3(side, entering) {
     row.appendChild(b);
   });
   head.appendChild(row); side.appendChild(head);
+  side.appendChild(renderSun(result, start));
 
   const bounds = [[start.lat, start.lng]];
   result.days.forEach((day, i) => {
     const col = getComputedStyle(document.documentElement).getPropertyValue(DAY_COLORS[i]).trim() || '#15696c';
     if (!hidden.has(i)) {
       const pts = [[start.lat, start.lng], ...day.stops.map(s => [s.place.lat, s.place.lng])];
-      L.polyline(pts, { color: col, weight: 2, opacity: 0.6, dashArray: '6 5' }).addTo(layers.route);   // 직선 = 길이 아니라 순서
+      map.line('route', pts, { color: col, weight: 2.5, opacity: 0.7 });   // 직선 = 길이 아니라 순서
       day.stops.forEach((s, k) => {
-        L.marker([s.place.lat, s.place.lng], { icon: L.divIcon({ className: '', html:
-          `<div style="width:22px;height:22px;border-radius:50%;background:${col};color:#fff;font:700 11px/22px sans-serif;text-align:center;border:2px solid #fff;box-shadow:0 0 0 1px ${col}">${k + 1}</div>`,
-          iconSize: [22, 22], iconAnchor: [11, 11] }) }).bindTooltip(`${hm(s.arrive)} ${esc(s.place.name)}`).addTo(layers.route);
+        map.html('route', s.place, `<div style="width:22px;height:22px;border-radius:50%;background:${col};color:#fff;font:700 11px/22px sans-serif;text-align:center;border:2px solid #fff;box-shadow:0 0 0 1px ${col}">${k + 1}</div>`, { title: `${hm(s.arrive)} ${s.place.name}` });
         bounds.push([s.place.lat, s.place.lng]);
       });
     }
@@ -543,7 +572,7 @@ function renderStep3(side, entering) {
     for (const d of result.dropped) panel.appendChild($('p', null, `<b>${esc(d.place.name)}</b> <span class="muted">— ${esc(d.reason)}. 꼭 가려면 2단계에서 「꼭」을 켜라.</span>`));
     side.appendChild(panel);
   }
-  if (entering && bounds.length > 1) map.fitBounds(bounds, { padding: [24, 24] });
+  if (entering && bounds.length > 1) map.fitBounds(bounds, 24);
   bindMapClick(null);
 }
 

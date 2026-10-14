@@ -95,3 +95,10 @@ test('pr: 열어 둔 여행 id — 영숫자만, 기본은 없음', () => {
 });
 
 test('tab: home도 허용된다', () => { assert.equal(decode('#tab=home').tab, 'home'); });
+
+test('dt: 첫날 날짜 — YYYY-MM-DD만, 엉터리는 버린다', () => {
+  assert.equal(decode('#dt=2026-11-03').dt, '2026-11-03');
+  assert.equal(decode('#dt=2026-13-99').dt, null);
+  assert.equal(decode('#dt=abc').dt, null);
+  assert.ok(encode({ ...DEFAULTS, dt: '2026-11-03' }).includes('dt=2026-11-03'));
+});

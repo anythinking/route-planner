@@ -66,3 +66,28 @@ create policy "own photo files" on storage.objects for all
 | 사진 보기 | `dataUrl` | `createSignedUrl(path, 3600)` → `url` |
 
 무료 구간: DB 500 MB · 파일 1 GB · 월 활성 사용자 5만. 사진은 올릴 때 긴 변 1600px로 줄이면 한 장 ≈ 300 KB, 1 GB에 3천 장.
+
+## 할 일 — SQL Editor에서 실행 (영철)
+
+### ③ 공개 플랜 (2026-10-15 추가, 미실행)
+```sql
+alter table projects add column if not exists is_public boolean not null default false;
+create policy "public projects readable" on projects for select using (is_public);
+```
+실행한 뒤 "됐어" → 여행마다 「공개」 스위치, 공개 링크 `#pub=<id>`, 홈에 「다른 사람의 플랜」 카드, 「내 걸로 복사」.
+
+### ④ 플랜 댓글 (메시지의 첫 형태 — ③ 다음)
+```sql
+create table comments (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references projects(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  body text not null check (char_length(body) <= 1000),
+  created_at timestamptz not null default now()
+);
+grant select, insert, delete on comments to authenticated;
+alter table comments enable row level security;
+create policy "comments on public projects readable" on comments for select using (exists (select 1 from projects p where p.id = project_id and (p.is_public or p.user_id = auth.uid())));
+create policy "own comments" on comments for insert with check (auth.uid() = user_id);
+create policy "delete own comments" on comments for delete using (auth.uid() = user_id);
+```

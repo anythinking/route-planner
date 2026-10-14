@@ -35,7 +35,8 @@
     -0.3,
     0.05
    ],
-   "image": "assets/cities/london.jpg"
+   "image": "assets/cities/london.jpg",
+   "tz": "Europe/London"
   },
   "paris": {
    "name": "파리",
@@ -51,7 +52,8 @@
     2.2,
     2.45
    ],
-   "image": "assets/cities/paris.jpg"
+   "image": "assets/cities/paris.jpg",
+   "tz": "Europe/Paris"
   },
   "tokyo": {
    "name": "도쿄",
@@ -67,7 +69,8 @@
     139.5,
     140.0
    ],
-   "image": "assets/cities/tokyo.jpg"
+   "image": "assets/cities/tokyo.jpg",
+   "tz": "Asia/Tokyo"
   },
   "osaka": {
    "name": "오사카",
@@ -83,7 +86,8 @@
     135.3,
     135.7
    ],
-   "image": "assets/cities/osaka.jpg"
+   "image": "assets/cities/osaka.jpg",
+   "tz": "Asia/Tokyo"
   },
   "kyoto": {
    "name": "교토",
@@ -99,7 +103,8 @@
     135.55,
     135.9
    ],
-   "image": "assets/cities/kyoto.jpg"
+   "image": "assets/cities/kyoto.jpg",
+   "tz": "Asia/Tokyo"
   },
   "rome": {
    "name": "로마",
@@ -115,7 +120,8 @@
     12.4,
     12.6
    ],
-   "image": "assets/cities/rome.jpg"
+   "image": "assets/cities/rome.jpg",
+   "tz": "Europe/Rome"
   },
   "barcelona": {
    "name": "바르셀로나",
@@ -131,7 +137,8 @@
     2.05,
     2.25
    ],
-   "image": "assets/cities/barcelona.jpg"
+   "image": "assets/cities/barcelona.jpg",
+   "tz": "Europe/Madrid"
   }
  }
 }

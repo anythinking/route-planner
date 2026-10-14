@@ -186,7 +186,7 @@ function renderList(ctx) {
 const planHash = st => encode({ ...st, tab: 'plan', pr: null });
 
 async function renderProject(ctx) {
-  const { state, setState, $, side, store, project: p, CITIES, render, layers, L, INDEX, loadCity, plan, resolvePlaces, hm, setStep } = ctx;
+  const { state, setState, $, side, store, project: p, CITIES, render, map, INDEX, loadCity, plan, resolvePlaces, hm, setStep } = ctx;
   const ci = INDEX?.cities?.[p.city] || {};
   const head = $('div', 'panel'); head.style.padding = '0'; head.style.overflow = 'hidden';
   if (ci.image) { const cover = $('div', 'cover'); cover.innerHTML = `<img src="${esc(ci.image)}" alt=""><div class="cap"><b>${esc(p.name)}</b><span>${esc(CITIES[p.city] || p.city)} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}</span></div>`; head.appendChild(cover); }
@@ -271,8 +271,7 @@ async function renderProject(ctx) {
     body.append(sel, note, meta, del); r.appendChild(body); ph.appendChild(r);
     // 지도: 좌표가 있으면 그 자리, 없으면 고른 장소 자리
     const at = x.lat != null ? [x.lat, x.lng] : (placeName(x.placeId) ? (pl => [pl.lat, pl.lng])(cityData.places.find(q => q.id === x.placeId)) : null);
-    if (at) L.marker(at, { icon: L.divIcon({ className: '', html: `<img src="${x.url || x.dataUrl}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)">`, iconSize: [36, 36], iconAnchor: [18, 18] }) })
-      .bindTooltip(esc(x.note || placeName(x.placeId) || '사진')).addTo(layers.route);
+    if (at && map) map.html('route', { lat: at[0], lng: at[1] }, `<img src="${x.url || x.dataUrl}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)">`, { title: x.note || placeName(x.placeId) || '사진' });
   }
   side.appendChild(ph);
 }
