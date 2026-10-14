@@ -348,11 +348,20 @@ function renderStep3(side, entering) {
   copy.onclick = async () => { try { await navigator.clipboard.writeText(location.href); copy.textContent = '복사됨'; } catch { prompt('이 주소를 복사하세요', location.href); } };
   const back = $('button', 'btn', '← 장소 고치기'); back.type = 'button'; back.onclick = () => goStep(2);
   const ed = $('button', 'btn' + (editing ? ' primary' : ''), editing ? '조정 끝' : '순서·이동 조정'); ed.type = 'button'; ed.onclick = () => { editing = !editing; render(); };
-  if (state.pr && curUser) {
-    const sv = $('button', 'btn', '이 여행에 저장'); sv.type = 'button';
-    sv.onclick = async () => { await store.updateProject(state.pr, { city: state.c, hash: encode({ ...state, tab: 'plan', pr: null }) }); sv.textContent = '저장됨'; };
-    row.append(copy, sv, back, ed);
-  } else row.append(copy, back, ed);
+  // 저장: 로그인 전엔 로그인으로 보내고, 로그인 후엔 열어 둔 여행에 덮어쓰거나 새 여행을 만든다
+  const sv = $('button', 'btn', state.pr && curUser ? '이 여행에 저장' : '저장'); sv.type = 'button';
+  sv.title = curUser ? '' : '저장하려면 로그인이 필요하다 — 플랜은 그대로 남는다';
+  sv.onclick = async () => {
+    if (!curUser) { setState({ tab: 'mine' }); return; }
+    const hash = encode({ ...state, tab: 'plan', pr: null });
+    try {
+      if (state.pr) { await store.updateProject(state.pr, { city: state.c, hash }); sv.textContent = '저장됨'; }
+      else { const name = prompt('여행 이름', `${CITIES[state.c]} ${state.d}일`); if (!name) return; const p = await store.createProject({ name, city: state.c, hash }); setState({ pr: p.id }); }
+    } catch (e) { alert(`저장 실패 — ${e.message || e}`); }
+  };
+  row.append(copy, sv, back, ed);
+  if (!curUser) head.appendChild($('p', 'muted', '로그인 없이도 플랜은 만들고 링크로 나눌 수 있다. 「저장」은 로그인해야 내 여행에 남는다.'));
+  else if (state.pr) head.appendChild($('p', 'muted', '열어 둔 여행에 저장된다. 다른 여행으로 저장하려면 「내 여행」에서 그 여행을 열어라.'));
   result.days.forEach((_, i) => {
     const b = $('button', 'btn', `${i + 1}일차`); b.type = 'button';
     b.style.borderColor = `var(${DAY_COLORS[i]})`; b.style.color = hidden.has(i) ? '' : `var(${DAY_COLORS[i]})`;
