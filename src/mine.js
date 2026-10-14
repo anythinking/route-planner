@@ -36,6 +36,8 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   head.appendChild($('h2', null, '내 계정'));
   head.appendChild($('p', 'meta', `${esc(user.email || '이 브라우저에만 저장되는 계정')} · 여행 ${projects.length}개 · 사진 ${photos}장`));
   head.appendChild($('p', null, store.kind === 'supabase' ? '계정 서버에 저장 — 어느 기기에서든 같은 걸 본다.' : '이 브라우저에만 저장 — 기기를 바꾸면 안 보인다.'));
+  const last = projects.find(x => x.id === user.prefs?.lastPr);
+  if (last) { const lr = $('div', 'row'); lr.appendChild($('span', null, `최근 여행 <b>${esc(last.name)}</b>`)); const lb = $('button', 'btn sm', '열기'); lb.type = 'button'; lb.onclick = () => { closeAccount(); setState({ pr: last.id }); }; lr.appendChild(lb); head.appendChild(lr); }
   const r0 = $('div', 'row');
   const list = $('button', 'btn primary', '내 여행 목록'); list.type = 'button'; list.onclick = () => { closeAccount(); render(); };
   const out = $('button', 'btn', '로그아웃'); out.type = 'button';
@@ -65,10 +67,17 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
     r2.append(pwGo, pwMsg); pwp.append(p1, p2, r2); side.appendChild(pwp);
   }
 
-  // 4. 기본 설정 — 새 플랜을 시작할 때 쓰는 값
+  // 4. 기본 설정 — 언어·새 플랜 기본값
   const prefs = user.prefs || {};
   const pp = $('div', 'panel'); pp.appendChild($('h2', null, '기본 설정'));
-  pp.appendChild($('p', null, '플랜 탭의 「기본값으로 새 플랜」이 이 값으로 시작한다.'));
+  const rl = $('div', 'row'); rl.appendChild($('span', 'muted', '언어'));
+  for (const [v, label, ready] of [['ko', '한국어', true], ['en', 'English', false], ['ja', '日本語', false]]) {
+    const b = $('button', 'btn' + ((prefs.lang || 'ko') === v ? ' primary' : ''), label + (ready ? '' : ' · 준비 중')); b.type = 'button'; b.disabled = !ready;
+    b.onclick = async () => { await store.updateUser({ prefs: { lang: v } }); render(); }; rl.appendChild(b);
+  }
+  pp.appendChild(rl);
+  pp.appendChild($('p', 'muted', '장소 설명·팁은 한국어로 쓰여 있어 화면 글자만 바꿔서는 반쪽이 된다 — 영어는 데이터 번역과 같이 연다.'));
+  pp.appendChild($('p', null, '아래 값으로 「기본값으로 새 플랜」이 시작한다.'));
   const r3 = $('div', 'row'); r3.appendChild($('span', 'muted', '도시'));
   const csel = $('select'); for (const [id, name] of Object.entries(CITIES)) { const o = $('option', null, esc(name)); o.value = id; o.selected = (prefs.c || 'london') === id; csel.appendChild(o); }
   csel.onchange = async () => { await store.updateUser({ prefs: { c: csel.value } }); render(); }; r3.appendChild(csel);
@@ -164,7 +173,7 @@ function renderList(ctx) {
   if (!projects.length) { side.appendChild($('div', 'panel', '<p class="muted">아직 여행이 없다.</p>')); return; }
   for (const p of projects) {
     const c = $('div', 'panel');
-    c.appendChild($('h2', null, esc(p.name)));
+    c.appendChild($('h2', null, esc(p.name) + (p.id === user.prefs?.lastPr ? ' <span class="tag">최근</span>' : '')));
     c.appendChild($('p', 'meta', `${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}`));
     const r = $('div', 'row');
     const open = $('button', 'btn primary', '열기'); open.type = 'button'; open.onclick = () => setState({ pr: p.id });

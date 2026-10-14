@@ -38,6 +38,7 @@ const layers = { places: L.layerGroup().addTo(map), route: L.layerGroup().addTo(
 
 export function setState(patch) {
   if ('c' in patch && patch.c !== state.c) regionOpen = null;
+  if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
   state = { ...state, ...patch };
   history.replaceState(null, '', '#' + encode(state));
   render();
@@ -125,6 +126,22 @@ function renderSettings(side) {
 }
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
 let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
+let resumeDismissed = false;
+
+// 돌아온 사람에게 마지막 여행을 이어서 열어 준다 — 플랜이 비어 있고 여행을 안 열었을 때만
+async function renderResume(side) {
+  if (resumeDismissed || !curUser || state.pr || Object.keys(state.p).length || state.u.length) return;
+  const lastPr = curUser.prefs?.lastPr; if (!lastPr) return;
+  let p = null; try { p = await store.getProject(lastPr); } catch {}
+  if (!p) return;
+  const box = $('div', 'panel'); box.style.background = 'var(--gold-soft)';
+  box.appendChild($('p', null, `<b>최근 여행 「${esc(p.name)}」</b> <span class="muted">· ${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length}</span>`));
+  const row = $('div', 'row');
+  const go = $('button', 'btn primary', '이어서 하기'); go.type = 'button';
+  go.onclick = () => { const st = decode('#' + p.hash); step = 3; setState({ ...st, tab: 'plan', pr: p.id }); };
+  const no = $('button', 'btn sm', '새로 시작'); no.type = 'button'; no.onclick = () => { resumeDismissed = true; render(); };
+  row.append(go, no); box.appendChild(row); side.appendChild(box);
+}
 
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
@@ -207,6 +224,7 @@ async function render() {
   if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.invalidateSize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
+  await renderResume(side); if (seq !== renderSeq) return;
   renderSettings(side);
   if (step === 2) renderStep2(side, entering);
   if (step === 3) renderStep3(side, entering);
