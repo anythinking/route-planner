@@ -55,7 +55,7 @@ export class SupabaseStore {
   }
   async updateProject(id, patch) {
     const row = { updated_at: new Date().toISOString() };
-    for (const k of ['name', 'city', 'hash', 'shopping']) if (k in patch) row[k] = patch[k];
+    for (const k of ['name', 'city', 'hash', 'shopping', 'packing']) if (k in patch) row[k] = patch[k];
     const { error } = await this.sb.from('projects').update(row).eq('id', id); if (error) throw error;
     return this.getProject(id);
   }
@@ -76,7 +76,7 @@ export class SupabaseStore {
     return rowToPhoto(data);
   }
   async updatePhoto(pid, phid, patch) {
-    const row = {}; if ('placeId' in patch) row.place_id = patch.placeId; if ('note' in patch) row.note = patch.note;
+    const row = {}; if ('placeId' in patch) row.place_id = patch.placeId; if ('note' in patch) row.note = patch.note; if ('lat' in patch) { row.lat = patch.lat; row.lng = patch.lng; }
     const { error } = await this.sb.from('photos').update(row).eq('id', phid); if (error) throw error;
   }
   async deletePhoto(pid, phid) {

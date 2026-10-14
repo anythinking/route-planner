@@ -27,6 +27,7 @@ let state = decode(location.hash);
 let step = 2;                // 2 장소 고르기 · 3 결과 (설정은 항상 위에 떠 있다)
 let lastStep = 0;            // 0 = 첫 렌더. 단계가 바뀔 때만 지도 뷰를 맞춘다
 let pickStart = false;       // 켜지면 다음 지도 클릭이 출발점이 된다
+let pickPhotoFn = null;      // 켜지면 다음 지도 클릭이 사진 위치가 된다
 let city = null;                 // data/<c>.json 내용
 let curUser = null;              // 로그인한 사람 (store.user())
 export let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
@@ -35,6 +36,50 @@ const cache = {};
 const map = createMap('map');
 let sunTime = null;   // 결과 화면의 해 시각(분) — null이면 하루 시작
 let shadowsOn = true; // 건물 그림자 (화면 상태)
+let playTimer = null;  // 하루 재생
+const PACKING = await fetch('data/packing.json').then(r => r.json()).catch(() => ({ groups: [] }));
+let packingCache = null;   // 현재 체크 상태 {id:true}
+// 체크 상태의 집: 여행을 열어 뒀고 로그인했으면 그 여행(서버), 아니면 이 브라우저
+function packKey() { return 'rp.pack.' + (state.pr || 'anon'); }
+async function loadPacking() {
+  if (state.pr && curUser) { try { const p = await store.getProject(state.pr); if (p) return p.packing || {}; } catch {} }
+  try { return JSON.parse(localStorage.getItem(packKey()) || '{}'); } catch { return {}; }
+}
+async function savePacking(v) {
+  try { localStorage.setItem(packKey(), JSON.stringify(v)); } catch {}
+  if (state.pr && curUser) { try { await store.updateProject(state.pr, { packing: v }); return 'server'; } catch (e) { return 'local'; } }
+  return 'local';
+}
+function renderPacking(side) {
+  const done = packingCache || {};
+  const total = PACKING.groups.reduce((n, g) => n + g.items.length, 0), n = PACKING.groups.reduce((k, g) => k + g.items.filter(([id]) => done[id]).length, 0);
+  const head = $('div', 'panel');
+  head.appendChild($('h2', null, `준비물 <span class="muted" style="font-weight:500">· ${n}/${total} 챙김</span>`));
+  const bar = $('div', 'bar'); bar.innerHTML = `<i style="width:${total ? Math.round(n / total * 100) : 0}%"></i>`; head.appendChild(bar);
+  head.appendChild($('p', 'muted', state.pr && curUser ? '체크는 이 여행에 저장된다.' : '체크는 이 브라우저에 남는다 — 「내 여행」에서 여행을 열어 두면 여행에 저장된다.'));
+  const r = $('div', 'row'); const reset = $('button', 'btn sm', '전부 해제'); reset.type = 'button'; reset.onclick = async () => { packingCache = {}; await savePacking({}); render(); }; r.appendChild(reset); head.appendChild(r);
+  side.appendChild(head);
+  for (const g of PACKING.groups) {
+    const d = $('details', 'panel group'); d.open = true;
+    const gn = g.items.filter(([id]) => done[id]).length;
+    d.appendChild($('summary', null, `<b>${esc(g.name)}</b> <span class="muted">${gn}/${g.items.length}</span>`));
+    for (const [id, label] of g.items) {
+      const row = $('div', 'row check');
+      const cb = $('input'); cb.type = 'checkbox'; cb.id = 'pk-' + id; cb.checked = !!done[id];
+      const lab = $('label', null, esc(label)); lab.htmlFor = cb.id; if (done[id]) lab.classList.add('done');
+      cb.onchange = async () => { packingCache = { ...(packingCache || {}), [id]: cb.checked }; if (!cb.checked) delete packingCache[id]; lab.classList.toggle('done', cb.checked); await savePacking(packingCache); updatePackCounts(side); };
+      row.append(cb, lab); d.appendChild(row);
+    }
+    side.appendChild(d);
+  }
+}
+function updatePackCounts(side) {
+  const done = packingCache || {};
+  const total = PACKING.groups.reduce((n, g) => n + g.items.length, 0), n = PACKING.groups.reduce((k, g) => k + g.items.filter(([id]) => done[id]).length, 0);
+  const h = side.querySelector('h2 .muted'); if (h) h.textContent = `· ${n}/${total} 챙김`;
+  const bar = side.querySelector('.bar i'); if (bar) bar.style.width = `${total ? Math.round(n / total * 100) : 0}%`;
+  side.querySelectorAll('details.group').forEach((d, i) => { const g = PACKING.groups[i]; const m = d.querySelector('summary .muted'); if (g && m) m.textContent = `${g.items.filter(([id]) => done[id]).length}/${g.items.length}`; });
+}
 document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
 export function setState(patch) {
@@ -158,7 +203,16 @@ function renderSun(result, start) {
   const out = $('span', null, '');
   const show = v => { const s2 = map.setSun(zoned(dayIdx, v), start); out.innerHTML = s2 ? `<b style="font-variant-numeric:tabular-nums">${hm(v)}</b> <span class="muted">${s2.up ? `고도 ${Math.round(s2.altitude)}° · ${dir(s2.azimuth)}쪽` : '해 진 뒤'}</span>` : hm(v); };
   sl.oninput = () => { sunTime = Number(sl.value); show(sunTime); };
-  r2.append(sl, out); p.appendChild(r2); show(t);
+  // ▶ 하루 재생 — 일출부터 일몰까지 12초에 훑으며 빛·그림자가 도는 걸 보여준다
+  const play = $('button', 'btn sm', '▶ 하루'); play.type = 'button';
+  play.onclick = () => {
+    if (playTimer) { clearInterval(playTimer); playTimer = null; play.textContent = '▶ 하루'; return; }
+    const toMin = d => d && !Number.isNaN(d.getTime()) ? Number(new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(d).split(':').reduce((h, m) => h * 60 + Number(m), 0)) : null;
+    const from = (sun && toMin(sun.sunrise)) ?? 360, to = (sun && toMin(sun.sunset)) ?? 1140;
+    let v = from; play.textContent = '■ 멈춤';
+    playTimer = setInterval(() => { v += (to - from) / 120; if (v >= to) { v = to; clearInterval(playTimer); playTimer = null; play.textContent = '▶ 하루'; } sl.value = Math.round(v); sunTime = Math.round(v); show(sunTime); }, 100);
+  };
+  r2.append(sl, out, play); p.appendChild(r2); show(t);
   if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든아워 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)}`));
   const r3 = $('div', 'row');
   const cb = $('input'); cb.type = 'checkbox'; cb.id = 'cb-shadow'; cb.checked = shadowsOn; cb.onchange = () => { shadowsOn = cb.checked; map.setShadows(shadowsOn); };
@@ -243,6 +297,7 @@ async function renderResume(side) {
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
   map.onClick(e => {
+    if (pickPhotoFn) { const fn = pickPhotoFn; pickPhotoFn = null; fn(e.latlng); return; }
     if (pickStart) { pickStart = false; setState({ s: { lat: e.latlng.lat, lng: e.latlng.lng } }); return; }
     if (fallback) fallback(e);
   });
@@ -251,8 +306,8 @@ function bindMapClick(fallback) {
 function renderInfo(side) {
   const chosen = new Set(Object.keys(state.p));
   if (state.tab === 'pack') {
-    const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 준비물 <span class="muted" style="font-weight:500">· ${esc(INDEX.cities[state.c]?.countryName || '')}</span>`));
-    p.appendChild($('p', null, '동선과 무관하게 챙길 것. 짐은 가볍게, 겹옷으로.'));
+    renderPacking(side);
+    const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)}에서 특히 <span class="muted" style="font-weight:500">· ${esc(INDEX.cities[state.c]?.countryName || '')}</span>`));
     for (const x of city.pack) p.appendChild($('div', 'item', `<b>${esc(x.item)}</b><span>${esc(x.why)}</span>`));
     side.appendChild(p);
   }
@@ -288,13 +343,14 @@ function renderInfo(side) {
 let renderSeq = 0;              // 겹쳐 시작된 렌더 중 마지막 것만 그린다 (await 사이에 새 렌더가 오면 옛것은 접는다)
 async function render() {
   const seq = ++renderSeq;
+  if (playTimer) { clearInterval(playTimer); playTimer = null; }
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
   if (lastStep === 0 && !/[#&]tab=/.test(location.hash) && !state.pr && !Object.keys(state.p).length && !state.u.length) {   // 빈손으로 오면 홈
     state = { ...state, tab: 'home' }; history.replaceState(null, '', '#' + encode(state));
   }
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
-  document.querySelector('.layout').classList.toggle('nomap', state.tab !== 'plan');   // 지도는 플랜에서만
+  document.querySelector('.layout').classList.toggle('nomap', !(state.tab === 'plan' || (state.tab === 'mine' && state.pr)));   // 지도는 플랜, 그리고 여행을 열어 둔 내 여행에서
   await storeReady;
   // 계정 확인이 3초 넘게 안 끝나면(다른 탭의 잠금 등) 일단 로그아웃 상태로 그리고, 세션이 오면 onChange가 다시 그린다
   try { curUser = await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch { curUser = null; }
@@ -308,7 +364,7 @@ async function render() {
   side.innerHTML = '';
   map.clear('places'); map.clear('route');
   drawStart();
-  if (state.tab === 'plan') map.resize();   // 숨겼다 보일 때 크기를 다시 잰다
+  if (state.tab === 'plan' || (state.tab === 'mine' && state.pr)) map.resize();   // 숨겼다 보일 때 크기를 다시 잰다
   const first = lastStep === 0;
   if (state.tab === 'home') {
     lastStep = -1;
@@ -323,12 +379,13 @@ async function render() {
     if (seq !== renderSeq) return;
     const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
-    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; } });
+    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); } });
+    bindMapClick(null); drawStart();
     if (seq !== renderSeq) return;
     if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
-  if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); restoreScroll(side, sy, st); return; }
+  if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'pack') { packingCache = await loadPacking(); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   await renderResume(side); if (seq !== renderSeq) return;

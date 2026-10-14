@@ -69,6 +69,11 @@ create policy "own photo files" on storage.objects for all
 
 ## 할 일 — SQL Editor에서 실행 (영철)
 
+### ⓪ 준비물 체크 저장 (2026-10-15 추가, 미실행 — 이게 없으면 체크가 브라우저에만 남는다)
+```sql
+alter table projects add column if not exists packing jsonb not null default '{}';
+```
+
 ### ③ 공개 플랜 (2026-10-15 추가, 미실행)
 ```sql
 alter table projects add column if not exists is_public boolean not null default false;

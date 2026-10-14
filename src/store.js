@@ -26,7 +26,7 @@ export class LocalStore {
   async getProject(id) { return this._get(this._key(), []).find(p => p.id === id) || null; }
   async createProject({ name, city, hash }) {
     const now = Date.now();
-    const p = { id: uid(), name: String(name || '').slice(0, 60) || '이름 없는 여행', city, hash: hash || '', shopping: [], photos: [], createdAt: now, updatedAt: now };
+    const p = { id: uid(), name: String(name || '').slice(0, 60) || '이름 없는 여행', city, hash: hash || '', shopping: [], packing: {}, photos: [], createdAt: now, updatedAt: now };
     this._set(this._key(), [...this._get(this._key(), []), p]); return p;
   }
   async updateProject(id, patch) {

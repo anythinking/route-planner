@@ -3,6 +3,13 @@ import { esc } from './html.js';
 import { decode, encode } from './state.js';
 
 const guard = (fn, render) => async (...a) => { try { await fn(...a); } catch (e) { alert(`저장 실패 — ${e.message || e}`); render(); } };
+// 크게 보기 — 화면 덮는 한 장
+function lightbox(src, caption) {
+  const o = document.createElement('div'); o.className = 'lightbox';
+  o.innerHTML = `<img src="${src}" alt=""><p>${caption.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]))}</p>`;
+  o.onclick = () => o.remove(); document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { o.remove(); document.removeEventListener('keydown', esc); } });
+  document.body.appendChild(o);
+}
 const fmtDate = t => new Date(t).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
 // 파일 → 작은 JPEG data URL (긴 변 1200px). 브라우저 저장소 한도(≈5MB) 안에서 여러 장을 담으려고 줄인다.
@@ -213,9 +220,17 @@ async function renderProject(ctx) {
     else {
       const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
       const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o });
+      const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
       res.days.forEach((day, i) => {
         if (!day.stops.length) return;
-        const d = $('div', 'item'); d.innerHTML = `<b>${i + 1}일차 <span class="muted" style="font-weight:500">${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분</span></b><span>${day.stops.map(s => esc(s.place.name)).join(' → ')}</span>`;
+        const d = $('div', 'item'); d.innerHTML = `<b>${i + 1}일차 <span class="muted" style="font-weight:500">${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분 · 도보 ${day.walkKm}km</span></b>`;
+        day.stops.forEach(st2 => {
+          d.appendChild($('div', 'leg', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`));
+          const row = $('div', 'stop'); row.appendChild($('div', 't', hm(st2.arrive)));
+          const body = $('div', 'body'); body.appendChild($('div', 'name', `${esc(st2.place.name)}${st2.place.must ? ' <span class="tag">꼭</span>' : ''}`));
+          body.appendChild($('div', 'muted', `${esc(st2.place.opts[st2.place.opt]?.label || '')} · ${st2.place.opts[st2.place.opt]?.min || ''}분`));
+          row.appendChild(body); d.appendChild(row);
+        });
         sum.appendChild(d);
       });
       if (res.dropped.length) sum.appendChild($('p', 'muted', `뺀 것 ${res.dropped.length}: ${res.dropped.map(x => esc(x.place.name)).join(', ')}`));
@@ -244,22 +259,39 @@ async function renderProject(ctx) {
   // 사진
   const ph = $('div', 'panel'); ph.appendChild($('h2', null, `사진 <span class="muted" style="font-weight:500">${p.photos.length}장</span>`));
   ph.appendChild($('p', null, '올리면 사진 안의 GPS로 지도에 찍힌다. GPS가 없으면 아래에서 장소를 골라 붙여라.'));
-  const file = $('input'); file.type = 'file'; file.accept = 'image/*'; file.multiple = true;
-  file.onchange = async () => {
-    for (const f of file.files) {
+  const cityData = await loadCity(p.city).catch(() => ({ places: [] }));
+  const placeName = id => cityData.places.find(x => x.id === id)?.name;
+  // 올리기: 파일 고르기 + 끌어다 놓기. 한 장씩 진행을 보여준다
+  const drop = $('div', 'drop'); drop.innerHTML = '<b>사진을 여기 끌어다 놓거나</b> <span class="muted">눌러서 고른다 · 여러 장 가능 · 올릴 때 긴 변 1200px로 줄인다</span>';
+  const file = $('input'); file.type = 'file'; file.accept = 'image/*'; file.multiple = true; file.hidden = true;
+  const prog = $('p', 'muted', '');
+  const ingest = async files => {
+    const list = [...files].filter(f => f.type.startsWith('image/')); if (!list.length) return;
+    let n = 0;
+    for (const f of list) {
+      prog.textContent = `올리는 중 ${++n}/${list.length} — ${f.name}`;
       try {
         const [dataUrl, gps] = await Promise.all([shrink(f), gpsOf(f)]);
         await store.addPhoto(p.id, { dataUrl, lat: gps?.lat ?? null, lng: gps?.lng ?? null, placeId: nearest(cityData, gps), note: '', takenAt: f.lastModified });
-      } catch (e) { alert(`「${f.name}」을 못 담았다 — 브라우저 저장 한도(약 5MB)를 넘었을 수 있다. 계정 서버가 붙으면 한도가 사라진다.`); break; }
+      } catch (e) { alert(`「${f.name}」을 못 담았다 — ${e.message || '브라우저 저장 한도(약 5MB)를 넘었을 수 있다'}`); break; }
     }
     render();
   };
-  ph.appendChild(file);
-  const cityData = await loadCity(p.city).catch(() => ({ places: [] }));
-  const placeName = id => cityData.places.find(x => x.id === id)?.name;
-  for (const x of [...p.photos].sort((a, b) => (a.takenAt || 0) - (b.takenAt || 0))) {
+  drop.onclick = () => file.click(); file.onchange = () => ingest(file.files);
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add('over'); }; drop.ondragleave = () => drop.classList.remove('over');
+  drop.ondrop = e => { e.preventDefault(); drop.classList.remove('over'); ingest(e.dataTransfer.files); };
+  ph.append(drop, file, prog);
+  // 장소별로 묶어 보여준다 — GPS로 붙은 장소, 손으로 고른 장소, 장소 없음
+  const groups = new Map();
+  for (const x of [...p.photos].sort((a, b) => (a.takenAt || 0) - (b.takenAt || 0))) { const k = x.placeId || ''; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(x); }
+  const order = [...groups.keys()].sort((a, b) => (a === '') - (b === '') || (placeName(a) || '').localeCompare(placeName(b) || ''));
+  for (const k of order) {
+    ph.appendChild($('h3', 'photogroup', `${esc(placeName(k) || '장소 없음')} <span class="muted" style="font-weight:500">${groups.get(k).length}장</span>`));
+    for (const x of groups.get(k)) ph.appendChild(photoRow(x));
+  }
+  function photoRow(x) {
     const r = $('div', 'photo');
-    const img = $('img'); img.src = x.url || x.dataUrl; img.loading = 'lazy'; r.appendChild(img);
+    const img = $('img'); img.src = x.url || x.dataUrl; img.loading = 'lazy'; img.title = '크게 보기'; img.onclick = () => lightbox(x.url || x.dataUrl, x.note || placeName(x.placeId) || ''); r.appendChild(img);
     const body = $('div', 'body');
     const sel = $('select', 'quiet'); sel.title = '어디서 찍었나';
     [['', x.lat != null ? 'GPS 자리' : '장소 없음'], ...cityData.places.map(pl => [pl.id, pl.name])].forEach(([v, l]) => { const o = $('option', null, esc(l)); o.value = v; o.selected = (x.placeId || '') === v; sel.appendChild(o); });
@@ -267,13 +299,19 @@ async function renderProject(ctx) {
     const note = $('input', 'text'); note.type = 'text'; note.placeholder = '메모'; note.value = x.note || ''; note.maxLength = 120;
     note.onchange = async () => { await store.updatePhoto(p.id, x.id, { note: note.value }); };
     const meta = $('div', 'muted', `${x.takenAt ? fmtDate(x.takenAt) : ''}${x.lat != null ? ` · ${x.lat.toFixed(4)}, ${x.lng.toFixed(4)}` : ' · GPS 없음'}`);
-    const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { await store.deletePhoto(p.id, x.id); render(); };
-    body.append(sel, note, meta, del); r.appendChild(body); ph.appendChild(r);
+    const tools = $('div', 'row');
+    const pick = $('button', 'btn sm', x.lat != null ? '지도에서 위치 옮기기' : '지도에서 위치 찍기'); pick.type = 'button';
+    pick.onclick = () => { ctx.pickPhoto?.(async ll => { await store.updatePhoto(p.id, x.id, { lat: ll.lat, lng: ll.lng, placeId: nearest(cityData, ll) || x.placeId || null }); render(); }); pick.textContent = '지도를 클릭해라…'; };
+    const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm('이 사진을 지울까?')) return; await store.deletePhoto(p.id, x.id); render(); };
+    tools.append(pick, del);
+    body.append(sel, note, meta, tools); r.appendChild(body);
     // 지도: 좌표가 있으면 그 자리, 없으면 고른 장소 자리
     const at = x.lat != null ? [x.lat, x.lng] : (placeName(x.placeId) ? (pl => [pl.lat, pl.lng])(cityData.places.find(q => q.id === x.placeId)) : null);
-    if (at && map) map.html('route', { lat: at[0], lng: at[1] }, `<img src="${x.url || x.dataUrl}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)">`, { title: x.note || placeName(x.placeId) || '사진' });
+    if (at && map) map.html('route', { lat: at[0], lng: at[1] }, `<img src="${x.url || x.dataUrl}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)">`, { title: x.note || placeName(x.placeId) || '사진', onClick: () => lightbox(x.url || x.dataUrl, x.note || placeName(x.placeId) || '') });
+    return r;
   }
   side.appendChild(ph);
+  if (p.photos.length && ctx.fitPhotos) ctx.fitPhotos(p.photos.filter(x => x.lat != null).map(x => ({ lat: x.lat, lng: x.lng })));
 }
 
 // GPS에서 1km 안의 가장 가까운 랜드마크 id (없으면 null)
