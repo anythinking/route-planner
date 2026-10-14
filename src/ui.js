@@ -134,7 +134,7 @@ function renderInfo(side) {
     for (const t of city.photo.general) g.appendChild($('div', 'item', `<span>${esc(t)}</span>`));
     side.appendChild(g);
     const mine = city.places.filter(pl => chosen.has(pl.id)), rest = city.places.filter(pl => !chosen.has(pl.id));
-    for (const [title, list, hint] of [['내가 고른 곳', mine, '플랜에서 고른 장소만. 지도의 진한 점이 이 곳들이다.'], ['나머지 장소', rest, '고르지 않은 곳도 참고용으로.']]) {
+    for (const [title, list, hint] of [['내가 고른 곳', mine, '플랜에서 고른 장소만.'], ['나머지 장소', rest, '고르지 않은 곳도 참고용으로.']]) {
       if (!list.length) continue;
       const p = $('div', 'panel'); p.appendChild($('h2', null, title)); p.appendChild($('p', null, hint));
       for (const pl of list) p.appendChild($('div', 'item', `<b>${esc(pl.name)}</b><span>${esc(city.photo.places[pl.id] || '')}</span>`));
@@ -156,9 +156,6 @@ function renderInfo(side) {
     if (!state.pr) p.appendChild($('p', 'muted', '「내 여행」에서 여행을 열어 두면 항목마다 「살 것에 담기」가 생긴다.'));
     side.appendChild(p);
   }
-  // 지도엔 고른 곳만 진하게 표시해 둔다
-  for (const pl of city.places) layers.places.addLayer(placeMarker(pl, chosen.has(pl.id), state.m.includes(pl.id)));
-  bindMapClick(null);
 }
 
 let renderSeq = 0;              // 겹쳐 시작된 렌더 중 마지막 것만 그린다 (await 사이에 새 렌더가 오면 옛것은 접는다)
@@ -167,6 +164,7 @@ async function render() {
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
+  document.querySelector('.layout').classList.toggle('nomap', state.tab !== 'plan');   // 지도는 플랜에서만
   await storeReady;
   // 계정 확인이 3초 넘게 안 끝나면(다른 탭의 잠금 등) 일단 로그아웃 상태로 그리고, 세션이 오면 onChange가 다시 그린다
   try { curUser = await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch { curUser = null; }
@@ -180,7 +178,7 @@ async function render() {
   side.innerHTML = '';
   layers.places.clearLayers(); layers.route.clearLayers();
   drawStart();
-  map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다
+  if (state.tab === 'plan') map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다 (지도가 숨겨진 탭에선 재지 않는다)
   const first = lastStep === 0;
   if (state.tab === 'mine') {
     lastStep = -1;
@@ -190,13 +188,11 @@ async function render() {
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
     renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; } });
     if (state.pr) accountOpen = false;
-    for (const pl of city.places) layers.places.addLayer(placeMarker(pl, Object.hasOwn(state.p, pl.id), state.m.includes(pl.id)));
-    bindMapClick(null);
-    if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] });
     restoreScroll(side, sy, st); return;
   }
-  if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] }); restoreScroll(side, sy, st); return; }
+  if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
+  if (entering) requestAnimationFrame(() => map.invalidateSize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   renderSettings(side);
   if (step === 2) renderStep2(side, entering);
   if (step === 3) renderStep3(side, entering);

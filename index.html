@@ -25,6 +25,7 @@ h1{font-size:20px;margin:0;font-weight:700}h1 a{color:inherit;text-decoration:no
 details.panel>summary{cursor:pointer;list-style:none;font-size:15px}details.panel>summary::-webkit-details-marker{display:none}details.panel>summary::before{content:'▸ ';color:var(--muted)}details.panel[open]>summary::before{content:'▾ '}
 details.panel[open]>summary{margin-bottom:6px}.group>summary b{font-size:17px}
 .layout{flex:1;min-height:0;display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.layout.nomap{grid-template-columns:1fr}.layout.nomap #map{display:none}.layout.nomap .side{max-width:860px;width:100%;margin-inline:auto}
 #map{min-height:340px;border:1px solid var(--line);border-radius:4px}
 .side{min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:4px}
 .panel{border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:16px}
@@ -52,7 +53,7 @@ input.text{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--l
 .photo{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.photo img{width:96px;height:96px;object-fit:cover;border-radius:4px}.photo .body{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.photo .body input.text{width:100%}
 select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);max-width:46vw}
 .muted{color:var(--muted);font-size:13px}
-@media (max-width:1000px){html,body{height:auto}body{overflow:visible}.app{height:auto}.layout{display:flex;flex-direction:column}#map{height:60vh}.side{overflow:visible}}
+@media (max-width:1000px){html,body{height:auto}body{overflow:visible}.app{height:auto}.layout{display:flex;flex-direction:column}#map{height:60vh}.side{overflow:visible}.layout.nomap #map{display:none}}
 </style>
 </head>
 <body>
