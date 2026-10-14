@@ -15,7 +15,7 @@
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;overflow:hidden}
 .app{height:100%;max-width:1560px;margin-inline:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
 header{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
-h1{font-size:20px;margin:0;font-weight:700}
+h1{font-size:20px;margin:0;font-weight:700}h1 a{color:inherit;text-decoration:none}h1 a:hover{opacity:.7}
 .steps{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
 .steps button{font:inherit;font-size:13px;font-weight:600;padding:6px 16px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
 .steps button:last-child{border-right:0}.steps button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
@@ -58,7 +58,7 @@ select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line
 <body>
 <div class="app">
   <header>
-    <h1>AlgoTrip</h1>
+    <h1><a href="#" id="home" title="홈 — 플랜으로">AlgoTrip</a></h1>
     <nav class="tabs" id="tabs"></nav>
     <div class="steps" id="steps"></div>
     <div id="who" style="margin-left:auto"></div>
