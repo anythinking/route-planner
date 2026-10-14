@@ -1,6 +1,7 @@
 import { plan, hm } from './engine.js';
 import { decode, encode, DEFAULTS, TABS, resolvePlaces } from './state.js';
 import { esc } from './html.js';
+import { search } from './search.js';
 
 const CITIES = { london: '런던', paris: '파리' };
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
@@ -143,16 +144,23 @@ async function render() {
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
   renderTabs();
+  const sy = window.scrollY, st = side.scrollTop;        // 다시 그리는 동안 스크롤 자리를 지킨다
+  side.style.minHeight = side.offsetHeight + 'px';
   side.innerHTML = '';
   layers.places.clearLayers(); layers.route.clearLayers();
   drawStart();
   map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다
   const first = lastStep === 0;
-  if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] }); return; }
+  if (state.tab !== 'plan') { lastStep = -1; renderInfo(side); if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] }); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   renderSettings(side);
   if (step === 2) renderStep2(side, entering);
   if (step === 3) renderStep3(side, entering);
+  restoreScroll(side, sy, st);
+}
+function restoreScroll(side, sy, st) {
+  side.scrollTop = st; window.scrollTo(0, sy);
+  requestAnimationFrame(() => { side.style.minHeight = ''; side.scrollTop = st; window.scrollTo(0, sy); });
 }
 
 // Task 8·9에서 채운다
@@ -180,6 +188,7 @@ function renderStep2(side, entering) {
   head.appendChild($('p', null, `고른 곳 ${n}개 · ${state.d}일. 「꼭」을 켜면 자르기에서 안 빠진다. 지도의 빈 곳을 클릭하면 내 장소를 추가한다.`));
   const go = $('button', 'btn primary', '경로 짜기 →'); go.type = 'button'; go.disabled = n === 0; go.onclick = () => goStep(3);
   head.appendChild(go); side.appendChild(head);
+  side.appendChild(renderSearch());
 
   for (const w of [1, 2, 3]) {
     const group = city.places.filter(p => p.weight === w);
@@ -187,7 +196,7 @@ function renderStep2(side, entering) {
     const panel = $('div', 'panel'); panel.appendChild($('h2', null, WEIGHT_LABEL[w]));
     for (const pl of group) {
       const chosen = pl.id in state.p, must = state.m.includes(pl.id);
-      const row = $('div', 'row');
+      const row = $('div', 'row place'); row.dataset.name = pl.name.toLowerCase();
       const cb = $('input'); cb.type = 'checkbox'; cb.checked = chosen; cb.id = 'cb-' + pl.id; cb.onchange = () => togglePlace(pl.id);
       const lab = $('label', null, esc(pl.name)); lab.htmlFor = cb.id; lab.style.fontWeight = '600';
       row.append(cb, lab);
@@ -200,11 +209,12 @@ function renderStep2(side, entering) {
         row.append(mustBtn, sel);
       }
       panel.appendChild(row);
-      if (chosen) panel.appendChild($('p', 'muted', pl.note));
+      if (chosen) { const note = $('p', 'muted', pl.note); note.dataset.name = row.dataset.name; panel.appendChild(note); }
       layers.places.addLayer(placeMarker(pl, chosen, must));
     }
-    side.appendChild(panel);
+    panel.classList.add('group'); side.appendChild(panel);
   }
+  applyFilter(side);
 
   if (state.u.length) {
     const panel = $('div', 'panel'); panel.appendChild($('h2', null, '내 장소'));
@@ -226,6 +236,45 @@ function renderStep2(side, entering) {
     const min = parseInt(prompt('머무는 시간(분)', '60')); if (!(min > 0)) return;
     setState({ u: [...state.u, { name: name.replace(/[~|]/g, ' '), lat: e.latlng.lat, lng: e.latlng.lng, min }], o: null });
   });
+}
+let query = '', results = null, searching = false, searchErr = '';   // 검색 상자 상태 (화면 상태)
+
+// 입력한 글자로 목록을 거른다 — 다시 그리지 않고 숨기기만 (입력 포커스를 지키려고)
+function applyFilter(side) {
+  const q = query.trim().toLowerCase();
+  side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
+  side.querySelectorAll('.panel.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); });
+}
+
+function renderSearch() {
+  const p = $('div', 'panel search');
+  const row = $('div', 'row');
+  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 이름 — 목록을 거르고, Enter로 지도에서 찾는다'; inp.value = query;
+  inp.oninput = () => { query = inp.value; applyFilter(document.getElementById('side')); };
+  const go = $('button', 'btn', '지도에서 찾기'); go.type = 'button';
+  const run = async () => {
+    const q = inp.value.trim(); if (!q) return;
+    query = q; searching = true; searchErr = ''; results = null; render();
+    try { results = await search(q, city.center); } catch (e) { searchErr = '검색 서버에 닿지 못했다. 잠시 뒤 다시.'; }
+    searching = false; render();
+  };
+  go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); run(); } };
+  row.append(inp, go); p.appendChild(row);
+  if (searching) p.appendChild($('p', 'muted', '찾는 중…'));
+  if (searchErr) p.appendChild($('p', null, `<b style="color:var(--warn)">${esc(searchErr)}</b>`));
+  if (results) {
+    if (!results.length) p.appendChild($('p', 'muted', `「${esc(query)}」 — 이 도시 안에서 못 찾았다. 철자를 바꾸거나 지도의 빈 곳을 직접 클릭해라.`));
+    for (const c of results) {
+      const r = $('div', 'row');
+      r.appendChild($('span', null, `<b>${esc(c.name)}</b> <span class="muted">${esc(c.detail)}</span>`));
+      const add = $('button', 'btn sm', '추가 · 60분'); add.type = 'button';
+      add.onclick = () => { results = null; query = ''; setState({ u: [...state.u, { name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min: 60 }], o: null }); };
+      r.appendChild(add); p.appendChild(r);
+      layers.places.addLayer(L.circleMarker([c.lat, c.lng], { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', fillOpacity: 1, dashArray: '2 2', bubblingMouseEvents: false }).bindTooltip(esc(c.name) + ' (검색 결과)'));
+    }
+    if (results.length) p.appendChild($('p', 'muted', '검색: OpenStreetMap Nominatim. 추가한 장소는 「내 장소」로 들어가고 머무는 시간은 60분으로 잡힌다 — 필요하면 지도의 빈 곳을 클릭해 다른 시간으로 다시 넣어라.'));
+  }
+  return p;
 }
 const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 안 넣는다)
 let editing = false;        // 순서·이동수단 조정 도구를 보일지 — 기본은 읽기만
