@@ -16,7 +16,15 @@ export class SupabaseStore {
 
   async user() {
     const { data } = await this.sb.auth.getUser(); const u = data.user; if (!u) return null;
-    return { id: u.id, name: u.user_metadata?.full_name || u.email?.split('@')[0] || '나', email: u.email };
+    return { id: u.id, name: u.user_metadata?.full_name || u.email?.split('@')[0] || '나', email: u.email, prefs: u.user_metadata?.prefs || {}, canPassword: true };
+  }
+  async updateUser({ name, prefs, password }) {
+    const { data } = await this.sb.auth.getUser(); const meta = { ...(data.user?.user_metadata || {}) };
+    if (name != null) meta.full_name = String(name).trim().slice(0, 40);
+    if (prefs) meta.prefs = { ...(meta.prefs || {}), ...prefs };
+    const body = { data: meta }; if (password) body.password = password;
+    const { error } = await this.sb.auth.updateUser(body); if (error) throw error;
+    return this.user();
   }
   // { email, password } → 비밀번호, { email } → 매직 링크 메일, { provider: 'google' } → OAuth
   async signIn({ email, password, provider }) {

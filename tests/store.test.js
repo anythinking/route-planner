@@ -34,3 +34,10 @@ test('LocalStore: 사진은 여행에 붙고, 좌표·장소·메모를 가진�
   await s.deletePhoto(p.id, ph.id);
   assert.equal((await s.getProject(p.id)).photos.length, 0);
 });
+
+test('LocalStore: updateUser로 이름·기본 설정을 바꾸고 user()에 반영된다', async () => {
+  const s = new LocalStore(mem()); await s.signIn({ name: '영철' });
+  await s.updateUser({ name: '신영철', prefs: { c: 'paris', v: 'taxi' } });
+  const u = await s.user();
+  assert.equal(u.name, '신영철'); assert.deepEqual(u.prefs, { c: 'paris', v: 'taxi' });
+});

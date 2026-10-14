@@ -12,7 +12,7 @@ const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '�
 // 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
 let store = new LocalStore();
 const storeReady = (async () => {
-  if (!SUPABASE.url) return;
+  if (!SUPABASE.url || new URLSearchParams(location.search).has('local')) return;   // ?local=1 이면 브라우저 저장으로 (개발·시험용)
   try { const { SupabaseStore } = await import('./store-supabase.js'); store = new SupabaseStore(); store.onChange = () => render(); }
   catch (e) { console.warn('계정 서버 연결 실패 — 브라우저 저장으로 간다', e); }
 })();
@@ -161,12 +161,15 @@ function renderInfo(side) {
   bindMapClick(null);
 }
 
+let renderSeq = 0;              // 겹쳐 시작된 렌더 중 마지막 것만 그린다 (await 사이에 새 렌더가 오면 옛것은 접는다)
 async function render() {
+  const seq = ++renderSeq;
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
   await storeReady;
   try { curUser = await store.user(); } catch { curUser = null; }
-  try { city = await loadCity(state.c); }
+  if (seq !== renderSeq) return;
+  try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
   renderTabs();
@@ -180,6 +183,7 @@ async function render() {
   if (state.tab === 'mine') {
     lastStep = -1;
     const projects = curUser ? await store.listProjects() : [];
+    if (seq !== renderSeq) return;
     const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
     renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; } });
