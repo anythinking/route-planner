@@ -18,8 +18,8 @@ async function gpsOf(file) {
   catch { return null; }
 }
 
-export function renderMine(ctx) {
-  const { state, setState, city, $, side, store, user, project, CITIES, render, layers, map, L } = ctx;
+export async function renderMine(ctx) {
+  const { state, user, project } = ctx;
   if (!user) return renderLogin(ctx);
   if (ctx.accountOpen && !state.pr) return renderAccount(ctx);
   if (!state.pr || !project) return renderList(ctx);
@@ -171,35 +171,57 @@ function renderList(ctx) {
   side.appendChild(head);
 
   if (!projects.length) { side.appendChild($('div', 'panel', '<p class="muted">아직 여행이 없다.</p>')); return; }
+  const grid = $('div', 'cards');
   for (const p of projects) {
-    const c = $('div', 'panel');
-    c.appendChild($('h2', null, esc(p.name) + (p.id === user.prefs?.lastPr ? ' <span class="tag">최근</span>' : '')));
-    c.appendChild($('p', 'meta', `${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}`));
-    const r = $('div', 'row');
-    const open = $('button', 'btn primary', '열기'); open.type = 'button'; open.onclick = () => setState({ pr: p.id });
-    r.appendChild(open); c.appendChild(r); side.appendChild(c);
+    const ci = ctx.INDEX?.cities?.[p.city] || {};
+    const card = $('a', 'card trip'); card.href = '#';
+    card.innerHTML = `<img src="${esc(ci.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}${p.id === user.prefs?.lastPr ? ' · 최근' : ''}</b><span>${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}</span></div>`;
+    card.onclick = e => { e.preventDefault(); setState({ pr: p.id }); };
+    grid.appendChild(card);
   }
+  side.appendChild(grid);
 }
 
 // 플랜만 담은 해시 (탭·여행 id 제외)
 const planHash = st => encode({ ...st, tab: 'plan', pr: null });
 
-function renderProject(ctx) {
-  const { state, setState, city, $, side, store, project: p, CITIES, render, layers, L } = ctx;
-  const head = $('div', 'panel');
+async function renderProject(ctx) {
+  const { state, setState, $, side, store, project: p, CITIES, render, layers, L, INDEX, loadCity, plan, resolvePlaces, hm, setStep } = ctx;
+  const ci = INDEX?.cities?.[p.city] || {};
+  const head = $('div', 'panel'); head.style.padding = '0'; head.style.overflow = 'hidden';
+  if (ci.image) { const cover = $('div', 'cover'); cover.innerHTML = `<img src="${esc(ci.image)}" alt=""><div class="cap"><b>${esc(p.name)}</b><span>${esc(CITIES[p.city] || p.city)} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}</span></div>`; head.appendChild(cover); }
+  const inner = $('div', null); inner.style.padding = '12px 16px 16px'; head.appendChild(inner);
   const back = $('button', 'btn sm', '← 목록'); back.type = 'button'; back.onclick = () => setState({ pr: null });
-  head.appendChild(back);
-  head.appendChild($('h2', null, esc(p.name)));
-  head.appendChild($('p', 'meta', `${esc(CITIES[p.city] || p.city)} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}`));
+  const ren = $('button', 'btn sm', '이름 바꾸기'); ren.type = 'button'; ren.onclick = async () => { const n = prompt('여행 이름', p.name); if (!n || n === p.name) return; await store.updateProject(p.id, { name: n }); render(); };
+  inner.append(back, ren);
   const row = $('div', 'row');
   const load = $('button', 'btn primary', '이 플랜 열기'); load.type = 'button';
-  load.onclick = () => { const st = decode('#' + p.hash); setState({ ...st, tab: 'plan', pr: p.id }); };
+  load.onclick = () => { const st = decode('#' + p.hash); setStep?.(3); setState({ ...st, tab: 'plan', pr: p.id }); };
   const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button';
   save.onclick = async () => { await store.updateProject(p.id, { city: state.c, hash: planHash(state) }); save.textContent = '저장됨'; setTimeout(render, 600); };
   const del = $('button', 'btn sm', '삭제'); del.type = 'button';
   del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까? 사진도 같이 지워진다.`)) return; await store.deleteProject(p.id); setState({ pr: null }); };
-  row.append(load, save, del); head.appendChild(row);
+  row.append(load, save, del); inner.appendChild(row);
   side.appendChild(head);
+
+  // 플랜 요약 — 저장된 해시를 그 도시 데이터로 다시 계산해 읽기 전용으로 보여준다
+  try {
+    const st = decode('#' + p.hash); const cd = await loadCity(p.city);
+    const places = resolvePlaces(st, cd);
+    const sum = $('div', 'panel'); sum.appendChild($('h2', null, `플랜 <span class="muted" style="font-weight:500">· ${st.d}일 · ${places.length}곳</span>`));
+    if (!places.length) sum.appendChild($('p', 'muted', '아직 고른 장소가 없다. 「이 플랜 열기」로 가서 고르면 여기 요약이 뜬다.'));
+    else {
+      const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
+      const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o });
+      res.days.forEach((day, i) => {
+        if (!day.stops.length) return;
+        const d = $('div', 'item'); d.innerHTML = `<b>${i + 1}일차 <span class="muted" style="font-weight:500">${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분</span></b><span>${day.stops.map(s => esc(s.place.name)).join(' → ')}</span>`;
+        sum.appendChild(d);
+      });
+      if (res.dropped.length) sum.appendChild($('p', 'muted', `뺀 것 ${res.dropped.length}: ${res.dropped.map(x => esc(x.place.name)).join(', ')}`));
+    }
+    side.appendChild(sum);
+  } catch (e) { side.appendChild($('div', 'panel', `<p class="muted">플랜 요약을 못 만들었다 — ${esc(e.message || e)}</p>`)); }
 
   // 살 것
   const shop = $('div', 'panel'); shop.appendChild($('h2', null, `살 것 <span class="muted" style="font-weight:500">${p.shopping.filter(x => x.done).length}/${p.shopping.length}</span>`));
@@ -227,19 +249,20 @@ function renderProject(ctx) {
     for (const f of file.files) {
       try {
         const [dataUrl, gps] = await Promise.all([shrink(f), gpsOf(f)]);
-        await store.addPhoto(p.id, { dataUrl, lat: gps?.lat ?? null, lng: gps?.lng ?? null, placeId: nearest(city, gps), note: '', takenAt: f.lastModified });
+        await store.addPhoto(p.id, { dataUrl, lat: gps?.lat ?? null, lng: gps?.lng ?? null, placeId: nearest(cityData, gps), note: '', takenAt: f.lastModified });
       } catch (e) { alert(`「${f.name}」을 못 담았다 — 브라우저 저장 한도(약 5MB)를 넘었을 수 있다. 계정 서버가 붙으면 한도가 사라진다.`); break; }
     }
     render();
   };
   ph.appendChild(file);
-  const placeName = id => city.places.find(x => x.id === id)?.name;
+  const cityData = await loadCity(p.city).catch(() => ({ places: [] }));
+  const placeName = id => cityData.places.find(x => x.id === id)?.name;
   for (const x of [...p.photos].sort((a, b) => (a.takenAt || 0) - (b.takenAt || 0))) {
     const r = $('div', 'photo');
     const img = $('img'); img.src = x.url || x.dataUrl; img.loading = 'lazy'; r.appendChild(img);
     const body = $('div', 'body');
     const sel = $('select', 'quiet'); sel.title = '어디서 찍었나';
-    [['', x.lat != null ? 'GPS 자리' : '장소 없음'], ...city.places.map(pl => [pl.id, pl.name])].forEach(([v, l]) => { const o = $('option', null, esc(l)); o.value = v; o.selected = (x.placeId || '') === v; sel.appendChild(o); });
+    [['', x.lat != null ? 'GPS 자리' : '장소 없음'], ...cityData.places.map(pl => [pl.id, pl.name])].forEach(([v, l]) => { const o = $('option', null, esc(l)); o.value = v; o.selected = (x.placeId || '') === v; sel.appendChild(o); });
     sel.onchange = async () => { await store.updatePhoto(p.id, x.id, { placeId: sel.value || null }); render(); };
     const note = $('input', 'text'); note.type = 'text'; note.placeholder = '메모'; note.value = x.note || ''; note.maxLength = 120;
     note.onchange = async () => { await store.updatePhoto(p.id, x.id, { note: note.value }); };
@@ -247,7 +270,7 @@ function renderProject(ctx) {
     const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { await store.deletePhoto(p.id, x.id); render(); };
     body.append(sel, note, meta, del); r.appendChild(body); ph.appendChild(r);
     // 지도: 좌표가 있으면 그 자리, 없으면 고른 장소 자리
-    const at = x.lat != null ? [x.lat, x.lng] : (placeName(x.placeId) ? (pl => [pl.lat, pl.lng])(city.places.find(q => q.id === x.placeId)) : null);
+    const at = x.lat != null ? [x.lat, x.lng] : (placeName(x.placeId) ? (pl => [pl.lat, pl.lng])(cityData.places.find(q => q.id === x.placeId)) : null);
     if (at) L.marker(at, { icon: L.divIcon({ className: '', html: `<img src="${x.url || x.dataUrl}" style="width:36px;height:36px;object-fit:cover;border-radius:4px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)">`, iconSize: [36, 36], iconAnchor: [18, 18] }) })
       .bindTooltip(esc(x.note || placeName(x.placeId) || '사진')).addTo(layers.route);
   }

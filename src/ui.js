@@ -284,7 +284,8 @@ async function render() {
     if (seq !== renderSeq) return;
     const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
-    renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; } });
+    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; } });
+    if (seq !== renderSeq) return;
     if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
