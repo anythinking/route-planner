@@ -4,11 +4,18 @@ import { esc } from './html.js';
 import { search } from './search.js';
 import { LocalStore } from './store.js';
 import { renderMine } from './mine.js';
+import { SUPABASE } from './config.js';
 
 const CITIES = { london: '런던', paris: '파리' };
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
 const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
-const store = new LocalStore();   // 계정 서버가 붙으면 여기만 바꾼다
+// 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
+let store = new LocalStore();
+const storeReady = (async () => {
+  if (!SUPABASE.url) return;
+  try { const { SupabaseStore } = await import('./store-supabase.js'); store = new SupabaseStore(); store.onChange = () => render(); }
+  catch (e) { console.warn('계정 서버 연결 실패 — 브라우저 저장으로 간다', e); }
+})();
 const DAY_COLORS = ['--d1','--d2','--d3','--d4','--d5','--d6','--d7','--d8','--d9','--d10'];
 const $ = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
@@ -155,7 +162,8 @@ function renderInfo(side) {
 async function render() {
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
-  curUser = await store.user();
+  await storeReady;
+  try { curUser = await store.user(); } catch { curUser = null; }
   try { city = await loadCity(state.c); }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)

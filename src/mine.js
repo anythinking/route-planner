@@ -2,6 +2,7 @@
 import { esc } from './html.js';
 import { decode, encode } from './state.js';
 
+const guard = (fn, render) => async (...a) => { try { await fn(...a); } catch (e) { alert(`저장 실패 — ${e.message || e}`); render(); } };
 const fmtDate = t => new Date(t).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
 // 파일 → 작은 JPEG data URL (긴 변 1200px). 브라우저 저장소 한도(≈5MB) 안에서 여러 장을 담으려고 줄인다.
@@ -24,18 +25,35 @@ export function renderMine(ctx) {
   return renderProject(ctx);
 }
 
+let mailSent = '';
 function renderLogin({ $, side, store, render }) {
   const p = $('div', 'panel');
   p.appendChild($('h2', null, '내 여행'));
-  p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 지금은 <b>이 브라우저 안에만</b> 저장된다(기기를 바꾸면 안 보인다). 계정 서버가 붙으면 같은 화면이 그대로 어디서나 열린다.'));
-  const row = $('div', 'row');
-  const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '이름'; inp.maxLength = 40;
-  const go = $('button', 'btn primary', '시작'); go.type = 'button';
-  const run = async () => { if (!inp.value.trim()) { inp.focus(); return; } await store.signIn({ name: inp.value }); render(); };
-  go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') run(); };
-  row.append(inp, go); p.appendChild(row);
-  const g = $('button', 'btn', '구글로 로그인'); g.type = 'button'; g.disabled = true; g.title = '계정 서버(Supabase)를 붙이면 켜진다';
-  p.appendChild($('div', 'row')).append(g, $('span', 'muted', '— 계정 서버를 붙이면 켜진다'));
+  if (store.kind === 'supabase') {
+    p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 로그인하면 어느 기기에서든 같은 여행이 열린다.'));
+    if (mailSent) { p.appendChild($('p', null, `<b>${esc(mailSent)}</b> 로 로그인 링크를 보냈다. 메일의 링크를 누르면 여기로 돌아온다(스팸함도 확인).`)); side.appendChild(p); return; }
+    const row = $('div', 'row');
+    const inp = $('input', 'text'); inp.type = 'email'; inp.placeholder = '이메일'; inp.autocomplete = 'email';
+    const go = $('button', 'btn primary', '로그인 링크 받기'); go.type = 'button';
+    const err = $('p', null, '');
+    const run = async () => {
+      const email = inp.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { inp.focus(); return; }
+      go.disabled = true; go.textContent = '보내는 중…';
+      try { await store.signIn({ email }); mailSent = email; render(); }
+      catch (e) { err.innerHTML = `<b style="color:var(--warn)">못 보냈다 — ${esc(e.message || e)}</b>`; go.disabled = false; go.textContent = '로그인 링크 받기'; }
+    };
+    go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') run(); };
+    row.append(inp, go); p.append(row, err);
+    p.appendChild($('p', 'muted', '비밀번호가 없다 — 메일로 온 링크 한 번이 로그인이다. 구글 로그인은 곧 붙는다.'));
+  } else {
+    p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 지금은 <b>이 브라우저 안에만</b> 저장된다(기기를 바꾸면 안 보인다).'));
+    const row = $('div', 'row');
+    const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '이름'; inp.maxLength = 40;
+    const go = $('button', 'btn primary', '시작'); go.type = 'button';
+    const run = async () => { if (!inp.value.trim()) { inp.focus(); return; } await store.signIn({ name: inp.value }); render(); };
+    go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') run(); };
+    row.append(inp, go); p.appendChild(row);
+  }
   side.appendChild(p);
 }
 

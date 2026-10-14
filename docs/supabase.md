@@ -11,9 +11,10 @@
 ## 영철이 할 일 (10분)
 1. https://supabase.com → 구글로 가입 → New project (이름 `route-planner`, 지역 `Northeast Asia (Seoul)`).
 2. Project Settings → API 에서 **Project URL** 과 **anon public key** 복사 → 나한테 주면 `src/store-supabase.js`에 넣는다. (service_role 키는 절대 안 쓴다.)
-3. Authentication → Providers → Google 켜기. 구글 클라우드 콘솔에서 OAuth 클라이언트를 하나 만들어 ID/Secret 붙여넣기 (이메일+비밀번호는 기본으로 켜져 있다).
+3. (나중에) Authentication → Providers → Google 켜기 — 구글 클라우드 콘솔에서 OAuth 클라이언트를 만들어 ID/Secret 붙여넣기. 처음엔 기본으로 켜진 **이메일 매직 링크**로 로그인한다.
 4. SQL Editor 에 아래를 붙여 넣고 Run.
 5. Storage → New bucket `photos` (Private).
+6. Authentication → URL Configuration — **Site URL** `https://anythinking.github.io/route-planner/`, **Redirect URLs**에 `https://anythinking.github.io/route-planner/**`·`http://127.0.0.1:8080/**`·`http://localhost:8080/**` 추가. (로그인 메일의 링크가 이 목록 밖 주소로는 못 돌아온다.)
 
 ## 표
 ```sql
@@ -39,6 +40,9 @@ create table photos (
   taken_at timestamptz,
   created_at timestamptz not null default now()
 );
+
+-- 「Automatically expose new tables」를 껐으므로 로그인 사용자 역할에 표 권한을 직접 준다
+grant select, insert, update, delete on projects, photos to authenticated;
 
 -- 행 단위 권한: 내 것만 보고 고친다
 alter table projects enable row level security;
