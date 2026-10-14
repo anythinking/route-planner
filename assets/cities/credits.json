@@ -1,0 +1,44 @@
+{
+ "london": {
+  "file": "London Skyline (125508655).jpeg",
+  "author": "Ilya Grigorik",
+  "license": "CC BY-SA 3.0",
+  "url": "https://commons.wikimedia.org/wiki/File:London_Skyline_%28125508655%29.jpeg"
+ },
+ "paris": {
+  "file": "La Tour Eiffel vue de la Tour Saint-Jacques, Paris août 2014 (2).jpg",
+  "author": "Yann Caradec from Paris, France",
+  "license": "CC BY-SA 2.0",
+  "url": "https://commons.wikimedia.org/wiki/File:La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg"
+ },
+ "tokyo": {
+  "file": "Skyscrapers of Shinjuku 2009 January (revised).jpg",
+  "author": "Morio",
+  "license": "CC BY-SA 3.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Skyscrapers_of_Shinjuku_2009_January_%28revised%29.jpg"
+ },
+ "osaka": {
+  "file": "Osaka montage.jpg",
+  "author": "Kyoww",
+  "license": "CC BY-SA 3.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Osaka_montage.jpg"
+ },
+ "kyoto": {
+  "file": "Pedestrian road with pavements, paper umbrellas and people in yukata, Higashiyama-ku, Kyoto, Japan.jpg",
+  "author": "Basile Morin",
+  "license": "CC BY-SA 4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Pedestrian_road_with_pavements%2C_paper_umbrellas_and_people_in_yukata%2C_Higashiyama-ku%2C_Kyoto%2C_Japan.jpg"
+ },
+ "rome": {
+  "file": "Rome Skyline (8012016319).jpg",
+  "author": "Bert Kaufmann from Roermond, Netherlands",
+  "license": "CC BY-SA 2.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Rome_Skyline_%288012016319%29.jpg"
+ },
+ "barcelona": {
+  "file": "Aerial view of La Sagrada Familia, Barcelona, Spain (51227006134).jpg",
+  "author": "dronepicr",
+  "license": "CC BY 2.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_La_Sagrada_Familia%2C_Barcelona%2C_Spain_%2851227006134%29.jpg"
+ }
+}

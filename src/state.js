@@ -1,7 +1,7 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
 export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null };
-export const TABS = ['plan', 'pack', 'photo', 'gift', 'mine'];   // 플랜 · 준비물 · 사진 · 기념품 · 내 여행
+export const TABS = ['home', 'plan', 'pack', 'photo', 'gift', 'mine'];   // 홈 · 플랜 · 준비물 · 사진 · 기념품 · 내 여행
 const ID = /^[a-z0-9_]+$/, MODES = ['walk', 'metro', 'taxi'];
 
 export function encode(st) {

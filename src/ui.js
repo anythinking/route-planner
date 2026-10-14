@@ -11,7 +11,7 @@ const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({
 const CITIES = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.name]));
 const REGIONS = INDEX.regions;
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
-const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
+const TAB_LABEL = { home: '홈', plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
 // 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
 let store = new LocalStore();
 const storeReady = (async () => {
@@ -127,6 +127,63 @@ function renderSettings(side) {
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
 let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
 let resumeDismissed = false;
+let homeQuery = '';
+
+// 홈 — 어디로 가세요? + 도시 카드 + (로그인) 내 여행
+function renderHome(side, projects) {
+  const hero = $('div', 'hero');
+  hero.appendChild($('h2', null, '어디로 가세요?'));
+  hero.appendChild($('p', null, '도시를 고르고 가고 싶은 곳에 표시하면, 며칠에 어떤 순서로 돌지 AlgoTrip이 짜 준다.'));
+  const sr = $('div', 'row');
+  const inp = $('input', 'text big'); inp.type = 'search'; inp.placeholder = '도시 이름'; inp.value = homeQuery;
+  inp.oninput = () => { homeQuery = inp.value; applyHomeFilter(side); };
+  sr.appendChild(inp); hero.appendChild(sr);
+  side.appendChild(hero);
+
+  const openCity = id => { regionOpen = null; step = 2; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
+  for (const r of REGIONS) {
+    const sec = $('section', 'region'); sec.dataset.region = r.id;
+    sec.appendChild($('h3', null, esc(r.name)));
+    const grid = $('div', 'cards');
+    for (const id of r.cities) {
+      const c = INDEX.cities[id]; if (!c) continue;
+      const card = $('a', 'card'); card.href = '#'; card.dataset.name = `${c.name} ${c.countryName} ${id}`.toLowerCase();
+      card.innerHTML = `<img src="${esc(c.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(c.name)}</b><span>${esc(c.countryName)}</span></div>`;
+      card.onclick = e => { e.preventDefault(); openCity(id); };
+      grid.appendChild(card);
+    }
+    sec.appendChild(grid); side.appendChild(sec);
+  }
+
+  if (curUser) {
+    const sec = $('section', 'region');
+    sec.appendChild($('h3', null, `${esc(curUser.name)}의 여행`));
+    if (!projects.length) sec.appendChild($('p', 'muted', '아직 저장한 여행이 없다. 도시를 골라 플랜을 짜고 「저장」을 눌러라.'));
+    const grid = $('div', 'cards');
+    for (const p of projects.slice(0, 6)) {
+      const c = INDEX.cities[p.city] || {};
+      const card = $('a', 'card trip'); card.href = '#';
+      card.innerHTML = `<img src="${esc(c.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}</b><span>${esc(c.name || p.city)} · 사진 ${p.photos.length}${p.id === curUser.prefs?.lastPr ? ' · 최근' : ''}</span></div>`;
+      card.onclick = e => { e.preventDefault(); const st = decode('#' + p.hash); step = 3; setState({ ...st, tab: 'plan', pr: p.id }); };
+      grid.appendChild(card);
+    }
+    sec.appendChild(grid);
+    if (projects.length > 6) { const more = $('button', 'btn', `전체 ${projects.length}개 보기`); more.type = 'button'; more.onclick = () => setState({ tab: 'mine', pr: null }); sec.appendChild(more); }
+    side.appendChild(sec);
+  } else {
+    const sec = $('div', 'panel');
+    sec.appendChild($('p', null, '<b>로그인하면</b> 짠 플랜을 여행으로 저장하고, 살 것과 사진을 같이 둘 수 있다. 플랜을 짜는 데는 로그인이 필요 없다.'));
+    const b = $('button', 'btn', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine' }); sec.appendChild(b);
+    side.appendChild(sec);
+  }
+  side.appendChild($('p', 'muted credits', '도시 사진: Wikimedia Commons (CC BY / CC BY-SA, <a href="assets/cities/credits.json">저작자</a>)'));
+  applyHomeFilter(side);
+}
+function applyHomeFilter(side) {
+  const q = homeQuery.trim().toLowerCase();
+  side.querySelectorAll('.card[data-name]').forEach(c => { c.hidden = !!q && !c.dataset.name.includes(q); });
+  side.querySelectorAll('section[data-region]').forEach(sec => { sec.hidden = !!q && ![...sec.querySelectorAll('.card')].some(c => !c.hidden); });
+}
 
 // 돌아온 사람에게 마지막 여행을 이어서 열어 준다 — 플랜이 비어 있고 여행을 안 열었을 때만
 async function renderResume(side) {
@@ -194,6 +251,9 @@ async function render() {
   const seq = ++renderSeq;
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
+  if (lastStep === 0 && !/[#&]tab=/.test(location.hash) && !state.pr && !Object.keys(state.p).length && !state.u.length) {   // 빈손으로 오면 홈
+    state = { ...state, tab: 'home' }; history.replaceState(null, '', '#' + encode(state));
+  }
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
   document.querySelector('.layout').classList.toggle('nomap', state.tab !== 'plan');   // 지도는 플랜에서만
   await storeReady;
@@ -211,6 +271,13 @@ async function render() {
   drawStart();
   if (state.tab === 'plan') map.invalidateSize();   // 첫 렌더 때 컨테이너 크기를 0으로 잰 채 fitBounds 하면 골목까지 확대된다 (지도가 숨겨진 탭에선 재지 않는다)
   const first = lastStep === 0;
+  if (state.tab === 'home') {
+    lastStep = -1;
+    const projects = curUser ? await store.listProjects().catch(() => []) : [];
+    if (seq !== renderSeq) return;
+    renderHome(side, projects);
+    restoreScroll(side, sy, st); return;
+  }
   if (state.tab === 'mine') {
     lastStep = -1;
     const projects = curUser ? await store.listProjects() : [];
@@ -480,7 +547,7 @@ function renderStep3(side, entering) {
 }
 
 // 제목 클릭 = 홈(플랜 탭). 고른 장소·열어 둔 여행은 그대로 둔다
-document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); accountOpen = false; step = resolvePlaces(state, city || { places: [] }).length ? 3 : 2; setState({ tab: 'plan' }); });
+document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); accountOpen = false; setState({ tab: 'home' }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
 window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
 render();

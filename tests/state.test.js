@@ -93,3 +93,5 @@ test('pr: 열어 둔 여행 id — 영숫자만, 기본은 없음', () => {
   assert.ok(encode({ ...DEFAULTS, pr: 'abc123' }).includes('pr=abc123'));
   assert.ok(!encode({ ...DEFAULTS }).includes('pr='));
 });
+
+test('tab: home도 허용된다', () => { assert.equal(decode('#tab=home').tab, 'home'); });
