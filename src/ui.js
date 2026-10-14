@@ -166,8 +166,10 @@ async function render() {
   const seq = ++renderSeq;
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
+  renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
   await storeReady;
-  try { curUser = await store.user(); } catch { curUser = null; }
+  // 계정 확인이 3초 넘게 안 끝나면(다른 탭의 잠금 등) 일단 로그아웃 상태로 그리고, 세션이 오면 onChange가 다시 그린다
+  try { curUser = await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch { curUser = null; }
   if (seq !== renderSeq) return;
   try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }

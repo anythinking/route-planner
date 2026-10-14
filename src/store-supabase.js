@@ -14,8 +14,9 @@ export class SupabaseStore {
   }
   async _uid() { const { data } = await this.sb.auth.getUser(); return data.user?.id || null; }
 
+  // 화면용 사용자 — 서버에 묻지 않고 브라우저에 남은 세션에서 읽는다 (getUser는 네트워크·탭 잠금에 걸려 멈출 수 있다)
   async user() {
-    const { data } = await this.sb.auth.getUser(); const u = data.user; if (!u) return null;
+    const { data } = await this.sb.auth.getSession(); const u = data.session?.user; if (!u) return null;
     return { id: u.id, name: u.user_metadata?.full_name || u.email?.split('@')[0] || '나', email: u.email, prefs: u.user_metadata?.prefs || {}, canPassword: true };
   }
   async updateUser({ name, prefs, password }) {
