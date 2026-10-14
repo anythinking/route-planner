@@ -18,10 +18,11 @@ export class SupabaseStore {
     const { data } = await this.sb.auth.getUser(); const u = data.user; if (!u) return null;
     return { id: u.id, name: u.user_metadata?.full_name || u.email?.split('@')[0] || '나', email: u.email };
   }
-  // { email } → 매직 링크 메일, { provider: 'google' } → OAuth
-  async signIn({ email, provider }) {
+  // { email, password } → 비밀번호, { email } → 매직 링크 메일, { provider: 'google' } → OAuth
+  async signIn({ email, password, provider }) {
     const redirect = location.href.split('#')[0] + '#tab=mine';
     if (provider) { const { error } = await this.sb.auth.signInWithOAuth({ provider, options: { redirectTo: redirect } }); if (error) throw error; return null; }
+    if (password) { const { error } = await this.sb.auth.signInWithPassword({ email, password }); if (error) throw error; return { ok: true }; }
     const { error } = await this.sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect } }); if (error) throw error;
     return { sent: true };
   }
