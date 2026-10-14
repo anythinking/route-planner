@@ -21,8 +21,24 @@ async function gpsOf(file) {
 export function renderMine(ctx) {
   const { state, setState, city, $, side, store, user, project, CITIES, render, layers, map, L } = ctx;
   if (!user) return renderLogin(ctx);
+  if (ctx.accountOpen && !state.pr) return renderAccount(ctx);
   if (!state.pr || !project) return renderList(ctx);
   return renderProject(ctx);
+}
+
+// 내 계정 — 누구로 들어와 있나, 무엇이 쌓였나, 나가기
+function renderAccount({ $, side, store, user, projects, setState, render, closeAccount }) {
+  const p = $('div', 'panel');
+  p.appendChild($('h2', null, '내 계정'));
+  const photos = projects.reduce((n, x) => n + x.photos.length, 0);
+  p.appendChild($('div', 'item', `<b>${esc(user.name)}</b><span class="muted">${esc(user.email || '이 브라우저에만 저장되는 계정')}</span>`));
+  p.appendChild($('div', 'item', `<b>여행 ${projects.length}개 · 사진 ${photos}장</b><span>${store.kind === 'supabase' ? '계정 서버에 저장 — 어느 기기에서든 같은 걸 본다.' : '이 브라우저에만 저장 — 기기를 바꾸면 안 보인다.'}</span>`));
+  const row = $('div', 'row');
+  const list = $('button', 'btn primary', '내 여행 목록'); list.type = 'button'; list.onclick = () => { closeAccount(); render(); };
+  const out = $('button', 'btn', '로그아웃'); out.type = 'button';
+  out.onclick = async () => { await store.signOut(); closeAccount(); setState({ pr: null }); };
+  row.append(list, out); p.appendChild(row);
+  side.appendChild(p);
 }
 
 let mailSent = '';
@@ -68,8 +84,7 @@ function renderList(ctx) {
     const p = await store.createProject({ name, city: state.c, hash: planHash(state) });
     setState({ pr: p.id });
   };
-  const out = $('button', 'btn', '로그아웃'); out.type = 'button'; out.onclick = async () => { await store.signOut(); setState({ pr: null }); };
-  row.append(nw, out); head.appendChild(row);
+  row.append(nw); head.appendChild(row);
   head.appendChild($('p', 'muted', '플랜 탭에서 장소를 고른 뒤 여기서 「새 여행」을 누르면 그 플랜이 담긴다.'));
   side.appendChild(head);
 

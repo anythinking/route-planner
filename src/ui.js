@@ -25,6 +25,7 @@ let lastStep = 0;            // 0 = 첫 렌더. 단계가 바뀔 때만 지도 �
 let pickStart = false;       // 켜지면 다음 지도 클릭이 출발점이 된다
 let city = null;                 // data/<c>.json 내용
 let curUser = null;              // 로그인한 사람 (store.user())
+export let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
 const cache = {};
 const map = L.map('map', { zoomControl: true });
 // 배경은 Esri 연회색 캔버스 — 키 없이 쓸 수 있고 글자·도로가 적어 마커가 산다. (OSM 기본 타일은 필터를 걸어도 글자가 너무 많았다)
@@ -60,7 +61,8 @@ function renderTabs() {
     host.appendChild(b);
   }
   const who = document.getElementById('who'); who.innerHTML = '';
-  if (curUser) { const b = $('button', 'btn sm', esc(curUser.name)); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
+  if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => { accountOpen = true; setState({ tab: 'mine', pr: null }); }; who.appendChild(b); }
+  else { const b = $('button', 'btn sm', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   const sub = document.getElementById('steps'); sub.innerHTML = '';
   if (state.tab !== 'plan') return;
   [[2, '장소 고르기'], [3, '결과']].forEach(([n, label]) => {
@@ -180,7 +182,8 @@ async function render() {
     const projects = curUser ? await store.listProjects() : [];
     const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
-    renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L });
+    renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, render, layers, map, L, accountOpen, closeAccount: () => { accountOpen = false; } });
+    if (state.pr) accountOpen = false;
     for (const pl of city.places) layers.places.addLayer(placeMarker(pl, Object.hasOwn(state.p, pl.id), state.m.includes(pl.id)));
     bindMapClick(null);
     if (first) map.fitBounds(city.places.map(p => [p.lat, p.lng]), { padding: [20, 20] });
