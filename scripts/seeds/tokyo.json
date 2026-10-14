@@ -1,0 +1,191 @@
+{
+ "places": [
+  {
+   "id": "sensoji",
+   "en": "Sensō-ji",
+   "weight": 1,
+   "cat": "temple",
+   "name": "센소지"
+  },
+  {
+   "id": "nakamise",
+   "en": "Nakamise-dōri",
+   "weight": 2,
+   "cat": "street",
+   "name": "나카미세 거리",
+   "q": "Q6960849",
+   "lat": 35.7117,
+   "lng": 139.7966,
+   "note": "센소지 가미나리몬에서 본당까지 250m 참배길. 양쪽 90여 점포가 인형구이·센베이·기념품을 판다. 아침 9시 전엔 셔터가 내려 있지만 셔터 그림이 볼만하다."
+  },
+  {
+   "id": "skytree",
+   "en": "Tokyo Skytree",
+   "weight": 1,
+   "cat": "tower",
+   "name": "도쿄 스카이트리"
+  },
+  {
+   "id": "meiji",
+   "en": "Meiji Shrine",
+   "weight": 1,
+   "cat": "shrine",
+   "name": "메이지 신궁"
+  },
+  {
+   "id": "shibuya",
+   "en": "Shibuya Crossing",
+   "weight": 1,
+   "cat": "landmark",
+   "name": "시부야 스크램블 교차로"
+  },
+  {
+   "id": "shinjukugyoen",
+   "en": "Shinjuku Gyoen",
+   "weight": 2,
+   "cat": "garden",
+   "name": "신주쿠 교엔"
+  },
+  {
+   "id": "tocho",
+   "en": "Tokyo Metropolitan Government Building",
+   "weight": 2,
+   "cat": "view",
+   "name": "도쿄도청 전망대"
+  },
+  {
+   "id": "tsukiji",
+   "en": "Tsukiji Outer Market",
+   "weight": 1,
+   "cat": "market",
+   "name": "쓰키지 장외시장",
+   "lat": 35.6654,
+   "lng": 139.7707,
+   "note": "도매시장은 도요스로 갔지만 장외시장은 그대로 남아 아침 참치덮밥·계란말이·굴을 서서 먹는다. 11시 전에 가야 줄이 짧고, 수요일·일요일은 문 닫는 집이 많다."
+  },
+  {
+   "id": "teamlab",
+   "en": "teamLab Planets",
+   "weight": 2,
+   "cat": "museum",
+   "name": "팀랩 플래닛",
+   "note": "물에 발을 담그고 걷는 몰입형 디지털 미술관. 바지를 걷어야 하니 치마·긴바지는 피하고, 시간 지정 예약이 필수다. 1~2시간."
+  },
+  {
+   "id": "imperial",
+   "en": "Tokyo Imperial Palace",
+   "weight": 2,
+   "cat": "palace",
+   "name": "고쿄(황거) 동쪽 정원"
+  },
+  {
+   "id": "ginza",
+   "en": "Ginza",
+   "weight": 2,
+   "cat": "district",
+   "name": "긴자"
+  },
+  {
+   "id": "akihabara",
+   "en": "Akihabara",
+   "weight": 2,
+   "cat": "district",
+   "name": "아키하바라"
+  },
+  {
+   "id": "harajuku",
+   "en": "Takeshita Street",
+   "weight": 2,
+   "cat": "street",
+   "name": "하라주쿠 다케시타 거리",
+   "note": "하라주쿠역 앞 400m 골목. 크레이프·타피오카·10대 패션 가게가 빽빽하고 주말 오후엔 걷기 힘들다. 메이지 신궁과 바로 붙어 있어 같이 묶는다."
+  },
+  {
+   "id": "omotesando",
+   "en": "Omotesandō",
+   "weight": 3,
+   "cat": "street",
+   "name": "오모테산도"
+  },
+  {
+   "id": "ueno",
+   "en": "Ueno Park",
+   "weight": 2,
+   "cat": "park",
+   "name": "우에노 공원"
+  },
+  {
+   "id": "tnm",
+   "en": "Tokyo National Museum",
+   "weight": 2,
+   "cat": "museum",
+   "name": "도쿄 국립박물관"
+  },
+  {
+   "id": "yanaka",
+   "en": "Yanaka Ginza",
+   "weight": 3,
+   "cat": "street",
+   "name": "야나카 긴자",
+   "lat": 35.7277,
+   "lng": 139.7659
+  },
+  {
+   "id": "roppongi",
+   "en": "Roppongi Hills",
+   "weight": 3,
+   "cat": "view",
+   "name": "롯폰기 힐즈 전망대"
+  },
+  {
+   "id": "tokyotower",
+   "en": "Tokyo Tower",
+   "weight": 2,
+   "cat": "tower",
+   "name": "도쿄 타워"
+  },
+  {
+   "id": "zojoji",
+   "en": "Zōjō-ji",
+   "weight": 3,
+   "cat": "temple",
+   "name": "조조지"
+  },
+  {
+   "id": "odaiba",
+   "en": "Odaiba",
+   "weight": 3,
+   "cat": "district",
+   "name": "오다이바"
+  },
+  {
+   "id": "tokyostation",
+   "en": "Tokyo Station",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "도쿄역 마루노우치 역사"
+  },
+  {
+   "id": "shimokita",
+   "en": "Shimokitazawa",
+   "weight": 3,
+   "cat": "district",
+   "name": "시모키타자와"
+  },
+  {
+   "id": "kappabashi",
+   "en": "Kappabashi-dori",
+   "weight": 3,
+   "cat": "street",
+   "name": "갓파바시 도구 거리",
+   "note": "식당용 그릇·칼·식품 샘플을 파는 도구 거리 800m. 칼은 쓰바야·가마아사, 식품 샘플 키링은 선물로 가볍다. 일요일은 닫는 가게가 많다."
+  },
+  {
+   "id": "nezu",
+   "en": "Nezu Museum",
+   "weight": 3,
+   "cat": "museum",
+   "name": "네즈 미술관"
+  }
+ ]
+}

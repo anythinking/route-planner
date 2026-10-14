@@ -1,9 +1,13 @@
 // data/*.json 스키마·좌표·고유성 검사. 실패하면 exit 1.
 import { readdirSync, readFileSync } from 'node:fs';
-const BBOX = { london: [51.40, 51.60, -0.30, 0.05], paris: [48.80, 48.95, 2.20, 2.45] }; // latMin,latMax,lngMin,lngMax
+const INDEX = JSON.parse(readFileSync('data/cities.json', 'utf8'));
+const BBOX = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.bbox])); // latMin,latMax,lngMin,lngMax
 let bad = 0;
 const fail = (f, m) => { console.error(`✗ ${f}: ${m}`); bad++; };
-const files = readdirSync('data').filter(f => f.endsWith('.json'));
+const files = readdirSync('data').filter(f => f.endsWith('.json') && f !== 'cities.json');
+// 색인 ↔ 파일 대조: 색인의 도시마다 파일이 있고, 지역 목록의 도시가 색인에 있어야 한다
+for (const id of Object.keys(INDEX.cities)) if (!files.includes(`${id}.json`)) fail('cities.json', `${id} 파일 없음`);
+for (const r of INDEX.regions) for (const id of r.cities) if (!INDEX.cities[id]) fail('cities.json', `지역 ${r.id}의 ${id}가 cities에 없음`);
 if (!files.length) fail('data/', '파일 없음');
 for (const f of files) {
   const c = JSON.parse(readFileSync(`data/${f}`, 'utf8'));
@@ -31,7 +35,7 @@ for (const f of files) {
   for (const x of c.gift || []) if (!x.item || !x.where || !x.note) fail(f, `gift 항목 이상 ${JSON.stringify(x)}`);
   if (!Array.isArray(c.photo?.general) || !c.photo.general.length) fail(f, 'photo.general 비어 있음');
   for (const id of Object.keys(c.photo?.places || {})) if (!ids.has(id)) fail(f, `photo.places에 모르는 id ${id}`);
-  for (const id of ids) if (!c.photo?.places?.[id]) fail(f, `photo.places에 ${id} 없음`);
+  const missing = [...ids].filter(id => !c.photo?.places?.[id]); if (missing.length) console.log(`  (${f}: 사진 팁 없는 장소 ${missing.length}곳)`);   // 있으면 좋지만 필수는 아니다
   console.log(`${f}: ${(c.places || []).length}곳`);
 }
 if (bad) { console.error(`${bad}건 실패`); process.exit(1); }

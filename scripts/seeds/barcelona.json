@@ -1,0 +1,191 @@
+{
+ "places": [
+  {
+   "id": "sagrada",
+   "en": "Sagrada Família",
+   "weight": 1,
+   "cat": "church",
+   "name": "사그라다 파밀리아"
+  },
+  {
+   "id": "parkguell",
+   "en": "Park Güell",
+   "weight": 1,
+   "cat": "park",
+   "name": "구엘 공원"
+  },
+  {
+   "id": "casabatllo",
+   "en": "Casa Batlló",
+   "weight": 1,
+   "cat": "landmark",
+   "name": "카사 바트요"
+  },
+  {
+   "id": "pedrera",
+   "en": "Casa Milà",
+   "weight": 2,
+   "cat": "landmark",
+   "name": "카사 밀라(라 페드레라)",
+   "note": "가우디의 1912년 공동주택. 직선이 하나도 없는 돌 입면과 옥상의 투구 모양 굴뚝이 핵심이고, 옥상은 예약제. 밤에 옥상을 여는 날도 있다."
+  },
+  {
+   "id": "rambla",
+   "en": "La Rambla",
+   "weight": 2,
+   "cat": "street",
+   "name": "람블라스 거리"
+  },
+  {
+   "id": "boqueria",
+   "en": "La Boqueria",
+   "weight": 1,
+   "cat": "market",
+   "name": "보케리아 시장"
+  },
+  {
+   "id": "gothic",
+   "en": "Gothic Quarter",
+   "weight": 1,
+   "cat": "district",
+   "name": "고딕 지구",
+   "note": "로마 성벽 안의 중세 골목. 대성당·왕의 광장·유대인 지구가 폭 2m 골목으로 이어진다. 지도를 접고 길을 잃는 게 맞는 곳."
+  },
+  {
+   "id": "cathedral",
+   "en": "Barcelona Cathedral",
+   "weight": 2,
+   "cat": "church",
+   "name": "바르셀로나 대성당",
+   "note": "13~15세기 고딕 대성당. 안뜰 회랑에 거위 13마리가 산다(성 에울랄리아의 나이). 옥상에 오르면 고딕 지구 지붕이 보인다."
+  },
+  {
+   "id": "born",
+   "en": "El Born",
+   "weight": 2,
+   "cat": "district",
+   "name": "엘 보른",
+   "note": "고딕 지구 동쪽의 옛 상인 지구. 피카소 미술관·산타 마리아 델 마르가 있고 저녁엔 타파스 바가 산다. 보른 문화센터 바닥의 18세기 유적도 볼만하다."
+  },
+  {
+   "id": "picasso",
+   "en": "Museu Picasso",
+   "weight": 2,
+   "cat": "museum",
+   "name": "피카소 미술관"
+  },
+  {
+   "id": "santamaria",
+   "en": "Santa Maria del Mar",
+   "weight": 2,
+   "cat": "church",
+   "name": "산타 마리아 델 마르",
+   "lat": 41.3837,
+   "lng": 2.182,
+   "note": "1329~1383년 55년 만에 지은 카탈루냐 고딕의 정수. 장식 없이 기둥만 높이 뻗어 \"바다의 성당\"으로 불린다. 소설 「바다의 성당」 배경."
+  },
+  {
+   "id": "barceloneta",
+   "en": "Barceloneta Beach",
+   "weight": 2,
+   "cat": "beach",
+   "name": "바르셀로네타 해변"
+  },
+  {
+   "id": "montjuic",
+   "en": "Montjuïc",
+   "weight": 2,
+   "cat": "park",
+   "name": "몬주익"
+  },
+  {
+   "id": "mnac",
+   "en": "MNAC",
+   "weight": 2,
+   "cat": "museum",
+   "name": "카탈루냐 국립미술관(MNAC)"
+  },
+  {
+   "id": "magic",
+   "en": "Magic Fountain of Montjuïc",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "마법의 분수"
+  },
+  {
+   "id": "miro",
+   "en": "Fundació Joan Miró",
+   "weight": 3,
+   "cat": "museum",
+   "name": "미로 미술관"
+  },
+  {
+   "id": "palau",
+   "en": "Palau de la Música Catalana",
+   "weight": 2,
+   "cat": "landmark",
+   "name": "카탈루냐 음악당"
+  },
+  {
+   "id": "santpau",
+   "en": "Hospital de Sant Pau",
+   "weight": 2,
+   "cat": "landmark",
+   "name": "산트 파우 병원"
+  },
+  {
+   "id": "bunkers",
+   "en": "Bunkers del Carmel",
+   "weight": 2,
+   "cat": "view",
+   "name": "카르멜 벙커",
+   "lat": 41.4193,
+   "lng": 2.1617,
+   "note": "내전 때 대공포 진지였던 언덕 꼭대기. 도시 360도가 한눈에 들어오고 해질녘엔 젊은이들이 맥주를 들고 모인다. 구엘 공원에서 걸어 20분."
+  },
+  {
+   "id": "tibidabo",
+   "en": "Tibidabo",
+   "weight": 3,
+   "cat": "view",
+   "name": "티비다보"
+  },
+  {
+   "id": "campnou",
+   "en": "Camp Nou",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "캄프 누"
+  },
+  {
+   "id": "gracia",
+   "en": "Gràcia",
+   "weight": 3,
+   "cat": "district",
+   "name": "그라시아",
+   "note": "한때 독립된 마을이었던 동네. 작은 광장들과 카페, 8월 축제(페스타 마요르)의 골목 장식으로 유명하다. 카사 비센스(가우디 첫 건물)가 여기 있다."
+  },
+  {
+   "id": "ciutadella",
+   "en": "Parc de la Ciutadella",
+   "weight": 3,
+   "cat": "park",
+   "name": "시우타데야 공원"
+  },
+  {
+   "id": "arc",
+   "en": "Arc de Triomf",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "개선문(바르셀로나)"
+  },
+  {
+   "id": "santcaterina",
+   "en": "Mercat de Santa Caterina",
+   "weight": 3,
+   "cat": "market",
+   "name": "산타 카테리나 시장",
+   "note": "보케리아보다 조용한 동네 시장. 물결치는 색색의 타일 지붕(미라예스 설계, 2005)이 건축으로도 볼만하다. 안의 쿠이네스 산타 카테리나에서 점심."
+  }
+ ]
+}

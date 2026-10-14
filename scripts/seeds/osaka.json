@@ -1,0 +1,177 @@
+{
+ "places": [
+  {
+   "id": "osakacastle",
+   "en": "Osaka Castle",
+   "weight": 1,
+   "cat": "castle",
+   "name": "오사카성"
+  },
+  {
+   "id": "dotonbori",
+   "en": "Dōtonbori",
+   "weight": 1,
+   "cat": "district",
+   "name": "도톤보리"
+  },
+  {
+   "id": "kuromon",
+   "en": "Kuromon Market",
+   "weight": 2,
+   "cat": "market",
+   "name": "구로몬 시장"
+  },
+  {
+   "id": "shinsekai",
+   "en": "Shinsekai",
+   "weight": 2,
+   "cat": "district",
+   "name": "신세카이"
+  },
+  {
+   "id": "tsutenkaku",
+   "en": "Tsūtenkaku",
+   "weight": 2,
+   "cat": "tower",
+   "name": "쓰텐카쿠"
+  },
+  {
+   "id": "umedasky",
+   "en": "Umeda Sky Building",
+   "weight": 1,
+   "cat": "view",
+   "name": "우메다 스카이빌딩 공중정원"
+  },
+  {
+   "id": "kaiyukan",
+   "en": "Osaka Aquarium Kaiyukan",
+   "weight": 2,
+   "cat": "museum",
+   "name": "가이유칸 수족관"
+  },
+  {
+   "id": "usj",
+   "en": "Universal Studios Japan",
+   "weight": 2,
+   "cat": "theme",
+   "name": "유니버설 스튜디오 재팬"
+  },
+  {
+   "id": "shitennoji",
+   "en": "Shitennō-ji",
+   "weight": 2,
+   "cat": "temple",
+   "name": "시텐노지"
+  },
+  {
+   "id": "sumiyoshi",
+   "en": "Sumiyoshi-taisha",
+   "weight": 2,
+   "cat": "shrine",
+   "name": "스미요시 타이샤"
+  },
+  {
+   "id": "namba",
+   "en": "Namba",
+   "weight": 2,
+   "cat": "district",
+   "name": "난바 · 센니치마에"
+  },
+  {
+   "id": "amerika",
+   "en": "Amerikamura",
+   "weight": 3,
+   "cat": "district",
+   "name": "아메리카무라"
+  },
+  {
+   "id": "nakanoshima",
+   "en": "Nakanoshima",
+   "weight": 3,
+   "cat": "park",
+   "name": "나카노시마 공원 · 중앙공회당"
+  },
+  {
+   "id": "abeno",
+   "en": "Abeno Harukas",
+   "weight": 2,
+   "cat": "view",
+   "name": "아베노 하루카스 전망대"
+  },
+  {
+   "id": "tennoji",
+   "en": "Tennōji Park",
+   "weight": 3,
+   "cat": "park",
+   "name": "덴노지 공원"
+  },
+  {
+   "id": "hozenji",
+   "en": "Hōzen-ji",
+   "weight": 3,
+   "cat": "temple",
+   "name": "호젠지 요코초"
+  },
+  {
+   "id": "tempozan",
+   "en": "Tempozan Ferris Wheel",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "덴포잔 대관람차",
+   "note": "가이유칸 옆 지름 100m 대관람차. 한 바퀴 15분, 바닥이 투명한 칸이 따로 있다. 수족관과 같이 묶는다."
+  },
+  {
+   "id": "minoh",
+   "en": "Minoh Falls",
+   "weight": 3,
+   "cat": "park",
+   "name": "미노오 폭포",
+   "note": "한큐 미노오역에서 계곡 길 2.7km를 걸어 올라가면 33m 폭포. 가을 단풍(11월 중하순)과 단풍잎 튀김이 유명하다. 시내에서 왕복 반나절."
+  },
+  {
+   "id": "kitashinchi",
+   "en": "Kitashinchi",
+   "weight": 3,
+   "cat": "district",
+   "name": "기타신치"
+  },
+  {
+   "id": "shinsaibashi",
+   "en": "Shinsaibashi",
+   "weight": 2,
+   "cat": "shop",
+   "name": "신사이바시스지"
+  },
+  {
+   "id": "osakamuseum",
+   "en": "Osaka Museum of History",
+   "weight": 3,
+   "cat": "museum",
+   "name": "오사카 역사박물관"
+  },
+  {
+   "id": "nationalart",
+   "en": "National Museum of Art, Osaka",
+   "weight": 3,
+   "cat": "museum",
+   "name": "국립국제미술관"
+  },
+  {
+   "id": "expo70",
+   "en": "Expo Commemoration Park",
+   "weight": 3,
+   "cat": "park",
+   "name": "만박기념공원 · 태양의 탑"
+  },
+  {
+   "id": "nipponbashi",
+   "en": "Nipponbashi Den Den Town",
+   "weight": 3,
+   "cat": "district",
+   "name": "닛폰바시 덴덴타운",
+   "lat": 34.662,
+   "lng": 135.506,
+   "note": "오사카의 아키하바라. 전자부품·피규어·게임·메이드 카페가 난바 남쪽 1km 거리에 모여 있다. 구로몬 시장과 붙어 있다."
+  }
+ ]
+}

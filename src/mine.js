@@ -70,7 +70,8 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   const pp = $('div', 'panel'); pp.appendChild($('h2', null, '기본 설정'));
   pp.appendChild($('p', null, '플랜 탭의 「기본값으로 새 플랜」이 이 값으로 시작한다.'));
   const r3 = $('div', 'row'); r3.appendChild($('span', 'muted', '도시'));
-  for (const [id, name] of Object.entries(CITIES)) { const b = $('button', 'btn' + ((prefs.c || 'london') === id ? ' primary' : ''), name); b.type = 'button'; b.onclick = async () => { await store.updateUser({ prefs: { c: id } }); render(); }; r3.appendChild(b); }
+  const csel = $('select'); for (const [id, name] of Object.entries(CITIES)) { const o = $('option', null, esc(name)); o.value = id; o.selected = (prefs.c || 'london') === id; csel.appendChild(o); }
+  csel.onchange = async () => { await store.updateUser({ prefs: { c: csel.value } }); render(); }; r3.appendChild(csel);
   const r4 = $('div', 'row'); r4.appendChild($('span', 'muted', '기본 이동'));
   for (const [v, label] of [['transit', '걷기 + 지하철'], ['taxi', '택시 위주']]) { const b = $('button', 'btn' + ((prefs.v || 'transit') === v ? ' primary' : ''), label); b.type = 'button'; b.onclick = async () => { await store.updateUser({ prefs: { v } }); render(); }; r4.appendChild(b); }
   const r5 = $('div', 'row'); r5.appendChild($('span', 'muted', '하루'));

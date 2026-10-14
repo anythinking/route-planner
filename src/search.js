@@ -1,8 +1,9 @@
 // 장소 검색 — OSM Nominatim(키 없음, 초당 1회). 도시 중심 주변 상자 안에서만 찾는다.
-export function searchUrl(q, center) {
+export function searchUrl(q, center, bbox = null) {
   const [lat, lng] = center, dLat = 0.15, dLng = 0.25;
+  const [s, n, w, e] = bbox || [lat - dLat, lat + dLat, lng - dLng, lng + dLng];   // latMin,latMax,lngMin,lngMax
   const p = new URLSearchParams({ q, format: 'jsonv2', limit: '6', bounded: '1', 'accept-language': 'ko',
-    viewbox: [lng - dLng, lat + dLat, lng + dLng, lat - dLat].join(',') });
+    viewbox: [w, n, e, s].join(',') });
   return `https://nominatim.openstreetmap.org/search?${p}`;
 }
 
@@ -13,8 +14,8 @@ export function toCandidate(r) {
   return { name: clean(parts[0] || ''), detail: parts.slice(1, 3).join(', '), lat: Number(r.lat), lng: Number(r.lon), type: r.type || '' };
 }
 
-export async function search(q, center) {
-  const r = await fetch(searchUrl(q, center), { headers: { Accept: 'application/json' } });
+export async function search(q, center, bbox = null) {
+  const r = await fetch(searchUrl(q, center, bbox), { headers: { Accept: 'application/json' } });
   if (!r.ok) throw new Error(r.status);
   return (await r.json()).map(toCandidate).filter(c => c.name && Number.isFinite(c.lat) && Number.isFinite(c.lng));
 }

@@ -1,0 +1,183 @@
+{
+ "places": [
+  {
+   "id": "colosseum",
+   "en": "Colosseum",
+   "weight": 1,
+   "cat": "ruin",
+   "name": "콜로세움"
+  },
+  {
+   "id": "forum",
+   "en": "Roman Forum",
+   "weight": 1,
+   "cat": "ruin",
+   "name": "포로 로마노"
+  },
+  {
+   "id": "palatine",
+   "en": "Palatine Hill",
+   "weight": 2,
+   "cat": "ruin",
+   "name": "팔라티노 언덕"
+  },
+  {
+   "id": "pantheon",
+   "en": "Pantheon",
+   "weight": 1,
+   "cat": "church",
+   "name": "판테온"
+  },
+  {
+   "id": "trevi",
+   "en": "Trevi Fountain",
+   "weight": 1,
+   "cat": "landmark",
+   "name": "트레비 분수"
+  },
+  {
+   "id": "spanish",
+   "en": "Spanish Steps",
+   "weight": 2,
+   "cat": "square",
+   "name": "스페인 계단"
+  },
+  {
+   "id": "navona",
+   "en": "Piazza Navona",
+   "weight": 1,
+   "cat": "square",
+   "name": "나보나 광장"
+  },
+  {
+   "id": "vatican",
+   "en": "Vatican Museums",
+   "weight": 1,
+   "cat": "museum",
+   "name": "바티칸 박물관 · 시스티나"
+  },
+  {
+   "id": "stpeter",
+   "en": "St. Peter's Basilica",
+   "weight": 1,
+   "cat": "church",
+   "name": "성 베드로 대성당"
+  },
+  {
+   "id": "castel",
+   "en": "Castel Sant'Angelo",
+   "weight": 2,
+   "cat": "castle",
+   "name": "산탄젤로 성"
+  },
+  {
+   "id": "trastevere",
+   "en": "Trastevere",
+   "weight": 2,
+   "cat": "district",
+   "name": "트라스테베레"
+  },
+  {
+   "id": "campo",
+   "en": "Campo de' Fiori",
+   "weight": 2,
+   "cat": "market",
+   "name": "캄포 데 피오리 시장"
+  },
+  {
+   "id": "borghese",
+   "en": "Galleria Borghese",
+   "weight": 2,
+   "cat": "museum",
+   "name": "보르게세 미술관"
+  },
+  {
+   "id": "villaborghese",
+   "en": "Villa Borghese",
+   "weight": 3,
+   "cat": "park",
+   "name": "보르게세 공원"
+  },
+  {
+   "id": "popolo",
+   "en": "Piazza del Popolo",
+   "weight": 3,
+   "cat": "square",
+   "name": "포폴로 광장"
+  },
+  {
+   "id": "capitoline",
+   "en": "Capitoline Museums",
+   "weight": 2,
+   "cat": "museum",
+   "name": "카피톨리니 박물관"
+  },
+  {
+   "id": "venezia",
+   "en": "Piazza Venezia",
+   "weight": 3,
+   "cat": "square",
+   "name": "베네치아 광장 · 비토리아노"
+  },
+  {
+   "id": "mouth",
+   "en": "Bocca della Verità",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "진실의 입"
+  },
+  {
+   "id": "lateran",
+   "en": "Archbasilica of Saint John Lateran",
+   "weight": 3,
+   "cat": "church",
+   "name": "산 조반니 인 라테라노"
+  },
+  {
+   "id": "maggiore",
+   "en": "Santa Maria Maggiore",
+   "weight": 3,
+   "cat": "church",
+   "name": "산타 마리아 마조레"
+  },
+  {
+   "id": "appia",
+   "en": "Appian Way",
+   "weight": 3,
+   "cat": "park",
+   "name": "아피아 가도"
+  },
+  {
+   "id": "testaccio",
+   "en": "Testaccio Market",
+   "weight": 3,
+   "cat": "market",
+   "name": "테스타치오 시장",
+   "lat": 41.8763,
+   "lng": 12.4753,
+   "note": "관광객 없는 동네 시장. 아침엔 채소·치즈, 점심엔 노점 파니니(모르데 에 바이 등)가 로마에서 가장 싸고 맛있는 축이다. 일요일 휴무."
+  },
+  {
+   "id": "gianicolo",
+   "en": "Janiculum",
+   "weight": 3,
+   "cat": "view",
+   "name": "자니콜로 언덕"
+  },
+  {
+   "id": "monti",
+   "en": "Monti",
+   "weight": 3,
+   "cat": "district",
+   "name": "몬티"
+  },
+  {
+   "id": "maxxi",
+   "en": "MAXXI",
+   "weight": 3,
+   "cat": "museum",
+   "name": "MAXXI 국립 21세기 미술관",
+   "note": "자하 하디드가 설계한 21세기 미술관(2010). 콘크리트 곡면 램프가 건물 전체를 가로질러, 전시보다 건물을 보러 간다. 플라미니오 지구라 시내에서 트램 2번."
+  }
+ ]
+}

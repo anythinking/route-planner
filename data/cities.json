@@ -1,0 +1,130 @@
+{
+ "regions": [
+  {
+   "id": "asia",
+   "name": "아시아",
+   "cities": [
+    "tokyo",
+    "osaka",
+    "kyoto"
+   ]
+  },
+  {
+   "id": "europe",
+   "name": "유럽",
+   "cities": [
+    "london",
+    "paris",
+    "rome",
+    "barcelona"
+   ]
+  }
+ ],
+ "cities": {
+  "london": {
+   "name": "런던",
+   "country": "uk",
+   "countryName": "영국",
+   "center": [
+    51.5074,
+    -0.1278
+   ],
+   "bbox": [
+    51.4,
+    51.6,
+    -0.3,
+    0.05
+   ]
+  },
+  "paris": {
+   "name": "파리",
+   "country": "france",
+   "countryName": "프랑스",
+   "center": [
+    48.8566,
+    2.3522
+   ],
+   "bbox": [
+    48.8,
+    48.95,
+    2.2,
+    2.45
+   ]
+  },
+  "tokyo": {
+   "name": "도쿄",
+   "country": "japan",
+   "countryName": "일본",
+   "center": [
+    35.6812,
+    139.7671
+   ],
+   "bbox": [
+    35.5,
+    35.85,
+    139.5,
+    140.0
+   ]
+  },
+  "osaka": {
+   "name": "오사카",
+   "country": "japan",
+   "countryName": "일본",
+   "center": [
+    34.6937,
+    135.5023
+   ],
+   "bbox": [
+    34.4,
+    34.9,
+    135.3,
+    135.7
+   ]
+  },
+  "kyoto": {
+   "name": "교토",
+   "country": "japan",
+   "countryName": "일본",
+   "center": [
+    35.0116,
+    135.7681
+   ],
+   "bbox": [
+    34.85,
+    35.15,
+    135.55,
+    135.9
+   ]
+  },
+  "rome": {
+   "name": "로마",
+   "country": "italy",
+   "countryName": "이탈리아",
+   "center": [
+    41.9028,
+    12.4964
+   ],
+   "bbox": [
+    41.8,
+    42.0,
+    12.4,
+    12.6
+   ]
+  },
+  "barcelona": {
+   "name": "바르셀로나",
+   "country": "spain",
+   "countryName": "스페인",
+   "center": [
+    41.3874,
+    2.1686
+   ],
+   "bbox": [
+    41.32,
+    41.47,
+    2.05,
+    2.25
+   ]
+  }
+ }
+}

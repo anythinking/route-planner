@@ -6,7 +6,10 @@ import { LocalStore } from './store.js';
 import { renderMine } from './mine.js';
 import { SUPABASE } from './config.js';
 
-const CITIES = { london: '런던', paris: '파리' };
+// 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
+const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));
+const CITIES = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.name]));
+const REGIONS = INDEX.regions;
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
 const TAB_LABEL = { plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
 // 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
@@ -34,6 +37,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_L
 const layers = { places: L.layerGroup().addTo(map), route: L.layerGroup().addTo(map), start: L.layerGroup().addTo(map) };
 
 export function setState(patch) {
+  if ('c' in patch && patch.c !== state.c) regionOpen = null;
   state = { ...state, ...patch };
   history.replaceState(null, '', '#' + encode(state));
   render();
@@ -83,10 +87,19 @@ function renderSettings(side) {
   const d = $('details', 'panel settings'); d.open = settingsOpen; d.ontoggle = () => { settingsOpen = d.open; };
   d.appendChild($('summary', null, `<b>설정</b> <span class="muted">${esc(CITIES[state.c])} · ${state.d}일 · ${hm(state.t)}–${hm(state.e)} · ${state.v === 'taxi' ? '택시 위주' : '걷기+지하철'}</span>`));
   const p = d;
+  // 지역(아시아·유럽) → 도시. 지역 선택은 화면 상태만, 도시 선택은 플랜을 비운다
+  const curRegion = REGIONS.find(r => r.cities.includes(state.c))?.id;
+  if (regionOpen == null) regionOpen = curRegion;
+  const rrow = $('div', 'row regions');
+  for (const r of REGIONS) {
+    const b = $('button', 'btn sm' + (regionOpen === r.id ? ' primary' : ''), r.name); b.type = 'button';
+    b.onclick = () => { regionOpen = r.id; render(); }; rrow.appendChild(b);
+  }
+  p.appendChild(rrow);
   const row1 = $('div', 'row');
-  for (const [id, name] of Object.entries(CITIES)) {
-    const b = $('button', 'btn' + (state.c === id ? ' primary' : ''), name); b.type = 'button';
-    b.onclick = () => setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null });
+  for (const id of (REGIONS.find(r => r.id === regionOpen)?.cities || [])) {
+    const b = $('button', 'btn' + (state.c === id ? ' primary' : ''), CITIES[id]); b.type = 'button';
+    b.onclick = () => { if (id === state.c) return; if (Object.keys(state.p).length && !confirm(`${CITIES[id]}(으)로 바꾸면 고른 장소가 비워진다. 바꿀까?`)) return; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null }); };
     row1.appendChild(b);
   }
   p.appendChild(row1);
@@ -111,6 +124,7 @@ function renderSettings(side) {
   side.appendChild(d);
 }
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
+let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
 
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
@@ -124,7 +138,7 @@ function bindMapClick(fallback) {
 function renderInfo(side) {
   const chosen = new Set(Object.keys(state.p));
   if (state.tab === 'pack') {
-    const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 준비물`));
+    const p = $('div', 'panel'); p.appendChild($('h2', null, `${esc(city.name)} 준비물 <span class="muted" style="font-weight:500">· ${esc(INDEX.cities[state.c]?.countryName || '')}</span>`));
     p.appendChild($('p', null, '동선과 무관하게 챙길 것. 짐은 가볍게, 겹옷으로.'));
     for (const x of city.pack) p.appendChild($('div', 'item', `<b>${esc(x.item)}</b><span>${esc(x.why)}</span>`));
     side.appendChild(p);
@@ -298,7 +312,7 @@ function renderSearch() {
   const run = async () => {
     const q = inp.value.trim(); if (!q) return;
     query = q; searching = true; searchErr = ''; results = null; render();
-    try { results = await search(q, city.center); } catch (e) { searchErr = '검색 서버에 닿지 못했다. 잠시 뒤 다시.'; }
+    try { results = await search(q, city.center, INDEX.cities[state.c]?.bbox); } catch (e) { searchErr = '검색 서버에 닿지 못했다. 잠시 뒤 다시.'; }
     searching = false; render();
   };
   go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); run(); } };

@@ -1,0 +1,181 @@
+{
+ "places": [
+  {
+   "id": "fushimi",
+   "en": "Fushimi Inari-taisha",
+   "weight": 1,
+   "cat": "shrine",
+   "name": "후시미 이나리 타이샤"
+  },
+  {
+   "id": "kinkakuji",
+   "en": "Kinkaku-ji",
+   "weight": 1,
+   "cat": "temple",
+   "name": "긴카쿠지(금각사)"
+  },
+  {
+   "id": "kiyomizu",
+   "en": "Kiyomizu-dera",
+   "weight": 1,
+   "cat": "temple",
+   "name": "기요미즈데라"
+  },
+  {
+   "id": "arashiyama",
+   "en": "Arashiyama Bamboo Grove",
+   "weight": 1,
+   "cat": "park",
+   "name": "아라시야마 대나무숲"
+  },
+  {
+   "id": "gion",
+   "en": "Gion",
+   "weight": 1,
+   "cat": "district",
+   "name": "기온 · 하나미코지"
+  },
+  {
+   "id": "nijo",
+   "en": "Nijō Castle",
+   "weight": 2,
+   "cat": "castle",
+   "name": "니조성"
+  },
+  {
+   "id": "ginkakuji",
+   "en": "Ginkaku-ji",
+   "weight": 2,
+   "cat": "temple",
+   "name": "긴카쿠지(은각사)"
+  },
+  {
+   "id": "philosopher",
+   "en": "Philosopher's Walk",
+   "weight": 2,
+   "cat": "street",
+   "name": "철학의 길"
+  },
+  {
+   "id": "nishiki",
+   "en": "Nishiki Market",
+   "weight": 2,
+   "cat": "market",
+   "name": "니시키 시장"
+  },
+  {
+   "id": "ryoanji",
+   "en": "Ryōan-ji",
+   "weight": 2,
+   "cat": "temple",
+   "name": "료안지 돌정원"
+  },
+  {
+   "id": "tenryuji",
+   "en": "Tenryū-ji",
+   "weight": 2,
+   "cat": "temple",
+   "name": "덴류지"
+  },
+  {
+   "id": "togetsukyo",
+   "en": "Togetsukyō",
+   "weight": 3,
+   "cat": "bridge",
+   "name": "도게츠쿄"
+  },
+  {
+   "id": "sanjusangendo",
+   "en": "Sanjūsangen-dō",
+   "weight": 2,
+   "cat": "temple",
+   "name": "산주산겐도",
+   "note": "120m 길이 본당에 천수관음 1,001구가 열 지어 서 있다. 12세기 창건, 현 건물은 1266년. 내부 촬영 금지. 교토역에서 가까워 첫 일정으로 좋다."
+  },
+  {
+   "id": "heian",
+   "en": "Heian Shrine",
+   "weight": 3,
+   "cat": "shrine",
+   "name": "헤이안 신궁"
+  },
+  {
+   "id": "nanzenji",
+   "en": "Nanzen-ji",
+   "weight": 2,
+   "cat": "temple",
+   "name": "난젠지"
+  },
+  {
+   "id": "pontocho",
+   "en": "Pontochō",
+   "weight": 2,
+   "cat": "street",
+   "name": "폰토초"
+  },
+  {
+   "id": "yasaka",
+   "en": "Yasaka Shrine",
+   "weight": 2,
+   "cat": "shrine",
+   "name": "야사카 신사"
+  },
+  {
+   "id": "ninenzaka",
+   "en": "Ninenzaka",
+   "weight": 2,
+   "cat": "street",
+   "name": "니넨자카 · 산넨자카"
+  },
+  {
+   "id": "kyotostation",
+   "en": "Kyoto Station",
+   "weight": 3,
+   "cat": "landmark",
+   "name": "교토역 건물"
+  },
+  {
+   "id": "tofukuji",
+   "en": "Tōfuku-ji",
+   "weight": 3,
+   "cat": "temple",
+   "name": "도후쿠지"
+  },
+  {
+   "id": "imperialkyoto",
+   "en": "Kyoto Imperial Palace",
+   "weight": 3,
+   "cat": "palace",
+   "name": "교토 고쇼"
+  },
+  {
+   "id": "kokedera",
+   "en": "Saihō-ji",
+   "weight": 3,
+   "cat": "garden",
+   "name": "사이호지(이끼 절)"
+  },
+  {
+   "id": "kuramadera",
+   "en": "Kurama-dera",
+   "weight": 3,
+   "cat": "temple",
+   "name": "구라마데라"
+  },
+  {
+   "id": "uji",
+   "en": "Byōdō-in",
+   "weight": 3,
+   "cat": "temple",
+   "name": "뵤도인(우지)"
+  },
+  {
+   "id": "kyotorailway",
+   "en": "Kyoto Railway Museum",
+   "weight": 3,
+   "cat": "museum",
+   "name": "교토 철도박물관",
+   "note": "증기기관차 20량이 부채꼴 차고에 서 있는 일본 최대 철도박물관. 실제 SL이 짧은 구간을 달린다. 아이 동반이면 반나절, 아니면 1시간."
+  }
+ ]
+}
