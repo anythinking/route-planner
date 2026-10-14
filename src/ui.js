@@ -149,19 +149,26 @@ function renderSettings(side) {
     row1.appendChild(b);
   }
   p.appendChild(row1);
-  const row2 = $('div', 'grid');
-  row2.append($('span', 'muted', '일수'), stepper(state.d, d => setState({ d: Math.max(1, Math.min(10, state.d + d)) })));
-  row2.append($('span', 'muted', '하루 시작'), stepper(state.t, d => setState({ t: Math.max(0, Math.min(state.e - 60, state.t + d * 30)) }), hm));
-  row2.append($('span', 'muted', '하루 끝'), stepper(state.e, d => setState({ e: Math.max(state.t + 60, Math.min(1440, state.e + d * 30)) }), hm));
+  // 일수: 블록으로 — [1일차][2일차]…[+ 추가]. 블록의 ×로 뺀다(최소 1일)
+  const days = $('div', 'row days');
+  for (let i = 0; i < state.d; i++) {
+    const b = $('span', 'day', `${i + 1}일차`); b.style.setProperty('--c', `var(${DAY_COLORS[i]})`);
+    if (state.d > 1) { const x = $('button', null, '×'); x.type = 'button'; x.title = '이 날 빼기'; x.onclick = () => setState({ d: state.d - 1, o: null }); b.appendChild(x); }
+    days.appendChild(b);
+  }
+  if (state.d < 10) { const add = $('button', 'btn sm', '+ 하루 추가'); add.type = 'button'; add.onclick = () => setState({ d: state.d + 1 }); days.appendChild(add); }
+  p.appendChild(days);
+  const row2 = $('div', 'row');
+  row2.append($('span', 'muted', '하루'), stepper(state.t, d => setState({ t: Math.max(0, Math.min(state.e - 60, state.t + d * 30)) }), hm), $('span', 'muted', '~'), stepper(state.e, d => setState({ e: Math.max(state.t + 60, Math.min(1440, state.e + d * 30)) }), hm));
   p.appendChild(row2);
-  const row3 = $('div', 'row'); row3.appendChild($('span', 'muted', '기본 이동'));
+  const row3 = $('div', 'row regions'); row3.appendChild($('span', 'muted', '이동'));
   for (const [v, label] of [['transit', '걷기 + 지하철'], ['taxi', '택시 위주']]) {
-    const b = $('button', 'btn' + (state.v === v ? ' primary' : ''), label); b.type = 'button';
+    const b = $('button', 'btn sm' + (state.v === v ? ' primary' : ''), label); b.type = 'button';
     b.onclick = () => setState({ v }); row3.appendChild(b);
   }
   p.appendChild(row3);
-  const row4 = $('div', 'row'); row4.appendChild($('span', 'muted', '출발점'));
-  const pick = $('button', 'btn' + (pickStart ? ' primary' : ''), pickStart ? '지도를 클릭해라…' : (state.s ? '출발점 옮기기' : '지도에서 출발점(숙소) 찍기'));
+  const row4 = $('div', 'row regions'); row4.appendChild($('span', 'muted', '출발점'));
+  const pick = $('button', 'btn sm' + (pickStart ? ' primary' : ''), pickStart ? '지도를 클릭해라…' : (state.s ? '출발점 옮기기' : '지도에서 찍기'));
   pick.type = 'button'; pick.onclick = () => { pickStart = !pickStart; render(); };
   row4.appendChild(pick);
   row4.appendChild($('span', 'muted', state.s ? `${state.s.lat.toFixed(4)}, ${state.s.lng.toFixed(4)}` : '안 찍으면 도심에서 출발'));
@@ -390,6 +397,7 @@ async function render() {
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   await renderResume(side); if (seq !== renderSeq) return;
   renderSettings(side);
+  if (step === 2) side.appendChild(renderSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }));
   if (step === 2) renderStep2(side, entering);
   if (step === 3) renderStep3(side, entering);
   restoreScroll(side, sy, st);
