@@ -441,7 +441,7 @@ function renderStep3(side, entering) {
 }
 
 // 제목 클릭 = 홈(플랜 탭). 고른 장소·열어 둔 여행은 그대로 둔다
-document.getElementById('home').onclick = e => { e.preventDefault(); accountOpen = false; step = resolvePlaces(state, city || { places: [] }).length ? 3 : 2; setState({ tab: 'plan' }); };
+document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); accountOpen = false; step = resolvePlaces(state, city || { places: [] }).length ? 3 : 2; setState({ tab: 'plan' }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
 window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
 render();
