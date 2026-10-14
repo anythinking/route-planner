@@ -193,7 +193,9 @@ function renderStep2(side, entering) {
   for (const w of [1, 2, 3]) {
     const group = city.places.filter(p => p.weight === w);
     if (!group.length) continue;
-    const panel = $('div', 'panel'); panel.appendChild($('h2', null, WEIGHT_LABEL[w]));
+    const panel = $('details', 'panel'); panel.open = openGroups.has(w); panel.ontoggle = () => { panel.open ? openGroups.add(w) : openGroups.delete(w); };
+    const chosenN = group.filter(p => p.id in state.p).length;
+    panel.appendChild($('summary', null, `<b>${WEIGHT_LABEL[w]}</b> <span class="muted">${group.length}곳${chosenN ? ` · 고른 ${chosenN}` : ''}</span>`));
     for (const pl of group) {
       const chosen = pl.id in state.p, must = state.m.includes(pl.id);
       const row = $('div', 'row place'); row.dataset.name = pl.name.toLowerCase();
@@ -238,12 +240,13 @@ function renderStep2(side, entering) {
   });
 }
 let query = '', results = null, searching = false, searchErr = '';   // 검색 상자 상태 (화면 상태)
+const openGroups = new Set([1]);   // 펼쳐 둔 추천 묶음 — 처음엔 1순위만
 
 // 입력한 글자로 목록을 거른다 — 다시 그리지 않고 숨기기만 (입력 포커스를 지키려고)
 function applyFilter(side) {
   const q = query.trim().toLowerCase();
   side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
-  side.querySelectorAll('.panel.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); });
+  side.querySelectorAll('.panel.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); if (q && !g.hidden) g.open = true; });
 }
 
 function renderSearch() {

@@ -21,8 +21,8 @@ h1{font-size:20px;margin:0;font-weight:700}
 .tabs{display:flex;gap:2px;border-bottom:2px solid var(--line)}
 .tabs button{font:inherit;font-size:14px;font-weight:600;padding:8px 16px;border:0;border-bottom:2px solid transparent;margin-bottom:-2px;background:transparent;color:var(--muted);cursor:pointer}
 .tabs button[aria-pressed="true"]{color:var(--fg);border-bottom-color:var(--fg)}
-.settings summary{cursor:pointer;list-style:none;font-size:15px}.settings summary::-webkit-details-marker{display:none}.settings summary::before{content:'▸ ';color:var(--muted)}.settings[open] summary::before{content:'▾ '}
-.settings[open] summary{margin-bottom:6px}
+details.panel>summary{cursor:pointer;list-style:none;font-size:15px}details.panel>summary::-webkit-details-marker{display:none}details.panel>summary::before{content:'▸ ';color:var(--muted)}details.panel[open]>summary::before{content:'▾ '}
+details.panel[open]>summary{margin-bottom:6px}.group>summary b{font-size:17px}
 .layout{flex:1;min-height:0;display:grid;grid-template-columns:3fr 2fr;gap:16px}
 #map{min-height:340px;border:1px solid var(--line);border-radius:4px}
 .side{min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:4px}
