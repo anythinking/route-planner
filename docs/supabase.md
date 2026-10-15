@@ -96,3 +96,11 @@ create policy "comments on public projects readable" on comments for select usin
 create policy "own comments" on comments for insert with check (auth.uid() = user_id);
 create policy "delete own comments" on comments for delete using (auth.uid() = user_id);
 ```
+
+### ⑤ AI 플랜 대화 — Edge Function 배포 (영철, 10분)
+코드는 `supabase/functions/plan-chat/index.ts`. 브라우저에서 Anthropic 키를 못 쓰니 이 함수가 대신 부른다(로그인 토큰 확인 → Claude → JSON).
+1. https://console.anthropic.com 에서 API 키 하나 만들기 (소액 결제 수단 필요. 대화 한 번 ≈ 1~2원).
+2. Supabase → 왼쪽 **Edge Functions** → **Deploy a new function** → 「Via Editor」 → 이름 `plan-chat` → 편집기에 `index.ts` 내용 전체 붙여 넣기 → Deploy.
+3. Edge Functions → **Secrets** → `ANTHROPIC_API_KEY` = 만든 키 → Save. (키는 여기만. 코드·메일·채팅에 두지 않는다.)
+4. 사이트 플랜 탭 → 「✦ AI에게 말하기」 → "미술관 위주로 2일" → 제안 → 「이 제안 적용」.
+함수 설정에서 「Verify JWT」가 켜져 있으면 그대로 둔다(로그인 사용자만 통과).

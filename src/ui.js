@@ -6,6 +6,7 @@ import { LocalStore } from './store.js';
 import { renderMine } from './mine.js';
 import { SUPABASE } from './config.js';
 import { createMap } from './map.js';
+import { chat } from './ai.js';
 
 // 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
 const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));
@@ -165,6 +166,7 @@ function renderSettings(side) {
   row4.appendChild($('span', 'muted', state.s ? `${state.s.lat.toFixed(4)}, ${state.s.lng.toFixed(4)}` : '안 찍으면 도심에서 출발'));
   if (state.s) { const clr = $('button', 'btn sm', '지우기'); clr.type = 'button'; clr.onclick = () => setState({ s: null }); row4.appendChild(clr); }
   p.appendChild(row4);
+  p.appendChild(renderSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }));
   side.appendChild(d);
 }
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
@@ -173,7 +175,7 @@ let resumeDismissed = false;
 
 // 해 — 첫날 날짜(dt)와 시각 슬라이더로 지도 빛을 맞추고 고도·방위·일출·일몰을 보여준다. 날짜가 없으면 오늘.
 function renderSun(result, start) {
-  const p = $('div', 'panel sun');
+  const p = $('div', 'sun');
   const firstVisible = result.days.findIndex((_, i) => !hidden.has(i)); const dayIdx = firstVisible < 0 ? 0 : firstVisible;
   const tz = INDEX.cities[state.c]?.tz || 'UTC';
   // 날짜 문자열(YYYY-MM-DD) + 분 → 그 도시 시간대의 실제 시각. 브라우저가 어디에 있든 파리 9:30은 파리 9:30이다.
@@ -194,7 +196,7 @@ function renderSun(result, start) {
   const di = $('input', 'text'); di.type = 'date'; di.value = state.dt || ''; di.title = '1일차 날짜'; di.style.width = 'auto';
   di.onchange = () => setState({ dt: di.value || null });
   r1.appendChild(di);
-  if (!state.dt) r1.appendChild($('span', 'muted', '날짜를 넣으면 그날 해로 계산한다 (지금은 오늘)'));
+  if (!state.dt) r1.appendChild($('span', 'muted', '(없으면 오늘)'));
   p.appendChild(r1);
   const r2 = $('div', 'row');
   const sl = $('input'); sl.type = 'range'; sl.min = 0; sl.max = 1439; sl.step = 10; sl.value = t; sl.style.flex = '1';
@@ -215,7 +217,7 @@ function renderSun(result, start) {
   const r3 = $('div', 'row');
   const cb = $('input'); cb.type = 'checkbox'; cb.id = 'cb-shadow'; cb.checked = shadowsOn; cb.onchange = () => { shadowsOn = cb.checked; map.setShadows(shadowsOn); };
   const lab = $('label', null, '건물 그림자'); lab.htmlFor = cb.id;
-  r3.append(cb, lab, $('span', 'muted', '지도를 건물이 보일 만큼 확대(줌 15.5+)하면 이 시각의 해로 그림자가 깔린다. 「3D」와 같이 보면 가장 잘 보인다.'));
+  r3.append(cb, lab, $('span', 'muted', '줌 15.5+ · 「3D」와 같이'));
   p.appendChild(r3);
   return p;
 }
@@ -386,9 +388,7 @@ async function render() {
   if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'pack') { packingCache = await loadPacking(); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
-  await renderResume(side); if (seq !== renderSeq) return;
   renderSettings(side);
-  if (step === 2) side.appendChild(renderSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }));
   if (step === 2) renderStep2(side, entering);
   if (step === 3) renderStep3(side, entering);
   restoreScroll(side, sy, st);
@@ -473,54 +473,122 @@ function renderDayBlocks(side) {
 }
 const openDays = new Set();
 
+let query = '', results = null, searching = false, searchErr = '';   // 검색 상자 상태 (화면 상태)
+const openGroups = new Set([1]);   // 펼쳐 둔 추천 묶음 — 처음엔 1순위만
+
+// 입력한 글자로 목록을 거른다 — 다시 그리지 않고 숨기기만 (입력 포커스를 지키려고)
+function applyFilter(side) {
+  const q = query.trim().toLowerCase();
+  side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
+  side.querySelectorAll('details.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); if (q && !g.hidden) g.open = true; });
+}
+
+let pickTab = 'rec';   // 가고 싶은 곳 상자의 탭: rec(추천) | search(검색)
+let aiMsgs = [], aiBusy = false, aiOpen = false, aiPending = null;   // AI 대화 (화면 상태)
+
+// AI에게 말하기 — "미술관 위주로 느긋하게 3일" 같은 말을 플랜 상태로 바꿔 준다. 로그인 필요(서버 함수가 토큰을 본다)
+function renderAiBox(host) {
+  const box = $('div', 'ai');
+  const hd = $('div', 'row');
+  const tg = $('button', 'btn sm' + (aiOpen ? ' primary' : ''), '✦ AI에게 말하기'); tg.type = 'button'; tg.onclick = () => { aiOpen = !aiOpen; render(); };
+  hd.appendChild(tg); hd.appendChild($('span', 'muted', '어떤 여행을 하고 싶은지 말하면 장소·일수·체류를 골라 준다'));
+  box.appendChild(hd);
+  if (!aiOpen) { host.appendChild(box); return; }
+  if (!curUser) { box.appendChild($('p', null, '로그인하면 쓸 수 있다 — <b>내 여행</b> 탭에서.')); host.appendChild(box); return; }
+  const log = $('div', 'ailog');
+  for (const m of aiMsgs) log.appendChild($('div', 'msg ' + m.role, esc(m.content)));
+  if (aiBusy) log.appendChild($('div', 'msg assistant muted', '생각 중…'));
+  box.appendChild(log);
+  if (aiPending && Object.keys(aiPending).length) {
+    const pr = $('div', 'row');
+    const n = Object.keys(aiPending.p || {}).length;
+    pr.appendChild($('span', null, `<b>제안</b> <span class="muted">${n ? `장소 ${n}곳` : ''}${aiPending.d ? ` · ${aiPending.d}일` : ''}${aiPending.o ? ' · 날짜별 배정' : ''}</span>`));
+    const ap = $('button', 'btn sm primary', '이 제안 적용'); ap.type = 'button';
+    ap.onclick = () => { const a = aiPending; aiPending = null; const patch = {}; if (a.p) { patch.p = a.p; patch.m = a.m || []; patch.o = a.o || null; } else if (a.m) patch.m = a.m; for (const k of ['d', 'v', 't', 'e']) if (a[k] != null) patch[k] = a[k]; if (!a.p && a.o) patch.o = a.o; setState(patch); };
+    const no = $('button', 'btn sm', '무시'); no.type = 'button'; no.onclick = () => { aiPending = null; render(); };
+    pr.append(ap, no); box.appendChild(pr);
+  }
+  const row = $('div', 'row');
+  const ta = $('textarea', 'text'); ta.rows = 2; ta.placeholder = aiMsgs.length ? '이어서…' : '예: 건축 좋아하는 아버지랑 3일, 미술관은 하나만, 저녁엔 야경';
+  const send = $('button', 'btn primary', '보내기'); send.type = 'button'; send.disabled = aiBusy;
+  const run = async () => {
+    const text = ta.value.trim(); if (!text || aiBusy) return;
+    aiMsgs.push({ role: 'user', content: text }); aiBusy = true; ta.value = ''; render();
+    try {
+      const session = store.sb ? (await store.sb.auth.getSession()).data.session : null;
+      const res = await chat({ session, city, places: city.places, state: { d: state.d, t: state.t, e: state.e, v: state.v, p: state.p, m: state.m }, messages: aiMsgs });
+      aiMsgs.push({ role: 'assistant', content: res.reply || '(빈 답)' }); aiPending = res.apply && Object.keys(res.apply).length ? res.apply : null;
+    } catch (e) { aiMsgs.push({ role: 'assistant', content: /Failed to fetch/.test(e.message) ? '서버 함수(plan-chat)가 아직 배포되지 않았다 — docs/supabase.md의 ⑤를 보라.' : `못 불렀다 — ${e.message || e}` }); }
+    aiBusy = false; render();
+  };
+  send.onclick = run; ta.onkeydown = e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) run(); };
+  row.append(ta, send); box.appendChild(row);
+  if (aiMsgs.length) { const clr = $('button', 'btn sm', '대화 지우기'); clr.type = 'button'; clr.onclick = () => { aiMsgs = []; aiPending = null; render(); }; box.appendChild(clr); }
+  host.appendChild(box);
+}
 function renderStep2(side, entering) {
-  const head = $('div', 'panel');
   const n = resolvePlaces(state, city).length;   // 해시의 모르는 id는 세지 않는다
-  head.appendChild($('h2', null, `${city.name} — 가고 싶은 곳 고르기`));
-  head.appendChild($('p', null, `고른 곳 ${n}개 · ${state.d}일. 날짜 블록의 「+ 여기에 추가」를 누르면 그날에 담기고, 안 누르면 자동으로 나눈다. 지도의 빈 곳을 클릭하면 내 장소.`));
-  const go = $('button', 'btn primary', '경로 짜기 →'); go.type = 'button'; go.disabled = n === 0; go.onclick = () => goStep(3);
-  head.appendChild(go); side.appendChild(head);
+  const head = $('div', 'panel');
+  const hr = $('div', 'row');
+  hr.appendChild($('h2', null, `${esc(city.name)} <span class="muted" style="font-weight:500">· 고른 곳 ${n}개 · ${state.d}일</span>`));
+  const go = $('button', 'btn primary', '경로 짜기 →'); go.type = 'button'; go.disabled = n === 0; go.onclick = () => goStep(3); go.style.marginLeft = 'auto';
+  hr.appendChild(go); head.appendChild(hr);
+  renderAiBox(head);
+  side.appendChild(head);
   renderDayBlocks(side);
-  side.appendChild(renderSearch());
 
-  for (const w of [1, 2, 3]) {
-    const group = city.places.filter(p => p.weight === w);
-    if (!group.length) continue;
-    const panel = $('details', 'panel'); panel.open = openGroups.has(w); panel.ontoggle = () => { panel.open ? openGroups.add(w) : openGroups.delete(w); };
-    const chosenN = group.filter(p => p.id in state.p).length;
-    panel.appendChild($('summary', null, `<b>${WEIGHT_LABEL[w]}</b> <span class="muted">${group.length}곳${chosenN ? ` · 고른 ${chosenN}` : ''}</span>`));
-    for (const pl of group) {
-      const chosen = pl.id in state.p, must = state.m.includes(pl.id);
-      const row = $('div', 'row place'); row.dataset.name = pl.name.toLowerCase();
-      const cb = $('input'); cb.type = 'checkbox'; cb.checked = chosen; cb.id = 'cb-' + pl.id; cb.onchange = () => togglePlace(pl.id);
-      const lab = $('label', null, esc(pl.name)); lab.htmlFor = cb.id; lab.style.fontWeight = '600';
-      row.append(cb, lab);
-      if (chosen) {
-        const mustBtn = $('button', 'btn' + (must ? ' primary' : ''), '꼭'); mustBtn.type = 'button';
-        mustBtn.onclick = () => setState({ m: must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
-        const sel = $('select');
-        pl.opts.forEach((o, i) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = i; op.selected = state.p[pl.id] === i; sel.appendChild(op); });
-        sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } });
-        row.append(mustBtn, sel);
+  // 가고 싶은 곳 — 추천 | 검색
+  const box = $('div', 'panel pick');
+  const th = $('div', 'row');
+  th.appendChild($('h2', null, '가고 싶은 곳'));
+  const tabs = $('div', 'steps');
+  for (const [id, label] of [['rec', '추천'], ['search', '검색']]) { const b = $('button', null, label); b.type = 'button'; b.setAttribute('aria-pressed', pickTab === id); b.onclick = () => { pickTab = id; render(); }; tabs.appendChild(b); }
+  th.appendChild(tabs); box.appendChild(th);
+  box.appendChild($('p', 'muted', '체크하면 활성 날짜 블록에 담긴다(없으면 자동 배정). 지도의 빈 곳을 클릭하면 내 장소.'));
+  if (pickTab === 'search') box.appendChild(renderSearch());
+  else {
+    const f = $('input', 'text'); f.type = 'search'; f.placeholder = '목록 거르기'; f.value = query; f.oninput = () => { query = f.value; applyFilter(box); };
+    box.appendChild(f);
+    for (const w of [1, 2, 3]) {
+      const group = city.places.filter(p => p.weight === w);
+      if (!group.length) continue;
+      const panel = $('details', 'group'); panel.open = openGroups.has(w); panel.ontoggle = () => { panel.open ? openGroups.add(w) : openGroups.delete(w); };
+      const chosenN = group.filter(p => p.id in state.p).length;
+      panel.appendChild($('summary', null, `<b>${WEIGHT_LABEL[w]}</b> <span class="muted">${group.length}곳${chosenN ? ` · 고른 ${chosenN}` : ''}</span>`));
+      for (const pl of group) {
+        const chosen = pl.id in state.p, must = state.m.includes(pl.id);
+        const row = $('div', 'row place'); row.dataset.name = pl.name.toLowerCase();
+        const cb = $('input'); cb.type = 'checkbox'; cb.checked = chosen; cb.id = 'cb-' + pl.id; cb.onchange = () => togglePlace(pl.id);
+        const lab = $('label', null, esc(pl.name)); lab.htmlFor = cb.id; lab.style.fontWeight = '600';
+        row.append(cb, lab);
+        if (chosen) {
+          const mustBtn = $('button', 'btn sm' + (must ? ' primary' : ''), '꼭'); mustBtn.type = 'button';
+          mustBtn.onclick = () => setState({ m: must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
+          const sel = $('select', 'quiet');
+          pl.opts.forEach((o, i) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = i; op.selected = state.p[pl.id] === i; sel.appendChild(op); });
+          sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } });
+          row.append(mustBtn, sel);
+        }
+        panel.appendChild(row);
+        if (chosen) { const note = $('p', 'muted', pl.note); note.dataset.name = row.dataset.name; panel.appendChild(note); }
       }
-      panel.appendChild(row);
-      if (chosen) { const note = $('p', 'muted', pl.note); note.dataset.name = row.dataset.name; panel.appendChild(note); }
-      placeMarker(pl, chosen, must);
+      box.appendChild(panel);
     }
-    panel.classList.add('group'); side.appendChild(panel);
+    applyFilter(box);
+    if (state.u.length) {
+      const panel = $('details', 'group'); panel.open = true; panel.appendChild($('summary', null, `<b>내 장소</b> <span class="muted">${state.u.length}곳</span>`));
+      state.u.forEach((u, i) => {
+        const row = $('div', 'row', `<b>${esc(u.name)}</b> <span class="muted">${esc(u.min)}분</span>`);
+        const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = () => setState({ u: state.u.filter((_, j) => j !== i), o: null });
+        row.appendChild(del); panel.appendChild(row);
+      });
+      box.appendChild(panel);
+    }
   }
-  applyFilter(side);
-
-  if (state.u.length) {
-    const panel = $('div', 'panel'); panel.appendChild($('h2', null, '내 장소'));
-    state.u.forEach((u, i) => {
-      const row = $('div', 'row', `<b>${esc(u.name)}</b> <span class="muted">${esc(u.min)}분</span>`);
-      const del = $('button', 'btn', '삭제'); del.type = 'button'; del.onclick = () => setState({ u: state.u.filter((_, j) => j !== i), o: null });
-      row.appendChild(del); panel.appendChild(row);
-      map.circle('places', u, { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', title: u.name + ' (내 장소)' });
-    });
-    side.appendChild(panel);
-  }
+  side.appendChild(box);
+  // 지도 마커 — 탭과 무관하게 전부
+  for (const pl of city.places) placeMarker(pl, pl.id in state.p, state.m.includes(pl.id));
+  for (const u of state.u) map.circle('places', u, { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', title: u.name + ' (내 장소)' });
 
   if (entering) {
     const pts = [...city.places.map(p => [p.lat, p.lng]), ...state.u.map(u => [u.lat, u.lng])];
@@ -532,18 +600,8 @@ function renderStep2(side, entering) {
     addUserPlace({ name: name.replace(/[~|]/g, ' '), lat: e.latlng.lat, lng: e.latlng.lng, min });
   });
 }
-let query = '', results = null, searching = false, searchErr = '';   // 검색 상자 상태 (화면 상태)
-const openGroups = new Set([1]);   // 펼쳐 둔 추천 묶음 — 처음엔 1순위만
-
-// 입력한 글자로 목록을 거른다 — 다시 그리지 않고 숨기기만 (입력 포커스를 지키려고)
-function applyFilter(side) {
-  const q = query.trim().toLowerCase();
-  side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
-  side.querySelectorAll('.panel.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); if (q && !g.hidden) g.open = true; });
-}
-
 function renderSearch() {
-  const p = $('div', 'panel search');
+  const p = $('div', 'search');
   const row = $('div', 'row');
   const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 이름 — 목록을 거르고, Enter로 지도에서 찾는다'; inp.value = query;
   inp.oninput = () => { query = inp.value; applyFilter(document.getElementById('side')); };
@@ -618,7 +676,7 @@ function renderStep3(side, entering) {
     row.appendChild(b);
   });
   head.appendChild(row); side.appendChild(head);
-  side.appendChild(renderSun(result, start));
+  const sunHost = side.querySelector('.settings .sun'); if (sunHost) sunHost.replaceWith(renderSun(result, start));
 
   const bounds = [[start.lat, start.lng]];
   result.days.forEach((day, i) => {
