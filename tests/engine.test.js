@@ -262,3 +262,15 @@ test('plan: 자동 모드도 manual:false를 돌려준다 · 빈 입력도', () 
   assert.equal(plan(LONDON, { days: 2, start: HOTEL }).manual, false);
   assert.deepEqual(plan([], { days: 3, start: HOTEL }), { days: [], dropped: [], manual: false });
 });
+
+test('plan perDay: 날마다 시작 시각·이동수단·출발점을 따로 줄 수 있다', () => {
+  const places = [
+    { id: 'a', name: 'A', lat: 48.86, lng: 2.35, weight: 1, opts: [{ label: 'x', min: 60 }], opt: 0, must: false },
+    { id: 'b', name: 'B', lat: 48.87, lng: 2.36, weight: 1, opts: [{ label: 'x', min: 60 }], opt: 0, must: false },
+  ];
+  const start = { lat: 48.85, lng: 2.34 };
+  const r = plan(places, { days: 2, start, manual: [['a'], ['b']], perDay: { 1: { dayStart: 720, pref: 'taxi', start: { lat: 48.9, lng: 2.4 } } } });
+  assert.ok(r.days[0].stops[0].arrive < 700);           // 1일차는 기본 9:30 출발
+  assert.ok(r.days[1].stops[0].arrive >= 720);          // 2일차는 12:00 이후
+  assert.equal(r.days[1].stops[0].travelMode, 'taxi');  // 2일차는 택시 (출발점이 멀어 2km 초과)
+});

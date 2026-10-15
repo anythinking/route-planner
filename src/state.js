@@ -1,6 +1,6 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
-export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null };
+export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null };
 export const TABS = ['home', 'plan', 'pack', 'photo', 'gift', 'mine'];   // 홈 · 플랜 · 준비물 · 사진 · 기념품 · 내 여행
 const ID = /^[a-z0-9_]+$/, MODES = ['walk', 'metro', 'taxi'];
 
@@ -19,6 +19,9 @@ export function encode(st) {
   if (st.tab && st.tab !== 'plan') q.set('tab', st.tab);
   if (st.pr) q.set('pr', st.pr);
   if (st.dt) q.set('dt', st.dt);
+  // 날짜별 설정: ds=0:t600,e1200,vtaxi,s48.85|2.34;2:t540
+  const dsk = Object.keys(st.ds || {}).filter(k => st.ds[k] && Object.keys(st.ds[k]).length).sort((a, b) => a - b);
+  if (dsk.length) q.set('ds', dsk.map(k => { const d = st.ds[k]; const parts = []; if (d.t != null) parts.push('t' + d.t); if (d.e != null) parts.push('e' + d.e); if (d.v) parts.push('v' + d.v); if (d.s) parts.push(`s${d.s.lat.toFixed(5)}|${d.s.lng.toFixed(5)}`); return `${k}:${parts.join(',')}`; }).join(';'));
   return q.toString();
 }
 
@@ -65,6 +68,22 @@ export function decode(hash) {
   if (TABS.includes(q.get('tab'))) st.tab = q.get('tab');
   if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
   if (/^\d{4}-\d{2}-\d{2}$/.test(q.get('dt') || '') && !Number.isNaN(Date.parse(q.get('dt')))) st.dt = q.get('dt');
+  if (q.get('ds')) {
+    const ds = {}; let ok = true;
+    for (const tok of q.get('ds').split(';').filter(Boolean)) {
+      const [k, rest] = tok.split(':'); if (!/^\d$/.test(k) || rest == null) { ok = false; break; }
+      const d = {};
+      for (const part of rest.split(',').filter(Boolean)) {
+        const key = part[0], val = part.slice(1);
+        if (key === 't' || key === 'e') { const n = Number(val); if (!Number.isInteger(n) || n < 0 || n > 1440) { ok = false; break; } d[key] = n; }
+        else if (key === 'v') { if (!['transit', 'taxi'].includes(val)) { ok = false; break; } d.v = val; }
+        else if (key === 's') { const [la, ln] = val.split('|').map(Number); if (!Number.isFinite(la) || !Number.isFinite(ln)) { ok = false; break; } d.s = { lat: la, lng: ln }; }
+        else { ok = false; break; }
+      }
+      if (!ok) break; if (Object.keys(d).length) ds[k] = d;
+    }
+    st.ds = ok && Object.keys(ds).length ? ds : null;
+  }
   return st;
 }
 

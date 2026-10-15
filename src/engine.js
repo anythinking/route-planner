@@ -160,14 +160,16 @@ function manualValid(manual, places) {
 }
 
 // 전체: 씨앗 → 묶기 → (순서 → 시간 → 자르기) × 날. manual이 맞으면 묶기·순서·자르기를 건너뛰고 시간만 쌓는다.
-export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref = 'transit', legs = {}, manual = null }) {
+// perDay = { [i]: { dayStart?, dayEnd?, pref?, start? } } — 그날만 다르게. 없는 칸은 전체 값.
+export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref = 'transit', legs = {}, manual = null, perDay = {} }) {
   if (!places.length) return { days: [], dropped: [], manual: false };
-  const opt = { legs, pref };
+  const forDay = i => { const o = perDay?.[i] || {}; return { start: o.start || start, dayStart: o.dayStart ?? dayStart, dayEnd: o.dayEnd ?? dayEnd, pref: o.pref || pref }; };
   if (manualValid(manual, places)) {
     const byIdMap = new Map(places.map(p => [p.id, p]));
-    const out = manual.map(ids => {
-      const day = schedule(ids.map(id => byIdMap.get(id)), start, dayStart, opt);
-      day.over = day.end > dayEnd;
+    const out = manual.map((ids, i) => {
+      const d = forDay(i);
+      const day = schedule(ids.map(id => byIdMap.get(id)), d.start, d.dayStart, { legs, pref: d.pref });
+      day.over = day.end > d.dayEnd;
       day.why = ids.length ? '직접 정한 순서' : '비어 있음';
       return day;
     });
@@ -177,8 +179,9 @@ export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref 
   const groups = cluster(places, seed(places, M), dayEnd - dayStart);
   const out = [], dropped = [];
   groups.forEach((g, i) => {
-    const d0 = schedule(order(g, start, pref), start, dayStart, opt);
-    const { day, dropped: dr } = trim(d0, { start, dayStart, dayEnd, dayIndex: i, legs, pref });
+    const d = forDay(i);
+    const d0 = schedule(order(g, d.start, d.pref), d.start, d.dayStart, { legs, pref: d.pref });
+    const { day, dropped: dr } = trim(d0, { start: d.start, dayStart: d.dayStart, dayEnd: d.dayEnd, dayIndex: i, legs, pref: d.pref });
     dropped.push(...dr);
     day.why = day.stops.length ? why(day) : '전부 예산을 넘겨 뺐다';   // 빈 날도 남겨 번호를 지킨다
     out.push(day);

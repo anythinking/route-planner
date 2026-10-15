@@ -102,3 +102,13 @@ test('dt: 첫날 날짜 — YYYY-MM-DD만, 엉터리는 버린다', () => {
   assert.equal(decode('#dt=abc').dt, null);
   assert.ok(encode({ ...DEFAULTS, dt: '2026-11-03' }).includes('dt=2026-11-03'));
 });
+
+test('ds: 날짜별 설정 — 시작·끝·이동·출발점, 엉터리는 버린다', () => {
+  const st = decode('#ds=0:t600,e1200,vtaxi,s48.85|2.34;2:t540');
+  assert.deepEqual(st.ds, { 0: { t: 600, e: 1200, v: 'taxi', s: { lat: 48.85, lng: 2.34 } }, 2: { t: 540 } });
+  assert.equal(decode('#ds=x:t600').ds, null);
+  assert.equal(decode('#ds=0:t9999').ds, null);
+  const enc = encode({ ...DEFAULTS, ds: { 1: { v: 'taxi', s: { lat: 1, lng: 2 } } } });
+  assert.ok(enc.includes('ds=1%3Avtaxi%2Cs1.00000%7C2.00000') || decodeURIComponent(enc).includes('ds=1:vtaxi,s1.00000|2.00000'));
+  assert.ok(!encode({ ...DEFAULTS }).includes('ds='));
+});
