@@ -59,8 +59,8 @@ export function decode(hash) {
     else if (/^\d+$/.test(val) && parseInt(val) > 0) st.l[key] = parseInt(val);
   }
   if (q.get('o')) {
-    const days = q.get('o').split('|').map(d => d.split(',').filter(id => ID.test(id))).filter(d => d.length);
-    st.o = days.length ? days : null;
+    const days = q.get('o').split('|').map(d => d.split(',').filter(id => ID.test(id)));   // 빈 날도 자리로 남긴다
+    st.o = days.some(d => d.length) ? days : null;
   }
   if (TABS.includes(q.get('tab'))) st.tab = q.get('tab');
   if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
