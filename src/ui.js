@@ -155,7 +155,6 @@ function renderSettings(side) {   // 기본값(시간·이동·출발점) + 해�
   row4.appendChild($('span', 'muted', state.s ? `${state.s.lat.toFixed(4)}, ${state.s.lng.toFixed(4)}` : '안 찍으면 도심에서 출발'));
   if (state.s) { const clr = $('button', 'btn sm', '지우기'); clr.type = 'button'; clr.onclick = () => setState({ s: null }); row4.appendChild(clr); }
   p.appendChild(row4);
-  p.appendChild(renderSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }));
   side.appendChild(d);
 }
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
@@ -163,6 +162,11 @@ let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
 let resumeDismissed = false;
 
 // 해 — 첫날 날짜(dt)와 시각 슬라이더로 지도 빛을 맞추고 고도·방위·일출·일몰을 보여준다. 날짜가 없으면 오늘.
+// 지도 위 「해와 그림자」 상자 — 플랜 탭에서만 보인다
+function mountSun(result, start) {
+  const host = document.getElementById('sunbox'); host.innerHTML = ''; host.hidden = false;
+  host.appendChild(renderSun(result, start));
+}
 function renderSun(result, start) {
   const p = $('div', 'sun');
   const firstVisible = result.days.findIndex((_, i) => !hidden.has(i)); const dayIdx = firstVisible < 0 ? 0 : firstVisible;
@@ -189,7 +193,7 @@ function renderSun(result, start) {
   if (!state.dt) r1.appendChild($('span', 'muted', '(없으면 오늘)'));
   p.appendChild(r1);
   const r2 = $('div', 'row');
-  p.appendChild($('p', 'muted', '해와 그림자에 따른 뷰와 사진을 고려해보세요 — 시각을 끌면 지도의 빛과 건물 그림자가 그 시각으로 바뀐다.'));
+  p.appendChild($('p', 'muted', '해와 그림자에 따른 뷰와 사진을 고려해보세요.'));
   const sl = $('input'); sl.type = 'range'; sl.min = 0; sl.max = 1439; sl.step = 10; sl.value = t; sl.style.flex = '1';
   const out = $('span', null, '');
   const show = v => { const s2 = map.setSun(zoned(dayIdx, v), start); out.innerHTML = s2 ? `<b style="font-variant-numeric:tabular-nums">${hm(v)}</b> <span class="muted">${s2.up ? `고도 ${Math.round(s2.altitude)}° · ${dir(s2.azimuth)}쪽` : '해 진 뒤'}</span>` : hm(v); };
@@ -208,7 +212,7 @@ function renderSun(result, start) {
   const r3 = $('div', 'row');
   const cb = $('input'); cb.type = 'checkbox'; cb.id = 'cb-shadow'; cb.checked = shadowsOn; cb.onchange = () => { shadowsOn = cb.checked; map.setShadows(shadowsOn); };
   const lab = $('label', null, '건물 그림자'); lab.htmlFor = cb.id;
-  r3.append(cb, lab, $('span', 'muted', '줌 15.5+ · 「3D」와 같이'));
+  r3.append(cb, lab, $('span', 'muted', '줌 15.5+'));
   p.appendChild(r3);
   return p;
 }
@@ -343,6 +347,7 @@ async function render() {
   }
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
   document.querySelector('.layout').classList.toggle('nomap', !(state.tab === 'plan' || (state.tab === 'mine' && state.pr)));   // 지도는 플랜, 그리고 여행을 열어 둔 내 여행에서
+  document.getElementById('sunbox').hidden = state.tab !== 'plan';
   await storeReady;
   // 계정 확인이 3초 넘게 안 끝나면(다른 탭의 잠금 등) 일단 로그아웃 상태로 그리고, 세션이 오면 onChange가 다시 그린다
   try { curUser = await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch { curUser = null; }
@@ -381,7 +386,7 @@ async function render() {
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   renderSettings(side);
-  if (step === 2) renderStep2(side, entering);
+  if (step === 2) { renderStep2(side, entering); mountSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }); }
   if (step === 3) renderStep3(side, entering);
   restoreScroll(side, sy, st);
 }
@@ -697,7 +702,7 @@ function renderStep3(side, entering) {
     row.appendChild(b);
   });
   head.appendChild(row); side.appendChild(head);
-  const sunHost = side.querySelector('.settings .sun'); if (sunHost) sunHost.replaceWith(renderSun(result, start));
+  mountSun(result, start);
 
   const bounds = [[start.lat, start.lng]];
   result.days.forEach((day, i) => {

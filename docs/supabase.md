@@ -104,3 +104,10 @@ create policy "delete own comments" on comments for delete using (auth.uid() = u
 3. Edge Functions → **Secrets** → `ANTHROPIC_API_KEY` = 만든 키 → Save. (키는 여기만. 코드·메일·채팅에 두지 않는다.)
 4. 사이트 플랜 탭 → 「✦ AI에게 말하기」 → "미술관 위주로 2일" → 제안 → 「이 제안 적용」.
 함수 설정에서 「Verify JWT」가 켜져 있으면 그대로 둔다(로그인 사용자만 통과).
+
+### ⑥ 같이 가는 사람과 공유·공동 편집 (설계 메모 — 나중에)
+- `project_members (project_id, user_id, role: owner|editor|viewer, invited_by, created_at)` + 초대 링크 토큰 `project_invites (token, project_id, role, expires_at)`.
+- RLS: projects/photos/comments의 select·update를 "내 것 or 멤버"로 넓힌다.
+- 편집 표시: `projects.hash`를 바꾸는 저장마다 `project_edits (project_id, user_id, at, summary)`에 한 줄 → 결과 화면 각 정류장·살 것 항목 옆에 「영철」「형」 태그(마지막으로 만진 사람).
+- 동시 편집 충돌: 저장 시 `updated_at`이 내가 읽은 것과 다르면 "○○가 먼저 고쳤다 — 다시 불러오기".
+- 실시간은 Supabase Realtime(채널 구독)으로 나중에.
