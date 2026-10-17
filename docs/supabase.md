@@ -111,3 +111,7 @@ create policy "delete own comments" on comments for delete using (auth.uid() = u
 - 편집 표시: `projects.hash`를 바꾸는 저장마다 `project_edits (project_id, user_id, at, summary)`에 한 줄 → 결과 화면 각 정류장·살 것 항목 옆에 「영철」「형」 태그(마지막으로 만진 사람).
 - 동시 편집 충돌: 저장 시 `updated_at`이 내가 읽은 것과 다르면 "○○가 먼저 고쳤다 — 다시 불러오기".
 - 실시간은 Supabase Realtime(채널 구독)으로 나중에.
+
+### ⑦ 공유 한 체계 (2026-10-17, 미실행) — ③·⑥을 합쳤다
+`docs/sharing.sql` 을 새 탭에 통째로 붙여 Run. 들어가는 것: 공유 범위(비공개·링크 초대·공개), 멤버·초대 표, 멤버도 읽고(편집자는 고치고) 사진도 보는 RLS, 초대 수락 함수, 공개 플랜은 로그인 없이 읽기.
+실행 전엔 사이트의 「공유」 패널이 "서버 준비 전"이라고 뜬다.

@@ -26,13 +26,20 @@ export class LocalStore {
   async getProject(id) { return this._get(this._key(), []).find(p => p.id === id) || null; }
   async createProject({ name, city, hash }) {
     const now = Date.now();
-    const p = { id: uid(), name: String(name || '').slice(0, 60) || '이름 없는 여행', city, hash: hash || '', shopping: [], packing: {}, photos: [], createdAt: now, updatedAt: now };
+    const p = { id: uid(), name: String(name || '').slice(0, 60) || '이름 없는 여행', city, hash: hash || '', shopping: [], packing: {}, photos: [], ownerId: 'local', visibility: 'private', edits: {}, createdAt: now, updatedAt: now };
     this._set(this._key(), [...this._get(this._key(), []), p]); return p;
   }
   async updateProject(id, patch) {
     const all = this._get(this._key(), []); const i = all.findIndex(p => p.id === id); if (i < 0) return null;
     all[i] = { ...all[i], ...patch, id, updatedAt: Date.now() }; this._set(this._key(), all); return all[i];
   }
+  // 공유 — 브라우저 저장엔 다른 사람이 없다
+  async myId() { return 'local'; }
+  async listMembers() { return []; }
+  async createInvite() { return null; }
+  async acceptInvite() { throw new Error('브라우저 저장에선 초대를 못 받는다'); }
+  async removeMember() {}
+  async listPublic() { return []; }
   async deleteProject(id) { this._set(this._key(), this._get(this._key(), []).filter(p => p.id !== id)); }
 
   async addPhoto(pid, ph) {

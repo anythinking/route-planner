@@ -7,6 +7,7 @@ import { renderMine } from './mine.js';
 import { SUPABASE } from './config.js';
 import { createMap } from './map.js';
 import { chat } from './ai.js';
+import { tagEdits } from './edits.js';
 
 // 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
 const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));
@@ -31,6 +32,17 @@ let pickStart = false;       // 켜지면 다음 지도 클릭이 출발점이 �
 let pickPhotoFn = null;      // 켜지면 다음 지도 클릭이 사진 위치가 된다
 let city = null;                 // data/<c>.json 내용
 let curUser = null;              // 로그인한 사람 (store.user())
+let curProject = null;           // 플랜 탭에서 열어 둔 여행(이름표용) — pr이 있을 때만
+// 지금 플랜을 여행에 저장 — 바뀐 장소에 내 이름표를 붙인다
+async function saveToProject(pid) {
+  const prev = await store.getProject(pid); if (!prev) throw new Error('여행이 없다');
+  const hash = encode({ ...state, tab: 'plan', pr: null });
+  const edits = tagEdits(prev.hash, hash, prev.edits, curUser?.name || '나');
+  const p = await store.updateProject(pid, { city: state.c, hash, edits, lastEditedBy: curUser?.name || null });
+  curProject = p; return p;
+}
+// 초대 링크(#join=토큰)로 들어온 경우
+function pendingJoin() { const m = location.hash.match(/[#&]join=([A-Za-z0-9]+)/); if (m) { try { sessionStorage.setItem('rp.join', m[1]); } catch {} history.replaceState(null, '', location.hash.replace(/[#&]join=[A-Za-z0-9]+/, '')); } try { return sessionStorage.getItem('rp.join'); } catch { return null; } }
 export let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
 const cache = {};
 // 지도: MapLibre + OpenFreeMap 컬러 벡터 타일(키 없음) — 건물 높이(3D)와 해 위치(빛)를 쓴다. src/map.js 참고
@@ -220,7 +232,7 @@ function renderSun(result, start) {
 let homeQuery = '';
 
 // 홈 — 어디로 가세요? + 도시 카드 + (로그인) 내 여행
-function renderHome(side, projects) {
+function renderHome(side, projects, pub = []) {
   const hero = $('div', 'hero');
   hero.appendChild($('h2', null, '어디로 가세요?'));
   hero.appendChild($('p', null, '도시를 고르고 가고 싶은 곳에 표시하면, 며칠에 어떤 순서로 돌지 AlgoTrip이 짜 준다.'));
@@ -265,6 +277,20 @@ function renderHome(side, projects) {
     sec.appendChild($('p', null, '<b>로그인하면</b> 짠 플랜을 여행으로 저장하고, 살 것과 사진을 같이 둘 수 있다. 플랜을 짜는 데는 로그인이 필요 없다.'));
     const b = $('button', 'btn', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine' }); sec.appendChild(b);
     side.appendChild(sec);
+  }
+  const others = pub.filter(p => !curUser || p.ownerId !== curUser.id);
+  if (others.length) {
+    const sec = $('section', 'region'); sec.appendChild($('h3', null, '다른 사람의 플랜'));
+    sec.appendChild($('p', 'muted', '공개로 둔 여행. 열어서 보고 「내 걸로 복사」하면 내 출발점이 된다.'));
+    const grid = $('div', 'cards');
+    for (const p of others) {
+      const c = INDEX.cities[p.city] || {};
+      const card = $('a', 'card trip'); card.href = '#';
+      card.innerHTML = `<img src="${esc(c.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}</b><span>${esc(c.name || p.city)}${p.lastEditedBy ? ` · ${esc(p.lastEditedBy)}` : ''} · 사진 ${p.photos.length}</span></div>`;
+      card.onclick = e => { e.preventDefault(); setState({ pr: p.id, tab: 'mine' }); };
+      grid.appendChild(card);
+    }
+    sec.appendChild(grid); side.appendChild(sec);
   }
   side.appendChild($('p', 'muted credits', '도시 사진: Wikimedia Commons (CC BY / CC BY-SA, <a href="assets/cities/credits.json">저작자</a>)'));
   applyHomeFilter(side);
@@ -364,20 +390,31 @@ async function render() {
   drawStart();
   if (state.tab === 'plan' || (state.tab === 'mine' && state.pr)) map.resize();   // 숨겼다 보일 때 크기를 다시 잰다
   const first = lastStep === 0;
+  // 초대 링크로 왔고 로그인돼 있으면 멤버로 들어가 그 여행을 연다
+  const join = pendingJoin();
+  if (join && curUser) {
+    try { const pid = await store.acceptInvite(join, curUser.name); sessionStorage.removeItem('rp.join'); setState({ pr: pid, tab: 'mine' }); return; }
+    catch (e) { sessionStorage.removeItem('rp.join'); alert(`초대를 못 받았다 — ${e.message || e}`); }
+  }
+  if (join && !curUser && state.tab !== 'mine') { setState({ tab: 'mine' }); return; }
   if (state.tab === 'home') {
     lastStep = -1;
-    const projects = curUser ? await store.listProjects().catch(() => []) : [];
+    const [projects, pub] = await Promise.all([curUser ? store.listProjects().catch(() => []) : [], store.listPublic ? store.listPublic(12).catch(() => []) : []]);
     if (seq !== renderSeq) return;
-    renderHome(side, projects);
+    renderHome(side, projects, pub);
     restoreScroll(side, sy, st); return;
   }
   if (state.tab === 'mine') {
     lastStep = -1;
     const projects = curUser ? await store.listProjects() : [];
     if (seq !== renderSeq) return;
-    const project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
+    let project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
+    let canEdit = false, isOwner = false;
+    if (state.pr && !project) { try { project = await store.getProject(state.pr); } catch {} }      // 공개 플랜·링크 보기
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
-    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); } });
+    if (project && curUser) { isOwner = project.ownerId === curUser.id; canEdit = isOwner || project.role === 'editor'; }
+    curProject = project;
+    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join });
     bindMapClick(null); drawStart();
     if (seq !== renderSeq) return;
     if (state.pr) accountOpen = false;
@@ -386,6 +423,8 @@ async function render() {
   if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'pack') { packingCache = await loadPacking(); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
+  if (state.pr && (!curProject || curProject.id !== state.pr)) { try { curProject = await store.getProject(state.pr); } catch { curProject = null; } if (seq !== renderSeq) return; }
+  if (!state.pr) curProject = null;
   renderSettings(side);
   if (step === 2) { renderStep2(side, entering); mountSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }); }
   if (step === 3) renderStep3(side, entering);
@@ -711,7 +750,7 @@ function renderStep3(side, entering) {
     if (!curUser) { setState({ tab: 'mine' }); return; }
     const hash = encode({ ...state, tab: 'plan', pr: null });
     try {
-      if (state.pr) { await store.updateProject(state.pr, { city: state.c, hash }); sv.textContent = '저장됨'; }
+      if (state.pr) { await saveToProject(state.pr); sv.textContent = '저장됨'; setTimeout(render, 500); }
       else { const name = prompt('여행 이름', `${CITIES[state.c]} ${state.d}일`); if (!name) return; const p = await store.createProject({ name, city: state.c, hash }); setState({ pr: p.id }); }
     } catch (e) { alert(`저장 실패 — ${e.message || e}`); }
   };
@@ -771,7 +810,8 @@ function renderStep3(side, entering) {
       const r = $('div', 'stop');
       r.appendChild($('div', 't', hm(s.arrive)));
       const body = $('div', 'body');
-      body.appendChild($('div', 'name', `${esc(s.place.name)}${s.place.must ? ' <span class="tag">꼭</span>' : ''}`));
+      const who = curProject?.edits?.[s.place.id]?.by;
+      body.appendChild($('div', 'name', `${esc(s.place.name)}${s.place.must ? ' <span class="tag">꼭</span>' : ''}${who ? ` <span class="who" title="마지막으로 고친 사람">${esc(who)}</span>` : ''}`));
       if (!s.place.user) {
         const sel = $('select', 'quiet'); sel.title = '머무는 방식';
         s.place.opts.forEach((o, k2) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = k2; op.selected = s.place.opt === k2; sel.appendChild(op); });

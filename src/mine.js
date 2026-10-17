@@ -27,10 +27,61 @@ async function gpsOf(file) {
 
 export async function renderMine(ctx) {
   const { state, user, project } = ctx;
+  if (!user && state.pr && project) return renderProject(ctx);   // 공개·링크 플랜은 로그인 없이 읽는다
   if (!user) return renderLogin(ctx);
   if (ctx.accountOpen && !state.pr) return renderAccount(ctx);
   if (!state.pr || !project) return renderList(ctx);
   return renderProject(ctx);
+}
+
+// 공유 패널 — 주인: 범위·초대·멤버 / 멤버: 나가기
+async function renderShare(ctx) {
+  const { $, store, project: p, isOwner, user, render, setState } = ctx;
+  const box = $('div', 'panel'); box.appendChild($('h2', null, '공유'));
+  const note = (el, msg, warn) => { el.innerHTML = msg ? `<b style="color:${warn ? 'var(--warn)' : 'var(--d1)'}">${esc(msg)}</b>` : ''; };
+  if (store.kind !== 'supabase') { box.appendChild($('p', 'muted', '브라우저 저장에선 공유가 안 된다 — 로그인하면 된다.')); return box; }
+  const vis = p.visibility || 'private';
+  if (isOwner) {
+    const r = $('div', 'row regions'); r.appendChild($('span', 'muted', '범위'));
+    for (const [v, label, hint] of [['private', '비공개', '나만'], ['link', '링크 초대', '초대 링크를 받은 사람만'], ['public', '공개', '누구나 보고 복사']]) {
+      const b = $('button', 'btn sm' + (vis === v ? ' primary' : ''), label); b.type = 'button'; b.title = hint;
+      b.onclick = async () => { try { await store.updateProject(p.id, { visibility: v }); render(); } catch (e) { alert(`서버 준비 전 — docs/sharing.sql 을 돌려야 한다 (${e.message || e})`); } };
+      r.appendChild(b);
+    }
+    box.appendChild(r);
+    box.appendChild($('p', 'muted', vis === 'private' ? '지금은 나만 본다.' : vis === 'link' ? '초대 링크를 받은 사람만 본다. 편집 링크면 같이 고친다.' : '누구나 보고 「내 걸로 복사」할 수 있다. 홈 「다른 사람의 플랜」에 뜬다.'));
+    if (vis !== 'private') {
+      const ir = $('div', 'row'); const msg = $('span', null, '');
+      for (const [role, label] of [['editor', '편집 링크 만들기'], ['viewer', '보기 링크 만들기']]) {
+        const b = $('button', 'btn sm', label); b.type = 'button';
+        b.onclick = async () => { try { const t = await store.createInvite(p.id, role); const url = location.href.split('#')[0] + `#join=${t}`; try { await navigator.clipboard.writeText(url); note(msg, '링크를 복사했다 — 같이 갈 사람에게 보내라'); } catch { prompt('이 링크를 보내라', url); } } catch (e) { note(msg, e.message || e, true); } };
+        ir.appendChild(b);
+      }
+      ir.appendChild(msg); box.appendChild(ir);
+      if (vis === 'public') { const pr = $('div', 'row'); const pb = $('button', 'btn sm', '공개 링크 복사'); pb.type = 'button'; const pm = $('span', null, ''); pb.onclick = async () => { const url = location.href.split('#')[0] + `#pr=${p.id}&tab=mine`; try { await navigator.clipboard.writeText(url); note(pm, '복사했다'); } catch { prompt('공개 링크', url); } }; pr.append(pb, pm); box.appendChild(pr); }
+    }
+    let members = []; try { members = await store.listMembers(p.id); } catch {}
+    if (members.length) {
+      box.appendChild($('p', null, `<b>같이 보는 사람</b> <span class="muted">${members.length}</span>`));
+      for (const m of members) {
+        const r2 = $('div', 'row'); r2.appendChild($('span', null, `${esc(m.name)} <span class="muted">· ${m.role === 'editor' ? '편집' : '보기'}</span>`));
+        const x = $('button', 'btn sm', '내보내기'); x.type = 'button'; x.onclick = async () => { if (!confirm(`${m.name}을 빼면 더는 못 본다. 뺄까?`)) return; await store.removeMember(p.id, m.userId); render(); };
+        r2.appendChild(x); box.appendChild(r2);
+      }
+    }
+  } else if (user) {
+    box.appendChild($('p', null, p.shared ? `<b>${esc(p.lastEditedBy || '주인')}</b>이 공유한 여행 · 나는 <b>${p.role === 'editor' ? '편집' : '보기'}</b> 권한` : '공개 플랜 — 복사해서 내 걸로 만들 수 있다.'));
+    const r = $('div', 'row');
+    const copy = $('button', 'btn primary', '내 걸로 복사'); copy.type = 'button';
+    copy.onclick = async () => { const n = await store.createProject({ name: `${p.name} (복사)`, city: p.city, hash: p.hash }); setState({ pr: n.id }); };
+    r.appendChild(copy);
+    if (p.shared) { const lv = $('button', 'btn sm', '나가기'); lv.type = 'button'; lv.onclick = async () => { if (!confirm('이 여행에서 나갈까?')) return; await store.removeMember(p.id, user.id); setState({ pr: null }); }; r.appendChild(lv); }
+    box.appendChild(r);
+  } else {
+    box.appendChild($('p', null, '공개 플랜이다. 로그인하면 「내 걸로 복사」할 수 있다.'));
+    const b = $('button', 'btn', '로그인'); b.type = 'button'; b.onclick = () => setState({ pr: null }); box.appendChild(b);
+  }
+  return box;
 }
 
 // 내 계정 — 프로필 · 비밀번호 · 기본 설정 · 내 데이터 · 로그아웃
@@ -120,12 +171,13 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
 }
 
 let mailSent = '';
-function renderLogin({ $, side, store, render, state: ctxState }) {
+function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
   const p = $('div', 'panel');
   p.appendChild($('h2', null, '내 여행'));
   if (store.kind === 'supabase') {
     p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 로그인하면 어느 기기에서든 같은 여행이 열린다.'));
     if (Object.keys(ctxState.p).length) p.appendChild($('p', null, '<b>지금 만든 플랜은 그대로 있다</b> — 로그인한 뒤 플랜 탭의 「저장」을 누르면 내 여행에 남는다.'));
+    if (joinPending) p.appendChild($('p', null, '<b>초대받은 여행이 있다</b> — 로그인하면 바로 열린다.'));
     if (mailSent) { p.appendChild($('p', null, `<b>${esc(mailSent)}</b> 로 로그인 링크를 보냈다. 메일의 링크를 누르면 여기로 돌아온다(스팸함도 확인).`)); side.appendChild(p); return; }
     const inp = $('input', 'text'); inp.type = 'email'; inp.placeholder = '이메일'; inp.autocomplete = 'email'; inp.style.width = '100%';
     const pw = $('input', 'text'); pw.type = 'password'; pw.placeholder = '비밀번호 (있으면)'; pw.autocomplete = 'current-password'; pw.style.width = '100%';
@@ -193,22 +245,22 @@ function renderList(ctx) {
 const planHash = st => encode({ ...st, tab: 'plan', pr: null });
 
 async function renderProject(ctx) {
-  const { state, setState, $, side, store, project: p, CITIES, render, map, INDEX, loadCity, plan, resolvePlaces, hm, setStep } = ctx;
+  const { state, setState, $, side, store, project: p, CITIES, render, map, INDEX, loadCity, plan, resolvePlaces, hm, setStep, canEdit = true, isOwner = true, saveToProject } = ctx;
   const ci = INDEX?.cities?.[p.city] || {};
   const head = $('div', 'panel'); head.style.padding = '0'; head.style.overflow = 'hidden';
   if (ci.image) { const cover = $('div', 'cover'); cover.innerHTML = `<img src="${esc(ci.image)}" alt=""><div class="cap"><b>${esc(p.name)}</b><span>${esc(CITIES[p.city] || p.city)} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}</span></div>`; head.appendChild(cover); }
   const inner = $('div', null); inner.style.padding = '12px 16px 16px'; head.appendChild(inner);
-  const back = $('button', 'btn sm', '← 목록'); back.type = 'button'; back.onclick = () => setState({ pr: null });
-  const ren = $('button', 'btn sm', '이름 바꾸기'); ren.type = 'button'; ren.onclick = async () => { const n = prompt('여행 이름', p.name); if (!n || n === p.name) return; await store.updateProject(p.id, { name: n }); render(); };
-  inner.append(back, ren);
+  const back = $('button', 'btn sm', ctx.user ? '← 목록' : '← 홈'); back.type = 'button'; back.onclick = () => setState({ pr: null, tab: ctx.user ? 'mine' : 'home' });
+  inner.append(back);
+  if (isOwner) { const ren = $('button', 'btn sm', '이름 바꾸기'); ren.type = 'button'; ren.onclick = async () => { const n = prompt('여행 이름', p.name); if (!n || n === p.name) return; await store.updateProject(p.id, { name: n }); render(); }; inner.appendChild(ren); }
+  if (p.lastEditedBy) inner.appendChild($('span', 'muted', ` 마지막 수정 ${esc(p.lastEditedBy)}`));
   const row = $('div', 'row');
   const load = $('button', 'btn primary', '이 플랜 열기'); load.type = 'button';
   load.onclick = () => { const st = decode('#' + p.hash); setStep?.(3); setState({ ...st, tab: 'plan', pr: p.id }); };
-  const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button';
-  save.onclick = async () => { await store.updateProject(p.id, { city: state.c, hash: planHash(state) }); save.textContent = '저장됨'; setTimeout(render, 600); };
-  const del = $('button', 'btn sm', '삭제'); del.type = 'button';
-  del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까? 사진도 같이 지워진다.`)) return; await store.deleteProject(p.id); setState({ pr: null }); };
-  row.append(load, save, del); inner.appendChild(row);
+  row.appendChild(load);
+  if (canEdit) { const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button'; save.onclick = async () => { try { await (saveToProject ? saveToProject(p.id) : store.updateProject(p.id, { city: state.c, hash: planHash(state) })); save.textContent = '저장됨'; setTimeout(render, 600); } catch (e) { alert(`저장 실패 — ${e.message || e}`); } }; row.appendChild(save); }
+  if (isOwner) { const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까? 사진도 같이 지워진다.`)) return; await store.deleteProject(p.id); setState({ pr: null }); }; row.appendChild(del); }
+  inner.appendChild(row);
   side.appendChild(head);
 
   // 플랜 요약 — 저장된 해시를 그 도시 데이터로 다시 계산해 읽기 전용으로 보여준다
@@ -227,7 +279,8 @@ async function renderProject(ctx) {
         day.stops.forEach(st2 => {
           d.appendChild($('div', 'leg', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`));
           const row = $('div', 'stop'); row.appendChild($('div', 't', hm(st2.arrive)));
-          const body = $('div', 'body'); body.appendChild($('div', 'name', `${esc(st2.place.name)}${st2.place.must ? ' <span class="tag">꼭</span>' : ''}`));
+          const who = p.edits?.[st2.place.id]?.by;
+          const body = $('div', 'body'); body.appendChild($('div', 'name', `${esc(st2.place.name)}${st2.place.must ? ' <span class="tag">꼭</span>' : ''}${who ? ` <span class="who">${esc(who)}</span>` : ''}`));
           body.appendChild($('div', 'muted', `${esc(st2.place.opts[st2.place.opt]?.label || '')} · ${st2.place.opts[st2.place.opt]?.min || ''}분`));
           row.appendChild(body); d.appendChild(row);
         });
@@ -237,6 +290,8 @@ async function renderProject(ctx) {
     }
     side.appendChild(sum);
   } catch (e) { side.appendChild($('div', 'panel', `<p class="muted">플랜 요약을 못 만들었다 — ${esc(e.message || e)}</p>`)); }
+  side.appendChild(await renderShare(ctx));
+  if (!canEdit) return;   // 보기만: 살 것·사진은 아래 읽기 전용으로 — 지금은 생략
 
   // 살 것
   const shop = $('div', 'panel'); shop.appendChild($('h2', null, `살 것 <span class="muted" style="font-weight:500">${p.shopping.filter(x => x.done).length}/${p.shopping.length}</span>`));

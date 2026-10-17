@@ -37,10 +37,33 @@ export class SupabaseStore {
   }
   async signOut() { await this.sb.auth.signOut(); }
 
+  async myId() { return this._uid(); }
+  // 내 것 + 초대받은 것 (공개 플랜은 여기 안 섞는다 — listPublic)
   async listProjects() {
-    const { data, error } = await this.sb.from('projects').select('*, photos(id)').order('updated_at', { ascending: false }); if (error) throw error;
+    const me = await this._uid(); if (!me) return [];
+    const mine = await this.sb.from('projects').select('*, photos(id)').eq('user_id', me).order('updated_at', { ascending: false }); if (mine.error) throw mine.error;
+    let shared = [];
+    const mem = await this.sb.from('project_members').select('project_id, role').eq('user_id', me);
+    if (!mem.error && mem.data?.length) {
+      const ids = mem.data.map(m => m.project_id);
+      const r = await this.sb.from('projects').select('*, photos(id)').in('id', ids).order('updated_at', { ascending: false });
+      if (!r.error) shared = r.data.map(x => ({ ...rowToProject(x, (x.photos || []).map(y => ({ id: y.id }))), shared: true, role: mem.data.find(m => m.project_id === x.id)?.role }));
+    }
+    return [...mine.data.map(r => rowToProject(r, (r.photos || []).map(x => ({ id: x.id })))), ...shared];
+  }
+  async listPublic(limit = 12) {
+    const { data, error } = await this.sb.from('projects').select('*, photos(id)').eq('visibility', 'public').order('updated_at', { ascending: false }).limit(limit);
+    if (error) return [];
     return data.map(r => rowToProject(r, (r.photos || []).map(x => ({ id: x.id }))));
   }
+  async listMembers(pid) { const { data, error } = await this.sb.from('project_members').select('user_id, role, name, added_at').eq('project_id', pid); if (error) throw error; return data.map(m => ({ userId: m.user_id, role: m.role, name: m.name || '이름 없음', addedAt: Date.parse(m.added_at) })); }
+  async createInvite(pid, role = 'editor') {
+    const token = crypto.randomUUID().replace(/-/g, '').slice(0, 20);
+    const { error } = await this.sb.from('project_invites').insert({ token, project_id: pid, role, created_by: await this._uid() }); if (error) throw error;
+    return token;
+  }
+  async acceptInvite(token, name) { const { data, error } = await this.sb.rpc('accept_invite', { t: token, display_name: name }); if (error) throw error; return data; }
+  async removeMember(pid, uid) { const { error } = await this.sb.from('project_members').delete().eq('project_id', pid).eq('user_id', uid); if (error) throw error; }
   async getProject(id) {
     const { data: r, error } = await this.sb.from('projects').select('*').eq('id', id).maybeSingle(); if (error) throw error; if (!r) return null;
     const { data: ph } = await this.sb.from('photos').select('*').eq('project_id', id).order('created_at');
@@ -55,7 +78,8 @@ export class SupabaseStore {
   }
   async updateProject(id, patch) {
     const row = { updated_at: new Date().toISOString() };
-    for (const k of ['name', 'city', 'hash', 'shopping', 'packing']) if (k in patch) row[k] = patch[k];
+    for (const k of ['name', 'city', 'hash', 'shopping', 'packing', 'visibility', 'edits']) if (k in patch) row[k] = patch[k];
+    if ('lastEditedBy' in patch) row.last_edited_by = patch.lastEditedBy;
     const { error } = await this.sb.from('projects').update(row).eq('id', id); if (error) throw error;
     return this.getProject(id);
   }
