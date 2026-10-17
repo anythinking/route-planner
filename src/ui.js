@@ -10,7 +10,7 @@ import { chat } from './ai.js';
 import { tagEdits } from './edits.js';
 
 // 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
-const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));
+const INDEX = await fetch('data/cities.json').then(r => r.json()).catch(() => ({ regions: [], cities: {} }));   // 홈을 그리는 데 꼭 필요한 유일한 선행 로드
 const CITIES = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.name]));
 const REGIONS = INDEX.regions;
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
@@ -25,7 +25,7 @@ const storeReady = (async () => {
   storeIsFinal = true; projectsCache = null; render();   // 준비되면 로그인 상태로 다시 그린다
 })();
 // 여행 목록은 한 번 받아 두고, 뭔가 바꿀 때만 다시 받는다 — 클릭마다 서버에 묻지 않으려고
-let projectsCache = null, publicCache = null;
+let projectsCache = null, publicCache = null, homeFetching = false;
 async function listPublicCached() { if (publicCache && Date.now() - publicCache.at < 120000) return publicCache.data; const data = await store.listPublic(12).catch(() => []); publicCache = { at: Date.now(), data }; return data; }
 async function listProjectsCached() {
   if (projectsCache && Date.now() - projectsCache.at < 60000) return projectsCache.data;
@@ -64,7 +64,8 @@ const map = createMap('map');
 let sunTime = null;   // 결과 화면의 해 시각(분) — null이면 하루 시작
 let shadowsOn = true; // 건물 그림자 (화면 상태)
 let playTimer = null;  // 하루 재생
-const PACKING = await fetch('data/packing.json').then(r => r.json()).catch(() => ({ groups: [] }));
+let PACKING = { groups: [] }; let packingLoaded = null;   // 준비물 목록은 탭에 들어갈 때 받는다
+const loadPackingList = () => packingLoaded || (packingLoaded = fetch('data/packing.json').then(r => r.json()).then(j => { PACKING = j; }).catch(() => {}));
 let packingCache = null;   // 현재 체크 상태 {id:true}
 // 체크 상태의 집: 여행을 열어 뒀고 로그인했으면 그 여행(서버), 아니면 이 브라우저
 function packKey() { return 'rp.pack.' + (state.pr || 'anon'); }
@@ -392,6 +393,19 @@ async function render() {
   // 계정 서버가 아직이면 기다리지 않고 그린다(storeReady가 끝나면 다시 그린다). 확인이 3초 넘게 안 끝나면 일단 로그아웃 상태로
   try { curUser = storeIsFinal ? await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]) : null; } catch { curUser = null; }
   if (seq !== renderSeq) return;
+  if (state.tab === 'home') {
+    lastStep = -1;
+    const sy = window.scrollY, st = side.scrollTop; side.style.minHeight = side.offsetHeight + 'px'; side.innerHTML = ''; map.clear('places'); map.clear('route');
+    const cached = projectsCache && Date.now() - projectsCache.at < 60000, pcached = publicCache && Date.now() - publicCache.at < 120000;
+    renderHome(side, cached ? projectsCache.data : [], pcached ? publicCache.data : []);
+    restoreScroll(side, sy, st);
+    // 목록이 없으면 받아서 한 번 더 — 계정 서버가 아직이면 storeReady가 어차피 다시 그리니 여기선 안 건다 (무한 루프 방지)
+    if (storeIsFinal && (!cached || !pcached) && !homeFetching) {
+      homeFetching = true;
+      Promise.all([listProjectsCached(), listPublicCached()]).finally(() => { homeFetching = false; if (seq === renderSeq && state.tab === 'home') render(); });
+    }
+    return;
+  }
   try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
@@ -410,13 +424,7 @@ async function render() {
     catch (e) { sessionStorage.removeItem('rp.join'); alert(`초대를 못 받았다 — ${e.message || e}`); }
   }
   if (join && !curUser && state.tab !== 'mine') { setState({ tab: 'mine' }); return; }
-  if (state.tab === 'home') {
-    lastStep = -1;
-    const [projects, pub] = await Promise.all([listProjectsCached(), storeIsFinal && store.listPublic ? listPublicCached() : []]);
-    if (seq !== renderSeq) return;
-    renderHome(side, projects, pub);
-    restoreScroll(side, sy, st); return;
-  }
+
   if (state.tab === 'mine') {
     lastStep = -1;
     const projects = await listProjectsCached();
@@ -433,7 +441,7 @@ async function render() {
     if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
-  if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'pack') { packingCache = await loadPacking(); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
+  if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'pack') { [packingCache] = await Promise.all([loadPacking(), loadPackingList()]); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   if (state.pr && (!curProject || curProject.id !== state.pr)) { try { curProject = await store.getProject(state.pr); } catch { curProject = null; } if (seq !== renderSeq) return; }
