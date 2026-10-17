@@ -445,6 +445,17 @@ function addUserPlace(u, day = null) {
   else if (o) { while (o.length <= activeDay) o.push([]); o[activeDay].push(id); }
   setState({ u: [...state.u, u], o });
 }
+// 날 고르기 — 4일 이하면 알약 버튼, 5일 이상이면 드롭박스. value는 ''(첫 선택지) 또는 날 번호 문자열
+function dayPicker(nDays, value, onChange, first = null) {
+  const opts = [...(first ? [['', first]] : []), ...Array.from({ length: nDays }, (_, i) => [String(i), `${i + 1}일차`])];
+  if (nDays <= 4) {
+    const w = $('span', 'row regions'); w.style.margin = '0';
+    for (const [v, l] of opts) { const b = $('button', 'btn sm' + (v === value ? ' primary' : ''), l); b.type = 'button'; b.onclick = () => { w.querySelectorAll('.btn').forEach(x => x.classList.remove('primary')); b.classList.add('primary'); w.dataset.value = v; onChange(v); }; w.appendChild(b); }
+    w.dataset.value = value; return w;
+  }
+  const sel = $('select', 'quiet'); for (const [v, l] of opts) { const o = $('option', null, l); o.value = v; o.selected = v === value; sel.appendChild(o); }
+  sel.onchange = () => onChange(sel.value); return sel;
+}
 // 검색으로 찾은 곳의 용도 — 머무는 시간이 달라진다. 역·정류장은 「경유」가 맞다
 const USES = [['see', '구경', 60], ['quick', '잠깐 들르기', 20], ['meal', '식사', 60], ['long', '오래 머물기', 120], ['via', '경유 (머물지 않음)', 5]];
 
@@ -564,7 +575,6 @@ function renderStep2(side, entering) {
   const go = $('button', 'btn primary', '경로 짜기 →'); go.type = 'button'; go.disabled = n === 0; go.onclick = () => goStep(3); go.style.marginLeft = 'auto';
   hr.appendChild(go); head.appendChild(hr);
   head.appendChild(renderSearch());
-  head.appendChild($('p', 'muted', '검색 결과의 「추가」나 아래 추천의 체크 → 활성 날짜 블록으로. 블록으로 끌어다 놓아도 된다. 안 나누면 경로 짜기 때 자동으로 나눈다.'));
   renderAiBox(head);
   side.appendChild(head);
   renderDayBlocks(side);
@@ -654,20 +664,18 @@ function renderSearch() {
       const card = $('div', 'result');
       card.appendChild($('div', null, `<b>${esc(c.name)}</b> <span class="muted">${esc(c.detail)}</span>`));
       const r = $('div', 'row');
-      const daySel = $('select', 'quiet'); daySel.title = '어느 날에';
-      const opts = [['', a.auto ? '자동 배정' : `${activeDay + 1}일차 (활성)`], ...a.days.map((_, i) => [String(i), `${i + 1}일차`])];
-      for (const [v, l] of opts) { const o = $('option', null, l); o.value = v; daySel.appendChild(o); }
+      let dayVal = a.auto ? '' : String(activeDay);
+      const daySel = dayPicker(a.days.length, dayVal, v => { dayVal = v; }, '자동');
       const useSel = $('select', 'quiet'); useSel.title = '용도';
       const isStation = /역|station|駅|정류장|bus stop|terminal|공항|airport/i.test(c.name + ' ' + c.type);
       for (const [v, l, m] of USES) { const o = $('option', null, `${l} · ${m}분`); o.value = v; o.selected = isStation ? v === 'via' : v === 'see'; useSel.appendChild(o); }
       const add = $('button', 'btn sm primary', '담기'); add.type = 'button';
-      add.onclick = () => { const min = USES.find(x => x[0] === useSel.value)[2]; results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min }, daySel.value === '' ? null : Number(daySel.value)); };
+      add.onclick = () => { const min = USES.find(x => x[0] === useSel.value)[2]; results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min }, dayVal === '' ? null : Number(dayVal)); };
       const asStart = $('button', 'btn sm', '출발점으로'); asStart.type = 'button'; asStart.title = '숙소·역처럼 하루를 시작하는 곳이면';
-      asStart.onclick = () => { results = null; query = ''; if (daySel.value === '') setState({ s: { lat: c.lat, lng: c.lng } }); else setDay(Number(daySel.value), { s: { lat: c.lat, lng: c.lng } }); };
+      asStart.onclick = () => { results = null; query = ''; if (dayVal === '') setState({ s: { lat: c.lat, lng: c.lng } }); else setDay(Number(dayVal), { s: { lat: c.lat, lng: c.lng } }); };
       r.append(daySel, useSel, add, asStart); card.appendChild(r); p.appendChild(card);
       map.circle('places', c, { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', dashed: true, title: c.name + ' (검색 결과)' });
     }
-    if (results.length) p.appendChild($('p', 'muted', '어느 날 · 어떤 용도로 담을지 고르고 「담기」. 숙소·역이면 「출발점으로」. (검색: OpenStreetMap)'));
   }
   return p;
 }
@@ -776,10 +784,10 @@ function renderStep3(side, entering) {
         up.onclick = () => { const o = layout(); [o[i][k - 1], o[i][k]] = [o[i][k], o[i][k - 1]]; commit(o); };
         const dn = $('button', 'btn sm', '↓'); dn.type = 'button'; dn.disabled = k === day.stops.length - 1;
         dn.onclick = () => { const o = layout(); [o[i][k], o[i][k + 1]] = [o[i][k + 1], o[i][k]]; commit(o); };
-        const mv = $('select'); mv.title = '다른 날로';
-        result.days.forEach((_, j) => { const op = $('option', null, `${j + 1}일차`); op.value = j; op.selected = j === i; mv.appendChild(op); });
-        const nw = $('option', null, '새 날'); nw.value = result.days.length; mv.appendChild(nw);
-        mv.onchange = () => { const o = layout(); const id = o[i].splice(k, 1)[0]; const j = Number(mv.value); (o[j] ||= []).push(id); commit(o); };
+        const moveTo = j => { const o = layout(); const id = o[i].splice(k, 1)[0]; (o[j] ||= []).push(id); commit(o); };
+        let mv;
+        if (result.days.length <= 4) { mv = $('span', 'row regions'); mv.style.margin = '0'; result.days.forEach((_, j) => { if (j === i) return; const b = $('button', 'btn sm', `→ ${j + 1}일차`); b.type = 'button'; b.onclick = () => moveTo(j); mv.appendChild(b); }); const nb = $('button', 'btn sm', '→ 새 날'); nb.type = 'button'; nb.onclick = () => moveTo(result.days.length); mv.appendChild(nb); }
+        else { mv = $('select'); mv.title = '다른 날로'; result.days.forEach((_, j) => { const op = $('option', null, `${j + 1}일차`); op.value = j; op.selected = j === i; mv.appendChild(op); }); const nw = $('option', null, '새 날'); nw.value = result.days.length; mv.appendChild(nw); mv.onchange = () => moveTo(Number(mv.value)); }
         tools.append(up, dn, mv); body.appendChild(tools);
       }
       r.appendChild(body);
