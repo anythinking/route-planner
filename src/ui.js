@@ -664,15 +664,15 @@ function renderSearch() {
       const card = $('div', 'result');
       card.appendChild($('div', null, `<b>${esc(c.name)}</b> <span class="muted">${esc(c.detail)}</span>`));
       const r = $('div', 'row');
-      let dayVal = a.auto ? '' : String(activeDay);
-      const daySel = dayPicker(a.days.length, dayVal, v => { dayVal = v; }, '자동');
+      let dayVal = String(Math.min(activeDay, a.days.length - 1));   // 항상 어느 날인가를 고른다
+      const daySel = dayPicker(a.days.length, dayVal, v => { dayVal = v; });
       const useSel = $('select', 'quiet'); useSel.title = '용도';
       const isStation = /역|station|駅|정류장|bus stop|terminal|공항|airport/i.test(c.name + ' ' + c.type);
       for (const [v, l, m] of USES) { const o = $('option', null, `${l} · ${m}분`); o.value = v; o.selected = isStation ? v === 'via' : v === 'see'; useSel.appendChild(o); }
       const add = $('button', 'btn sm primary', '담기'); add.type = 'button';
-      add.onclick = () => { const min = USES.find(x => x[0] === useSel.value)[2]; results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min }, dayVal === '' ? null : Number(dayVal)); };
+      add.onclick = () => { const min = USES.find(x => x[0] === useSel.value)[2]; results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min }, Number(dayVal)); };
       const asStart = $('button', 'btn sm', '출발점으로'); asStart.type = 'button'; asStart.title = '숙소·역처럼 하루를 시작하는 곳이면';
-      asStart.onclick = () => { results = null; query = ''; if (dayVal === '') setState({ s: { lat: c.lat, lng: c.lng } }); else setDay(Number(dayVal), { s: { lat: c.lat, lng: c.lng } }); };
+      asStart.onclick = () => { results = null; query = ''; setDay(Number(dayVal), { s: { lat: c.lat, lng: c.lng } }); };
       r.append(daySel, useSel, add, asStart); card.appendChild(r); p.appendChild(card);
       map.circle('places', c, { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', dashed: true, title: c.name + ' (검색 결과)' });
     }
