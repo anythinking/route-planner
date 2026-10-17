@@ -437,12 +437,16 @@ function togglePlace(id) {
   else { p[id] = city.places.find(x => x.id === id).default; if (o) { while (o.length <= activeDay) o.push([]); o[activeDay].push(id); } }
   setState({ p, m, o });
 }
-function addUserPlace(u) {
-  const idx = state.u.length;
+// 내 장소 추가 — day가 숫자면 그날로(직접 배정으로 굳음), null이면 직접 모드일 때 활성 날, 자동 모드면 자동
+function addUserPlace(u, day = null) {
+  const idx = state.u.length, id = `u${idx}`;
   let o = state.o ? state.o.map(d => [...d]) : null;
-  if (o) { while (o.length <= activeDay) o.push([]); o[activeDay].push(`u${idx}`); }
+  if (day != null) { o = o || makeManual(); while (o.length <= day) o.push([]); o[day].push(id); activeDay = day; }
+  else if (o) { while (o.length <= activeDay) o.push([]); o[activeDay].push(id); }
   setState({ u: [...state.u, u], o });
 }
+// 검색으로 찾은 곳의 용도 — 머무는 시간이 달라진다. 역·정류장은 「경유」가 맞다
+const USES = [['see', '구경', 60], ['quick', '잠깐 들르기', 20], ['meal', '식사', 60], ['long', '오래 머물기', 120], ['via', '경유 (머물지 않음)', 5]];
 
 // 날짜 블록 — [1일차 ▾ · 3곳] 안에 그날 갈 곳, 「+ 여기에 추가」, 「+ 하루 추가」
 function renderDayBlocks(side) {
@@ -645,15 +649,25 @@ function renderSearch() {
   if (searchErr) p.appendChild($('p', null, `<b style="color:var(--warn)">${esc(searchErr)}</b>`));
   if (results) {
     if (!results.length) p.appendChild($('p', 'muted', `「${esc(query)}」 — 이 도시 안에서 못 찾았다. 철자를 바꾸거나 지도의 빈 곳을 직접 클릭해라.`));
+    const a = assignment();
     for (const c of results) {
+      const card = $('div', 'result');
+      card.appendChild($('div', null, `<b>${esc(c.name)}</b> <span class="muted">${esc(c.detail)}</span>`));
       const r = $('div', 'row');
-      r.appendChild($('span', null, `<b>${esc(c.name)}</b> <span class="muted">${esc(c.detail)}</span>`));
-      const add = $('button', 'btn sm', '추가 · 60분'); add.type = 'button';
-      add.onclick = () => { results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min: 60 }); };
-      r.appendChild(add); p.appendChild(r);
+      const daySel = $('select', 'quiet'); daySel.title = '어느 날에';
+      const opts = [['', a.auto ? '자동 배정' : `${activeDay + 1}일차 (활성)`], ...a.days.map((_, i) => [String(i), `${i + 1}일차`])];
+      for (const [v, l] of opts) { const o = $('option', null, l); o.value = v; daySel.appendChild(o); }
+      const useSel = $('select', 'quiet'); useSel.title = '용도';
+      const isStation = /역|station|駅|정류장|bus stop|terminal|공항|airport/i.test(c.name + ' ' + c.type);
+      for (const [v, l, m] of USES) { const o = $('option', null, `${l} · ${m}분`); o.value = v; o.selected = isStation ? v === 'via' : v === 'see'; useSel.appendChild(o); }
+      const add = $('button', 'btn sm primary', '담기'); add.type = 'button';
+      add.onclick = () => { const min = USES.find(x => x[0] === useSel.value)[2]; results = null; query = ''; addUserPlace({ name: c.name.slice(0, 40), lat: c.lat, lng: c.lng, min }, daySel.value === '' ? null : Number(daySel.value)); };
+      const asStart = $('button', 'btn sm', '출발점으로'); asStart.type = 'button'; asStart.title = '숙소·역처럼 하루를 시작하는 곳이면';
+      asStart.onclick = () => { results = null; query = ''; if (daySel.value === '') setState({ s: { lat: c.lat, lng: c.lng } }); else setDay(Number(daySel.value), { s: { lat: c.lat, lng: c.lng } }); };
+      r.append(daySel, useSel, add, asStart); card.appendChild(r); p.appendChild(card);
       map.circle('places', c, { radius: 7, color: '#22201c', weight: 2, fillColor: '#fff', dashed: true, title: c.name + ' (검색 결과)' });
     }
-    if (results.length) p.appendChild($('p', 'muted', '검색: OpenStreetMap Nominatim. 추가한 장소는 「내 장소」로 들어가고 머무는 시간은 60분으로 잡힌다 — 필요하면 지도의 빈 곳을 클릭해 다른 시간으로 다시 넣어라.'));
+    if (results.length) p.appendChild($('p', 'muted', '어느 날 · 어떤 용도로 담을지 고르고 「담기」. 숙소·역이면 「출발점으로」. (검색: OpenStreetMap)'));
   }
   return p;
 }
