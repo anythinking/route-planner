@@ -164,8 +164,9 @@ let resumeDismissed = false;
 // 해 — 첫날 날짜(dt)와 시각 슬라이더로 지도 빛을 맞추고 고도·방위·일출·일몰을 보여준다. 날짜가 없으면 오늘.
 // 지도 위 「해와 그림자」 상자 — 플랜 탭에서만 보인다
 function mountSun(result, start) {
-  const host = document.getElementById('sunbox'); host.innerHTML = ''; host.hidden = false;
+  const host = document.getElementById('sunbox'); const was = host.hidden; host.innerHTML = ''; host.hidden = false;
   host.appendChild(renderSun(result, start));
+  if (was) requestAnimationFrame(() => map.resize());
 }
 function renderSun(result, start) {
   const p = $('div', 'sun');
@@ -193,7 +194,7 @@ function renderSun(result, start) {
   if (!state.dt) r1.appendChild($('span', 'muted', '(없으면 오늘)'));
   p.appendChild(r1);
   const r2 = $('div', 'row');
-  p.appendChild($('p', 'muted', '해와 그림자에 따른 뷰와 사진을 고려해보세요.'));
+  p.title = '해와 그림자에 따른 뷰와 사진을 고려해보세요';
   const sl = $('input'); sl.type = 'range'; sl.min = 0; sl.max = 1439; sl.step = 10; sl.value = t; sl.style.flex = '1';
   const out = $('span', null, '');
   const show = v => { const s2 = map.setSun(zoned(dayIdx, v), start); out.innerHTML = s2 ? `<b style="font-variant-numeric:tabular-nums">${hm(v)}</b> <span class="muted">${s2.up ? `고도 ${Math.round(s2.altitude)}° · ${dir(s2.azimuth)}쪽` : '해 진 뒤'}</span>` : hm(v); };
@@ -208,7 +209,7 @@ function renderSun(result, start) {
     playTimer = setInterval(() => { v += (to - from) / 120; if (v >= to) { v = to; clearInterval(playTimer); playTimer = null; play.textContent = '▶ 하루'; } sl.value = Math.round(v); sunTime = Math.round(v); show(sunTime); }, 100);
   };
   r2.append(sl, out, play); p.appendChild(r2); show(t);
-  if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든아워 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)}`));
+  if (sun) p.appendChild($('p', 'muted', `일출 ${fmt(sun.sunrise)} · 골든 ~${fmt(sun.goldenHourEnd)} / ${fmt(sun.goldenHour)}~ · 일몰 ${fmt(sun.sunset)}`));
   const r3 = $('div', 'row');
   const cb = $('input'); cb.type = 'checkbox'; cb.id = 'cb-shadow'; cb.checked = shadowsOn; cb.onchange = () => { shadowsOn = cb.checked; map.setShadows(shadowsOn); };
   const lab = $('label', null, '건물 그림자'); lab.htmlFor = cb.id;

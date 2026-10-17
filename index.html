@@ -46,9 +46,9 @@ input.text.big{font-size:17px;padding:12px 16px;border-radius:6px;max-width:520p
 textarea.text{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--fg);flex:1;resize:vertical;min-width:160px}
 .credits{margin-top:28px;font-size:12px}.credits a{color:inherit}
 .cover{position:relative;height:180px;color:#fff}.cover img{width:100%;height:100%;object-fit:cover;display:block}.cover .cap{position:absolute;inset:auto 0 0 0;padding:40px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7))}.cover .cap b{font-size:22px;display:block}.cover .cap span{font-size:13px;opacity:.9}
-#mapwrap{position:relative;min-height:340px}#map{position:absolute;inset:0;border:1px solid var(--line);border-radius:4px}
-#btn3d{position:absolute;top:10px;right:10px;z-index:2;background:var(--surface)}
-#sunbox{position:absolute;left:10px;right:10px;bottom:28px;z-index:2;pointer-events:none}#sunbox .sun{pointer-events:auto;max-width:560px;margin:0 auto;background:rgba(255,255,255,.93);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px}#sunbox .sun .row{margin:4px 0}#sunbox .sun p{margin:0 0 4px;font-size:12px}
+#mapwrap{position:relative;min-height:340px;display:flex;flex-direction:column;gap:8px}#map{position:relative;flex:1;min-height:0;border:1px solid var(--line);border-radius:4px}
+#btn3d{position:absolute;top:10px;right:10px;z-index:2;background:var(--surface)}#btn3d[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+#sunbox{flex:none}#sunbox .sun{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:6px 12px;font-size:13px}#sunbox .sun .row{margin:0;gap:6px 10px}#sunbox .sun p{margin:0;font-size:12px}#sunbox .sun input[type=range]{min-width:160px}
 @media (max-width:1000px){#sunbox{left:6px;right:6px;bottom:22px}}#btn3d[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 .sun input[type=range]{accent-color:var(--gold)}
 .side{min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:4px}
@@ -80,7 +80,7 @@ input.text{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--l
 .photo{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.photo img{width:96px;height:96px;object-fit:cover;border-radius:4px}.photo .body{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.photo .body input.text{width:100%}
 select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);max-width:46vw}
 .muted{color:var(--muted);font-size:13px}
-@media (max-width:1000px){html,body{height:auto}body{overflow:visible}.app{height:auto}.layout{display:flex;flex-direction:column}#mapwrap{height:60vh}.side{overflow:visible}.layout.nomap #mapwrap{display:none}}
+@media (max-width:1000px){html,body{height:auto}body{overflow:visible}.app{height:auto}.layout{display:flex;flex-direction:column}#mapwrap{height:68vh}.side{overflow:visible}.layout.nomap #mapwrap{display:none}}
 </style>
 </head>
 <body>
@@ -92,7 +92,7 @@ select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line
     <div id="who" style="margin-left:auto"></div>
   </header>
   <div class="layout">
-    <div id="mapwrap"><div id="map"></div><button type="button" id="btn3d" class="btn sm" aria-pressed="false" title="건물 높이 보기">3D</button><div id="sunbox" hidden></div></div>
+    <div id="mapwrap"><div id="sunbox" hidden></div><div id="map"><button type="button" id="btn3d" class="btn sm" aria-pressed="false" title="건물 높이 보기">3D</button></div></div>
     <aside class="side" id="side"></aside>
   </div>
 </div>
