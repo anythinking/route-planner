@@ -17,11 +17,25 @@ const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직�
 const TAB_LABEL = { home: '홈', plan: '플랜', pack: '준비물', photo: '사진', gift: '기념품', mine: '내 여행' };
 // 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
 let store = new LocalStore();
+let storeIsFinal = !SUPABASE.url || new URLSearchParams(location.search).has('local');   // ?local=1 이면 브라우저 저장으로 (개발·시험용)
 const storeReady = (async () => {
-  if (!SUPABASE.url || new URLSearchParams(location.search).has('local')) return;   // ?local=1 이면 브라우저 저장으로 (개발·시험용)
-  try { const { SupabaseStore } = await import('./store-supabase.js'); store = new SupabaseStore(); store.onChange = () => render(); }
+  if (storeIsFinal) return;
+  try { const { SupabaseStore } = await import('./store-supabase.js'); store = new SupabaseStore(); store.onChange = () => { projectsCache = null; render(); }; }
   catch (e) { console.warn('계정 서버 연결 실패 — 브라우저 저장으로 간다', e); }
+  storeIsFinal = true; projectsCache = null; render();   // 준비되면 로그인 상태로 다시 그린다
 })();
+// 여행 목록은 한 번 받아 두고, 뭔가 바꿀 때만 다시 받는다 — 클릭마다 서버에 묻지 않으려고
+let projectsCache = null, publicCache = null;
+async function listPublicCached() { if (publicCache && Date.now() - publicCache.at < 120000) return publicCache.data; const data = await store.listPublic(12).catch(() => []); publicCache = { at: Date.now(), data }; return data; }
+async function listProjectsCached() {
+  if (projectsCache && Date.now() - projectsCache.at < 60000) return projectsCache.data;
+  const data = curUser ? await store.listProjects().catch(() => []) : [];
+  projectsCache = { at: Date.now(), data }; return data;
+}
+const MUTATING = /^(create|update|delete|add|remove|accept|signIn|signOut)/;
+function withInvalidation(s) {   // 바꾸는 메서드가 끝나면 캐시를 비운다
+  return new Proxy(s, { get(t, k) { const v = t[k]; if (typeof v !== 'function' || !MUTATING.test(String(k))) return typeof v === 'function' ? v.bind(t) : v; return async (...a) => { const r = await v.apply(t, a); projectsCache = null; curProject = null; return r; }; } });
+}
 const DAY_COLORS = ['--d1','--d2','--d3','--d4','--d5','--d6','--d7','--d8','--d9','--d10'];
 const $ = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
@@ -375,9 +389,8 @@ async function render() {
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
   document.querySelector('.layout').classList.toggle('nomap', !(state.tab === 'plan' || (state.tab === 'mine' && state.pr)));   // 지도는 플랜, 그리고 여행을 열어 둔 내 여행에서
   document.getElementById('sunbox').hidden = state.tab !== 'plan';
-  await storeReady;
-  // 계정 확인이 3초 넘게 안 끝나면(다른 탭의 잠금 등) 일단 로그아웃 상태로 그리고, 세션이 오면 onChange가 다시 그린다
-  try { curUser = await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]); } catch { curUser = null; }
+  // 계정 서버가 아직이면 기다리지 않고 그린다(storeReady가 끝나면 다시 그린다). 확인이 3초 넘게 안 끝나면 일단 로그아웃 상태로
+  try { curUser = storeIsFinal ? await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]) : null; } catch { curUser = null; }
   if (seq !== renderSeq) return;
   try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
@@ -399,14 +412,14 @@ async function render() {
   if (join && !curUser && state.tab !== 'mine') { setState({ tab: 'mine' }); return; }
   if (state.tab === 'home') {
     lastStep = -1;
-    const [projects, pub] = await Promise.all([curUser ? store.listProjects().catch(() => []) : [], store.listPublic ? store.listPublic(12).catch(() => []) : []]);
+    const [projects, pub] = await Promise.all([listProjectsCached(), storeIsFinal && store.listPublic ? listPublicCached() : []]);
     if (seq !== renderSeq) return;
     renderHome(side, projects, pub);
     restoreScroll(side, sy, st); return;
   }
   if (state.tab === 'mine') {
     lastStep = -1;
-    const projects = curUser ? await store.listProjects() : [];
+    const projects = await listProjectsCached();
     if (seq !== renderSeq) return;
     let project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     let canEdit = false, isOwner = false;
@@ -414,7 +427,7 @@ async function render() {
     if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
     if (project && curUser) { isOwner = project.ownerId === curUser.id; canEdit = isOwner || project.role === 'editor'; }
     curProject = project;
-    await renderMine({ state, setState, city, $, side, store, user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join });
+    await renderMine({ state, setState, city, $, side, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join });
     bindMapClick(null); drawStart();
     if (seq !== renderSeq) return;
     if (state.pr) accountOpen = false;
