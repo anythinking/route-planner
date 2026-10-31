@@ -10,7 +10,7 @@ import { chat } from './ai.js';
 import { tagEdits } from './edits.js';
 
 // 도시 색인 (data/cities.json): 지역 → 도시. CITIES는 {id: 이름} 평면 지도.
-const INDEX = await fetch('data/cities.json', { credentials: 'same-origin', mode: 'cors' }).then(r => r.json()).catch(() => ({ regions: [], cities: {} }));   // 홈을 그리는 데 꼭 필요한 유일한 선행 로드
+const INDEX = await fetch('data/cities.json' + (new URL(import.meta.url).search || ''), { credentials: 'same-origin', mode: 'cors' }).then(r => r.json()).catch(() => ({ regions: [], cities: {} }));   // 홈을 그리는 데 꼭 필요한 유일한 선행 로드
 const CITIES = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.name]));
 const REGIONS = INDEX.regions;
 const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };

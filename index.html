@@ -7,8 +7,11 @@
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="modulepreload" href="src/ui.js?v=20261101b"><link rel="modulepreload" href="src/state.js"><link rel="modulepreload" href="src/engine.js"><link rel="modulepreload" href="src/travel.js"><link rel="modulepreload" href="src/html.js"><link rel="modulepreload" href="src/map.js"><link rel="modulepreload" href="src/shadow.js"><link rel="modulepreload" href="src/mine.js"><link rel="modulepreload" href="src/store.js"><link rel="modulepreload" href="src/store-map.js"><link rel="modulepreload" href="src/store-supabase.js"><link rel="modulepreload" href="src/search.js"><link rel="modulepreload" href="src/config.js"><link rel="modulepreload" href="src/ai.js"><link rel="modulepreload" href="src/edits.js">
-<link rel="preload" href="data/cities.json" as="fetch" crossorigin>
+<!-- modules -->
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202610311528","./src/config.js":"./src/config.js?v=202610311528","./src/edits.js":"./src/edits.js?v=202610311528","./src/engine.js":"./src/engine.js?v=202610311528","./src/html.js":"./src/html.js?v=202610311528","./src/map.js":"./src/map.js?v=202610311528","./src/mine.js":"./src/mine.js?v=202610311528","./src/search.js":"./src/search.js?v=202610311528","./src/shadow.js":"./src/shadow.js?v=202610311528","./src/state.js":"./src/state.js?v=202610311528","./src/store-map.js":"./src/store-map.js?v=202610311528","./src/store-supabase.js":"./src/store-supabase.js?v=202610311528","./src/store.js":"./src/store.js?v=202610311528","./src/travel.js":"./src/travel.js?v=202610311528","./src/ui.js":"./src/ui.js?v=202610311528"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202610311528"><link rel="modulepreload" href="src/config.js?v=202610311528"><link rel="modulepreload" href="src/edits.js?v=202610311528"><link rel="modulepreload" href="src/engine.js?v=202610311528"><link rel="modulepreload" href="src/html.js?v=202610311528"><link rel="modulepreload" href="src/map.js?v=202610311528"><link rel="modulepreload" href="src/mine.js?v=202610311528"><link rel="modulepreload" href="src/search.js?v=202610311528"><link rel="modulepreload" href="src/shadow.js?v=202610311528"><link rel="modulepreload" href="src/state.js?v=202610311528"><link rel="modulepreload" href="src/store-map.js?v=202610311528"><link rel="modulepreload" href="src/store-supabase.js?v=202610311528"><link rel="modulepreload" href="src/store.js?v=202610311528"><link rel="modulepreload" href="src/travel.js?v=202610311528"><link rel="modulepreload" href="src/ui.js?v=202610311528">
+<link rel="preload" href="data/cities.json?v=202610311528" as="fetch" crossorigin>
+<!-- /modules -->
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
 <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -78,8 +81,8 @@ body.v2 :focus-visible{outline:2px solid var(--d1);outline-offset:2px}
 .daycfgbox>summary{list-style:none;cursor:pointer;font-size:12px;font-weight:700;opacity:.9}.daycfgbox>summary::-webkit-details-marker{display:none}
 .daycfgbox[open]{position:absolute;z-index:4}.daycfgbox[open]>.daycfg{background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px;box-shadow:0 8px 24px rgba(28,32,38,.12)}
 .line ol{list-style:none;margin:0;padding:6px 14px 2px}
-.line li{display:grid;grid-template-columns:52px 18px 1fr;align-items:start;column-gap:10px}
-.line li{background:linear-gradient(color-mix(in srgb,var(--c) 40%,transparent),color-mix(in srgb,var(--c) 40%,transparent)) no-repeat 70px 0/4px 100%}
+.line li{display:grid;grid-template-columns:62px 18px 1fr;align-items:start;column-gap:10px}
+.line li{background:linear-gradient(color-mix(in srgb,var(--c) 40%,transparent),color-mix(in srgb,var(--c) 40%,transparent)) no-repeat 80px 0/4px 100%}
 .line li.leg{min-height:24px;align-items:center}.line li.leg select{grid-column:3;justify-self:start;font-size:12.5px;width:auto;border-bottom:0;color:var(--faint)}
 .line li.stn{padding:2px 0;cursor:grab}.line li.stn time{font-size:20px;font-weight:800;line-height:1.3;text-align:right;letter-spacing:-.02em}
 .line li.stn .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:4px solid var(--c);margin-top:5px;justify-self:center}
@@ -129,6 +132,29 @@ input.text{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--l
 select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);max-width:46vw}
 .muted{color:var(--muted);font-size:13px}
 @media (max-width:1000px){html,body{height:auto}body{overflow:visible}.app{height:auto}.layout{display:flex;flex-direction:column}#mapwrap{height:68vh}.side{overflow:visible}.layout.nomap #mapwrap{display:none}}
+
+/* 글자 크기 한 단계 위로 (2026-11-01) */
+body.v2{font-size:16px}
+body.v2 h1{font-size:23px}
+body.v2 .tabs button{font-size:16px;padding:9px 16px}
+body.v2 .muted{font-size:14px}
+body.v2 .btn{font-size:15px}body.v2 .btn.sm{font-size:13.5px;padding:3px 10px}
+body.v2 select{font-size:14px}body.v2 select.quiet{font-size:14.5px}
+body.v2 input.text{font-size:15.5px}
+body.v2 .panel h2{font-size:20px}body.v2 .panel p{font-size:15px}
+body.v2 .item b{font-size:16.5px}body.v2 .item span{font-size:15px}body.v2 .item span.muted{font-size:14px}
+body.v2 .row.check label{font-size:16px}
+body.v2 details.panel>summary{font-size:16.5px}
+body.v2 .v2title h2{font-size:30px}
+body.v2 .line>header b{font-size:18px}body.v2 .line>header span{font-size:14px}
+body.v2 .line li.stn time{font-size:22px}body.v2 .line .nm{font-size:17.5px}body.v2 .line .meta{font-size:14px}body.v2 .line li.leg select{font-size:13.5px}
+body.v2 .addhere{font-size:14.5px}
+body.v2 .chip{font-size:15px}
+body.v2 .guidenav a{font-size:15.5px}
+body.v2 .card .cap b{font-size:18px}body.v2 .card .cap span{font-size:14px}
+body.v2 .hero h2{font-size:34px}body.v2 .hero p{font-size:16.5px}
+body.v2 .st span{font-size:13px}body.v2 .mk span{font-size:12px}
+body.v2 #sunbox .sun{font-size:14px}
 </style>
 </head>
 <body class="v2">
@@ -143,6 +169,6 @@ select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=20261101b"></script>
+<script type="module" src="src/ui.js?v=202610311528"></script>
 </body>
 </html>
