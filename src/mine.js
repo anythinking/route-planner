@@ -33,6 +33,8 @@ async function gpsOf(file) {
   catch { return null; }
 }
 
+const tlImport = { busy: false, text: '', el: null };   // 타임라인 가져오기 진행 — render를 넘어 산다
+
 export async function renderMine(ctx) {
   const { state, user, project } = ctx;
   if (!user && state.pr && project) return renderProject(ctx);   // 공개·링크 플랜은 로그인 없이 읽는다
@@ -236,32 +238,35 @@ function renderList(ctx) {
   // 구글 지도 타임라인 → 실제로 다닌 여행. 파일은 이 브라우저 안에서만 읽는다
   const tl = $('button', 'btn', '구글 타임라인 가져오기'); tl.type = 'button';
   const file = $('input'); file.type = 'file'; file.accept = '.json,application/json'; file.hidden = true; file.id = 'timeline-file';
-  const msg = $('p', 'muted', '');
+  // 진행 글자는 화면 밖에 둔다 — 파일 창에서 돌아오면 로그인 확인이 화면을 다시 그려, 옛 글자 칸에 쓰면 안 보였다
+  const msg = $('p', 'muted', esc(tlImport.text)); tlImport.el = msg; tl.disabled = tlImport.busy;
+  const say = t => { tlImport.text = t; if (tlImport.el) tlImport.el.textContent = t; };
   tl.onclick = () => file.click();
   file.onchange = async () => {
-    const f = file.files[0]; if (!f) return;
+    const f = file.files[0]; if (!f || tlImport.busy) return;
     try {
-      tl.disabled = true; msg.textContent = '타임라인을 읽고 있어요…';
+      tlImport.busy = tl.disabled = true; say('타임라인을 읽고 있어요…');
       const visits = parseVisits(JSON.parse(await f.text()));
       const idx = ctx.INDEX; const cityData = {};
       for (const id of Object.keys(idx.cities)) { try { cityData[id] = await ctx.loadCity(id); } catch {} }
       const trips = buildTrips(visits, idx, cityData);
-      if (!trips.length) { msg.textContent = '지원하는 도시(런던·파리·도쿄·오사카·교토·로마·바르셀로나)에 머문 기록을 못 찾았어요.'; tl.disabled = false; return; }
+      if (!trips.length) { tlImport.busy = false; say('지원하는 도시(런던·파리·도쿄·오사카·교토·로마·바르셀로나)에 머문 기록을 못 찾았어요.'); render(); return; }
       // 랜드마크에 안 맞은 곳은 지도 서비스로 이름을 붙인다 (1초에 하나)
       const named = trips.flatMap(t => t.u);
       for (const [k, u] of named.entries()) {
-        msg.textContent = `이름 없는 곳에 이름 붙이는 중 ${k + 1}/${named.length}`;
+        say(`이름 없는 곳에 이름 붙이는 중 ${k + 1}/${named.length} — 이 탭을 닫지 마세요`);
         u.name = await reverseName(u) || `${u.at.slice(11)} 머문 곳`;
         if (k < named.length - 1) await new Promise(r => setTimeout(r, 1100));
       }
       const md = d => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
       const legHashes = trips.sort((x, y) => x.dt.localeCompare(y.dt)).map(t => encode({ ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ name, lat, lng, min }) => ({ name: name.replace(/[~|,]/g, ' ').slice(0, 40), lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt, tab: 'plan' }));
       const first = trips[0], last = trips[trips.length - 1];
+      say('계정에 저장하는 중…');
       const pr = await store.createProject({ name: `${trips.map(t => CITIES[t.city]).join('·')} ${md(first.dates[0])}–${md(last.dates[last.dates.length - 1])} (실제 동선)`, city: first.city, hash: legHashes.join('\n') });
       const lastId = pr.id;
-      msg.textContent = `${trips.map(t => `${CITIES[t.city]} ${t.d}일`).join(' → ')} — 여행 하나로 만들었어요.`;
-      setTimeout(() => setState({ pr: lastId }), 900);
-    } catch (e) { msg.textContent = `읽지 못했어요 — 구글 지도 앱의 「타임라인 내보내기」 JSON인지 확인해 주세요. (${e.message || e})`; tl.disabled = false; }
+      tlImport.busy = false; say('');
+      setState({ pr: lastId });
+    } catch (e) { console.error(e); tlImport.busy = false; say(`가져오지 못했어요 — ${e.message || e}`); render(); }
   };
   row.append(nw, tl, file); head.appendChild(row); head.appendChild(msg);
   head.appendChild($('p', 'muted', '타임라인 파일은 구글 지도 앱 → 설정 → 위치 및 개인정보 → 타임라인 내보내기에서 받아요. 파일은 이 브라우저 안에서만 읽고, 만들어진 플랜만 저장돼요.'));
