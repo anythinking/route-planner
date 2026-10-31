@@ -1,7 +1,8 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
 export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null };
-export const TABS = ['home', 'plan', 'pack', 'photo', 'gift', 'mine'];   // 홈 · 플랜 · 준비물 · 사진 · 기념품 · 내 여행
+export const TABS = ['home', 'plan', 'guide', 'mine'];   // 홈 · 플랜 · 가이드(준비물·사진·기념품) · 내 여행
+const OLD_TABS = { pack: 'guide', photo: 'guide', gift: 'guide' };   // 옛 링크
 const ID = /^[a-z0-9_]+$/, MODES = ['walk', 'metro', 'taxi'];
 
 export function encode(st) {
@@ -65,7 +66,8 @@ export function decode(hash) {
     const days = q.get('o').split('|').map(d => d.split(',').filter(id => ID.test(id)));   // 빈 날도 자리로 남긴다
     st.o = days.some(d => d.length) ? days : null;
   }
-  if (TABS.includes(q.get('tab'))) st.tab = q.get('tab');
+  const tab = OLD_TABS[q.get('tab')] || q.get('tab');
+  if (TABS.includes(tab)) st.tab = tab;
   if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
   if (/^\d{4}-\d{2}-\d{2}$/.test(q.get('dt') || '') && !Number.isNaN(Date.parse(q.get('dt')))) st.dt = q.get('dt');
   if (q.get('ds')) {

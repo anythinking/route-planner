@@ -80,10 +80,11 @@ test('o: 빈 날·잘못된 id는 버리고, 비면 null', () => {
 
 test('tab: 기본은 plan이고 해시에 안 쓴다, 모르는 값은 plan으로', () => {
   assert.equal(decode('').tab, 'plan');
-  assert.equal(decode('#tab=gift').tab, 'gift');
+  assert.equal(decode('#tab=guide').tab, 'guide');
+  assert.equal(decode('#tab=gift').tab, 'guide');   // 옛 링크(준비물·사진·기념품)는 가이드로
   assert.equal(decode('#tab=nope').tab, 'plan');
   assert.ok(!encode({ ...DEFAULTS }).includes('tab='));
-  assert.ok(encode({ ...DEFAULTS, tab: 'photo' }).includes('tab=photo'));
+  assert.ok(encode({ ...DEFAULTS, tab: 'guide' }).includes('tab=guide'));
 });
 
 test('pr: 열어 둔 여행 id — 영숫자만, 기본은 없음', () => {
