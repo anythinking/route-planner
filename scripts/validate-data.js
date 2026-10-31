@@ -1,15 +1,14 @@
 // data/*.json 스키마·좌표·고유성 검사. 실패하면 exit 1.
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 const INDEX = JSON.parse(readFileSync('data/cities.json', 'utf8'));
 const BBOX = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.bbox])); // latMin,latMax,lngMin,lngMax
 let bad = 0;
 const fail = (f, m) => { console.error(`✗ ${f}: ${m}`); bad++; };
-const files = readdirSync('data').filter(f => f.endsWith('.json') && f !== 'cities.json');
-// 색인 ↔ 파일 대조: 색인의 도시마다 파일이 있고, 지역 목록의 도시가 색인에 있어야 한다
-for (const id of Object.keys(INDEX.cities)) if (!files.includes(`${id}.json`)) fail('cities.json', `${id} 파일 없음`);
+// 도시 파일은 색인에 있는 것만 — packing.json 같은 다른 데이터는 도시가 아니다
+const files = Object.keys(INDEX.cities).map(id => `${id}.json`);
+for (const f of files) if (!existsSync(`data/${f}`)) fail(f, '파일 없음');
 for (const r of INDEX.regions) for (const id of r.cities) if (!INDEX.cities[id]) fail('cities.json', `지역 ${r.id}의 ${id}가 cities에 없음`);
-if (!files.length) fail('data/', '파일 없음');
-for (const f of files) {
+for (const f of files.filter(f => existsSync(`data/${f}`))) {
   const c = JSON.parse(readFileSync(`data/${f}`, 'utf8'));
   for (const k of ['city', 'name', 'center', 'places']) if (!(k in c)) fail(f, `${k} 없음`);
   if (c.city !== f.replace('.json', '')) fail(f, `city(${c.city})와 파일명 불일치`);

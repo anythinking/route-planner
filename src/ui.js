@@ -57,7 +57,7 @@ async function saveToProject(pid) {
 }
 // 초대 링크(#join=토큰)로 들어온 경우
 function pendingJoin() { const m = location.hash.match(/[#&]join=([A-Za-z0-9]+)/); if (m) { try { sessionStorage.setItem('rp.join', m[1]); } catch {} history.replaceState(null, '', location.hash.replace(/[#&]join=[A-Za-z0-9]+/, '')); } try { return sessionStorage.getItem('rp.join'); } catch { return null; } }
-export let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
+let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
 const cache = {};
 // 지도: MapLibre + OpenFreeMap 컬러 벡터 타일(키 없음) — 건물 높이(3D)와 해 위치(빛)를 쓴다. src/map.js 참고
 const map = createMap('map');
@@ -111,7 +111,6 @@ function updatePackCounts(side) {
 document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
 export function setState(patch) {
-  if ('c' in patch && patch.c !== state.c) regionOpen = null;
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
   state = { ...state, ...patch };
   history.replaceState(null, '', '#' + encode(state));
@@ -185,7 +184,6 @@ function renderSettings(side) {   // 기본값(시간·이동·출발점) + 해�
   side.appendChild(d);
 }
 let settingsOpen = !Object.keys(state.p).length && !state.u.length;   // 공유 링크로 결과에 바로 오면 접어 둔다
-let regionOpen = null;   // 설정에서 펼친 지역 (화면 상태)
 let resumeDismissed = false;
 
 // 해 — 첫날 날짜(dt)와 시각 슬라이더로 지도 빛을 맞추고 고도·방위·일출·일몰을 보여준다. 날짜가 없으면 오늘.
@@ -257,7 +255,7 @@ function renderHome(side, projects, pub = []) {
   sr.appendChild(inp); hero.appendChild(sr);
   side.appendChild(hero);
 
-  const openCity = id => { regionOpen = null; step = 2; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
+  const openCity = id => { step = 2; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
   for (const r of REGIONS) {
     const sec = $('section', 'region'); sec.dataset.region = r.id;
     sec.appendChild($('h3', null, esc(r.name)));
@@ -316,20 +314,6 @@ function applyHomeFilter(side) {
   side.querySelectorAll('section[data-region]').forEach(sec => { sec.hidden = !!q && ![...sec.querySelectorAll('.card')].some(c => !c.hidden); });
 }
 
-// 돌아온 사람에게 마지막 여행을 이어서 열어 준다 — 플랜이 비어 있고 여행을 안 열었을 때만
-async function renderResume(side) {
-  if (resumeDismissed || !curUser || state.pr || Object.keys(state.p).length || state.u.length) return;
-  const lastPr = curUser.prefs?.lastPr; if (!lastPr) return;
-  let p = null; try { p = await store.getProject(lastPr); } catch {}
-  if (!p) return;
-  const box = $('div', 'panel'); box.style.background = 'var(--gold-soft)';
-  box.appendChild($('p', null, `<b>최근 여행 「${esc(p.name)}」</b> <span class="muted">· ${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length}</span>`));
-  const row = $('div', 'row');
-  const go = $('button', 'btn primary', '이어서 하기'); go.type = 'button';
-  go.onclick = () => { const st = decode('#' + p.hash); step = 3; setState({ ...st, tab: 'plan', pr: p.id }); };
-  const no = $('button', 'btn sm', '새로 시작'); no.type = 'button'; no.onclick = () => { resumeDismissed = true; render(); };
-  row.append(go, no); box.appendChild(row); side.appendChild(box);
-}
 
 // 지도 클릭: 출발점 찍기가 켜져 있으면 그게 우선, 아니면 단계별 동작
 function bindMapClick(fallback) {
@@ -584,7 +568,6 @@ function applyFilter(side) {
   side.querySelectorAll('details.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); if (q && !g.hidden) g.open = true; });
 }
 
-let pickTab = 'rec';   // 가고 싶은 곳 상자의 탭: rec(추천) | search(검색)
 let aiMsgs = [], aiBusy = false, aiOpen = false, aiPending = null;   // AI 대화 (화면 상태)
 
 // AI에게 말하기 — "미술관 위주로 느긋하게 3일" 같은 말을 플랜 상태로 바꿔 준다. 로그인 필요(서버 함수가 토큰을 본다)
@@ -643,10 +626,8 @@ function renderStep2(side, entering) {
   const box = $('div', 'panel pick');
   const th = $('div', 'row');
   th.appendChild($('h2', null, '가고 싶은 곳'));
-  const tabs = $('div', 'steps');
-  th.appendChild(tabs); box.appendChild(th);
-  if (pickTab === 'search') box.appendChild($('p', 'muted', '검색창은 위에 있다 — 맨 위 상자의 「장소 이름」 칸.'));
-  else {
+  box.appendChild(th);
+  {
     const f = $('input', 'text'); f.type = 'search'; f.placeholder = '목록 거르기'; f.value = query; f.oninput = () => { query = f.value; applyFilter(box); };
     box.appendChild(f);
     for (const w of [1, 2, 3]) {

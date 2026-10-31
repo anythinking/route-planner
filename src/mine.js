@@ -2,7 +2,6 @@
 import { esc } from './html.js';
 import { decode, encode } from './state.js';
 
-const guard = (fn, render) => async (...a) => { try { await fn(...a); } catch (e) { alert(`저장 실패 — ${e.message || e}`); render(); } };
 // 크게 보기 — 화면 덮는 한 장
 function lightbox(src, caption) {
   const o = document.createElement('div'); o.className = 'lightbox';

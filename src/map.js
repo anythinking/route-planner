@@ -46,7 +46,6 @@ function buildMap(containerId) {
     updateShadows();
   });
   map.on('error', e => console.warn('지도 오류', e?.error?.message || e));
-  window.__algoMap = map;   // 디버그용
   map.on('click', e => { if (clickFn) clickFn({ latlng: { lat: e.lngLat.lat, lng: e.lngLat.lng } }); });
   const pushLines = g => whenReady(() => map.getSource('lines-' + g)?.setData({ type: 'FeatureCollection', features: lines[g] }));
 

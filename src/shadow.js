@@ -11,4 +11,3 @@ export function shadowPolygons(ring, h, sun, lat0, maxLen = 400) {
   for (let i = 0; i < ring.length - 1; i++) out.push([[ring[i], ring[i + 1], moved[i + 1], moved[i], ring[i]]]);
   return out;
 }
-export const shadowLength = (h, altitudeDeg) => altitudeDeg > 0 ? h / Math.tan(altitudeDeg * Math.PI / 180) : Infinity;
