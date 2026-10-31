@@ -36,6 +36,15 @@ const MUTATING = /^(create|update|delete|add|remove|accept|signIn|signOut)/;
 function withInvalidation(s) {   // 바꾸는 메서드가 끝나면 캐시를 비운다
   return new Proxy(s, { get(t, k) { const v = t[k]; if (typeof v !== 'function' || !MUTATING.test(String(k))) return typeof v === 'function' ? v.bind(t) : v; return async (...a) => { const r = await v.apply(t, a); projectsCache = null; curProject = null; return r; }; } });
 }
+// 새 화면 시안 — 주소에 ?ui=v2 가 있으면 플랜을 「노선도」 한 화면으로 그린다
+const V2 = new URLSearchParams(location.search).get('ui') === 'v2';
+if (V2) {
+  document.body.classList.add('v2');
+  const f = document.createElement('link'); f.rel = 'stylesheet';
+  f.href = 'https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css';
+  document.head.appendChild(f);
+}
+let sunOpen = false;   // v2: 지도 귀퉁이 ☀로 여닫는다
 const DAY_COLORS = ['--d1','--d2','--d3','--d4','--d5','--d6','--d7','--d8','--d9','--d10'];
 const $ = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
@@ -108,6 +117,7 @@ function updatePackCounts(side) {
   const bar = side.querySelector('.bar i'); if (bar) bar.style.width = `${total ? Math.round(n / total * 100) : 0}%`;
   side.querySelectorAll('details.group').forEach((d, i) => { const g = PACKING.groups[i]; const m = d.querySelector('summary .muted'); if (g && m) m.textContent = `${g.items.filter(([id]) => done[id]).length}/${g.items.length}`; });
 }
+document.getElementById('btnsun').onclick = () => { sunOpen = !sunOpen; document.getElementById('btnsun').setAttribute('aria-pressed', sunOpen); render(); };
 document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
 export function setState(patch) {
@@ -142,7 +152,7 @@ function renderTabs() {
   if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => { accountOpen = true; setState({ tab: 'mine', pr: null }); }; who.appendChild(b); }
   else { const b = $('button', 'btn sm', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   const sub = document.getElementById('steps'); sub.innerHTML = '';
-  if (state.tab !== 'plan') return;
+  if (state.tab !== 'plan' || V2) return;
   [[2, '장소 고르기'], [3, '결과']].forEach(([n, label]) => {
     const b = $('button', null, label); b.type = 'button';
     b.setAttribute('aria-pressed', step === n); b.onclick = () => goStep(n);
@@ -373,7 +383,8 @@ async function render() {
   }
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
   document.querySelector('.layout').classList.toggle('nomap', !(state.tab === 'plan' || (state.tab === 'mine' && state.pr)));   // 지도는 플랜, 그리고 여행을 열어 둔 내 여행에서
-  document.getElementById('sunbox').hidden = state.tab !== 'plan';
+  document.getElementById('sunbox').hidden = state.tab !== 'plan' || (V2 && !sunOpen);
+  document.getElementById('btnsun').hidden = !(V2 && state.tab === 'plan');
   // 계정 서버가 아직이면 기다리지 않고 그린다(storeReady가 끝나면 다시 그린다). 확인이 3초 넘게 안 끝나면 일단 로그아웃 상태로
   try { curUser = storeIsFinal ? await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]) : null; } catch { curUser = null; }
   if (seq !== renderSeq) return;
@@ -431,6 +442,7 @@ async function render() {
   if (state.pr && (!curProject || curProject.id !== state.pr)) { try { curProject = await store.getProject(state.pr); } catch { curProject = null; } if (seq !== renderSeq) return; }
   if (!state.pr) curProject = null;
   renderSettings(side);
+  if (V2) { side.querySelector('.settings')?.remove(); renderPlanV2(side, entering); restoreScroll(side, sy, st); return; }
   if (step === 2) { renderStep2(side, entering); mountSun({ days: Array.from({ length: state.d }, () => ({ stops: [] })) }, state.s || { lat: city.center[0], lng: city.center[1] }); }
   if (step === 3) renderStep3(side, entering);
   restoreScroll(side, sy, st);
@@ -517,18 +529,7 @@ function renderDayBlocks(side) {
     // 끌어다 놓기: 추천 목록·다른 날의 장소를 이 블록에 떨어뜨리면 이 날로
     d.ondragover = ev => { ev.preventDefault(); d.classList.add('over'); }; d.ondragleave = () => d.classList.remove('over');
     d.ondrop = ev => { ev.preventDefault(); d.classList.remove('over'); const id = ev.dataTransfer.getData('text/place'); if (id) dropToDay(id, i); };
-    // 이 날만 다르게 — 시간·이동·출발점
-    const ov = state.ds?.[i] || {}; const on = Object.keys(ov).length > 0;
-    const cfg = $('div', 'row regions daycfg');
-    const sw = $('input'); sw.type = 'checkbox'; sw.id = `dcfg-${i}`; sw.checked = on; sw.onchange = () => { if (sw.checked) setDay(i, { t: state.t, e: state.e }); else setDay(i, { t: null, e: null, v: null, s: null }); };
-    const swl = $('label', 'muted', '이 날만 다르게'); swl.htmlFor = sw.id; cfg.append(sw, swl);
-    if (on) {
-      const t0 = ov.t ?? state.t, e0 = ov.e ?? state.e;
-      cfg.append(stepper(t0, dd => setDay(i, { t: Math.max(0, Math.min(e0 - 60, t0 + dd * 30)) }), hm), $('span', 'muted', '~'), stepper(e0, dd => setDay(i, { e: Math.max(t0 + 60, Math.min(1440, e0 + dd * 30)) }), hm));
-      for (const [v, label] of [['transit', '걷기+지하철'], ['taxi', '택시']]) { const b = $('button', 'btn sm' + ((ov.v || state.v) === v ? ' primary' : ''), label); b.type = 'button'; b.onclick = () => setDay(i, { v }); cfg.appendChild(b); }
-      const ps = $('button', 'btn sm' + (pickDayStart === i ? ' primary' : ''), pickDayStart === i ? '지도를 클릭…' : (ov.s ? '출발점 옮기기' : '이 날 출발점')); ps.type = 'button'; ps.onclick = () => { pickDayStart = pickDayStart === i ? null : i; render(); }; cfg.appendChild(ps);
-      if (ov.s) { const c = $('button', 'btn sm', '출발점 지우기'); c.type = 'button'; c.onclick = () => setDay(i, { s: null }); cfg.appendChild(c); }
-    }
+    const cfg = renderDayCfg(i);
     d.appendChild(cfg);
     if (!ids.length) d.appendChild($('p', 'muted', '아직 없다. 아래에서 체크하거나 여기로 끌어다 놓아라.'));
     for (const id of ids) {
@@ -548,6 +549,21 @@ function renderDayBlocks(side) {
   if (!a.auto) { const auto = $('button', 'btn sm', '자동으로 다시 나누기'); auto.type = 'button'; auto.onclick = () => setState({ o: null }); r.appendChild(auto); }
   if (a.dropped.length) r.appendChild($('span', 'muted', `예산을 넘겨 빠진 곳 ${a.dropped.length}: ${a.dropped.map(id => esc(byId.get(id)?.name || id)).join(', ')}`));
   wrap.appendChild(r); side.appendChild(wrap);
+}
+function renderDayCfg(i) {
+  // 이 날만 다르게 — 시간·이동·출발점
+  const ov = state.ds?.[i] || {}; const on = Object.keys(ov).length > 0;
+  const cfg = $('div', 'row regions daycfg');
+  const sw = $('input'); sw.type = 'checkbox'; sw.id = `dcfg-${i}`; sw.checked = on; sw.onchange = () => { if (sw.checked) setDay(i, { t: state.t, e: state.e }); else setDay(i, { t: null, e: null, v: null, s: null }); };
+  const swl = $('label', 'muted', '이 날만 다르게'); swl.htmlFor = sw.id; cfg.append(sw, swl);
+  if (on) {
+    const t0 = ov.t ?? state.t, e0 = ov.e ?? state.e;
+    cfg.append(stepper(t0, dd => setDay(i, { t: Math.max(0, Math.min(e0 - 60, t0 + dd * 30)) }), hm), $('span', 'muted', '~'), stepper(e0, dd => setDay(i, { e: Math.max(t0 + 60, Math.min(1440, e0 + dd * 30)) }), hm));
+    for (const [v, label] of [['transit', '걷기+지하철'], ['taxi', '택시']]) { const b = $('button', 'btn sm' + ((ov.v || state.v) === v ? ' primary' : ''), label); b.type = 'button'; b.onclick = () => setDay(i, { v }); cfg.appendChild(b); }
+    const ps = $('button', 'btn sm' + (pickDayStart === i ? ' primary' : ''), pickDayStart === i ? '지도를 클릭…' : (ov.s ? '출발점 옮기기' : '이 날 출발점')); ps.type = 'button'; ps.onclick = () => { pickDayStart = pickDayStart === i ? null : i; render(); }; cfg.appendChild(ps);
+    if (ov.s) { const c = $('button', 'btn sm', '출발점 지우기'); c.type = 'button'; c.onclick = () => setDay(i, { s: null }); cfg.appendChild(c); }
+  }
+  return cfg;
 }
 const openDays = new Set();
 // id를 i번째 날로 — 고른 적 없는 장소면 고르면서, 이미 다른 날에 있으면 옮기면서. 직접 배정으로 굳는다
@@ -575,7 +591,7 @@ function renderAiBox(host) {
   const box = $('div', 'ai');
   const hd = $('div', 'row');
   const tg = $('button', 'btn sm' + (aiOpen ? ' primary' : ''), '✦ AI에게 말하기'); tg.type = 'button'; tg.onclick = () => { aiOpen = !aiOpen; render(); };
-  hd.appendChild(tg); hd.appendChild($('span', 'muted', '어떤 여행을 하고 싶은지 말하면 장소·일수·체류를 골라 준다'));
+  hd.appendChild(tg); hd.appendChild($('span', 'muted', '어떤 여행을 하고 싶은지 말하면 장소와 일정을 골라 줘요'));
   box.appendChild(hd);
   if (!aiOpen) { host.appendChild(box); return; }
   if (!curUser) { box.appendChild($('p', null, '로그인하면 쓸 수 있다 — <b>내 여행</b> 탭에서.')); host.appendChild(box); return; }
@@ -627,7 +643,152 @@ function renderStep2(side, entering) {
   const th = $('div', 'row');
   th.appendChild($('h2', null, '가고 싶은 곳'));
   box.appendChild(th);
-  {
+  renderRecs(box);
+  side.appendChild(box);
+  // 지도 마커 — 탭과 무관하게 전부
+  for (const pl of city.places) placeMarker(pl, pl.id in state.p, state.m.includes(pl.id));
+  for (const u of state.u) map.circle('places', u, { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', title: u.name + ' (내 장소)' });
+
+  if (entering) {
+    const pts = [...city.places.map(p => [p.lat, p.lng]), ...state.u.map(u => [u.lat, u.lng])];
+    map.fitBounds(pts, 20);
+  }
+  bindMapClick(e => {
+    const name = prompt('장소 이름'); if (!name) return;
+    const min = parseInt(prompt('머무는 시간(분)', '60')); if (!(min > 0)) return;
+    addUserPlace({ name: name.replace(/[~|]/g, ' '), lat: e.latlng.lat, lng: e.latlng.lng, min });
+  });
+}
+
+// ───── v2: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
+let dragId = null;
+function renderPlanV2(side, entering) {
+  const places = resolvePlaces(state, city);
+  const byId = new Map(places.map(p => [p.id, p]));
+  const a = assignment();
+  const start = state.s || { lat: city.center[0], lng: city.center[1] };
+  const result = places.length ? plan(places, { days: state.d, start, dayStart: state.t, dayEnd: state.e, pref: state.v, legs: state.l, manual: a.auto ? null : a.days, perDay: perDay() }) : { days: [], dropped: [] };
+  const days = Array.from({ length: Math.max(state.d, result.days.length) }, (_, i) => result.days[i] || { stops: [], end: 0, moveMin: 0 });
+
+  // 머리 — 도시 · 일수 · 저장 · 더보기
+  const head = $('div', 'v2head');
+  const ttl = $('div', 'v2title');
+  ttl.innerHTML = `<h2>${esc(city.name)}</h2><span>${state.d}일 · ${places.length}곳</span>`;
+  head.appendChild(ttl);
+  const sv = $('button', 'btn primary', state.pr && curUser ? '저장' : '여행으로 저장'); sv.type = 'button';
+  sv.onclick = async () => {
+    if (!curUser) { setState({ tab: 'mine' }); return; }
+    try {
+      if (state.pr) { await saveToProject(state.pr); sv.textContent = '저장했어요'; setTimeout(render, 600); }
+      else { const name = prompt('여행 이름', `${CITIES[state.c]} ${state.d}일`); if (!name) return; const p = await store.createProject({ name, city: state.c, hash: encode({ ...state, tab: 'plan', pr: null }) }); setState({ pr: p.id }); }
+    } catch (e) { alert(`저장하지 못했어요 — ${e.message || e}`); }
+  };
+  const more = $('details', 'v2more'); more.appendChild($('summary', null, '⋯'));
+  const menu = $('div', 'v2menu');
+  const mi = (label, fn) => { const b = $('button', null, label); b.type = 'button'; b.onclick = () => { more.open = false; fn(); }; menu.appendChild(b); };
+  mi('링크 복사', async () => { try { await navigator.clipboard.writeText(location.href); } catch { prompt('이 주소를 복사하세요', location.href); } });
+  mi('하루 추가', () => setState({ d: Math.min(10, state.d + 1), o: state.o ? [...state.o.map(d => [...d]), []] : null }));
+  if (!a.auto) mi('자동으로 다시 나누기', () => setState({ o: null }));
+  mi('도시 바꾸기', () => setState({ tab: 'home' }));
+  const set = $('div', 'v2set'); renderSettings(set); menu.appendChild(set);
+  more.appendChild(menu);
+  head.append(sv, more);
+  side.appendChild(head);
+
+  // 넣기 — 검색 + AI
+  const add = $('div', 'v2add');
+  add.appendChild(renderSearch());
+  renderAiBox(add);
+  side.appendChild(add);
+
+  // 비었을 때 — 1순위로 첫 클릭을 만든다
+  if (!places.length) {
+    const e = $('div', 'v2empty');
+    e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.`));
+    const chips = $('div', 'v2chips');
+    for (const pl of city.places.filter(p => p.weight === 1)) { const c = $('button', 'chip', esc(pl.name)); c.type = 'button'; c.onclick = () => togglePlace(pl.id); chips.appendChild(c); }
+    e.appendChild(chips); side.appendChild(e);
+  }
+
+  // 노선 — 날마다 하나
+  const lines = $('div', 'v2lines');
+  days.forEach((day, i) => {
+    const col = `var(${DAY_COLORS[i] || '--d1'})`;
+    const ln = $('section', 'line' + (i === activeDay && !a.auto ? ' active' : '')); ln.style.setProperty('--c', col);
+    const hd = $('header');
+    const span = day.stops.length ? `${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분${day.over ? ' · <b class="warn">시간 초과</b>' : ''}` : '비어 있어요';
+    hd.innerHTML = `<b>${i + 1}일차</b><span>${span}</span>`;
+    const dc = $('details', 'daycfgbox'); dc.appendChild($('summary', null, '설정')); dc.appendChild(renderDayCfg(i)); hd.appendChild(dc);
+    if (days.length > 1) { const x = $('button', 'x', '×'); x.type = 'button'; x.title = '이 날 빼기 — 장소는 앞날로 옮겨요'; x.onclick = () => { const o = makeManual(); while (o.length < days.length) o.push([]); const j = Math.max(0, i - 1); if (i === 0) o[1] = [...o[0], ...(o[1] || [])]; else o[j].push(...o[i]); o.splice(i, 1); activeDay = Math.min(activeDay, o.length - 1); setState({ d: Math.max(1, state.d - 1), o }); }; hd.appendChild(x); }
+    ln.appendChild(hd);
+    ln.ondragover = ev => { ev.preventDefault(); ln.classList.add('over'); }; ln.ondragleave = () => ln.classList.remove('over');
+    ln.ondrop = ev => { ev.preventDefault(); ln.classList.remove('over'); const id = ev.dataTransfer.getData('text/place') || dragId; if (id) dropToDay(id, i); };
+    const ol = $('ol');
+    let prevId = 'start';
+    day.stops.forEach((st2, k) => {
+      const pl = st2.place, key = `${prevId}>${pl.id}`; prevId = pl.id;
+      const leg = $('li', 'leg');
+      const ls = $('select', 'quiet'); ls.title = '이 구간 이동';
+      for (const [v, label] of [['', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`], ['walk', '도보로'], ['metro', '지하철로'], ['taxi', '택시로']]) { const o = $('option', null, label); o.value = v; o.selected = v === '' ? state.l[key] == null : state.l[key] === v; ls.appendChild(o); }
+      ls.onchange = () => { const l = { ...state.l }; if (ls.value) l[key] = ls.value; else delete l[key]; setState({ l }); };
+      leg.appendChild(ls); ol.appendChild(leg);
+      const li = $('li', 'stn'); li.draggable = true;
+      li.ondragstart = ev => { dragId = pl.id; ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'move'; };
+      li.ondrop = ev => {   // 역 위에 떨어뜨리면 그 앞으로
+        ev.preventDefault(); ev.stopPropagation(); ln.classList.remove('over');
+        const id = ev.dataTransfer.getData('text/place') || dragId; if (!id || id === pl.id) return;
+        const o = makeManual().map(d => d.filter(x => x !== id)); while (o.length <= i) o.push([]);
+        const p = { ...state.p }; if (!id.startsWith('u') && !(id in p)) { const q = city.places.find(x => x.id === id); if (!q) return; p[id] = q.default; }
+        o[i].splice(Math.max(0, o[i].indexOf(pl.id)), 0, id); activeDay = i; setState({ p, o });
+      };
+      const who = curProject?.edits?.[pl.id]?.by;
+      li.innerHTML = `<time>${hm(st2.arrive)}</time><i class="dot"></i>`;
+      const body = $('div', 'body');
+      body.appendChild($('div', 'nm', `${esc(pl.name)}${pl.must ? ' <span class="star" title="꼭 가기">★</span>' : ''}${who ? ` <span class="who">${esc(who)}</span>` : ''}`));
+      const meta = $('div', 'meta');
+      if (!pl.user) { const sel = $('select', 'quiet'); pl.opts.forEach((o, j) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = j; op.selected = pl.opt === j; sel.appendChild(op); }); sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } }); meta.appendChild(sel); }
+      else meta.appendChild($('span', null, `${esc(pl.opts[0].min)}분`));
+      const star = $('button', 'ic', pl.must ? '★' : '☆'); star.type = 'button'; star.title = pl.must ? '꼭 가기 해제' : '꼭 가기 — 시간이 모자라도 안 빠져요'; if (!pl.user) star.onclick = () => setState({ m: pl.must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
+      const rm = $('button', 'ic', '×'); rm.type = 'button'; rm.title = '빼기'; rm.onclick = () => pl.user ? setState({ u: state.u.filter((_, j) => `u${j}` !== pl.id), o: null }) : togglePlace(pl.id);
+      meta.append(star, rm); body.appendChild(meta); li.appendChild(body); ol.appendChild(li);
+    });
+    ln.appendChild(ol);
+    const ad = $('button', 'addhere', i === activeDay && !a.auto ? '+ 여기에 추가 중 — 검색하거나 아래에서 고르세요' : '+ 이 날에 추가'); ad.type = 'button';
+    ad.onclick = () => { activeDay = i; setState({ o: makeManual() }); setTimeout(() => document.querySelector('.v2add .search input')?.focus(), 50); };
+    ln.appendChild(ad);
+    lines.appendChild(ln);
+  });
+  if (a.auto && places.length) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
+  if (result.dropped?.length) lines.appendChild($('p', 'warnline', `시간이 모자라 뺀 곳: ${result.dropped.map(x => esc(x.place.name)).join(', ')} — ☆를 ★로 바꾸면 꼭 넣어요.`));
+  side.appendChild(lines);
+
+  // 추천 — 접어 둔다 (비었을 땐 펼침)
+  const rec = $('details', 'v2rec'); rec.open = !places.length;
+  rec.appendChild($('summary', null, `추천 장소 <span class="muted">${city.places.length}곳</span>`));
+  renderRecs(rec); side.appendChild(rec);
+
+  // 지도 — 노선색 선 + 역 번호·이름표, 안 고른 곳은 흐린 점(누르면 추가)
+  const chosen = new Set(places.map(p => p.id));
+  for (const pl of city.places) if (!chosen.has(pl.id)) map.html('places', pl, `<div class="mk${pl.weight === 1 ? ' w1' : ''}"><i></i>${pl.weight === 1 ? `<span>${esc(pl.name)}</span>` : ''}</div>`, { title: pl.name + ' — 눌러서 추가', onClick: () => togglePlace(pl.id) });
+  const bounds = [[start.lat, start.lng]];
+  days.forEach((day, i) => {
+    if (!day.stops.length) return;
+    const col = getComputedStyle(document.body).getPropertyValue(DAY_COLORS[i]).trim() || '#1F4FA8';
+    const s0 = perDay()[i]?.start || start;
+    map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
+    day.stops.forEach((x, k) => { map.html('route', x.place, `<div class="st" style="--c:${col}"><i>${k + 1}</i><span>${esc(x.place.name)}</span></div>`, { title: `${hm(x.arrive)} ${x.place.name}` }); bounds.push([x.place.lat, x.place.lng]); });
+  });
+  if (entering) map.fitBounds(bounds.length > 1 ? bounds : city.places.map(p => [p.lat, p.lng]), 40);
+  if (sunOpen) mountSun(result.days.length ? result : { days }, start);
+  bindMapClick(e => {
+    const name = prompt('이 자리를 뭐라고 부를까요?'); if (!name) return;
+    const min = parseInt(prompt('몇 분 머무를까요?', '60')); if (!(min > 0)) return;
+    addUserPlace({ name: name.replace(/[~|]/g, ' '), lat: e.latlng.lat, lng: e.latlng.lng, min });
+  });
+}
+
+// 추천 장소 목록 — 순위별 묶음, 체크로 고르고, 끌어서 날짜에 놓는다
+function renderRecs(box) {
     const f = $('input', 'text'); f.type = 'search'; f.placeholder = '목록 거르기'; f.value = query; f.oninput = () => { query = f.value; applyFilter(box); };
     box.appendChild(f);
     for (const w of [1, 2, 3]) {
@@ -667,25 +828,10 @@ function renderStep2(side, entering) {
       box.appendChild(panel);
     }
   }
-  side.appendChild(box);
-  // 지도 마커 — 탭과 무관하게 전부
-  for (const pl of city.places) placeMarker(pl, pl.id in state.p, state.m.includes(pl.id));
-  for (const u of state.u) map.circle('places', u, { radius: 9, color: '#22201c', weight: 3, fillColor: '#c99a18', title: u.name + ' (내 장소)' });
-
-  if (entering) {
-    const pts = [...city.places.map(p => [p.lat, p.lng]), ...state.u.map(u => [u.lat, u.lng])];
-    map.fitBounds(pts, 20);
-  }
-  bindMapClick(e => {
-    const name = prompt('장소 이름'); if (!name) return;
-    const min = parseInt(prompt('머무는 시간(분)', '60')); if (!(min > 0)) return;
-    addUserPlace({ name: name.replace(/[~|]/g, ' '), lat: e.latlng.lat, lng: e.latlng.lng, min });
-  });
-}
 function renderSearch() {
   const p = $('div', 'search');
   const row = $('div', 'row');
-  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 이름 — 목록을 거르고, Enter로 지도에서 찾는다'; inp.value = query;
+  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 검색 — 글자로 목록을 거르고, Enter로 지도에서 찾아요'; inp.value = query;
   inp.oninput = () => { query = inp.value; applyFilter(document.getElementById('side')); };
   const go = $('button', 'btn', '지도에서 찾기'); go.type = 'button';
   const run = async () => {

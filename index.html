@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="modulepreload" href="src/ui.js?v=20261031a"><link rel="modulepreload" href="src/state.js"><link rel="modulepreload" href="src/engine.js"><link rel="modulepreload" href="src/travel.js"><link rel="modulepreload" href="src/html.js"><link rel="modulepreload" href="src/map.js"><link rel="modulepreload" href="src/shadow.js"><link rel="modulepreload" href="src/mine.js"><link rel="modulepreload" href="src/store.js"><link rel="modulepreload" href="src/store-map.js"><link rel="modulepreload" href="src/store-supabase.js"><link rel="modulepreload" href="src/search.js"><link rel="modulepreload" href="src/config.js"><link rel="modulepreload" href="src/ai.js"><link rel="modulepreload" href="src/edits.js">
+<link rel="modulepreload" href="src/ui.js?v=20261101a"><link rel="modulepreload" href="src/state.js"><link rel="modulepreload" href="src/engine.js"><link rel="modulepreload" href="src/travel.js"><link rel="modulepreload" href="src/html.js"><link rel="modulepreload" href="src/map.js"><link rel="modulepreload" href="src/shadow.js"><link rel="modulepreload" href="src/mine.js"><link rel="modulepreload" href="src/store.js"><link rel="modulepreload" href="src/store-map.js"><link rel="modulepreload" href="src/store-supabase.js"><link rel="modulepreload" href="src/search.js"><link rel="modulepreload" href="src/config.js"><link rel="modulepreload" href="src/ai.js"><link rel="modulepreload" href="src/edits.js">
 <link rel="preload" href="data/cities.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -50,10 +50,49 @@ input.text.big{font-size:17px;padding:12px 16px;border-radius:6px;max-width:520p
 .pick .steps{margin-left:auto}.pick details.group{border-top:1px solid var(--line);padding:8px 0}.pick details.group>summary{cursor:pointer;list-style:none;font-size:15px}.pick details.group>summary::before{content:'▸ ';color:var(--muted)}.pick details.group[open]>summary::before{content:'▾ '}
 .ai{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}.ailog{display:flex;flex-direction:column;gap:6px;margin:8px 0;max-height:320px;overflow:auto}.msg{padding:8px 12px;border-radius:10px;max-width:92%;font-size:14px;line-height:1.5;white-space:pre-wrap}.msg.user{align-self:flex-end;background:var(--fg);color:var(--bg)}.msg.assistant{align-self:flex-start;background:var(--sunk)}
 textarea.text{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--fg);flex:1;resize:vertical;min-width:160px}
-.credits{margin-top:28px;font-size:12px}.credits a{color:inherit}
+.credits{margin-top:28px;font-size:12px}
+/* ───── v2 「노선도」 ───── */
+body.v2{--bg:#ffffff;--surface:#ffffff;--sunk:#f4f5f7;--fg:#1c2026;--muted:#565e6b;--faint:#6b7380;--line:#e3e6ea;
+  --d1:#1f4fa8;--d2:#1e8c4e;--d3:#e2611c;--d4:#7a3fb0;--d5:#0f8a96;--d6:#c0306a;--gold:#f2b400;--gold-soft:#fff6d6;--warn:#c7341f;
+  font-family:"Wanted Sans Variable","Wanted Sans",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-feature-settings:"tnum"}
+body.v2 .btn{border-radius:8px}body.v2 .btn.primary{background:var(--fg);border-color:var(--fg)}
+body.v2 :focus-visible{outline:2px solid var(--d1);outline-offset:2px}
+.v2head{display:flex;align-items:center;gap:10px;padding:4px 2px 2px}.v2title{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px}
+.v2title h2{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0}.v2title span{color:var(--muted);font-weight:600}
+.v2more{position:relative}.v2more>summary{list-style:none;cursor:pointer;font-weight:800;font-size:18px;padding:4px 12px;border:1px solid var(--line);border-radius:8px}.v2more>summary::-webkit-details-marker{display:none}
+.v2menu{position:absolute;right:0;top:42px;z-index:5;width:min(440px,86vw);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 28px rgba(28,32,38,.14);padding:8px;display:flex;flex-direction:column;gap:2px}
+.v2menu>button{font:inherit;text-align:left;border:0;background:none;padding:8px 10px;border-radius:6px;cursor:pointer}.v2menu>button:hover{background:var(--sunk)}
+.v2menu .settings{border:0;padding:6px 10px;margin-top:4px;border-top:1px solid var(--line);border-radius:0}
+.v2add{display:flex;flex-direction:column;gap:6px}.v2add .search .row{margin:0}.v2add .ai{margin-top:0;border-top:0;padding-top:0}
+.v2empty{background:var(--sunk);border-radius:12px;padding:16px}.v2empty p{color:var(--fg);margin:0 0 10px}
+.v2chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;cursor:pointer}.chip:hover{border-color:var(--d1);color:var(--d1)}
+.v2lines{display:flex;flex-direction:column;gap:14px}
+.line{--c:var(--d1);border-radius:12px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.line.active{box-shadow:0 0 0 2px var(--c)}.line.over{background:var(--sunk)}
+.line>header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--c);color:#fff}
+.line>header b{font-size:17px;font-weight:800}.line>header span{font-size:13px;opacity:.92;flex:1}.line>header .warn{color:#fff;background:var(--warn);padding:0 6px;border-radius:4px}
+.line>header .x{border:0;background:none;color:#fff;font-size:18px;cursor:pointer;opacity:.8}
+.daycfgbox>summary{list-style:none;cursor:pointer;font-size:12px;font-weight:700;opacity:.9}.daycfgbox>summary::-webkit-details-marker{display:none}
+.daycfgbox[open]{position:absolute;z-index:4}.daycfgbox[open]>.daycfg{background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px;box-shadow:0 8px 24px rgba(28,32,38,.12)}
+.line ol{list-style:none;margin:0;padding:6px 14px 2px}
+.line li{display:grid;grid-template-columns:52px 18px 1fr;align-items:start;column-gap:10px}
+.line li{background:linear-gradient(color-mix(in srgb,var(--c) 40%,transparent),color-mix(in srgb,var(--c) 40%,transparent)) no-repeat 70px 0/4px 100%}
+.line li.leg{min-height:24px;align-items:center}.line li.leg select{grid-column:3;justify-self:start;font-size:12.5px;width:auto;border-bottom:0;color:var(--faint)}
+.line li.stn{padding:2px 0;cursor:grab}.line li.stn time{font-size:20px;font-weight:800;line-height:1.3;text-align:right;letter-spacing:-.02em}
+.line li.stn .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:4px solid var(--c);margin-top:5px;justify-self:center}
+.line .nm{font-weight:700;font-size:16px;line-height:1.35}.line .star{color:var(--gold)}
+.line .meta{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px}
+.line .ic{border:0;background:none;cursor:pointer;color:var(--faint);font-size:15px;padding:0 3px}.line .ic:hover{color:var(--fg)}
+.addhere{display:block;width:calc(100% - 28px);margin:6px 14px 12px;font:inherit;font-size:13.5px;font-weight:600;color:var(--c);background:none;border:1.5px dashed var(--c);border-radius:8px;padding:7px;cursor:pointer;opacity:.85}.addhere:hover{opacity:1}
+.warnline{color:var(--warn);font-size:13.5px}
+.v2rec{border:1px solid var(--line);border-radius:12px;padding:10px 14px}.v2rec>summary{cursor:pointer;font-weight:700}
+.mk{display:flex;align-items:center;gap:4px;cursor:pointer}.mk i{width:8px;height:8px;border-radius:50%;background:#fff;border:1.5px solid #8a929e}.mk.w1 i{width:10px;height:10px}.mk span{font-size:11px;font-weight:600;color:#565e6b;background:rgba(255,255,255,.85);padding:0 4px;border-radius:3px;white-space:nowrap}
+.st{display:flex;align-items:center;gap:5px}.st i{width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--c);font:800 11px/14px "Wanted Sans Variable",sans-serif;font-style:normal;text-align:center;color:#1c2026;box-sizing:border-box}.st span{font-size:12px;font-weight:700;color:#1c2026;background:#fff;padding:1px 6px;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.18);white-space:nowrap}
+body.v2 #sunbox .sun{border-radius:10px}
+.credits a{color:inherit}
 .cover{position:relative;height:180px;color:#fff}.cover img{width:100%;height:100%;object-fit:cover;display:block}.cover .cap{position:absolute;inset:auto 0 0 0;padding:40px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7))}.cover .cap b{font-size:22px;display:block}.cover .cap span{font-size:13px;opacity:.9}
 #mapwrap{position:relative;min-height:340px;display:flex;flex-direction:column;gap:8px}#map{position:relative;flex:1;min-height:0;border:1px solid var(--line);border-radius:4px}
-#btn3d{position:absolute;top:10px;right:10px;z-index:2;background:var(--surface)}#btn3d[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+#btn3d{position:absolute;top:10px;right:10px;z-index:2;background:var(--surface)}#btnsun{position:absolute;top:10px;right:52px;z-index:2;background:var(--surface)}#btnsun[aria-pressed="true"]{background:#F2B400;border-color:#F2B400}#btn3d[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 #sunbox{flex:none}#sunbox .sun{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:6px 12px;font-size:13px}#sunbox .sun .row{margin:0;gap:6px 10px}#sunbox .sun p{margin:0;font-size:12px}#sunbox .sun input[type=range]{min-width:160px}
 @media (max-width:1000px){#sunbox{left:6px;right:6px;bottom:22px}}#btn3d[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 .sun input[type=range]{accent-color:var(--gold)}
@@ -98,10 +137,10 @@ select{font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line
     <div id="who" style="margin-left:auto"></div>
   </header>
   <div class="layout">
-    <div id="mapwrap"><div id="sunbox" hidden></div><div id="map"><button type="button" id="btn3d" class="btn sm" aria-pressed="false" title="건물 높이 보기">3D</button></div></div>
+    <div id="mapwrap"><div id="sunbox" hidden></div><div id="map"><button type="button" id="btnsun" class="btn sm" aria-pressed="false" title="해와 그림자" hidden>☀</button><button type="button" id="btn3d" class="btn sm" aria-pressed="false" title="건물 높이 보기">3D</button></div></div>
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=20261031a"></script>
+<script type="module" src="src/ui.js?v=20261101a"></script>
 </body>
 </html>
