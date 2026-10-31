@@ -3,7 +3,7 @@
 import { shadowPolygons } from './shadow.js';
 const STYLE = 'https://tiles.openfreemap.org/styles/liberty';   // 컬러. 'bright'·'positron'도 있다
 
-export function createMap(containerId) {
+function buildMap(containerId) {
   const map = new maplibregl.Map({ container: containerId, style: STYLE, center: [0, 0], zoom: 2, attributionControl: { compact: true }, maxPitch: 70 });
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-left');
   const groups = { places: [], route: [], start: [] };      // 그룹별 마커
@@ -95,5 +95,21 @@ export function createMap(containerId) {
     is3D() { return map.getPitch() > 10; },
     setShadows(on) { shadowsOn = on; updateShadows(); },
     shadowInfo() { return { on: shadowsOn, zoomOk: map.getZoom() >= 15.5, sun: sunPos }; },
+  };
+}
+
+// 지연 생성 — 홈처럼 지도가 안 보이는 화면에선 아무것도 받지 않는다. 처음 그리는 호출에서 만든다.
+export function createMap(containerId) {
+  let inner = null;
+  const get = () => inner || (inner = buildMap(containerId));
+  const pass = name => (...a) => get()[name](...a);
+  return {
+    get map() { return inner?.map; },
+    circle: pass('circle'), html: pass('html'), line: pass('line'), fitBounds: pass('fitBounds'), setView: pass('setView'),
+    onClick: pass('onClick'), setSun: pass('setSun'), set3D: pass('set3D'), setShadows: pass('setShadows'), shadowInfo: pass('shadowInfo'),
+    clear: g => { if (inner) inner.clear(g); },
+    resize: () => { if (inner) inner.resize(); },
+    is3D: () => inner ? inner.is3D() : false,
+    ready: () => !!inner,
   };
 }
