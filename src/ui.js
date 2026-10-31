@@ -112,12 +112,22 @@ function updatePackCounts(side) {
 document.getElementById('btnsun').onclick = () => { sunOpen = !sunOpen; document.getElementById('btnsun').setAttribute('aria-pressed', sunOpen); render(); };
 document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.set3D(on); document.getElementById('btn3d').setAttribute('aria-pressed', on); };
 
+// 화면 이동(탭·여행·도시)은 브라우저 기록에 쌓아 뒤로가기가 되게 하고, 플랜 고치기는 되돌리기 스택에 쌓는다
+const undoStack = [];
+const NAV_KEYS = ['tab', 'pr', 'c'];
 export function setState(patch) {
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
+  const nav = NAV_KEYS.some(k => k in patch && patch[k] !== state[k]);
+  const before = encode(state);
   state = { ...state, ...patch };
-  history.replaceState(null, '', '#' + encode(state));
+  const after = encode(state);
+  if (after === before) { render(); return; }
+  if (nav) history.pushState(null, '', '#' + after);
+  else { undoStack.push(before); if (undoStack.length > 50) undoStack.shift(); history.replaceState(null, '', '#' + after); }
   render();
 }
+function undo() { const h = undoStack.pop(); if (h == null) return; state = decode('#' + h); history.replaceState(null, '', '#' + h); render(); }
+window.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'z' && !e.shiftKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')) { e.preventDefault(); undo(); } });
 export function loadCity(id) {
   if (!cache[id]) cache[id] = fetch(`data/${id}.json`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .catch(e => { delete cache[id]; throw e; });
@@ -584,9 +594,12 @@ function renderPlan(side, entering) {
 
   // 머리 — 도시 · 일수 · 저장 · 더보기
   const head = $('div', 'v2head');
+  if (state.pr) { const bk = $('button', 'btn sm', '← 여행'); bk.type = 'button'; bk.title = '여행 페이지로'; bk.onclick = () => setState({ tab: 'mine' }); head.appendChild(bk); }
   const ttl = $('div', 'v2title');
   ttl.innerHTML = `<h2>${esc(city.name)}</h2><span>${state.d}일 · ${places.length}곳</span>`;
   head.appendChild(ttl);
+  const un = $('button', 'btn sm', '↶ 되돌리기'); un.type = 'button'; un.title = '방금 한 것 되돌리기 (⌘Z)'; un.disabled = !undoStack.length; un.onclick = undo;
+  head.appendChild(un);
   const sv = $('button', 'btn primary', state.pr && curUser ? '저장' : '여행으로 저장'); sv.type = 'button';
   sv.onclick = async () => {
     if (!curUser) { setState({ tab: 'mine' }); return; }
@@ -602,6 +615,7 @@ function renderPlan(side, entering) {
   mi('하루 추가', () => setState({ d: Math.min(10, state.d + 1), o: state.o ? [...state.o.map(d => [...d]), []] : null }));
   if (!a.auto) mi('자동으로 다시 나누기', () => setState({ o: null }));
   mi('도시 바꾸기', () => setState({ tab: 'home' }));
+  mi('플랜 비우기', () => { if (places.length && !confirm('고른 장소와 날짜 배정을 모두 지울까요? 「↶ 되돌리기」로 다시 살릴 수 있어요.')) return; setState({ p: {}, m: [], u: [], o: null, l: {}, ds: null }); });
   const set = $('div', 'v2set'); renderSettings(set); menu.appendChild(set);
   more.appendChild(menu);
   head.append(sv, more);
@@ -784,5 +798,6 @@ const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 �
 // 제목 클릭 = 홈(플랜 탭). 고른 장소·열어 둔 여행은 그대로 둔다
 document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); accountOpen = false; setState({ tab: 'home' }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
+window.addEventListener('popstate', () => { const h = decode(location.hash); if (encode(h) !== encode(state)) { state = h; render(); } });   // 뒤로·앞으로
 window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
 render();
