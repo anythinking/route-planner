@@ -113,3 +113,17 @@ test('ds: 날짜별 설정 — 시작·끝·이동·출발점, 엉터리는 버�
   assert.ok(enc.includes('ds=1%3Avtaxi%2Cs1.00000%7C2.00000') || decodeURIComponent(enc).includes('ds=1:vtaxi,s1.00000|2.00000'));
   assert.ok(!encode({ ...DEFAULTS }).includes('ds='));
 });
+
+test('lg: 여러 도시 여행에서 몇 번째 구간을 열었나 — 0은 쓰지 않는다', () => {
+  assert.equal(decode('').lg, 0);
+  assert.equal(decode('#lg=2').lg, 2);
+  assert.equal(decode('#lg=x').lg, 0);
+  assert.ok(encode({ ...DEFAULTS, lg: 1 }).includes('lg=1'));
+  assert.ok(!encode({ ...DEFAULTS }).includes('lg='));
+});
+test('legsOf / withLeg: 여행 하나에 도시 구간 여러 개 (줄바꿈으로 구분)', async () => {
+  const { legsOf, withLeg } = await import('../src/state.js');
+  assert.deepEqual(legsOf('c=london&d=3\nc=paris&d=5'), ['c=london&d=3', 'c=paris&d=5']);
+  assert.deepEqual(legsOf(''), ['']);
+  assert.equal(withLeg('c=london\nc=paris', 1, 'c=paris&d=2'), 'c=london\nc=paris&d=2');
+});

@@ -1,5 +1,5 @@
 import { plan, hm } from './engine.js';
-import { decode, encode, DEFAULTS, TABS, resolvePlaces } from './state.js';
+import { decode, encode, DEFAULTS, TABS, resolvePlaces, legsOf, withLeg } from './state.js';
 import { esc } from './html.js';
 import { search } from './search.js';
 import { LocalStore } from './store.js';
@@ -51,9 +51,9 @@ let curProject = null;           // 플랜 탭에서 열어 둔 여행(이름표
 // 지금 플랜을 여행에 저장 — 바뀐 장소에 내 이름표를 붙인다
 async function saveToProject(pid) {
   const prev = await store.getProject(pid); if (!prev) throw new Error('여행이 없다');
-  const hash = encode({ ...state, tab: 'plan', pr: null });
-  const edits = tagEdits(prev.hash, hash, prev.edits, curUser?.name || '나');
-  const p = await store.updateProject(pid, { city: state.c, hash, edits, lastEditedBy: curUser?.name || null });
+  const i = state.lg || 0, leg = encode({ ...state, tab: 'plan', pr: null, lg: 0 });
+  const edits = tagEdits(legsOf(prev.hash)[i], leg, prev.edits, curUser?.name || '나');
+  const p = await store.updateProject(pid, { city: i === 0 ? state.c : prev.city, hash: withLeg(prev.hash, i, leg), edits, lastEditedBy: curUser?.name || null });
   curProject = p; return p;
 }
 // 초대 링크(#join=토큰)로 들어온 경우
@@ -118,6 +118,7 @@ const NAV_KEYS = ['tab', 'pr', 'c'];
 export function setState(patch) {
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
   const nav = NAV_KEYS.some(k => k in patch && patch[k] !== state[k]);
+  if (('c' in patch && patch.c !== state.c) || ('lg' in patch && patch.lg !== state.lg)) hidden.clear();
   const before = encode(state);
   state = { ...state, ...patch };
   const after = encode(state);
@@ -284,7 +285,7 @@ function renderHome(side, projects, pub = []) {
       const c = INDEX.cities[p.city] || {};
       const card = $('a', 'card trip'); card.href = '#';
       card.innerHTML = `<img src="${esc(c.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}</b><span>${esc(c.name || p.city)} · 사진 ${p.photos.length}${p.id === curUser.prefs?.lastPr ? ' · 최근' : ''}</span></div>`;
-      card.onclick = e => { e.preventDefault(); const st = decode('#' + p.hash); step = 3; setState({ ...st, tab: 'plan', pr: p.id }); };
+      card.onclick = e => { e.preventDefault(); setState({ pr: p.id, tab: 'mine' }); };
       grid.appendChild(card);
     }
     sec.appendChild(grid);
@@ -584,6 +585,7 @@ function renderAiBox(host) {
 
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
+let mapFitAsked = false;   // 날을 켜고 끈 뒤 지도를 보이는 날에 맞춘다
 function renderPlan(side, entering) {
   const places = resolvePlaces(state, city);
   const byId = new Map(places.map(p => [p.id, p]));
@@ -595,6 +597,12 @@ function renderPlan(side, entering) {
   // 머리 — 도시 · 일수 · 저장 · 더보기
   const head = $('div', 'v2head');
   if (state.pr) { const bk = $('button', 'btn sm', '← 여행'); bk.type = 'button'; bk.title = '여행 페이지로'; bk.onclick = () => setState({ tab: 'mine' }); head.appendChild(bk); }
+  const legs = curProject?.id === state.pr ? legsOf(curProject.hash) : [];
+  if (legs.length > 1) {
+    const lp = $('div', 'row regions legpills'); lp.style.margin = '0';
+    legs.forEach((h, j) => { const c = decode('#' + h).c; const b = $('button', 'btn sm' + (j === (state.lg || 0) ? ' primary' : ''), esc(CITIES[c] || c)); b.type = 'button'; b.onclick = () => { if (j !== (state.lg || 0)) setState({ ...decode('#' + h), tab: 'plan', pr: state.pr, lg: j }); }; lp.appendChild(b); });
+    side.appendChild(lp);
+  }
   const ttl = $('div', 'v2title');
   ttl.innerHTML = `<h2>${esc(city.name)}</h2><span>${state.d}일 · ${places.length}곳</span>`;
   head.appendChild(ttl);
@@ -644,6 +652,9 @@ function renderPlan(side, entering) {
     const hd = $('header');
     const span = day.stops.length ? `${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분${day.over ? ' · <b class="warn">시간 초과</b>' : ''}` : '비어 있어요';
     hd.innerHTML = `<b>${i + 1}일차</b><span>${span}</span>`;
+    const eye = $('button', 'eye', hidden.has(i) ? '지도 끔' : '지도'); eye.type = 'button'; eye.setAttribute('aria-pressed', !hidden.has(i)); eye.title = '이 날을 지도에 보이기/숨기기';
+    eye.onclick = () => { hidden.has(i) ? hidden.delete(i) : hidden.add(i); mapFitAsked = true; render(); };
+    hd.appendChild(eye);
     const dc = $('details', 'daycfgbox'); dc.appendChild($('summary', null, '설정')); dc.appendChild(renderDayCfg(i)); hd.appendChild(dc);
     if (days.length > 1) { const x = $('button', 'x', '×'); x.type = 'button'; x.title = '이 날 빼기 — 장소는 앞날로 옮겨요'; x.onclick = () => { const o = makeManual(); while (o.length < days.length) o.push([]); const j = Math.max(0, i - 1); if (i === 0) o[1] = [...o[0], ...(o[1] || [])]; else o[j].push(...o[i]); o.splice(i, 1); activeDay = Math.min(activeDay, o.length - 1); setState({ d: Math.max(1, state.d - 1), o }); }; hd.appendChild(x); }
     ln.appendChild(hd);
@@ -698,13 +709,13 @@ function renderPlan(side, entering) {
   for (const pl of city.places) if (!chosen.has(pl.id)) map.html('places', pl, `<div class="mk${pl.weight === 1 ? ' w1' : ''}"><i></i>${pl.weight === 1 ? `<span>${esc(pl.name)}</span>` : ''}</div>`, { title: pl.name + ' — 눌러서 추가', onClick: () => togglePlace(pl.id) });
   const bounds = [[start.lat, start.lng]];
   days.forEach((day, i) => {
-    if (!day.stops.length) return;
+    if (!day.stops.length || hidden.has(i)) return;
     const col = getComputedStyle(document.body).getPropertyValue(DAY_COLORS[i]).trim() || '#1F4FA8';
     const s0 = perDay()[i]?.start || start;
     map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
     day.stops.forEach((x, k) => { map.html('route', x.place, `<div class="st" style="--c:${col}"><i>${k + 1}</i><span>${esc(x.place.name)}</span></div>`, { title: `${hm(x.arrive)} ${x.place.name}` }); bounds.push([x.place.lat, x.place.lng]); });
   });
-  if (entering) map.fitBounds(bounds.length > 1 ? bounds : city.places.map(p => [p.lat, p.lng]), 40);
+  if (entering || mapFitAsked) { mapFitAsked = false; map.fitBounds(bounds.length > 1 ? bounds : city.places.map(p => [p.lat, p.lng]), 40); }
   if (sunOpen) mountSun(result.days.length ? result : { days }, start);
   bindMapClick(e => {
     const name = prompt('이 자리를 뭐라고 부를까요?'); if (!name) return;

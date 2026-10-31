@@ -1,6 +1,6 @@
 // 「내 여행」 탭 — 로그인 · 여행 목록 · 여행 하나(플랜 저장, 살 것, 사진). 저장은 ctx.store 인터페이스만 쓴다.
 import { esc } from './html.js';
-import { decode, encode, DEFAULTS } from './state.js';
+import { decode, encode, DEFAULTS, legsOf } from './state.js';
 import { parseVisits, buildTrips } from './timeline.js';
 
 // 크게 보기 — 화면 덮는 한 장
@@ -254,15 +254,13 @@ function renderList(ctx) {
         u.name = await reverseName(u) || `${u.at.slice(11)} 머문 곳`;
         if (k < named.length - 1) await new Promise(r => setTimeout(r, 1100));
       }
-      let lastId = null;
-      for (const t of trips) {
-        const st = { ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ name, lat, lng, min }) => ({ name: name.replace(/[~|,]/g, ' ').slice(0, 40), lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt, tab: 'plan' };
-        const md = d => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
-        const pr = await store.createProject({ name: `${CITIES[t.city]} ${md(t.dates[0])}–${md(t.dates[t.dates.length - 1])} (실제 동선)`, city: t.city, hash: encode({ ...st, tab: 'plan', pr: null }) });
-        lastId = pr.id;
-      }
-      msg.textContent = `${trips.map(t => `${CITIES[t.city]} ${t.d}일`).join(', ')} — 여행 ${trips.length}개를 만들었어요.`;
-      setTimeout(() => setState({ pr: trips.length === 1 ? lastId : null }), 900);
+      const md = d => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
+      const legHashes = trips.sort((x, y) => x.dt.localeCompare(y.dt)).map(t => encode({ ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ name, lat, lng, min }) => ({ name: name.replace(/[~|,]/g, ' ').slice(0, 40), lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt, tab: 'plan' }));
+      const first = trips[0], last = trips[trips.length - 1];
+      const pr = await store.createProject({ name: `${trips.map(t => CITIES[t.city]).join('·')} ${md(first.dates[0])}–${md(last.dates[last.dates.length - 1])} (실제 동선)`, city: first.city, hash: legHashes.join('\n') });
+      const lastId = pr.id;
+      msg.textContent = `${trips.map(t => `${CITIES[t.city]} ${t.d}일`).join(' → ')} — 여행 하나로 만들었어요.`;
+      setTimeout(() => setState({ pr: lastId }), 900);
     } catch (e) { msg.textContent = `읽지 못했어요 — 구글 지도 앱의 「타임라인 내보내기」 JSON인지 확인해 주세요. (${e.message || e})`; tl.disabled = false; }
   };
   row.append(nw, tl, file); head.appendChild(row); head.appendChild(msg);
@@ -274,7 +272,7 @@ function renderList(ctx) {
   for (const p of projects) {
     const ci = ctx.INDEX?.cities?.[p.city] || {};
     const card = $('a', 'card trip'); card.href = '#';
-    card.innerHTML = `<img src="${esc(ci.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}${p.id === user.prefs?.lastPr ? ' · 최근' : ''}</b><span>${esc(CITIES[p.city] || p.city)} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}</span></div>`;
+    card.innerHTML = `<img src="${esc(ci.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}${p.id === user.prefs?.lastPr ? ' · 최근' : ''}</b><span>${legsOf(p.hash).map(h => esc(CITIES[decode('#' + h).c] || '')).join(' → ')} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}</span></div>`;
     card.onclick = e => { e.preventDefault(); setState({ pr: p.id }); };
     grid.appendChild(card);
   }
@@ -287,27 +285,30 @@ const planHash = st => encode({ ...st, tab: 'plan', pr: null });
 async function renderProject(ctx) {
   const { state, setState, $, side, store, project: p, CITIES, render, map, INDEX, loadCity, plan, resolvePlaces, hm, setStep, canEdit = true, isOwner = true, saveToProject } = ctx;
   const ci = INDEX?.cities?.[p.city] || {};
+  const legs = legsOf(p.hash).map(h => decode('#' + h));
+  const crumb = $('nav', 'crumb');
+  const cb = $('a', null, ctx.user ? '← 내 여행' : '← 홈'); cb.href = '#'; cb.onclick = e => { e.preventDefault(); setState({ pr: null, tab: ctx.user ? 'mine' : 'home' }); };
+  crumb.append(cb, $('span', null, esc(p.name)));
+  side.appendChild(crumb);
   const head = $('div', 'panel'); head.style.padding = '0'; head.style.overflow = 'hidden';
-  if (ci.image) { const cover = $('div', 'cover'); cover.innerHTML = `<img src="${esc(ci.image)}" alt=""><div class="cap"><b>${esc(p.name)}</b><span>${esc(CITIES[p.city] || p.city)} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}</span></div>`; head.appendChild(cover); }
+  if (ci.image) { const cover = $('div', 'cover'); cover.innerHTML = `<img src="${esc(ci.image)}" alt=""><div class="cap"><b>${esc(p.name)}</b><span>${legs.map(l => esc(CITIES[l.c] || l.c)).join(' → ')} · 만든 날 ${fmtDate(p.createdAt)} · 고친 날 ${fmtDate(p.updatedAt)}</span></div>`; head.appendChild(cover); }
   const inner = $('div', null); inner.style.padding = '12px 16px 16px'; head.appendChild(inner);
-  const back = $('button', 'btn sm', ctx.user ? '← 목록' : '← 홈'); back.type = 'button'; back.onclick = () => setState({ pr: null, tab: ctx.user ? 'mine' : 'home' });
-  inner.append(back);
   if (isOwner) { const ren = $('button', 'btn sm', '이름 바꾸기'); ren.type = 'button'; ren.onclick = async () => { const n = prompt('여행 이름', p.name); if (!n || n === p.name) return; await store.updateProject(p.id, { name: n }); render(); }; inner.appendChild(ren); }
   if (p.lastEditedBy) inner.appendChild($('span', 'muted', ` 마지막 수정 ${esc(p.lastEditedBy)}`));
   const row = $('div', 'row');
   const load = $('button', 'btn primary', '이 플랜 열기'); load.type = 'button';
-  load.onclick = () => { const st = decode('#' + p.hash); setStep?.(3); setState({ ...st, tab: 'plan', pr: p.id }); };
+  load.onclick = () => setState({ ...legs[0], tab: 'plan', pr: p.id, lg: 0 });
   row.appendChild(load);
-  if (canEdit) { const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button'; save.onclick = async () => { try { await (saveToProject ? saveToProject(p.id) : store.updateProject(p.id, { city: state.c, hash: planHash(state) })); save.textContent = '저장됨'; setTimeout(render, 600); } catch (e) { alert(`저장 실패 — ${e.message || e}`); } }; row.appendChild(save); }
+  if (canEdit && legs.length === 1) { const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button'; save.onclick = async () => { try { await (saveToProject ? saveToProject(p.id) : store.updateProject(p.id, { city: state.c, hash: planHash(state) })); save.textContent = '저장됨'; setTimeout(render, 600); } catch (e) { alert(`저장 실패 — ${e.message || e}`); } }; row.appendChild(save); }
   if (isOwner) { const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까? 사진도 같이 지워진다.`)) return; await store.deleteProject(p.id); setState({ pr: null }); }; row.appendChild(del); }
   inner.appendChild(row);
   side.appendChild(head);
 
-  // 플랜 요약 — 저장된 해시를 그 도시 데이터로 다시 계산해 읽기 전용으로 보여준다
-  try {
-    const st = decode('#' + p.hash); const cd = await loadCity(p.city);
+  // 플랜 요약 — 도시 구간마다 저장된 해시를 다시 계산해 읽기 전용으로 보여준다
+  for (const [li, st] of legs.entries()) try {
+    const cd = await loadCity(st.c);
     const places = resolvePlaces(st, cd);
-    const sum = $('div', 'panel'); sum.appendChild($('h2', null, `플랜 <span class="muted" style="font-weight:500">· ${st.d}일 · ${places.length}곳</span>`));
+    const sum = $('div', 'panel'); const sh = $('div', 'row'); sh.appendChild($('h2', null, `${esc(CITIES[st.c] || st.c)} <span class="muted" style="font-weight:500">· ${st.d}일 · ${places.length}곳${st.dt ? ` · ${Number(st.dt.slice(5, 7))}/${Number(st.dt.slice(8, 10))}부터` : ''}</span>`)); const op = $('button', 'btn sm', '이 구간 플랜 열기'); op.type = 'button'; op.style.marginLeft = 'auto'; op.onclick = () => setState({ ...st, tab: 'plan', pr: p.id, lg: li }); sh.appendChild(op); sum.appendChild(sh);
     if (!places.length) sum.appendChild($('p', 'muted', '아직 고른 장소가 없다. 「이 플랜 열기」로 가서 고르면 여기 요약이 뜬다.'));
     else {
       const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
