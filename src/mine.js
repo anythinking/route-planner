@@ -1,6 +1,7 @@
 // 「내 여행」 탭 — 로그인 · 여행 목록 · 여행 하나(플랜 저장, 살 것, 사진). 저장은 ctx.store 인터페이스만 쓴다.
 import { esc } from './html.js';
-import { decode, encode } from './state.js';
+import { decode, encode, DEFAULTS } from './state.js';
+import { parseVisits, buildTrips } from './timeline.js';
 
 // 크게 보기 — 화면 덮는 한 장
 function lightbox(src, caption) {
@@ -8,6 +9,14 @@ function lightbox(src, caption) {
   o.innerHTML = `<img src="${src}" alt=""><p>${caption.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]))}</p>`;
   o.onclick = () => o.remove(); document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { o.remove(); document.removeEventListener('keydown', esc); } });
   document.body.appendChild(o);
+}
+// 좌표 → 장소 이름 (OpenStreetMap). 못 찾으면 빈 값
+async function reverseName({ lat, lng }) {
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&accept-language=ko&lat=${lat}&lon=${lng}`, { headers: { Accept: 'application/json' } });
+    const j = await r.json(); const a = j.address || {};
+    return (j.name || a.tourism || a.amenity || a.shop || a.attraction || a.building || a.road || a.suburb || a.village || a.town || a.city || '').trim();
+  } catch { return ''; }
 }
 const fmtDate = t => new Date(t).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
@@ -224,8 +233,40 @@ function renderList(ctx) {
     const p = await store.createProject({ name, city: state.c, hash: planHash(state) });
     setState({ pr: p.id });
   };
-  row.append(nw); head.appendChild(row);
-  head.appendChild($('p', 'muted', '플랜 탭에서 장소를 고른 뒤 여기서 「새 여행」을 누르면 그 플랜이 담긴다.'));
+  // 구글 지도 타임라인 → 실제로 다닌 여행. 파일은 이 브라우저 안에서만 읽는다
+  const tl = $('button', 'btn', '구글 타임라인 가져오기'); tl.type = 'button';
+  const file = $('input'); file.type = 'file'; file.accept = '.json,application/json'; file.hidden = true; file.id = 'timeline-file';
+  const msg = $('p', 'muted', '');
+  tl.onclick = () => file.click();
+  file.onchange = async () => {
+    const f = file.files[0]; if (!f) return;
+    try {
+      tl.disabled = true; msg.textContent = '타임라인을 읽고 있어요…';
+      const visits = parseVisits(JSON.parse(await f.text()));
+      const idx = ctx.INDEX; const cityData = {};
+      for (const id of Object.keys(idx.cities)) { try { cityData[id] = await ctx.loadCity(id); } catch {} }
+      const trips = buildTrips(visits, idx, cityData);
+      if (!trips.length) { msg.textContent = '지원하는 도시(런던·파리·도쿄·오사카·교토·로마·바르셀로나)에 머문 기록을 못 찾았어요.'; tl.disabled = false; return; }
+      // 랜드마크에 안 맞은 곳은 지도 서비스로 이름을 붙인다 (1초에 하나)
+      const named = trips.flatMap(t => t.u);
+      for (const [k, u] of named.entries()) {
+        msg.textContent = `이름 없는 곳에 이름 붙이는 중 ${k + 1}/${named.length}`;
+        u.name = await reverseName(u) || `${u.at.slice(11)} 머문 곳`;
+        if (k < named.length - 1) await new Promise(r => setTimeout(r, 1100));
+      }
+      let lastId = null;
+      for (const t of trips) {
+        const st = { ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ name, lat, lng, min }) => ({ name: name.replace(/[~|,]/g, ' ').slice(0, 40), lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt, tab: 'plan' };
+        const md = d => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
+        const pr = await store.createProject({ name: `${CITIES[t.city]} ${md(t.dates[0])}–${md(t.dates[t.dates.length - 1])} (실제 동선)`, city: t.city, hash: encode({ ...st, tab: 'plan', pr: null }) });
+        lastId = pr.id;
+      }
+      msg.textContent = `${trips.map(t => `${CITIES[t.city]} ${t.d}일`).join(', ')} — 여행 ${trips.length}개를 만들었어요.`;
+      setTimeout(() => setState({ pr: trips.length === 1 ? lastId : null }), 900);
+    } catch (e) { msg.textContent = `읽지 못했어요 — 구글 지도 앱의 「타임라인 내보내기」 JSON인지 확인해 주세요. (${e.message || e})`; tl.disabled = false; }
+  };
+  row.append(nw, tl, file); head.appendChild(row); head.appendChild(msg);
+  head.appendChild($('p', 'muted', '타임라인 파일은 구글 지도 앱 → 설정 → 위치 및 개인정보 → 타임라인 내보내기에서 받아요. 파일은 이 브라우저 안에서만 읽고, 만들어진 플랜만 저장돼요.'));
   side.appendChild(head);
 
   if (!projects.length) { side.appendChild($('div', 'panel', '<p class="muted">아직 여행이 없다.</p>')); return; }
@@ -270,7 +311,8 @@ async function renderProject(ctx) {
     if (!places.length) sum.appendChild($('p', 'muted', '아직 고른 장소가 없다. 「이 플랜 열기」로 가서 고르면 여기 요약이 뜬다.'));
     else {
       const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
-      const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o });
+      const perDay = Object.fromEntries(Object.entries(st.ds || {}).map(([k, d]) => [k, { dayStart: d.t, dayEnd: d.e, pref: d.v, start: d.s }]));
+      const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o, perDay });
       const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
       res.days.forEach((day, i) => {
         if (!day.stops.length) return;
