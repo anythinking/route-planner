@@ -33,6 +33,7 @@ async function gpsOf(file) {
   catch { return null; }
 }
 
+const tripLeg = new Map();   // 여행 페이지에서 보고 있는 구간 (여행 id → 번호)
 const tlImport = { busy: false, text: '', el: null };   // 타임라인 가져오기 진행 — render를 넘어 산다
 
 export async function renderMine(ctx) {
@@ -327,34 +328,46 @@ async function renderProject(ctx) {
   inner.appendChild(row);
   side.appendChild(head);
 
-  // 플랜 요약 — 도시 구간마다 저장된 해시를 다시 계산해 읽기 전용으로 보여준다
-  for (const [li, st] of legs.entries()) try {
+  // 플랜 요약 — 노선도 모양 그대로, 구간 하나씩 (지도도 그 구간만)
+  const li = Math.min(tripLeg.get(p.id) || 0, legs.length - 1), st = legs[li];
+  if (legs.length > 1) {
+    const pills = $('div', 'legpills');
+    legs.forEach((l, k) => { const b = $('button', 'btn sm' + (k === li ? ' primary' : ''), esc(CITIES[l.c] || l.c)); b.type = 'button'; b.onclick = () => { tripLeg.set(p.id, k); render(); }; pills.appendChild(b); });
+    side.appendChild(pills);
+  }
+  try {
     const cd = await loadCity(st.c);
     const places = resolvePlaces(st, cd);
-    const sum = $('div', 'panel'); const sh = $('div', 'row'); sh.appendChild($('h2', null, `${esc(CITIES[st.c] || st.c)} <span class="muted" style="font-weight:500">· ${st.d}일 · ${places.length}곳${st.dt ? ` · ${Number(st.dt.slice(5, 7))}/${Number(st.dt.slice(8, 10))}부터` : ''}</span>`)); const op = $('button', 'btn sm', '이 구간 플랜 열기'); op.type = 'button'; op.style.marginLeft = 'auto'; op.onclick = () => setState({ ...st, tab: 'plan', pr: p.id, lg: li }); sh.appendChild(op); sum.appendChild(sh);
-    if (!places.length) sum.appendChild($('p', 'muted', '아직 고른 장소가 없다. 「이 플랜 열기」로 가서 고르면 여기 요약이 뜬다.'));
+    const sum = $('div', 'panel'); const sh = $('div', 'row');
+    sh.appendChild($('h2', null, `${esc(CITIES[st.c] || st.c)} <span class="muted" style="font-weight:500">· ${st.d}일 · ${places.length}곳${st.dt ? ` · ${Number(st.dt.slice(5, 7))}/${Number(st.dt.slice(8, 10))}부터` : ''}</span>`));
+    const op = $('button', 'btn sm', '플랜 열기'); op.type = 'button'; op.style.marginLeft = 'auto'; op.onclick = () => setState({ ...st, tab: 'plan', pr: p.id, lg: li }); sh.appendChild(op); sum.appendChild(sh);
+    if (!places.length) sum.appendChild($('p', 'muted', '아직 고른 장소가 없어요. 「플랜 열기」로 가서 고르면 여기 노선이 떠요.'));
     else {
       const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
       const perDay = Object.fromEntries(Object.entries(st.ds || {}).map(([k, d]) => [k, { dayStart: d.t, dayEnd: d.e, pref: d.v, start: d.s }]));
       const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o, perDay });
-      const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
+      const lines = $('div', 'v2lines'), bounds = [[start.lat, start.lng]], css = getComputedStyle(document.body);
       res.days.forEach((day, i) => {
         if (!day.stops.length) return;
-        const d = $('div', 'item'); d.innerHTML = `<b>${i + 1}일차 <span class="muted" style="font-weight:500">${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분 · 도보 ${day.walkKm}km</span></b>`;
-        day.stops.forEach(st2 => {
-          d.appendChild($('div', 'leg', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`));
-          const row = $('div', 'stop'); row.appendChild($('div', 't', hm(st2.arrive)));
-          const who = p.edits?.[st2.place.id]?.by;
-          const body = $('div', 'body'); body.appendChild($('div', 'name', `${esc(st2.place.name)}${st2.place.must ? ' <span class="tag">꼭</span>' : ''}${who ? ` <span class="who">${esc(who)}</span>` : ''}`));
-          body.appendChild($('div', 'muted', `${esc(st2.place.opts[st2.place.opt]?.label || '')} · ${st2.place.opts[st2.place.opt]?.min || ''}분`));
-          row.appendChild(body); d.appendChild(row);
-        });
-        sum.appendChild(d);
+        const cv = `--d${i % 10 + 1}`, col = css.getPropertyValue(cv).trim() || '#1F4FA8';
+        const ln = $('section', 'line ro'); ln.style.setProperty('--c', `var(${cv})`);
+        ln.innerHTML = `<header><b>${i + 1}일차</b><span>${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분</span></header>`;
+        const ol = $('ol');
+        for (const x of day.stops) {
+          const who = p.edits?.[x.place.id]?.by, o = x.place.opts[x.place.opt];
+          ol.appendChild($('li', 'stn', `<time>${hm(x.arrive)}</time><i class="dot"></i><div><div class="nm">${esc(x.place.name)}${who ? ` <span class="who">${esc(who)}</span>` : ''}</div><div class="meta">${esc(o?.label && o.label !== '머물기' ? o.label + ' · ' : '')}${o?.min || ''}분</div></div>`));
+        }
+        ln.appendChild(ol); lines.appendChild(ln);
+        const s0 = perDay[i]?.start || start;
+        map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
+        day.stops.forEach((x, k) => { map.html('route', x.place, `<div class="st" style="--c:${col}"><i>${k + 1}</i><span>${esc(x.place.name)}</span></div>`, { title: `${hm(x.arrive)} ${x.place.name}` }); bounds.push([x.place.lat, x.place.lng]); });
       });
-      if (res.dropped.length) sum.appendChild($('p', 'muted', `뺀 것 ${res.dropped.length}: ${res.dropped.map(x => esc(x.place.name)).join(', ')}`));
+      sum.appendChild(lines);
+      if (res.dropped.length) sum.appendChild($('p', 'muted', `시간이 모자라 뺀 곳 ${res.dropped.length}: ${res.dropped.map(x => esc(x.place.name)).join(', ')}`));
+      map.fitBounds(bounds, 40);
     }
     side.appendChild(sum);
-  } catch (e) { side.appendChild($('div', 'panel', `<p class="muted">플랜 요약을 못 만들었다 — ${esc(e.message || e)}</p>`)); }
+  } catch (e) { side.appendChild($('div', 'panel', `<p class="muted">노선을 못 그렸어요 — ${esc(e.message || e)}</p>`)); }
   side.appendChild(await renderShare(ctx));
   if (!canEdit) return;   // 보기만: 살 것·사진은 아래 읽기 전용으로 — 지금은 생략
 
