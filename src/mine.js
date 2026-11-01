@@ -347,7 +347,7 @@ async function renderProject(ctx) {
         }
         ln.appendChild(ol); lines.appendChild(ln);
         const hd = ln.querySelector('header'), fk = `${key}:${i}`; hd.style.cursor = 'pointer'; hd.onclick = () => pick(i === sel ? null : i);
-        const fold = $('button', 'eye', tripFold.has(fk) ? '펴기' : '접기'); fold.type = 'button'; fold.setAttribute('aria-expanded', !tripFold.has(fk));
+        const fold = $('button', 'eye fold', '▾'); fold.type = 'button'; fold.setAttribute('aria-expanded', !tripFold.has(fk)); fold.setAttribute('aria-label', tripFold.has(fk) ? '펴기' : '접기');
         fold.onclick = e => { e.stopPropagation(); tripFold.has(fk) ? tripFold.delete(fk) : tripFold.add(fk); render(); };
         hd.appendChild(fold); ol.hidden = tripFold.has(fk);
         if (sel !== null && i !== sel) return;
