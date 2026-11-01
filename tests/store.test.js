@@ -41,3 +41,12 @@ test('LocalStore: updateUser로 이름·기본 설정을 바꾸고 user()에 반
   const u = await s.user();
   assert.equal(u.name, '신영철'); assert.deepEqual(u.prefs, { c: 'paris', v: 'taxi' });
 });
+
+test('LocalStore: 탈퇴하면 사용자와 여행이 모두 지워진다', async () => {
+  const s = new LocalStore(mem());
+  await s.signUp({ name: '영철' });
+  await s.createProject({ name: '런던', city: 'london', hash: '' });
+  await s.deleteAccount();
+  assert.equal(await s.user(), null);
+  assert.deepEqual(await s.listProjects(), []);
+});

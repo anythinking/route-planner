@@ -1,5 +1,6 @@
 import { plan, hm } from './engine.js';
-import { decode, encode, DEFAULTS, TABS, resolvePlaces, legsOf, withLeg } from './state.js';
+import { decode, encode, DEFAULTS, TABS, PAGES, resolvePlaces, legsOf, withLeg } from './state.js';
+import { renderPage } from './pages.js';
 import { esc } from './html.js';
 import { search } from './search.js';
 import { LocalStore } from './store.js';
@@ -293,8 +294,8 @@ function renderHome(side, projects, pub = []) {
     side.appendChild(sec);
   } else {
     const sec = $('div', 'panel');
-    sec.appendChild($('p', null, '<b>로그인하면</b> 짠 플랜을 여행으로 저장하고, 살 것과 사진을 같이 둘 수 있다. 플랜을 짜는 데는 로그인이 필요 없다.'));
-    const b = $('button', 'btn', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine' }); sec.appendChild(b);
+    sec.appendChild($('p', null, '<b>로그인하면</b> 짠 플랜을 여행으로 저장하고, 살 것과 사진을 같이 둘 수 있어요. 플랜을 짜는 데는 로그인이 필요 없어요.'));
+    const b = $('button', 'btn', '로그인 · 회원가입'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine' }); sec.appendChild(b);
     side.appendChild(sec);
   }
   const others = pub.filter(p => !curUser || p.ownerId !== curUser.id);
@@ -311,7 +312,7 @@ function renderHome(side, projects, pub = []) {
     }
     sec.appendChild(grid); side.appendChild(sec);
   }
-  side.appendChild($('p', 'muted credits', '도시 사진: Wikimedia Commons (CC BY / CC BY-SA, <a href="assets/cities/credits.json">저작자</a>)'));
+  side.appendChild($('p', 'muted credits', '도시 사진: Wikimedia Commons (CC BY / CC BY-SA, <a href="assets/cities/credits.json">저작자</a>) · <a href="#tab=terms">이용약관</a> · <a href="#tab=privacy">개인정보처리방침</a>'));
   applyHomeFilter(side);
 }
 function applyHomeFilter(side) {
@@ -372,6 +373,7 @@ function renderInfo(side) {
   side.appendChild(gp);
 }
 
+const LOADING = '<div class="panel loading" role="status"><span class="spin"></span> 불러오는 중이에요…</div>';
 let renderSeq = 0;              // 겹쳐 시작된 렌더 중 마지막 것만 그린다 (await 사이에 새 렌더가 오면 옛것은 접는다)
 async function render() {
   const seq = ++renderSeq;
@@ -388,6 +390,7 @@ async function render() {
   // 계정 서버가 아직이면 기다리지 않고 그린다(storeReady가 끝나면 다시 그린다). 확인이 3초 넘게 안 끝나면 일단 로그아웃 상태로
   try { curUser = storeIsFinal ? await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]) : null; } catch { curUser = null; }
   if (seq !== renderSeq) return;
+  if (PAGES.includes(state.tab)) { lastStep = -1; side.innerHTML = ''; map.clear('places'); map.clear('route'); renderPage(side, state.tab, { $, setState }); window.scrollTo(0, 0); return; }
   if (state.tab === 'home') {
     lastStep = -1;
     const sy = window.scrollY, st = side.scrollTop; side.style.minHeight = side.offsetHeight + 'px'; side.innerHTML = ''; map.clear('places'); map.clear('route');
@@ -401,6 +404,7 @@ async function render() {
     }
     return;
   }
+  if (!side.children.length) side.innerHTML = LOADING;            // 첫 화면 — 도시 파일을 받는 동안
   try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
   catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
@@ -422,12 +426,13 @@ async function render() {
 
   if (state.tab === 'mine') {
     lastStep = -1;
+    side.innerHTML = LOADING;                                        // 아래 상자를 바꿔 끼울 때 사라진다
     const projects = await listProjectsCached();
     if (seq !== renderSeq) return;
     let project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     let canEdit = false, isOwner = false;
     if (state.pr && !project) { try { project = await store.getProject(state.pr); } catch {} }      // 공개 플랜·링크 보기
-    if (state.pr && !project) { state = { ...state, pr: null }; history.replaceState(null, '', '#' + encode(state)); }
+    if (state.pr && !project && storeIsFinal) { side.innerHTML = ''; renderPage(side, 'notfound', { $, setState, missingTrip: true }); return; }   // 지워졌거나 권한이 없는 여행
     if (project && curUser) { isOwner = project.ownerId === curUser.id; canEdit = isOwner || project.role === 'editor'; }
     curProject = project;
     // 떼어 둔 상자에 그렸다가 마지막에 한 번에 바꿔 끼운다 — 그리는 도중 render가 또 불리면 두 벌이 섞여 붙었다
@@ -439,7 +444,7 @@ async function render() {
     if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
-  if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'guide') { [packingCache] = await Promise.all([loadPacking(), loadPackingList()]); if (seq !== renderSeq) return; } renderInfo(side); restoreScroll(side, sy, st); return; }
+  if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'guide') { side.innerHTML = LOADING; [packingCache] = await Promise.all([loadPacking(), loadPackingList()]); if (seq !== renderSeq) return; side.innerHTML = ''; } renderInfo(side); restoreScroll(side, sy, st); return; }
   const entering = step !== lastStep; lastStep = step;
   if (entering) requestAnimationFrame(() => map.resize());   // 숨겼다 다시 보일 때 타일 빈칸 방지
   if (state.pr && (!curProject || curProject.id !== state.pr)) { try { curProject = await store.getProject(state.pr); } catch { curProject = null; } if (seq !== renderSeq) return; }
@@ -821,3 +826,14 @@ window.addEventListener('hashchange', () => { state = decode(location.hash); ren
 window.addEventListener('popstate', () => { const h = decode(location.hash); if (encode(h) !== encode(state)) { state = h; render(); } });   // 뒤로·앞으로
 window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
 render();
+
+// 어디서든 처리 못 한 오류 — 조용히 멈추지 않고 아래에 알린다
+function oops(e) {
+  const m = e?.reason?.message || e?.message || String(e?.reason || e || ''); if (!m || /ResizeObserver/.test(m)) return;
+  let bar = document.getElementById('oops');
+  if (!bar) { bar = $('div', 'oops'); bar.id = 'oops'; bar.setAttribute('role', 'alert'); document.body.appendChild(bar); }
+  bar.innerHTML = `<span>문제가 생겼어요 — ${esc(m.slice(0, 140))}</span><button class="btn sm" type="button">새로고침</button><button class="btn sm" type="button" aria-label="닫기">×</button>`;
+  const [re, x] = bar.querySelectorAll('button'); re.onclick = () => location.reload(); x.onclick = () => bar.remove();
+}
+window.addEventListener('error', oops);
+window.addEventListener('unhandledrejection', oops);

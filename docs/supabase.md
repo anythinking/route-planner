@@ -115,3 +115,7 @@ create policy "delete own comments" on comments for delete using (auth.uid() = u
 ### ⑦ 공유 한 체계 (2026-10-17, 미실행) — ③·⑥을 합쳤다
 `docs/sharing.sql` 을 새 탭에 통째로 붙여 Run. 들어가는 것: 공유 범위(비공개·링크 초대·공개), 멤버·초대 표, 멤버도 읽고(편집자는 고치고) 사진도 보는 RLS, 초대 수락 함수, 공개 플랜은 로그인 없이 읽기.
 실행 전엔 사이트의 「공유」 패널이 "서버 준비 전"이라고 뜬다.
+
+### ⑦ 회원 탈퇴 (2026-11-02)
+`docs/account.sql` 을 SQL Editor 에서 한 번 돌린다. 안 돌리면 「탈퇴」가 아무것도 지우지 않고 "서버에 docs/account.sql 을 먼저 돌려야 해요"로 멈춘다.
+비밀번호 재설정 메일이 돌아올 주소: Authentication → URL Configuration 의 Redirect URLs 에 `https://anythinking.github.io/route-planner/` 가 있어야 한다(로그인 링크 때 이미 넣었으면 그대로).

@@ -5,6 +5,7 @@ export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m:
 export const legsOf = h => { const l = String(h || '').split('\n').filter(Boolean); return l.length ? l : ['']; };
 export const withLeg = (h, i, leg) => { const l = legsOf(h); l[i] = leg; return l.join('\n'); };
 export const TABS = ['home', 'plan', 'guide', 'mine'];   // 홈 · 플랜 · 가이드(준비물·사진·기념품) · 내 여행
+export const PAGES = ['privacy', 'terms', 'notfound'];   // 탭 줄엔 없는 문서 쪽 (404 포함)
 const OLD_TABS = { pack: 'guide', photo: 'guide', gift: 'guide' };   // 옛 링크
 const ID = /^[a-z0-9_]+$/, MODES = ['walk', 'metro', 'taxi'];
 
@@ -71,7 +72,8 @@ export function decode(hash) {
     st.o = days.some(d => d.length) ? days : null;
   }
   const tab = OLD_TABS[q.get('tab')] || q.get('tab');
-  if (TABS.includes(tab)) st.tab = tab;
+  if (TABS.includes(tab) || PAGES.includes(tab)) st.tab = tab;
+  else if (tab) st.tab = 'notfound';
   if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
   if (/^[1-9]$/.test(q.get('lg') || '')) st.lg = Number(q.get('lg'));
   if (/^\d{4}-\d{2}-\d{2}$/.test(q.get('dt') || '') && !Number.isNaN(Date.parse(q.get('dt')))) st.dt = q.get('dt');

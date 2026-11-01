@@ -1,5 +1,5 @@
 // 저장소 — 계정·여행(프로젝트)·살 것·사진. 화면은 이 인터페이스만 쓴다.
-//   user() · signIn(opts) · signOut() · updateUser({name, prefs, password})
+//   user() · signIn(opts) · signUp(opts) · resetPassword(email) · signOut() · deleteAccount() · updateUser({name, prefs, password})
 //   listProjects() · getProject(id) · createProject({name, city, hash}) · updateProject(id, patch) · deleteProject(id)
 //   addPhoto(pid, {dataUrl|url, lat, lng, placeId, note}) · updatePhoto(pid, phid, patch) · deletePhoto(pid, phid)
 // LocalStore는 브라우저 안에만 남는다(이 기기, 이 브라우저). Supabase 구현이 들어오면 같은 메서드로 갈아끼운다.
@@ -15,6 +15,9 @@ export class LocalStore {
   async user() { return this._get('rp.user', null); }
   async signIn({ name }) { const u = { id: 'local', name: String(name || '').trim().slice(0, 40) || '나' }; this._set('rp.user', u); return u; }
   async signOut() { this.s.removeItem('rp.user'); }
+  async signUp({ name }) { return this.signIn({ name }); }
+  async resetPassword() { throw new Error('브라우저 저장에는 비밀번호가 없어요'); }
+  async deleteAccount() { this.s.removeItem(this._key()); this.s.removeItem('rp.user'); }
   // { name?, prefs?, password? } — 로컬은 비밀번호가 없다
   async updateUser(patch) {
     const u = await this.user(); if (!u) return null;

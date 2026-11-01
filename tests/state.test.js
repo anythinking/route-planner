@@ -78,11 +78,13 @@ test('o: 빈 날·잘못된 id는 버리고, 비면 null', () => {
   assert.equal(decode('#o=bad id,!').o, null);
 });
 
-test('tab: 기본은 plan이고 해시에 안 쓴다, 모르는 값은 plan으로', () => {
+test('tab: 기본은 plan이고 해시에 안 쓴다, 모르는 값은 notfound(404)', () => {
   assert.equal(decode('').tab, 'plan');
   assert.equal(decode('#tab=guide').tab, 'guide');
   assert.equal(decode('#tab=gift').tab, 'guide');   // 옛 링크(준비물·사진·기념품)는 가이드로
-  assert.equal(decode('#tab=nope').tab, 'plan');
+  assert.equal(decode('#tab=nope').tab, 'notfound');
+  assert.equal(decode('#tab=privacy').tab, 'privacy');
+  assert.equal(decode('#tab=terms').tab, 'terms');
   assert.ok(!encode({ ...DEFAULTS }).includes('tab='));
   assert.ok(encode({ ...DEFAULTS, tab: 'guide' }).includes('tab=guide'));
 });

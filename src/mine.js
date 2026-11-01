@@ -31,10 +31,10 @@ const tripDay = new Map();   // 여행 페이지 지도에 보이는 날 (여행
 const tripLeg = new Map();   // 여행 페이지에서 보고 있는 구간 (여행 id → 번호)
 
 export async function renderMine(ctx) {
-  const { state, user, project } = ctx;
+  const { state, user, project, store } = ctx;
   if (!user && state.pr && project) return renderProject(ctx);   // 공개·링크 플랜은 로그인 없이 읽는다
   if (!user) return renderLogin(ctx);
-  if (ctx.accountOpen && !state.pr) return renderAccount(ctx);
+  if ((ctx.accountOpen || store.recovering) && !state.pr) return renderAccount(ctx);   // 재설정 메일로 오면 계정 화면부터
   if (!state.pr || !project) return renderList(ctx);
   return renderProject(ctx);
 }
@@ -116,18 +116,19 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   nmGo.onclick = async () => { try { await store.updateUser({ name: nm.value }); note(nmMsg, '바꿨다'); setTimeout(render, 500); } catch (e) { note(nmMsg, e.message || e, true); } };
   r1.append(nm, nmGo, nmMsg); prof.appendChild(r1); side.appendChild(prof);
 
-  // 3. 비밀번호 (계정 서버일 때만)
+  // 3. 비밀번호 (계정 서버일 때만) — 재설정 메일로 들어왔으면 맨 위에서 새 비밀번호부터
   if (user.canPassword) {
-    const pwp = $('div', 'panel'); pwp.appendChild($('h2', null, '비밀번호'));
-    pwp.appendChild($('p', null, '8자 이상. 바꿔도 지금 로그인은 유지된다.'));
+    const pwp = $('div', 'panel'); pwp.appendChild($('h2', null, store.recovering ? '새 비밀번호를 정해 주세요' : '비밀번호'));
+    pwp.appendChild($('p', null, store.recovering ? '재설정 링크로 들어왔어요. 새 비밀번호를 두 번 적고 「바꾸기」를 누르면 끝나요.' : '8자 이상. 바꿔도 지금 로그인은 유지된다.'));
+    if (store.recovering) { pwp.style.boxShadow = '0 0 0 2px var(--d1)'; side.insertBefore(pwp, side.firstChild); }
     const p1 = $('input', 'text'); p1.type = 'password'; p1.placeholder = '새 비밀번호'; p1.autocomplete = 'new-password'; p1.style.width = '100%';
     const p2 = $('input', 'text'); p2.type = 'password'; p2.placeholder = '한 번 더'; p2.autocomplete = 'new-password'; p2.style.width = '100%';
     const r2 = $('div', 'row'); const pwGo = $('button', 'btn sm', '바꾸기'); pwGo.type = 'button'; const pwMsg = $('span', null, '');
     pwGo.onclick = async () => {
       if (p1.value.length < 8) return note(pwMsg, '8자 이상', true); if (p1.value !== p2.value) return note(pwMsg, '두 칸이 다르다', true);
-      try { await store.updateUser({ password: p1.value }); p1.value = p2.value = ''; note(pwMsg, '바꿨다'); } catch (e) { note(pwMsg, e.message || e, true); }
+      try { await store.updateUser({ password: p1.value }); p1.value = p2.value = ''; note(pwMsg, '바꿨다'); if (store.recovering) { store.recovering = false; setTimeout(render, 800); } } catch (e) { note(pwMsg, e.message || e, true); }
     };
-    r2.append(pwGo, pwMsg); pwp.append(p1, p2, r2); side.appendChild(pwp);
+    r2.append(pwGo, pwMsg); pwp.append(p1, p2, r2); if (!store.recovering) side.appendChild(pwp);
   }
 
   // 4. 기본 설정 — 언어·새 플랜 기본값
@@ -171,43 +172,82 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
     } catch (e) { note(exMsg, e.message || e, true); }
   };
   r7.append(ex, exMsg); dp.appendChild(r7);
-  dp.appendChild($('p', 'muted', '계정 삭제는 아직 없다 — 필요하면 말해라(서버 쪽 함수가 하나 필요하다).'));
   side.appendChild(dp);
+
+  // 6. 탈퇴 — 되돌릴 수 없으니 「탈퇴」를 직접 적어야 눌린다
+  const wd = $('div', 'panel'); wd.appendChild($('h2', null, '회원 탈퇴'));
+  wd.appendChild($('p', null, `계정과 여행 ${projects.length}개, 사진 ${photos}장이 모두 지워지고 되돌릴 수 없어요. 남기고 싶으면 위의 「내 데이터」에서 먼저 받아 두세요. 같이 보던 여행에서는 빠지고, 내가 주인인 여행은 같이 보던 사람에게서도 사라져요.`));
+  const wr = $('div', 'row'); const wi = $('input', 'text'); wi.type = 'text'; wi.placeholder = '탈퇴 라고 적어 주세요';
+  const wGo = $('button', 'btn', '탈퇴하기'); wGo.type = 'button'; wGo.disabled = true; wGo.style.color = 'var(--warn)'; const wMsg = $('span', null, '');
+  wi.oninput = () => { wGo.disabled = wi.value.trim() !== '탈퇴'; };
+  wGo.onclick = async () => {
+    if (!confirm('정말 탈퇴할까요? 지금 바로 모두 지워져요.')) return;
+    wGo.disabled = true; wGo.textContent = '지우는 중…';
+    try { await store.deleteAccount(); closeAccount(); setState({ pr: null, tab: 'home' }); }
+    catch (e) { note(wMsg, e.message || e, true); wGo.textContent = '탈퇴하기'; wGo.disabled = false; }
+  };
+  wr.append(wi, wGo, wMsg); wd.appendChild(wr); side.appendChild(wd);
+  side.appendChild($('p', 'muted legal', `<a href="#tab=terms">이용약관</a> · <a href="#tab=privacy">개인정보처리방침</a>`));
 }
 
-let mailSent = '';
+let mailSent = '';            // 보낸 메일 안내 (주소 + 무엇을 보냈나)
+let authMode = 'login';       // login · signup · reset
+const LEGAL = '<a href="#tab=terms">이용약관</a>과 <a href="#tab=privacy">개인정보처리방침</a>';
 function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
   const p = $('div', 'panel');
-  p.appendChild($('h2', null, '내 여행'));
   if (store.kind === 'supabase') {
-    p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 로그인하면 어느 기기에서든 같은 여행이 열린다.'));
-    if (Object.keys(ctxState.p).length) p.appendChild($('p', null, '<b>지금 만든 플랜은 그대로 있다</b> — 로그인한 뒤 플랜 탭의 「저장」을 누르면 내 여행에 남는다.'));
-    if (joinPending) p.appendChild($('p', null, '<b>초대받은 여행이 있다</b> — 로그인하면 바로 열린다.'));
-    if (mailSent) { p.appendChild($('p', null, `<b>${esc(mailSent)}</b> 로 로그인 링크를 보냈다. 메일의 링크를 누르면 여기로 돌아온다(스팸함도 확인).`)); side.appendChild(p); return; }
-    const inp = $('input', 'text'); inp.type = 'email'; inp.placeholder = '이메일'; inp.autocomplete = 'email'; inp.style.width = '100%';
-    const pw = $('input', 'text'); pw.type = 'password'; pw.placeholder = '비밀번호 (있으면)'; pw.autocomplete = 'current-password'; pw.style.width = '100%';
-    const row = $('div', 'row');
-    const go = $('button', 'btn primary', '로그인'); go.type = 'button';
-    const link = $('button', 'btn', '메일로 링크 받기'); link.type = 'button';
+    const TITLE = { login: '로그인', signup: '회원가입', reset: '비밀번호 재설정' };
+    p.appendChild($('h2', null, TITLE[authMode]));
+    if (authMode === 'login') p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둬요. 로그인하면 어느 기기에서든 같은 여행이 열려요.'));
+    if (Object.keys(ctxState.p).length) p.appendChild($('p', null, '<b>지금 만든 플랜은 그대로 있어요</b> — 로그인한 뒤 플랜의 「저장」을 누르면 내 여행에 남아요.'));
+    if (joinPending) p.appendChild($('p', null, '<b>초대받은 여행이 있어요</b> — 로그인하면 바로 열려요.'));
+    if (mailSent) {
+      p.appendChild($('p', null, `<b>${esc(mailSent)}</b> — 메일의 링크를 누르면 여기로 돌아와요. 안 보이면 스팸함도 확인해 주세요.`));
+      const back = $('button', 'btn', '로그인 화면으로'); back.type = 'button'; back.onclick = () => { mailSent = ''; authMode = 'login'; render(); };
+      p.appendChild(back); side.appendChild(p); return;
+    }
+    const field = (type, ph, ac) => { const i = $('input', 'text'); i.type = type; i.placeholder = ph; i.autocomplete = ac; i.style.width = '100%'; p.appendChild(i); return i; };
+    const nm = authMode === 'signup' ? field('text', '이름 (여행 목록에 보여요)', 'nickname') : null;
+    const inp = field('email', '이메일', 'email');
+    const pw = authMode !== 'reset' ? field('password', authMode === 'signup' ? '비밀번호 (8자 이상)' : '비밀번호', authMode === 'signup' ? 'new-password' : 'current-password') : null;
+    const pw2 = authMode === 'signup' ? field('password', '비밀번호 한 번 더', 'new-password') : null;
     const err = $('p', null, '');
-    const fail = (m, b, label) => { err.innerHTML = `<b style="color:var(--warn)">${esc(m)}</b>`; b.disabled = false; b.textContent = label; };
-    const email = () => { const v = inp.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { inp.focus(); return null; } return v; };
-    go.onclick = async () => {
-      const e = email(); if (!e) return; if (!pw.value) { pw.focus(); return; }
-      go.disabled = true; go.textContent = '확인 중…';
-      try { await store.signIn({ email: e, password: pw.value }); render(); }
-      catch (x) { fail(`로그인 실패 — ${x.message || x}`, go, '로그인'); }
-    };
-    link.onclick = async () => {
-      const e = email(); if (!e) return;
-      link.disabled = true; link.textContent = '보내는 중…';
-      try { await store.signIn({ email: e }); mailSent = e; render(); }
-      catch (x) { fail(`못 보냈다 — ${x.message || x}`, link, '메일로 링크 받기'); }
-    };
-    pw.onkeydown = e => { if (e.key === 'Enter') go.click(); };
-    row.append(go, link); p.append(inp, pw, row, err);
-    p.appendChild($('p', 'muted', '비밀번호가 없으면 「메일로 링크 받기」 — 메일의 링크 한 번이 로그인이다(시간당 2통 한도).'));
+    const say = m => { err.innerHTML = `<b style="color:var(--warn)">${esc(m)}</b>`; };
+    const email = () => { const v = inp.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { say('이메일 주소를 확인해 주세요.'); inp.focus(); return null; } return v; };
+    const busy = async (b, label, fn) => { b.disabled = true; const t = b.textContent; b.textContent = label; try { await fn(); } catch (x) { say(x.message || String(x)); b.disabled = false; b.textContent = t; } };
+    const row = $('div', 'row');
+    if (authMode === 'login') {
+      const go = $('button', 'btn primary', '로그인'); go.type = 'button';
+      go.onclick = () => { const e = email(); if (!e) return; if (!pw.value) { pw.focus(); return; } busy(go, '확인 중…', async () => { await store.signIn({ email: e, password: pw.value }); render(); }); };
+      pw.onkeydown = ev => { if (ev.key === 'Enter') go.click(); };
+      const link = $('button', 'btn', '메일 링크로 로그인'); link.type = 'button';
+      link.onclick = () => { const e = email(); if (!e) return; busy(link, '보내는 중…', async () => { await store.signIn({ email: e }); mailSent = `${e} 로 로그인 링크를 보냈어요`; render(); }); };
+      row.append(go, link);
+    } else if (authMode === 'signup') {
+      const go = $('button', 'btn primary', '가입하기'); go.type = 'button';
+      go.onclick = () => {
+        const e = email(); if (!e) return;
+        if (!nm.value.trim()) { say('이름을 적어 주세요.'); nm.focus(); return; }
+        if (pw.value.length < 8) { say('비밀번호는 8자 이상이에요.'); pw.focus(); return; }
+        if (pw.value !== pw2.value) { say('두 비밀번호가 달라요.'); pw2.focus(); return; }
+        busy(go, '가입하는 중…', async () => { const r = await store.signUp({ name: nm.value, email: e, password: pw.value }); if (!r.session) mailSent = `${e} 로 가입 확인 메일을 보냈어요`; render(); });
+      };
+      row.append(go);
+    } else {
+      const go = $('button', 'btn primary', '재설정 링크 받기'); go.type = 'button';
+      go.onclick = () => { const e = email(); if (!e) return; busy(go, '보내는 중…', async () => { await store.resetPassword(e); mailSent = `${e} 로 비밀번호 재설정 링크를 보냈어요. 링크로 들어오면 새 비밀번호를 정하는 화면이 열려요`; render(); }); };
+      row.append(go);
+    }
+    p.append(row, err);
+    const sw = (label, mode) => { const a = $('a', null, label); a.href = '#'; a.onclick = ev => { ev.preventDefault(); authMode = mode; render(); }; return a; };
+    const alt = $('p', 'muted authalt');
+    if (authMode === 'login') alt.append(sw('처음이에요 — 회원가입', 'signup'), ' · ', sw('비밀번호를 잊었어요', 'reset'));
+    else alt.append(sw('← 로그인으로', 'login'));
+    p.appendChild(alt);
+    if (authMode === 'signup') p.appendChild($('p', 'muted', `가입하면 ${LEGAL}에 동의하는 것으로 봐요.`));
+    p.appendChild($('p', 'muted', '메일(로그인 링크·가입 확인·재설정)은 시간당 몇 통으로 제한돼 있어요. 안 오면 잠시 뒤 다시 해 주세요.'));
   } else {
+    p.appendChild($('h2', null, '내 여행'));
     p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 지금은 <b>이 브라우저 안에만</b> 저장된다(기기를 바꾸면 안 보인다).'));
     const row = $('div', 'row');
     const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '이름'; inp.maxLength = 40;
@@ -268,7 +308,11 @@ function renderList(ctx) {
   head.appendChild($('p', 'muted', '타임라인 파일은 구글 지도 앱 → 설정 → 위치 및 개인정보 → 타임라인 내보내기에서 받아요. 파일은 이 브라우저 안에서만 읽고, 만들어진 플랜만 저장돼요.'));
   side.appendChild(head);
 
-  if (!projects.length) { side.appendChild($('div', 'panel', '<p class="muted">아직 여행이 없다.</p>')); return; }
+  if (!projects.length) {
+    const em = $('div', 'panel empty', '<h3>아직 여행이 없어요</h3><p>도시를 골라 가고 싶은 곳을 담고, 플랜의 「저장」을 누르면 여기에 쌓여요.</p>');
+    const go = $('button', 'btn primary', '도시 고르러 가기'); go.type = 'button'; go.onclick = () => setState({ tab: 'home' }); em.appendChild(go);
+    side.appendChild(em); return;
+  }
   const grid = $('div', 'cards');
   for (const p of projects) {
     const ci = ctx.INDEX?.cities?.[p.city] || {};

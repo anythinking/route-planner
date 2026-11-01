@@ -10,7 +10,7 @@ export class SupabaseStore {
   constructor() {
     this.kind = 'supabase';
     this.sb = createClient(SUPABASE.url, SUPABASE.anonKey);
-    this.sb.auth.onAuthStateChange(() => this.onChange?.());
+    this.sb.auth.onAuthStateChange(ev => { if (ev === 'PASSWORD_RECOVERY') this.recovering = true; this.onChange?.(); });   // 재설정 메일로 들어오면 새 비밀번호부터
   }
   async _uid() { const { data } = await this.sb.auth.getUser(); return data.user?.id || null; }
 
@@ -36,6 +36,25 @@ export class SupabaseStore {
     return { sent: true };
   }
   async signOut() { await this.sb.auth.signOut(); }
+  // 가입 — 메일 확인을 켜 두면 세션 없이 돌아오고 확인 메일이 간다
+  async signUp({ name, email, password }) {
+    const { data, error } = await this.sb.auth.signUp({ email, password, options: { data: { full_name: String(name || '').trim().slice(0, 40) }, emailRedirectTo: location.href.split('#')[0] + '#tab=mine' } });
+    if (error) throw error;
+    return { session: !!data.session };
+  }
+  async resetPassword(email) {
+    const { error } = await this.sb.auth.resetPasswordForEmail(email, { redirectTo: location.href.split('#')[0] + '#tab=mine' }); if (error) throw error;
+  }
+  // 탈퇴 — 사진 파일을 먼저 지우고(저장소는 표와 따로라 같이 안 지워진다), 서버 함수가 계정을 지우면 표는 연쇄로 지워진다
+  async deleteAccount() {
+    const uid = await this._uid(); if (!uid) throw new Error('로그인 필요');
+    const need = '서버에 docs/account.sql 을 먼저 돌려야 해요';
+    { const { error } = await this.sb.rpc('delete_my_account', { dry: true }); if (error) throw new Error(`${error.message} — ${need}`); }   // 함수가 없으면 아무것도 안 지운다
+    const { data: rows, error: e1 } = await this.sb.from('photos').select('path').eq('user_id', uid); if (e1) throw e1;
+    if (rows.length) { const { error } = await this.sb.storage.from('photos').remove(rows.map(r => r.path)); if (error) throw error; }
+    const { error } = await this.sb.rpc('delete_my_account'); if (error) throw new Error(`${error.message} — ${need}`);
+    await this.sb.auth.signOut();
+  }
 
   async myId() { return this._uid(); }
   // 내 것 + 초대받은 것 (공개 플랜은 여기 안 섞는다 — listPublic)
