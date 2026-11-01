@@ -118,8 +118,8 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
 
   // 3. 비밀번호 (계정 서버일 때만) — 재설정 메일로 들어왔으면 맨 위에서 새 비밀번호부터
   if (user.canPassword) {
-    const pwp = $('div', 'panel'); pwp.appendChild($('h2', null, store.recovering ? '새 비밀번호를 정해 주세요' : '비밀번호'));
-    pwp.appendChild($('p', null, store.recovering ? '재설정 링크로 들어왔어요. 새 비밀번호를 두 번 적고 「바꾸기」를 누르면 끝나요.' : '8자 이상. 바꿔도 지금 로그인은 유지된다.'));
+    const pwp = $('div', 'panel'); pwp.appendChild($('h2', null, store.recovering ? '새 비밀번호를 정해 주세요' : '비밀번호 정하기 · 바꾸기'));
+    pwp.appendChild($('p', null, store.recovering ? '재설정 링크로 들어왔어요. 새 비밀번호를 두 번 적고 「바꾸기」를 누르면 끝나요.' : '메일 링크로만 들어왔다면 아직 비밀번호가 없어요. 여기서 정해 두면 다음부터 이메일과 비밀번호로 로그인돼요. 8자 이상, 바꿔도 지금 로그인은 그대로예요.'));
     if (store.recovering) { pwp.style.boxShadow = '0 0 0 2px var(--d1)'; side.insertBefore(pwp, side.firstChild); }
     const p1 = $('input', 'text'); p1.type = 'password'; p1.placeholder = '새 비밀번호'; p1.autocomplete = 'new-password'; p1.style.width = '100%';
     const p2 = $('input', 'text'); p2.type = 'password'; p2.placeholder = '한 번 더'; p2.autocomplete = 'new-password'; p2.style.width = '100%';
