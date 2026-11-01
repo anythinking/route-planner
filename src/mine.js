@@ -269,6 +269,24 @@ function renderList(ctx) {
     } catch (e) { console.error(e); tlImport.busy = false; say(`가져오지 못했어요 — ${e.message || e}`); render(); }
   };
   row.append(nw, tl, file); head.appendChild(row); head.appendChild(msg);
+  // 플랜 링크 여러 개 → 여행 하나 (도시마다 구간). 링크의 # 뒤만 읽는다
+  const lk = $('details'); lk.appendChild($('summary', null, '플랜 링크로 여행 만들기'));
+  const ta = $('textarea', 'text'); ta.rows = 3; ta.placeholder = '플랜 링크를 붙여 넣어요 — 여러 도시면 줄마다 하나씩';
+  const lkGo = $('button', 'btn primary', '여행 만들기'); lkGo.type = 'button'; const lkMsg = $('span', 'muted', '');
+  lkGo.onclick = async () => {
+    const legs = (ta.value.match(/#[^\s]+/g) || []).map(h => decode(h)).filter(st => CITIES[st.c] && Object.keys(st.p).length + st.u.length)
+      .sort((x, y) => (x.dt || '').localeCompare(y.dt || ''));
+    if (!legs.length) { lkMsg.textContent = '장소가 담긴 플랜 링크를 못 찾았어요.'; return; }
+    const md = st => st.dt ? `${Number(st.dt.slice(5, 7))}/${Number(st.dt.slice(8, 10))}` : '';
+    const end = legs.at(-1), endDt = end.dt && new Date(Date.parse(end.dt) + (end.d - 1) * 864e5).toISOString().slice(0, 10);
+    const range = legs[0].dt ? ` ${md(legs[0])}–${md({ dt: endDt })}` : '';
+    try {
+      lkGo.disabled = true;
+      const pr = await store.createProject({ name: `${legs.map(st => CITIES[st.c]).join('·')}${range}`, city: legs[0].c, hash: legs.map(st => encode({ ...st, tab: 'plan', pr: null, lg: 0 })).join('\n') });
+      setState({ pr: pr.id });
+    } catch (e) { lkGo.disabled = false; lkMsg.textContent = `만들지 못했어요 — ${e.message || e}`; }
+  };
+  const lkRow = $('div', 'row'); lkRow.append(ta, lkGo, lkMsg); lk.appendChild(lkRow); head.appendChild(lk);
   head.appendChild($('p', 'muted', '타임라인 파일은 구글 지도 앱 → 설정 → 위치 및 개인정보 → 타임라인 내보내기에서 받아요. 파일은 이 브라우저 안에서만 읽고, 만들어진 플랜만 저장돼요.'));
   side.appendChild(head);
 
