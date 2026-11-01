@@ -649,15 +649,21 @@ function renderPlan(side, entering) {
 
   // 노선 — 날마다 하나
   const lines = $('div', 'v2lines');
+  // 지도에 보일 날 — 여행 페이지와 같은 알약: 전체 또는 하루
+  const shown = days.map((_, i) => i).filter(i => !hidden.has(i)), sel = shown.length === 1 && days.length > 1 ? shown[0] : null;
+  if (days.length > 1) {
+    const pick = d => { hidden.clear(); if (d !== null) activeDay = d; if (d !== null) days.forEach((_, i) => { if (i !== d) hidden.add(i); }); mapFitAsked = true; render(); };
+    const chips = $('div', 'legpills');
+    [null, ...days.keys()].forEach(d => { const b = $('button', 'btn sm' + (d === sel ? ' primary' : ''), d === null ? '전체' : `${d + 1}일차`); b.type = 'button'; b.onclick = () => pick(d); chips.appendChild(b); });
+    side.appendChild(chips);
+  }
   days.forEach((day, i) => {
     const col = `var(${DAY_COLORS[i] || '--d1'})`;
     const ln = $('section', 'line' + (i === activeDay && !a.auto ? ' active' : '')); ln.style.setProperty('--c', col);
     const hd = $('header');
     const span = day.stops.length ? `${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분${day.over ? ' · <b class="warn">시간 초과</b>' : ''}` : '비어 있어요';
     hd.innerHTML = `<b>${i + 1}일차</b><span>${span}</span>`;
-    const eye = $('button', 'eye', hidden.has(i) ? '지도 끔' : '지도'); eye.type = 'button'; eye.setAttribute('aria-pressed', !hidden.has(i)); eye.title = '이 날을 지도에 보이기/숨기기';
-    eye.onclick = () => { hidden.has(i) ? hidden.delete(i) : hidden.add(i); mapFitAsked = true; render(); };
-    hd.appendChild(eye);
+    if (sel !== null && i !== sel) ln.style.opacity = '.45';
     const dc = $('details', 'daycfgbox'); dc.appendChild($('summary', null, '설정')); dc.appendChild(renderDayCfg(i)); hd.appendChild(dc);
     if (days.length > 1) { const x = $('button', 'x', '×'); x.type = 'button'; x.title = '이 날 빼기 — 장소는 앞날로 옮겨요'; x.onclick = () => { const o = makeManual(); while (o.length < days.length) o.push([]); const j = Math.max(0, i - 1); if (i === 0) o[1] = [...o[0], ...(o[1] || [])]; else o[j].push(...o[i]); o.splice(i, 1); activeDay = Math.min(activeDay, o.length - 1); setState({ d: Math.max(1, state.d - 1), o }); }; hd.appendChild(x); }
     ln.appendChild(hd);

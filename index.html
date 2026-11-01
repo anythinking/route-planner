@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611011607","./src/config.js":"./src/config.js?v=202611011607","./src/edits.js":"./src/edits.js?v=202611011607","./src/engine.js":"./src/engine.js?v=202611011607","./src/html.js":"./src/html.js?v=202611011607","./src/map.js":"./src/map.js?v=202611011607","./src/mine.js":"./src/mine.js?v=202611011607","./src/search.js":"./src/search.js?v=202611011607","./src/shadow.js":"./src/shadow.js?v=202611011607","./src/state.js":"./src/state.js?v=202611011607","./src/store-map.js":"./src/store-map.js?v=202611011607","./src/store-supabase.js":"./src/store-supabase.js?v=202611011607","./src/store.js":"./src/store.js?v=202611011607","./src/timeline.js":"./src/timeline.js?v=202611011607","./src/travel.js":"./src/travel.js?v=202611011607","./src/ui.js":"./src/ui.js?v=202611011607"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611011607"><link rel="modulepreload" href="src/config.js?v=202611011607"><link rel="modulepreload" href="src/edits.js?v=202611011607"><link rel="modulepreload" href="src/engine.js?v=202611011607"><link rel="modulepreload" href="src/html.js?v=202611011607"><link rel="modulepreload" href="src/map.js?v=202611011607"><link rel="modulepreload" href="src/mine.js?v=202611011607"><link rel="modulepreload" href="src/search.js?v=202611011607"><link rel="modulepreload" href="src/shadow.js?v=202611011607"><link rel="modulepreload" href="src/state.js?v=202611011607"><link rel="modulepreload" href="src/store-map.js?v=202611011607"><link rel="modulepreload" href="src/store-supabase.js?v=202611011607"><link rel="modulepreload" href="src/store.js?v=202611011607"><link rel="modulepreload" href="src/timeline.js?v=202611011607"><link rel="modulepreload" href="src/travel.js?v=202611011607"><link rel="modulepreload" href="src/ui.js?v=202611011607">
-<link rel="preload" href="data/cities.json?v=202611011607" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611011609","./src/config.js":"./src/config.js?v=202611011609","./src/edits.js":"./src/edits.js?v=202611011609","./src/engine.js":"./src/engine.js?v=202611011609","./src/html.js":"./src/html.js?v=202611011609","./src/map.js":"./src/map.js?v=202611011609","./src/mine.js":"./src/mine.js?v=202611011609","./src/search.js":"./src/search.js?v=202611011609","./src/shadow.js":"./src/shadow.js?v=202611011609","./src/state.js":"./src/state.js?v=202611011609","./src/store-map.js":"./src/store-map.js?v=202611011609","./src/store-supabase.js":"./src/store-supabase.js?v=202611011609","./src/store.js":"./src/store.js?v=202611011609","./src/timeline.js":"./src/timeline.js?v=202611011609","./src/travel.js":"./src/travel.js?v=202611011609","./src/ui.js":"./src/ui.js?v=202611011609"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611011609"><link rel="modulepreload" href="src/config.js?v=202611011609"><link rel="modulepreload" href="src/edits.js?v=202611011609"><link rel="modulepreload" href="src/engine.js?v=202611011609"><link rel="modulepreload" href="src/html.js?v=202611011609"><link rel="modulepreload" href="src/map.js?v=202611011609"><link rel="modulepreload" href="src/mine.js?v=202611011609"><link rel="modulepreload" href="src/search.js?v=202611011609"><link rel="modulepreload" href="src/shadow.js?v=202611011609"><link rel="modulepreload" href="src/state.js?v=202611011609"><link rel="modulepreload" href="src/store-map.js?v=202611011609"><link rel="modulepreload" href="src/store-supabase.js?v=202611011609"><link rel="modulepreload" href="src/store.js?v=202611011609"><link rel="modulepreload" href="src/timeline.js?v=202611011609"><link rel="modulepreload" href="src/travel.js?v=202611011609"><link rel="modulepreload" href="src/ui.js?v=202611011609">
+<link rel="preload" href="data/cities.json?v=202611011609" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -76,7 +76,7 @@ body.v2{--bg:#ffffff;--surface:#ffffff;--sunk:#f4f5f7;--fg:#1c2026;--muted:#565e
   font-family:"Wanted Sans Variable","Wanted Sans",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-feature-settings:"tnum"}
 body.v2 .btn{border-radius:8px}body.v2 .btn.primary{background:var(--fg);border-color:var(--fg)}
 body.v2 :focus-visible{outline:2px solid var(--d1);outline-offset:2px}
-.v2head{display:flex;align-items:center;gap:10px;padding:4px 2px 2px}.v2title{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px}
+.v2head{display:flex;align-items:center;gap:10px;padding:4px 2px 2px}.v2title{flex:1;min-width:0;display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}.v2title h2,.v2title span{white-space:nowrap}
 .v2title h2{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0}.v2title span{color:var(--muted);font-weight:600}
 .v2more{position:relative}.v2more>summary{list-style:none;cursor:pointer;font-weight:800;font-size:18px;padding:4px 12px;border:1px solid var(--line);border-radius:8px}.v2more>summary::-webkit-details-marker{display:none}
 .v2menu{position:absolute;right:0;top:42px;z-index:5;width:min(440px,86vw);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 28px rgba(28,32,38,.14);padding:8px;display:flex;flex-direction:column;gap:2px}
@@ -182,6 +182,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611011607"></script>
+<script type="module" src="src/ui.js?v=202611011609"></script>
 </body>
 </html>
