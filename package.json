@@ -6,6 +6,10 @@
     "test": "node --test tests/*.test.js",
     "validate": "node scripts/validate-data.js",
     "bump": "node scripts/bump.js",
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
   }
 }
