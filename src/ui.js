@@ -63,7 +63,6 @@ async function saveToProject(pid) {
 }
 // 초대 링크(#join=토큰)로 들어온 경우
 function pendingJoin() { const m = location.hash.match(/[#&]join=([A-Za-z0-9]+)/); if (m) { try { sessionStorage.setItem('rp.join', m[1]); } catch {} history.replaceState(null, '', location.hash.replace(/[#&]join=[A-Za-z0-9]+/, '')); } try { return sessionStorage.getItem('rp.join'); } catch { return null; } }
-let accountOpen = false;  // 「내 계정」 창을 열어 둔 상태 (화면 상태)
 const cache = {};
 // 지도: MapLibre + OpenFreeMap 컬러 벡터 타일(키 없음) — 건물 높이(3D)와 해 위치(빛)를 쓴다. src/map.js 참고
 const map = createMap('map');
@@ -119,6 +118,7 @@ document.getElementById('btn3d').onclick = () => { const on = !map.is3D(); map.s
 
 // 화면 이동(탭·여행·도시)은 브라우저 기록에 쌓아 뒤로가기가 되게 하고, 플랜 고치기는 되돌리기 스택에 쌓는다
 const undoStack = [];
+let navTop = false;   // 화면을 옮겼으면 옛 스크롤 자리를 지키지 않는다 — 휴대폰에서 새 화면이 아래로 내려간 채 열렸다
 const NAV_KEYS = ['tab', 'pr', 'c'];
 export function setState(patch) {
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
@@ -128,11 +128,17 @@ export function setState(patch) {
   state = { ...state, ...patch };
   const after = encode(state);
   if (after === before) { render(); return; }
-  if (nav) history.pushState(null, '', '#' + after);
-  else { undoStack.push(before); if (undoStack.length > 50) undoStack.shift(); history.replaceState(null, '', '#' + after); }
+  if (nav) { history.pushState({ from: before }, '', '#' + after); navTop = true; }   // 들어온 곳을 남겨 backTo가 되짚게, 새 화면은 맨 위부터
+  else { undoStack.push(before); if (undoStack.length > 50) undoStack.shift(); history.replaceState(history.state, '', '#' + after); }
   render();
 }
-function undo() { const h = undoStack.pop(); if (h == null) return; state = decode('#' + h); history.replaceState(null, '', '#' + h); render(); }
+// 「← 여행」·「← 내 여행」 — 바로 앞 기록이 그 화면이면 뒤로 가고, 아니면 새로 쌓는다 (안 그러면 뒤로가 상세↔플랜을 핑퐁한다)
+function backTo(patch) {
+  const from = history.state?.from, f = from != null ? decode('#' + from) : null;
+  if (f && Object.keys(patch).every(k => (f[k] ?? null) === (patch[k] ?? null))) history.back();
+  else setState(patch);
+}
+function undo() { const h = undoStack.pop(); if (h == null) return; state = decode('#' + h); history.replaceState(history.state, '', '#' + h); render(); }
 window.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'z' && !e.shiftKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')) { e.preventDefault(); undo(); } });
 export function loadCity(id) {
   if (!cache[id]) cache[id] = fetch(`data/${id}.json`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -152,11 +158,11 @@ function renderTabs() {
   const host = document.getElementById('tabs'); host.innerHTML = '';
   for (const t of TABS) {
     const b = $('button', null, TAB_LABEL[t]); b.type = 'button';
-    b.setAttribute('aria-pressed', state.tab === t); b.onclick = () => setState({ tab: t });
+    b.setAttribute('aria-pressed', state.tab === t || (t === 'mine' && state.tab === 'account')); b.onclick = () => { if (t !== state.tab || (state.pr && t !== 'plan')) setState({ tab: t, pr: null }); };   // 탭은 열린 여행을 놓는다 — 안 그러면 홈에 다녀와도 옛 여행이 다시 열렸다
     host.appendChild(b);
   }
   const who = document.getElementById('who'); who.innerHTML = '';
-  if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => { accountOpen = true; setState({ tab: 'mine', pr: null }); }; who.appendChild(b); }
+  if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => setState({ tab: 'account', pr: null }); who.appendChild(b); }
   else { const b = $('button', 'btn sm', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   // 단계 토글은 없다 — 플랜은 한 화면
 }
@@ -394,6 +400,9 @@ async function render() {
   // 계정 서버가 아직이면 기다리지 않고 그린다(storeReady가 끝나면 다시 그린다). 확인이 3초 넘게 안 끝나면 일단 로그아웃 상태로
   try { curUser = storeIsFinal ? await Promise.race([store.user(), new Promise(r => setTimeout(() => r(null), 3000))]) : null; } catch { curUser = null; }
   if (seq !== renderSeq) return;
+  // 휴대폰은 지도가 위 68%를 차지해 「← 여행」「← 내 여행」이 첫 화면 밖으로 밀린다 — 지도 위에 하나 띄운다 (데스크톱은 CSS로 숨김)
+  const mb = document.getElementById('mapback'), back = state.pr && (state.tab === 'plan' ? ['← 여행', { tab: 'mine', pr: state.pr }] : state.tab === 'mine' ? [curUser ? '← 내 여행' : '← 홈', { tab: curUser ? 'mine' : 'home', pr: null }] : null);
+  mb.hidden = !back; if (back) { mb.textContent = back[0]; mb.onclick = () => backTo(back[1]); }
   if (PAGES.includes(state.tab)) { lastStep = -1; side.innerHTML = ''; map.clear('places'); map.clear('route'); renderPage(side, state.tab, { $, setState }); window.scrollTo(0, 0); return; }
   if (state.tab === 'home') {
     lastStep = -1;
@@ -428,7 +437,7 @@ async function render() {
   }
   if (join && !curUser && state.tab !== 'mine') { setState({ tab: 'mine' }); return; }
 
-  if (state.tab === 'mine') {
+  if (state.tab === 'mine' || state.tab === 'account') {
     lastStep = -1;
     side.innerHTML = LOADING;                                        // 아래 상자를 바꿔 끼울 때 사라진다
     const projects = await listProjectsCached();
@@ -436,16 +445,15 @@ async function render() {
     let project = state.pr ? projects.find(p => p.id === state.pr) || null : null;
     let canEdit = false, isOwner = false;
     if (state.pr && !project) { try { project = await store.getProject(state.pr); } catch {} }      // 공개 플랜·링크 보기
-    if (state.pr && !project && storeIsFinal) { side.innerHTML = ''; renderPage(side, 'notfound', { $, setState, missingTrip: true }); return; }   // 지워졌거나 권한이 없는 여행
+    if (state.pr && !project && storeIsFinal) { side.innerHTML = ''; document.querySelector('.layout').classList.add('nomap'); renderPage(side, 'notfound', { $, setState, missingTrip: true }); return; }   // 지도를 숨겨야 휴대폰에서 버튼이 첫 화면에 온다   // 지워졌거나 권한이 없는 여행
     if (project && curUser) { isOwner = project.ownerId === curUser.id; canEdit = isOwner || project.role === 'editor'; }
     curProject = project;
     // 떼어 둔 상자에 그렸다가 마지막에 한 번에 바꿔 끼운다 — 그리는 도중 render가 또 불리면 두 벌이 섞여 붙었다
     const out = document.createElement('div');
-    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join, authNote });
+    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen: state.tab === 'account', backTo, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join, authNote });
     if (seq !== renderSeq) return;
     side.replaceChildren(...out.childNodes);
     bindMapClick(null); drawStart();
-    if (state.pr) accountOpen = false;
     restoreScroll(side, sy, st); return;
   }
   if (state.tab !== 'plan') { lastStep = -1; if (state.tab === 'guide') { side.innerHTML = LOADING; [packingCache] = await Promise.all([loadPacking(), loadPackingList()]); if (seq !== renderSeq) return; side.innerHTML = ''; } renderInfo(side); restoreScroll(side, sy, st); return; }
@@ -457,6 +465,7 @@ async function render() {
   restoreScroll(side, sy, st);
 }
 function restoreScroll(side, sy, st) {
+  if (navTop) { navTop = false; sy = st = 0; }
   side.scrollTop = st; window.scrollTo(0, sy);
   requestAnimationFrame(() => { side.style.minHeight = ''; side.scrollTop = st; window.scrollTo(0, sy); });
 }
@@ -608,7 +617,7 @@ function renderPlan(side, entering) {
 
   // 머리 — 도시 · 일수 · 저장 · 더보기
   const head = $('div', 'v2head');
-  if (state.pr) { const bk = $('button', 'btn sm', '← 여행'); bk.type = 'button'; bk.title = '여행 페이지로'; bk.onclick = () => setState({ tab: 'mine' }); head.appendChild(bk); }
+  if (state.pr) { const bk = $('button', 'btn sm', '← 여행'); bk.type = 'button'; bk.title = '여행 페이지로'; bk.onclick = () => backTo({ tab: 'mine', pr: state.pr }); head.appendChild(bk); }
   const legs = curProject?.id === state.pr ? legsOf(curProject.hash) : [];
   if (legs.length > 1) {
     const lp = $('div', 'row regions legpills'); lp.style.margin = '0';
@@ -825,7 +834,7 @@ const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 �
 
 
 // 제목 클릭 = 홈(플랜 탭). 고른 장소·열어 둔 여행은 그대로 둔다
-document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); accountOpen = false; setState({ tab: 'home' }); });
+document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); setState({ tab: 'home', pr: null }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
 window.addEventListener('popstate', () => { const h = decode(location.hash); if (encode(h) !== encode(state)) { state = h; render(); } });   // 뒤로·앞으로
 window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다

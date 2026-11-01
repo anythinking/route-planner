@@ -72,7 +72,7 @@ export function decode(hash) {
     st.o = days.some(d => d.length) ? days : null;
   }
   const tab = OLD_TABS[q.get('tab')] || q.get('tab');
-  if (TABS.includes(tab) || PAGES.includes(tab)) st.tab = tab;
+  if (TABS.includes(tab) || PAGES.includes(tab) || tab === 'account') st.tab = tab;   // account = 내 계정 (탭 줄엔 없다)
   else if (tab) st.tab = 'notfound';
   if (/^[A-Za-z0-9_-]{1,40}$/.test(q.get('pr') || '')) st.pr = q.get('pr');
   if (/^[1-9]$/.test(q.get('lg') || '')) st.lg = Number(q.get('lg'));

@@ -90,7 +90,7 @@ async function renderShare(ctx) {
 }
 
 // 내 계정 — 프로필 · 비밀번호 · 기본 설정 · 내 데이터 · 로그아웃
-function renderAccount({ $, side, store, user, projects, setState, render, closeAccount, CITIES, state }) {
+function renderAccount({ $, side, store, user, projects, setState, render, backTo, CITIES, state }) {
   const photos = projects.reduce((n, x) => n + x.photos.length, 0);
   const note = (el, msg, warn) => { el.innerHTML = msg ? `<b style="color:${warn ? 'var(--warn)' : 'var(--d1)'}">${esc(msg)}</b>` : ''; };
 
@@ -100,11 +100,11 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   head.appendChild($('p', 'meta', `${esc(user.email || '이 브라우저에만 저장되는 계정')} · 여행 ${projects.length}개 · 사진 ${photos}장`));
   head.appendChild($('p', null, store.kind === 'supabase' ? '계정 서버에 저장 — 어느 기기에서든 같은 걸 본다.' : '이 브라우저에만 저장 — 기기를 바꾸면 안 보인다.'));
   const last = projects.find(x => x.id === user.prefs?.lastPr);
-  if (last) { const lr = $('div', 'row'); lr.appendChild($('span', null, `최근 여행 <b>${esc(last.name)}</b>`)); const lb = $('button', 'btn sm', '열기'); lb.type = 'button'; lb.onclick = () => { closeAccount(); setState({ pr: last.id }); }; lr.appendChild(lb); head.appendChild(lr); }
+  if (last) { const lr = $('div', 'row'); lr.appendChild($('span', null, `최근 여행 <b>${esc(last.name)}</b>`)); const lb = $('button', 'btn sm', '열기'); lb.type = 'button'; lb.onclick = () => setState({ tab: 'mine', pr: last.id }); lr.appendChild(lb); head.appendChild(lr); }
   const r0 = $('div', 'row');
-  const list = $('button', 'btn primary', '내 여행 목록'); list.type = 'button'; list.onclick = () => { closeAccount(); render(); };
+  const list = $('button', 'btn primary', '내 여행 목록'); list.type = 'button'; list.onclick = () => backTo({ tab: 'mine', pr: null });
   const out = $('button', 'btn', '로그아웃'); out.type = 'button';
-  out.onclick = async () => { if (!confirm('로그아웃할까? 다시 들어오려면 비밀번호나 메일 링크가 필요하다.')) return; await store.signOut(); closeAccount(); setState({ pr: null }); };
+  out.onclick = async () => { if (!confirm('로그아웃할까? 다시 들어오려면 비밀번호나 메일 링크가 필요하다.')) return; await store.signOut(); setState({ tab: 'mine', pr: null }); };
   r0.append(list, out); head.appendChild(r0); side.appendChild(head);
 
   // 2. 프로필 — 표시 이름
@@ -156,7 +156,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   r5.append(mk(t, 0, 1380, 't', e), $('span', 'muted', '부터'), mk(e, 60, 1440, 'e', t), $('span', 'muted', '까지'));
   pp.append(r3, r4, r5);
   const r6 = $('div', 'row'); const useBtn = $('button', 'btn', '기본값으로 새 플랜'); useBtn.type = 'button';
-  useBtn.onclick = () => { closeAccount(); setState({ c: prefs.c || 'london', v: prefs.v || 'transit', t, e, d: 3, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
+  useBtn.onclick = () => { setState({ c: prefs.c || 'london', v: prefs.v || 'transit', t, e, d: 3, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
   r6.appendChild(useBtn); pp.appendChild(r6); side.appendChild(pp);
 
   // 5. 내 데이터 — 내보내기 (사진은 메타데이터만)
@@ -183,7 +183,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   wGo.onclick = async () => {
     if (!confirm('정말 탈퇴할까요? 지금 바로 모두 지워져요.')) return;
     wGo.disabled = true; wGo.textContent = '지우는 중…';
-    try { await store.deleteAccount(); closeAccount(); setState({ pr: null, tab: 'home' }); }
+    try { await store.deleteAccount(); setState({ pr: null, tab: 'home' }); }
     catch (e) { note(wMsg, e.message || e, true); wGo.textContent = '탈퇴하기'; wGo.disabled = false; }
   };
   wr.append(wi, wGo, wMsg); wd.appendChild(wr); side.appendChild(wd);
@@ -335,7 +335,7 @@ async function renderProject(ctx) {
   const ci = INDEX?.cities?.[p.city] || {};
   const legs = legsOf(p.hash).map(h => decode('#' + h));
   const crumb = $('nav', 'crumb');
-  const cb = $('a', null, ctx.user ? '← 내 여행' : '← 홈'); cb.href = '#'; cb.onclick = e => { e.preventDefault(); setState({ pr: null, tab: ctx.user ? 'mine' : 'home' }); };
+  const cb = $('a', null, ctx.user ? '← 내 여행' : '← 홈'); cb.href = '#'; cb.onclick = e => { e.preventDefault(); ctx.backTo({ pr: null, tab: ctx.user ? 'mine' : 'home' }); };
   crumb.append(cb, $('span', null, esc(p.name)));
   side.appendChild(crumb);
   const head = $('div', 'panel'); head.style.padding = '0'; head.style.overflow = 'hidden';

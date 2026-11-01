@@ -85,6 +85,7 @@ test('tab: 기본은 plan이고 해시에 안 쓴다, 모르는 값은 notfound(
   assert.equal(decode('#tab=nope').tab, 'notfound');
   assert.equal(decode('#tab=privacy').tab, 'privacy');
   assert.equal(decode('#tab=terms').tab, 'terms');
+  assert.equal(decode('#tab=account').tab, 'account');   // 내 계정 — 자기 주소가 있어야 새로고침·뒤로가 맞다
   assert.ok(!encode({ ...DEFAULTS }).includes('tab='));
   assert.ok(encode({ ...DEFAULTS, tab: 'guide' }).includes('tab=guide'));
 });
