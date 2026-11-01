@@ -26,6 +26,7 @@ async function gpsOf(file) {
   catch { return null; }
 }
 
+const tripDay = new Map();   // 여행 페이지 지도에 보이는 날 (여행·구간 → 일차 번호, 없으면 전체)
 const tripLeg = new Map();   // 여행 페이지에서 보고 있는 구간 (여행 id → 번호)
 
 export async function renderMine(ctx) {
@@ -322,10 +323,18 @@ async function renderProject(ctx) {
       const perDay = Object.fromEntries(Object.entries(st.ds || {}).map(([k, d]) => [k, { dayStart: d.t, dayEnd: d.e, pref: d.v, start: d.s }]));
       const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o, perDay });
       const lines = $('div', 'v2lines'), bounds = [[start.lat, start.lng]], css = getComputedStyle(document.body);
+      const key = `${p.id}:${li}`, sel = tripDay.get(key) ?? null;
+      const pick = d => { d === null ? tripDay.delete(key) : tripDay.set(key, d); render(); };
+      const chips = $('div', 'legpills');
+      [null, ...res.days.map((d, i) => d.stops.length ? i : -1).filter(i => i >= 0)].forEach(d => {
+        const b = $('button', 'btn sm' + (d === sel ? ' primary' : ''), d === null ? '전체' : `${d + 1}일차`); b.type = 'button'; b.onclick = () => pick(d); chips.appendChild(b);
+      });
+      sum.appendChild(chips);
       res.days.forEach((day, i) => {
         if (!day.stops.length) return;
         const cv = `--d${i % 10 + 1}`, col = css.getPropertyValue(cv).trim() || '#1F4FA8';
-        const ln = $('section', 'line ro'); ln.style.setProperty('--c', `var(${cv})`);
+        const ln = $('section', 'line ro' + (i === sel ? ' active' : '')); ln.style.setProperty('--c', `var(${cv})`);
+        if (sel !== null && i !== sel) ln.style.opacity = '.45';
         ln.innerHTML = `<header><b>${i + 1}일차</b><span>${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분</span></header>`;
         const ol = $('ol');
         for (const x of day.stops) {
@@ -333,6 +342,8 @@ async function renderProject(ctx) {
           ol.appendChild($('li', 'stn', `<time>${hm(x.arrive)}</time><i class="dot"></i><div><div class="nm">${esc(x.place.name)}${who ? ` <span class="who">${esc(who)}</span>` : ''}</div><div class="meta">${esc(o?.label && o.label !== '머물기' ? o.label + ' · ' : '')}${o?.min || ''}분</div></div>`));
         }
         ln.appendChild(ol); lines.appendChild(ln);
+        ln.querySelector('header').style.cursor = 'pointer'; ln.querySelector('header').onclick = () => pick(i === sel ? null : i);
+        if (sel !== null && i !== sel) return;
         const s0 = perDay[i]?.start || start;
         map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
         day.stops.forEach((x, k) => { map.html('route', x.place, `<div class="st" style="--c:${col}"><i>${k + 1}</i><span>${esc(x.place.name)}</span></div>`, { title: `${hm(x.arrive)} ${x.place.name}` }); bounds.push([x.place.lat, x.place.lng]); });
