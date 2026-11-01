@@ -11,13 +11,6 @@ function lightbox(src, caption) {
   document.body.appendChild(o);
 }
 // 좌표 → 장소 이름 (OpenStreetMap). 못 찾으면 빈 값
-async function reverseName({ lat, lng }) {
-  try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&accept-language=ko&lat=${lat}&lon=${lng}`, { headers: { Accept: 'application/json' } });
-    const j = await r.json(); const a = j.address || {};
-    return (j.name || a.tourism || a.amenity || a.shop || a.attraction || a.building || a.road || a.suburb || a.village || a.town || a.city || '').trim();
-  } catch { return ''; }
-}
 const fmtDate = t => new Date(t).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
 
 // 파일 → 작은 JPEG data URL (긴 변 1200px). 브라우저 저장소 한도(≈5MB) 안에서 여러 장을 담으려고 줄인다.
@@ -34,7 +27,6 @@ async function gpsOf(file) {
 }
 
 const tripLeg = new Map();   // 여행 페이지에서 보고 있는 구간 (여행 id → 번호)
-const tlImport = { busy: false, text: '', el: null };   // 타임라인 가져오기 진행 — render를 넘어 산다
 
 export async function renderMine(ctx) {
   const { state, user, project } = ctx;
@@ -230,62 +222,45 @@ function renderList(ctx) {
   const head = $('div', 'panel');
   head.appendChild($('h2', null, `${esc(user.name)}의 여행`));
   const row = $('div', 'row');
-  const nw = $('button', 'btn primary', '지금 플랜으로 새 여행'); nw.type = 'button';
-  nw.onclick = async () => {
-    const name = prompt('여행 이름', `${CITIES[state.c]} ${state.d}일`); if (!name) return;
-    const p = await store.createProject({ name, city: state.c, hash: planHash(state) });
-    setState({ pr: p.id });
+  // 여행 만들기 입구 셋이 모두 여기로 — 플랜(구간) 여러 개를 날짜순으로 묶어 저장하고 연다
+  const md = dt => `${Number(dt.slice(5, 7))}/${Number(dt.slice(8, 10))}`;
+  const newTrip = async (legs, name) => {
+    legs = [...legs].sort((x, y) => (x.dt || '').localeCompare(y.dt || ''));
+    const end = legs.at(-1), endDt = end.dt && new Date(Date.parse(end.dt) + (end.d - 1) * 864e5).toISOString().slice(0, 10);
+    name ||= legs.map(st => CITIES[st.c]).join('·') + (legs[0].dt ? ` ${md(legs[0].dt)}–${md(endDt)}` : '');
+    const pr = await store.createProject({ name, city: legs[0].c, hash: legs.map(st => encode({ ...st, tab: 'plan', pr: null, lg: 0 })).join('\n') });
+    setState({ pr: pr.id });
   };
+  const fail = (el, e) => { el.textContent = `만들지 못했어요 — ${e.message || e}`; };
+  const msg = $('p', 'muted', '');
+  const nw = $('button', 'btn primary', '지금 플랜으로 새 여행'); nw.type = 'button';
+  nw.onclick = () => { const name = prompt('여행 이름', `${CITIES[state.c]} ${state.d}일`); if (name) newTrip([state], name).catch(e => fail(msg, e)); };
   // 구글 지도 타임라인 → 실제로 다닌 여행. 파일은 이 브라우저 안에서만 읽는다
   const tl = $('button', 'btn', '구글 타임라인 가져오기'); tl.type = 'button';
   const file = $('input'); file.type = 'file'; file.accept = '.json,application/json'; file.hidden = true; file.id = 'timeline-file';
-  // 진행 글자는 화면 밖에 둔다 — 파일 창에서 돌아오면 로그인 확인이 화면을 다시 그려, 옛 글자 칸에 쓰면 안 보였다
-  const msg = $('p', 'muted', esc(tlImport.text)); tlImport.el = msg; tl.disabled = tlImport.busy;
-  const say = t => { tlImport.text = t; if (tlImport.el) tlImport.el.textContent = t; };
   tl.onclick = () => file.click();
   file.onchange = async () => {
-    const f = file.files[0]; if (!f || tlImport.busy) return;
+    const f = file.files[0]; if (!f) return;
     try {
-      tlImport.busy = tl.disabled = true; say('타임라인을 읽고 있어요…');
       const visits = parseVisits(JSON.parse(await f.text()));
-      const idx = ctx.INDEX; const cityData = {};
-      for (const id of Object.keys(idx.cities)) { try { cityData[id] = await ctx.loadCity(id); } catch {} }
-      const trips = buildTrips(visits, idx, cityData);
-      if (!trips.length) { tlImport.busy = false; say('지원하는 도시(런던·파리·도쿄·오사카·교토·로마·바르셀로나)에 머문 기록을 못 찾았어요.'); render(); return; }
-      // 랜드마크에 안 맞은 곳은 지도 서비스로 이름을 붙인다 (1초에 하나)
-      const named = trips.flatMap(t => t.u);
-      for (const [k, u] of named.entries()) {
-        say(`이름 없는 곳에 이름 붙이는 중 ${k + 1}/${named.length} — 이 탭을 닫지 마세요`);
-        u.name = await reverseName(u) || `${u.at.slice(11)} 머문 곳`;
-        if (k < named.length - 1) await new Promise(r => setTimeout(r, 1100));
-      }
-      const md = d => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}`;
-      const legHashes = trips.sort((x, y) => x.dt.localeCompare(y.dt)).map(t => encode({ ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ name, lat, lng, min }) => ({ name: name.replace(/[~|,]/g, ' ').slice(0, 40), lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt, tab: 'plan' }));
-      const first = trips[0], last = trips[trips.length - 1];
-      say('계정에 저장하는 중…');
-      const pr = await store.createProject({ name: `${trips.map(t => CITIES[t.city]).join('·')} ${md(first.dates[0])}–${md(last.dates[last.dates.length - 1])} (실제 동선)`, city: first.city, hash: legHashes.join('\n') });
-      const lastId = pr.id;
-      tlImport.busy = false; say('');
-      setState({ pr: lastId });
-    } catch (e) { console.error(e); tlImport.busy = false; say(`가져오지 못했어요 — ${e.message || e}`); render(); }
+      const cityData = {};
+      for (const id of Object.keys(ctx.INDEX.cities)) { try { cityData[id] = await ctx.loadCity(id); } catch {} }
+      const trips = buildTrips(visits, ctx.INDEX, cityData);
+      if (!trips.length) { msg.textContent = '지원하는 도시(런던·파리·도쿄·오사카·교토·로마·바르셀로나)에 머문 기록을 못 찾았어요.'; return; }
+      // 랜드마크에 안 맞은 곳은 「시각 머문 곳」 — 이름은 플랜에서 고친다
+      await newTrip(trips.map(t => ({ ...DEFAULTS, c: t.city, d: t.d, t: t.t, e: t.e, s: t.s, p: t.p, m: t.m, u: t.u.map(({ at, lat, lng, min }) => ({ name: `${at.slice(11)} 머문 곳`, lat, lng, min })), o: t.o, ds: t.ds, dt: t.dt })),
+        `${trips.map(t => CITIES[t.city]).join('·')} ${md(trips[0].dates[0])}–${md(trips.at(-1).dates.at(-1))} (실제 동선)`);
+    } catch (e) { fail(msg, e); }
   };
   row.append(nw, tl, file); head.appendChild(row); head.appendChild(msg);
   // 플랜 링크 여러 개 → 여행 하나 (도시마다 구간). 링크의 # 뒤만 읽는다
   const lk = $('details'); lk.appendChild($('summary', null, '플랜 링크로 여행 만들기'));
   const ta = $('textarea', 'text'); ta.rows = 3; ta.placeholder = '플랜 링크를 붙여 넣어요 — 여러 도시면 줄마다 하나씩';
   const lkGo = $('button', 'btn primary', '여행 만들기'); lkGo.type = 'button'; const lkMsg = $('span', 'muted', '');
-  lkGo.onclick = async () => {
-    const legs = (ta.value.match(/#[^\s]+/g) || []).map(h => decode(h)).filter(st => CITIES[st.c] && Object.keys(st.p).length + st.u.length)
-      .sort((x, y) => (x.dt || '').localeCompare(y.dt || ''));
+  lkGo.onclick = () => {
+    const legs = (ta.value.match(/#[^\s]+/g) || []).map(h => decode(h)).filter(st => CITIES[st.c] && Object.keys(st.p).length + st.u.length);
     if (!legs.length) { lkMsg.textContent = '장소가 담긴 플랜 링크를 못 찾았어요.'; return; }
-    const md = st => st.dt ? `${Number(st.dt.slice(5, 7))}/${Number(st.dt.slice(8, 10))}` : '';
-    const end = legs.at(-1), endDt = end.dt && new Date(Date.parse(end.dt) + (end.d - 1) * 864e5).toISOString().slice(0, 10);
-    const range = legs[0].dt ? ` ${md(legs[0])}–${md({ dt: endDt })}` : '';
-    try {
-      lkGo.disabled = true;
-      const pr = await store.createProject({ name: `${legs.map(st => CITIES[st.c]).join('·')}${range}`, city: legs[0].c, hash: legs.map(st => encode({ ...st, tab: 'plan', pr: null, lg: 0 })).join('\n') });
-      setState({ pr: pr.id });
-    } catch (e) { lkGo.disabled = false; lkMsg.textContent = `만들지 못했어요 — ${e.message || e}`; }
+    newTrip(legs).catch(e => fail(lkMsg, e));
   };
   const lkRow = $('div', 'row'); lkRow.append(ta, lkGo, lkMsg); lk.appendChild(lkRow); head.appendChild(lk);
   head.appendChild($('p', 'muted', '타임라인 파일은 구글 지도 앱 → 설정 → 위치 및 개인정보 → 타임라인 내보내기에서 받아요. 파일은 이 브라우저 안에서만 읽고, 만들어진 플랜만 저장돼요.'));
