@@ -129,3 +129,8 @@ test('legsOf / withLeg: 여행 하나에 도시 구간 여러 개 (줄바꿈으�
   assert.deepEqual(legsOf(''), ['']);
   assert.equal(withLeg('c=london\nc=paris', 1, 'c=paris&d=2'), 'c=london\nc=paris&d=2');
 });
+
+test('decode: 로그인 메일이 붙인 두 번째 #(토큰)은 무시한다', () => {
+  assert.equal(decode('#tab=mine#access_token=abc&type=recovery').tab, 'mine');
+  assert.equal(decode('#access_token=abc&refresh_token=x&type=recovery').tab, 'plan');
+});

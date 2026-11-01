@@ -42,6 +42,10 @@ const DAY_COLORS = ['--d1','--d2','--d3','--d4','--d5','--d6','--d7','--d8','--d
 const $ = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
 
 let state = decode(location.hash);
+// 메일 링크(로그인·가입 확인·비밀번호 재설정)로 막 돌아왔다 — #토큰은 Supabase가 읽고 지우니 건드리지 않고, 화면만 내 여행으로
+const authLanding = /(^|[#&])(access_token|error_description)=/.test(location.hash);
+let authNote = decodeURIComponent((location.hash.match(/error_description=([^&]+)/) || [])[1] || '').replace(/\+/g, ' ');
+if (authLanding) state = { ...state, tab: 'mine' };
 let step = 2;                // 2 장소 고르기 · 3 결과 (설정은 항상 위에 떠 있다)
 let lastStep = 0;            // 0 = 첫 렌더. 단계가 바뀔 때만 지도 뷰를 맞춘다
 let pickStart = false;       // 켜지면 다음 지도 클릭이 출발점이 된다
@@ -373,14 +377,14 @@ function renderInfo(side) {
   side.appendChild(gp);
 }
 
-const LOADING = '<div class="panel loading" role="status"><span class="spin"></span> 불러오는 중이에요…</div>';
+const LOADING = '<div class="loading" role="status"><span class="ride" aria-hidden="true"><i></i></span>불러오는 중이에요</div>';   // 선 위를 달리는 점
 let renderSeq = 0;              // 겹쳐 시작된 렌더 중 마지막 것만 그린다 (await 사이에 새 렌더가 오면 옛것은 접는다)
 async function render() {
   const seq = ++renderSeq;
   if (playTimer) { clearInterval(playTimer); playTimer = null; }
   if (!Object.hasOwn(CITIES, state.c)) { state = { ...state, c: DEFAULTS.c, p: {}, m: [], u: [], s: null }; history.replaceState(null, '', '#' + encode(state)); }
   const side = document.getElementById('side');
-  if (lastStep === 0 && !/[#&]tab=/.test(location.hash) && !state.pr && !Object.keys(state.p).length && !state.u.length) {   // 빈손으로 오면 홈
+  if (lastStep === 0 && !authLanding && !/[#&]tab=/.test(location.hash) && !state.pr && !Object.keys(state.p).length && !state.u.length) {   // 빈손으로 오면 홈
     state = { ...state, tab: 'home' }; history.replaceState(null, '', '#' + encode(state));
   }
   renderTabs();                                     // 계정 확인을 기다리지 않고 틀부터 그린다
@@ -437,7 +441,7 @@ async function render() {
     curProject = project;
     // 떼어 둔 상자에 그렸다가 마지막에 한 번에 바꿔 끼운다 — 그리는 도중 render가 또 불리면 두 벌이 섞여 붙었다
     const out = document.createElement('div');
-    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join });
+    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen, closeAccount: () => { accountOpen = false; }, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join, authNote });
     if (seq !== renderSeq) return;
     side.replaceChildren(...out.childNodes);
     bindMapClick(null); drawStart();

@@ -175,7 +175,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
   side.appendChild(dp);
 
   // 6. 탈퇴 — 되돌릴 수 없으니 「탈퇴」를 직접 적어야 눌린다
-  const wd = $('div', 'panel'); wd.appendChild($('h2', null, '회원 탈퇴'));
+  const wd = $('div', 'panel danger'); wd.appendChild($('h2', null, '회원 탈퇴'));
   wd.appendChild($('p', null, `계정과 여행 ${projects.length}개, 사진 ${photos}장이 모두 지워지고 되돌릴 수 없어요. 남기고 싶으면 위의 「내 데이터」에서 먼저 받아 두세요. 같이 보던 여행에서는 빠지고, 내가 주인인 여행은 같이 보던 사람에게서도 사라져요.`));
   const wr = $('div', 'row'); const wi = $('input', 'text'); wi.type = 'text'; wi.placeholder = '탈퇴 라고 적어 주세요';
   const wGo = $('button', 'btn', '탈퇴하기'); wGo.type = 'button'; wGo.disabled = true; wGo.style.color = 'var(--warn)'; const wMsg = $('span', null, '');
@@ -193,12 +193,19 @@ function renderAccount({ $, side, store, user, projects, setState, render, close
 let mailSent = '';            // 보낸 메일 안내 (주소 + 무엇을 보냈나)
 let authMode = 'login';       // login · signup · reset
 const LEGAL = '<a href="#tab=terms">이용약관</a>과 <a href="#tab=privacy">개인정보처리방침</a>';
-function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
+function renderLogin({ $, side, store, render, state: ctxState, joinPending, authNote }) {
   const p = $('div', 'panel');
+  if (authNote) p.appendChild($('p', 'authnote', `메일 링크를 쓸 수 없어요 (${esc(authNote)}). 링크는 한 번만 쓸 수 있고 시간이 지나면 끝나요. 아래에서 새로 받아 주세요.`));
   if (store.kind === 'supabase') {
-    const TITLE = { login: '로그인', signup: '회원가입', reset: '비밀번호 재설정' };
-    p.appendChild($('h2', null, TITLE[authMode]));
-    if (authMode === 'login') p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둬요. 로그인하면 어느 기기에서든 같은 여행이 열려요.'));
+    // 세 화면을 한 노선의 역으로 — 지금 있는 역만 채워진다
+    p.classList.add('auth');
+    const line = $('nav', 'authline'); line.setAttribute('aria-label', '계정');
+    for (const [m, label] of [['login', '로그인'], ['signup', '회원가입'], ['reset', '비밀번호 찾기']]) {
+      const b = $('button', null, `<i></i><span>${label}</span>`); b.type = 'button'; b.setAttribute('aria-current', authMode === m ? 'page' : 'false');
+      b.onclick = () => { authMode = m; mailSent = ''; render(); }; line.appendChild(b);
+    }
+    p.appendChild(line);
+    p.appendChild($('p', 'authlead', { login: '여행별로 플랜과 살 것, 사진을 모아 둬요. 어느 기기에서든 같은 여행이 열려요.', signup: '이메일과 비밀번호만 있으면 돼요. 플랜을 짜는 데는 가입이 필요 없어요.', reset: '가입한 이메일로 새 비밀번호를 정하는 링크를 보내요.' }[authMode]));
     if (Object.keys(ctxState.p).length) p.appendChild($('p', null, '<b>지금 만든 플랜은 그대로 있어요</b> — 로그인한 뒤 플랜의 「저장」을 누르면 내 여행에 남아요.'));
     if (joinPending) p.appendChild($('p', null, '<b>초대받은 여행이 있어요</b> — 로그인하면 바로 열려요.'));
     if (mailSent) {
@@ -206,11 +213,11 @@ function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
       const back = $('button', 'btn', '로그인 화면으로'); back.type = 'button'; back.onclick = () => { mailSent = ''; authMode = 'login'; render(); };
       p.appendChild(back); side.appendChild(p); return;
     }
-    const field = (type, ph, ac) => { const i = $('input', 'text'); i.type = type; i.placeholder = ph; i.autocomplete = ac; i.style.width = '100%'; p.appendChild(i); return i; };
-    const nm = authMode === 'signup' ? field('text', '이름 (여행 목록에 보여요)', 'nickname') : null;
+    const field = (type, label, ac, hint) => { const l = $('label', 'field', `<span>${label}${hint ? ` <em>${hint}</em>` : ''}</span>`); const i = $('input', 'text'); i.type = type; i.autocomplete = ac; l.appendChild(i); p.appendChild(l); return i; };
+    const nm = authMode === 'signup' ? field('text', '이름', 'nickname', '여행 목록에 보여요') : null;
     const inp = field('email', '이메일', 'email');
-    const pw = authMode !== 'reset' ? field('password', authMode === 'signup' ? '비밀번호 (8자 이상)' : '비밀번호', authMode === 'signup' ? 'new-password' : 'current-password') : null;
-    const pw2 = authMode === 'signup' ? field('password', '비밀번호 한 번 더', 'new-password') : null;
+    const pw = authMode !== 'reset' ? field('password', '비밀번호', authMode === 'signup' ? 'new-password' : 'current-password', authMode === 'signup' ? '8자 이상' : '') : null;
+    const pw2 = authMode === 'signup' ? field('password', '비밀번호 확인', 'new-password') : null;
     const err = $('p', null, '');
     const say = m => { err.innerHTML = `<b style="color:var(--warn)">${esc(m)}</b>`; };
     const email = () => { const v = inp.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { say('이메일 주소를 확인해 주세요.'); inp.focus(); return null; } return v; };
@@ -220,7 +227,7 @@ function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
       const go = $('button', 'btn primary', '로그인'); go.type = 'button';
       go.onclick = () => { const e = email(); if (!e) return; if (!pw.value) { pw.focus(); return; } busy(go, '확인 중…', async () => { await store.signIn({ email: e, password: pw.value }); render(); }); };
       pw.onkeydown = ev => { if (ev.key === 'Enter') go.click(); };
-      const link = $('button', 'btn', '메일 링크로 로그인'); link.type = 'button';
+      const link = $('button', 'btn ghost', '메일 링크로 로그인'); link.type = 'button';
       link.onclick = () => { const e = email(); if (!e) return; busy(link, '보내는 중…', async () => { await store.signIn({ email: e }); mailSent = `${e} 로 로그인 링크를 보냈어요`; render(); }); };
       row.append(go, link);
     } else if (authMode === 'signup') {
@@ -239,11 +246,6 @@ function renderLogin({ $, side, store, render, state: ctxState, joinPending }) {
       row.append(go);
     }
     p.append(row, err);
-    const sw = (label, mode) => { const a = $('a', null, label); a.href = '#'; a.onclick = ev => { ev.preventDefault(); authMode = mode; render(); }; return a; };
-    const alt = $('p', 'muted authalt');
-    if (authMode === 'login') alt.append(sw('처음이에요 — 회원가입', 'signup'), ' · ', sw('비밀번호를 잊었어요', 'reset'));
-    else alt.append(sw('← 로그인으로', 'login'));
-    p.appendChild(alt);
     if (authMode === 'signup') p.appendChild($('p', 'muted', `가입하면 ${LEGAL}에 동의하는 것으로 봐요.`));
     p.appendChild($('p', 'muted', '메일(로그인 링크·가입 확인·재설정)은 시간당 몇 통으로 제한돼 있어요. 안 오면 잠시 뒤 다시 해 주세요.'));
   } else {
@@ -309,8 +311,8 @@ function renderList(ctx) {
   side.appendChild(head);
 
   if (!projects.length) {
-    const em = $('div', 'panel empty', '<h3>아직 여행이 없어요</h3><p>도시를 골라 가고 싶은 곳을 담고, 플랜의 「저장」을 누르면 여기에 쌓여요.</p>');
-    const go = $('button', 'btn primary', '도시 고르러 가기'); go.type = 'button'; go.onclick = () => setState({ tab: 'home' }); em.appendChild(go);
+    const em = $('div', 'panel empty', '<div class="emptyline" aria-hidden="true"><i></i><b>+</b></div><h3>아직 여행이 없어요</h3><p>도시를 골라 가고 싶은 곳을 담고, 플랜의 「저장」을 누르면 여기에 역처럼 쌓여요.</p>');
+    const go = $('button', 'btn primary', '도시 고르기'); go.type = 'button'; go.onclick = () => setState({ tab: 'home' }); em.appendChild(go);
     side.appendChild(em); return;
   }
   const grid = $('div', 'cards');

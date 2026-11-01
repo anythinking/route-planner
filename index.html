@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611011616","./src/config.js":"./src/config.js?v=202611011616","./src/edits.js":"./src/edits.js?v=202611011616","./src/engine.js":"./src/engine.js?v=202611011616","./src/html.js":"./src/html.js?v=202611011616","./src/map.js":"./src/map.js?v=202611011616","./src/mine.js":"./src/mine.js?v=202611011616","./src/pages.js":"./src/pages.js?v=202611011616","./src/search.js":"./src/search.js?v=202611011616","./src/shadow.js":"./src/shadow.js?v=202611011616","./src/state.js":"./src/state.js?v=202611011616","./src/store-map.js":"./src/store-map.js?v=202611011616","./src/store-supabase.js":"./src/store-supabase.js?v=202611011616","./src/store.js":"./src/store.js?v=202611011616","./src/timeline.js":"./src/timeline.js?v=202611011616","./src/travel.js":"./src/travel.js?v=202611011616","./src/ui.js":"./src/ui.js?v=202611011616"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611011616"><link rel="modulepreload" href="src/config.js?v=202611011616"><link rel="modulepreload" href="src/edits.js?v=202611011616"><link rel="modulepreload" href="src/engine.js?v=202611011616"><link rel="modulepreload" href="src/html.js?v=202611011616"><link rel="modulepreload" href="src/map.js?v=202611011616"><link rel="modulepreload" href="src/mine.js?v=202611011616"><link rel="modulepreload" href="src/pages.js?v=202611011616"><link rel="modulepreload" href="src/search.js?v=202611011616"><link rel="modulepreload" href="src/shadow.js?v=202611011616"><link rel="modulepreload" href="src/state.js?v=202611011616"><link rel="modulepreload" href="src/store-map.js?v=202611011616"><link rel="modulepreload" href="src/store-supabase.js?v=202611011616"><link rel="modulepreload" href="src/store.js?v=202611011616"><link rel="modulepreload" href="src/timeline.js?v=202611011616"><link rel="modulepreload" href="src/travel.js?v=202611011616"><link rel="modulepreload" href="src/ui.js?v=202611011616">
-<link rel="preload" href="data/cities.json?v=202611011616" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611011656","./src/config.js":"./src/config.js?v=202611011656","./src/edits.js":"./src/edits.js?v=202611011656","./src/engine.js":"./src/engine.js?v=202611011656","./src/html.js":"./src/html.js?v=202611011656","./src/map.js":"./src/map.js?v=202611011656","./src/mine.js":"./src/mine.js?v=202611011656","./src/pages.js":"./src/pages.js?v=202611011656","./src/search.js":"./src/search.js?v=202611011656","./src/shadow.js":"./src/shadow.js?v=202611011656","./src/state.js":"./src/state.js?v=202611011656","./src/store-map.js":"./src/store-map.js?v=202611011656","./src/store-supabase.js":"./src/store-supabase.js?v=202611011656","./src/store.js":"./src/store.js?v=202611011656","./src/timeline.js":"./src/timeline.js?v=202611011656","./src/travel.js":"./src/travel.js?v=202611011656","./src/ui.js":"./src/ui.js?v=202611011656"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611011656"><link rel="modulepreload" href="src/config.js?v=202611011656"><link rel="modulepreload" href="src/edits.js?v=202611011656"><link rel="modulepreload" href="src/engine.js?v=202611011656"><link rel="modulepreload" href="src/html.js?v=202611011656"><link rel="modulepreload" href="src/map.js?v=202611011656"><link rel="modulepreload" href="src/mine.js?v=202611011656"><link rel="modulepreload" href="src/pages.js?v=202611011656"><link rel="modulepreload" href="src/search.js?v=202611011656"><link rel="modulepreload" href="src/shadow.js?v=202611011656"><link rel="modulepreload" href="src/state.js?v=202611011656"><link rel="modulepreload" href="src/store-map.js?v=202611011656"><link rel="modulepreload" href="src/store-supabase.js?v=202611011656"><link rel="modulepreload" href="src/store.js?v=202611011656"><link rel="modulepreload" href="src/timeline.js?v=202611011656"><link rel="modulepreload" href="src/travel.js?v=202611011656"><link rel="modulepreload" href="src/ui.js?v=202611011656">
+<link rel="preload" href="data/cities.json?v=202611011656" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -66,10 +66,48 @@ textarea.text{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(
 .crumb{display:flex;align-items:center;gap:10px;padding:2px 0 4px;font-size:15px}.crumb a{font-weight:800;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--surface)}.crumb a:hover{border-color:var(--d1);color:var(--d1)}.crumb span{color:var(--muted);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .line>header .eye{border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;font:inherit;font-size:12px;font-weight:700;border-radius:999px;padding:1px 9px;cursor:pointer}.line>header .eye[aria-pressed="false"]{background:rgba(0,0,0,.25);opacity:.75}
 .line>header .fold{font-size:15px;line-height:1;padding:3px 7px;transition:transform .15s}.line>header .fold[aria-expanded=true]{transform:rotate(180deg)}
-.loading{display:flex;align-items:center;gap:10px;color:var(--muted)}.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--d1);animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.spin{animation:none}}
-.oops{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:8px;max-width:calc(100% - 32px);background:#1c2026;color:#fff;padding:10px 12px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);font-size:14px}.oops .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
-.doc{max-width:72ch;line-height:1.7}.doc h3{font-size:16px;margin:20px 0 6px}.doc ul{padding-left:20px;margin:6px 0}.doc li{margin:3px 0}
-.legal{text-align:center;font-size:13px}.legal a,.credits a{color:inherit}.authalt a{color:var(--d1);font-weight:600}.empty{text-align:center;padding:28px 16px}.empty h3{margin:0 0 6px}
+.oops{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:8px;max-width:calc(100% - 32px);background:var(--fg);color:#fff;padding:10px 12px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);font-size:14px}.oops .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+/* 불러오는 중 — 짧은 선 위를 점 하나가 달린다 */
+.loading{display:flex;align-items:center;gap:12px;padding:28px 4px;color:var(--muted);font-weight:600}
+.ride{position:relative;width:64px;height:4px;border-radius:2px;background:color-mix(in srgb,var(--d1) 22%,transparent)}
+.ride i{position:absolute;top:50%;left:0;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#fff;border:3px solid var(--d1);box-sizing:border-box;animation:ride 1.1s ease-in-out infinite alternate}
+@keyframes ride{to{left:calc(100% - 12px)}}@media (prefers-reduced-motion:reduce){.ride i{animation:none;left:calc(50% - 6px)}}
+/* 계정 — 세 화면을 한 노선의 역으로 */
+.panel.auth{max-width:440px;margin-inline:auto;padding:22px 22px 18px}
+.authline{position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin:2px -6px 18px}
+.authline::before{content:"";position:absolute;left:16.6%;right:16.6%;top:9px;height:4px;border-radius:2px;background:var(--d1)}
+.authline button{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;padding:0 0 2px}
+.authline i{width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--d1);box-sizing:border-box}
+.authline [aria-current=page]{color:var(--fg);font-weight:800}.authline [aria-current=page] i{background:var(--d1);box-shadow:0 0 0 4px color-mix(in srgb,var(--d1) 18%,transparent)}
+.authline button:focus-visible{outline:2px solid var(--d1);outline-offset:4px;border-radius:6px}
+.authlead{color:var(--muted);margin:0 0 14px}
+.field{display:block;margin:0 0 12px}.field>span{display:block;font-size:14px;font-weight:700;margin-bottom:5px}.field em{font-style:normal;font-weight:500;color:var(--faint)}.field input{width:100%;box-sizing:border-box}
+.panel.auth a{color:var(--d1);font-weight:600}.panel.auth .row{margin-top:4px}.btn.ghost{background:transparent}
+.authnote{background:color-mix(in srgb,var(--warn) 8%,#fff);border-left:4px solid var(--warn);padding:8px 12px;border-radius:6px;font-size:14px}
+/* 문서 — 절마다 노선 위 역, 번호는 역 동그라미 안 */
+.doc{max-width:68ch;line-height:1.75}
+.doc h3{position:relative;display:flex;align-items:center;gap:12px;font-size:17px;margin:26px 0 6px}
+.doc h3 i{flex:none;width:28px;height:28px;border-radius:50%;background:#fff;border:4px solid var(--d1);box-sizing:border-box;font:800 12px/20px "Wanted Sans Variable",sans-serif;font-style:normal;text-align:center;color:var(--fg)}
+.doc h3~p,.doc h3~ul{margin-left:13px;padding-left:27px;border-left:4px solid color-mix(in srgb,var(--d1) 30%,transparent)}
+.doc h3~ul{padding-left:44px}.doc li{margin:3px 0}
+/* 404 — 끊긴 노선. 이 페이지에만 큰 글자 */
+.lost{padding:36px 28px 30px;max-width:640px;margin-inline:auto}
+body.v2 .panel.lost h2{font-size:clamp(34px,7vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:22px 0 10px}
+.lost p{color:var(--muted);max-width:44ch}
+.broken{display:flex;align-items:center;max-width:420px}
+.broken .stn{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted)}
+.broken .stn i{width:26px;height:26px;border-radius:50%;background:#fff;border:5px solid var(--d1);box-sizing:border-box;font:800 12px/16px sans-serif;font-style:normal;text-align:center}
+.broken .stn.end i{border-color:var(--warn);color:var(--warn)}
+.broken .track{flex:2;height:5px;background:var(--d1);margin:0 -2px 20px}
+.broken .gap{flex:1.4;height:5px;margin:0 6px 20px 2px;background:repeating-linear-gradient(90deg,var(--d1) 0 8px,transparent 8px 16px);opacity:.45}
+/* 빈 목록 — 점선 끝의 + 역 */
+.panel.empty,.panel.empty p{text-align:center}.empty{padding:30px 18px}.empty h3{margin:14px 0 6px;font-size:20px}.empty p{color:var(--muted);max-width:40ch;margin:0 auto 16px}
+.emptyline{display:flex;align-items:center;justify-content:center}
+.emptyline i{width:90px;height:4px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.emptyline b{width:36px;height:36px;border-radius:50%;border:4px dashed var(--d1);box-sizing:border-box;display:grid;place-items:center;color:var(--d1);font-size:20px;line-height:1}
+/* 탈퇴 — 경고색 선 */
+.panel.danger{border-left:4px solid var(--warn)}.panel.danger h2{color:var(--warn)}
+.legal{text-align:center;font-size:13px;margin:18px 0}.legal a,.credits a{color:inherit}
 .legpills{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}.legpills .btn{border-radius:999px}
 .guidenav{position:sticky;top:0;z-index:3;display:flex;gap:6px;padding:8px 0;background:var(--bg)}.guidenav a{font-weight:700;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px}.guidenav a:hover{border-color:var(--d1);color:var(--d1)}
 .guidesec{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:18px 0 4px;scroll-margin-top:56px}
@@ -186,6 +224,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611011616"></script>
+<script type="module" src="src/ui.js?v=202611011656"></script>
 </body>
 </html>

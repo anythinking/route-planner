@@ -34,7 +34,7 @@ export function encode(st) {
 export function decode(hash) {
   const st = structuredClone(DEFAULTS);
   let q;
-  try { q = new URLSearchParams((hash || '').replace(/^#/, '')); } catch { return st; }
+  try { q = new URLSearchParams((hash || '').replace(/^#/, '').split('#')[0]); } catch { return st; }   // 로그인 메일이 뒤에 붙인 #토큰은 계정 쪽 몫
   const int = (k, lo, hi, def) => {
     if (!q.has(k)) return def;
     const v = Number(q.get(k));

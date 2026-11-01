@@ -4,6 +4,8 @@ import { SUPABASE } from './config.js';
 const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/+esm');
 
 import { rowToProject, rowToPhoto } from './store-map.js';
+// 메일 링크가 돌아올 주소 — #을 붙이면 Supabase가 #토큰을 하나 더 붙여 둘 다 깨진다. 돌아오면 ui.js가 내 여행으로 보낸다
+const BACK = location.origin + location.pathname;
 const dataUrlToBlob = async d => (await fetch(d)).blob();
 
 export class SupabaseStore {
@@ -29,7 +31,7 @@ export class SupabaseStore {
   }
   // { email, password } → 비밀번호, { email } → 매직 링크 메일, { provider: 'google' } → OAuth
   async signIn({ email, password, provider }) {
-    const redirect = location.href.split('#')[0] + '#tab=mine';
+    const redirect = BACK;
     if (provider) { const { error } = await this.sb.auth.signInWithOAuth({ provider, options: { redirectTo: redirect } }); if (error) throw error; return null; }
     if (password) { const { error } = await this.sb.auth.signInWithPassword({ email, password }); if (error) throw error; return { ok: true }; }
     const { error } = await this.sb.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect } }); if (error) throw error;
@@ -38,12 +40,12 @@ export class SupabaseStore {
   async signOut() { await this.sb.auth.signOut(); }
   // 가입 — 메일 확인을 켜 두면 세션 없이 돌아오고 확인 메일이 간다
   async signUp({ name, email, password }) {
-    const { data, error } = await this.sb.auth.signUp({ email, password, options: { data: { full_name: String(name || '').trim().slice(0, 40) }, emailRedirectTo: location.href.split('#')[0] + '#tab=mine' } });
+    const { data, error } = await this.sb.auth.signUp({ email, password, options: { data: { full_name: String(name || '').trim().slice(0, 40) }, emailRedirectTo: BACK } });
     if (error) throw error;
     return { session: !!data.session };
   }
   async resetPassword(email) {
-    const { error } = await this.sb.auth.resetPasswordForEmail(email, { redirectTo: location.href.split('#')[0] + '#tab=mine' }); if (error) throw error;
+    const { error } = await this.sb.auth.resetPasswordForEmail(email, { redirectTo: BACK }); if (error) throw error;
   }
   // 탈퇴 — 사진 파일을 먼저 지우고(저장소는 표와 따로라 같이 안 지워진다), 서버 함수가 계정을 지우면 표는 연쇄로 지워진다
   async deleteAccount() {
