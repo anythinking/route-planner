@@ -26,6 +26,7 @@ async function gpsOf(file) {
   catch { return null; }
 }
 
+const tripFold = new Set();  // 접어 둔 노선 (여행·구간·일차)
 const tripDay = new Map();   // 여행 페이지 지도에 보이는 날 (여행·구간 → 일차 번호, 없으면 전체)
 const tripLeg = new Map();   // 여행 페이지에서 보고 있는 구간 (여행 id → 번호)
 
@@ -329,7 +330,10 @@ async function renderProject(ctx) {
       [null, ...res.days.map((d, i) => d.stops.length ? i : -1).filter(i => i >= 0)].forEach(d => {
         const b = $('button', 'btn sm' + (d === sel ? ' primary' : ''), d === null ? '전체' : `${d + 1}일차`); b.type = 'button'; b.onclick = () => pick(d); chips.appendChild(b);
       });
-      sum.appendChild(chips);
+      const dayKeys = res.days.map((d, i) => d.stops.length ? `${key}:${i}` : null).filter(Boolean), allFolded = dayKeys.every(k => tripFold.has(k));
+      const fa = $('button', 'btn sm', allFolded ? '모두 펴기' : '모두 접기'); fa.type = 'button'; fa.style.marginLeft = 'auto';
+      fa.onclick = () => { dayKeys.forEach(k => allFolded ? tripFold.delete(k) : tripFold.add(k)); render(); };
+      chips.appendChild(fa); sum.appendChild(chips);
       res.days.forEach((day, i) => {
         if (!day.stops.length) return;
         const cv = `--d${i % 10 + 1}`, col = css.getPropertyValue(cv).trim() || '#1F4FA8';
@@ -342,7 +346,10 @@ async function renderProject(ctx) {
           ol.appendChild($('li', 'stn', `<time>${hm(x.arrive)}</time><i class="dot"></i><div><div class="nm">${esc(x.place.name)}${who ? ` <span class="who">${esc(who)}</span>` : ''}</div><div class="meta">${esc(o?.label && o.label !== '머물기' ? o.label + ' · ' : '')}${o?.min || ''}분</div></div>`));
         }
         ln.appendChild(ol); lines.appendChild(ln);
-        ln.querySelector('header').style.cursor = 'pointer'; ln.querySelector('header').onclick = () => pick(i === sel ? null : i);
+        const hd = ln.querySelector('header'), fk = `${key}:${i}`; hd.style.cursor = 'pointer'; hd.onclick = () => pick(i === sel ? null : i);
+        const fold = $('button', 'eye', tripFold.has(fk) ? '펴기' : '접기'); fold.type = 'button'; fold.setAttribute('aria-expanded', !tripFold.has(fk));
+        fold.onclick = e => { e.stopPropagation(); tripFold.has(fk) ? tripFold.delete(fk) : tripFold.add(fk); render(); };
+        hd.appendChild(fold); ol.hidden = tripFold.has(fk);
         if (sel !== null && i !== sel) return;
         const s0 = perDay[i]?.start || start;
         map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
