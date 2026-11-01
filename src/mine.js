@@ -221,7 +221,8 @@ function renderLogin({ $, side, store, render, state: ctxState, joinPending, aut
     const err = $('p', null, '');
     const say = m => { err.innerHTML = `<b style="color:var(--warn)">${esc(m)}</b>`; };
     const email = () => { const v = inp.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { say('이메일 주소를 확인해 주세요.'); inp.focus(); return null; } return v; };
-    const busy = async (b, label, fn) => { b.disabled = true; const t = b.textContent; b.textContent = label; try { await fn(); } catch (x) { say(x.message || String(x)); b.disabled = false; b.textContent = t; } };
+    const KO = { 'Invalid login credentials': '이메일이나 비밀번호가 맞지 않아요.', 'Email not confirmed': '가입 확인 메일의 링크를 먼저 눌러 주세요.', 'User already registered': '이미 가입된 이메일이에요. 로그인하거나 비밀번호 찾기를 써 주세요.' };
+    const busy = async (b, label, fn) => { b.disabled = true; const t = b.textContent; b.textContent = label; try { await fn(); } catch (x) { const m = x.message || String(x); say(KO[m] || (/rate limit/i.test(m) ? '메일을 너무 자주 보냈어요. 잠시 뒤 다시 해 주세요.' : m)); b.disabled = false; b.textContent = t; } };
     const row = $('div', 'row');
     if (authMode === 'login') {
       const go = $('button', 'btn primary', '로그인'); go.type = 'button';
