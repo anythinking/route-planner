@@ -28,9 +28,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611071800","./src/config.js":"./src/config.js?v=202611071800","./src/edits.js":"./src/edits.js?v=202611071800","./src/engine.js":"./src/engine.js?v=202611071800","./src/html.js":"./src/html.js?v=202611071800","./src/map.js":"./src/map.js?v=202611071800","./src/mine.js":"./src/mine.js?v=202611071800","./src/pages.js":"./src/pages.js?v=202611071800","./src/search.js":"./src/search.js?v=202611071800","./src/shadow.js":"./src/shadow.js?v=202611071800","./src/state.js":"./src/state.js?v=202611071800","./src/store-map.js":"./src/store-map.js?v=202611071800","./src/store-supabase.js":"./src/store-supabase.js?v=202611071800","./src/store.js":"./src/store.js?v=202611071800","./src/timeline.js":"./src/timeline.js?v=202611071800","./src/travel.js":"./src/travel.js?v=202611071800","./src/ui.js":"./src/ui.js?v=202611071800"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611071800"><link rel="modulepreload" href="src/config.js?v=202611071800"><link rel="modulepreload" href="src/edits.js?v=202611071800"><link rel="modulepreload" href="src/engine.js?v=202611071800"><link rel="modulepreload" href="src/html.js?v=202611071800"><link rel="modulepreload" href="src/map.js?v=202611071800"><link rel="modulepreload" href="src/mine.js?v=202611071800"><link rel="modulepreload" href="src/pages.js?v=202611071800"><link rel="modulepreload" href="src/search.js?v=202611071800"><link rel="modulepreload" href="src/shadow.js?v=202611071800"><link rel="modulepreload" href="src/state.js?v=202611071800"><link rel="modulepreload" href="src/store-map.js?v=202611071800"><link rel="modulepreload" href="src/store-supabase.js?v=202611071800"><link rel="modulepreload" href="src/store.js?v=202611071800"><link rel="modulepreload" href="src/timeline.js?v=202611071800"><link rel="modulepreload" href="src/travel.js?v=202611071800"><link rel="modulepreload" href="src/ui.js?v=202611071800">
-<link rel="preload" href="data/cities.json?v=202611071800" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611071823","./src/config.js":"./src/config.js?v=202611071823","./src/edits.js":"./src/edits.js?v=202611071823","./src/engine.js":"./src/engine.js?v=202611071823","./src/html.js":"./src/html.js?v=202611071823","./src/map.js":"./src/map.js?v=202611071823","./src/mine.js":"./src/mine.js?v=202611071823","./src/pages.js":"./src/pages.js?v=202611071823","./src/search.js":"./src/search.js?v=202611071823","./src/shadow.js":"./src/shadow.js?v=202611071823","./src/state.js":"./src/state.js?v=202611071823","./src/store-map.js":"./src/store-map.js?v=202611071823","./src/store-supabase.js":"./src/store-supabase.js?v=202611071823","./src/store.js":"./src/store.js?v=202611071823","./src/timeline.js":"./src/timeline.js?v=202611071823","./src/travel.js":"./src/travel.js?v=202611071823","./src/ui.js":"./src/ui.js?v=202611071823"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611071823"><link rel="modulepreload" href="src/config.js?v=202611071823"><link rel="modulepreload" href="src/edits.js?v=202611071823"><link rel="modulepreload" href="src/engine.js?v=202611071823"><link rel="modulepreload" href="src/html.js?v=202611071823"><link rel="modulepreload" href="src/map.js?v=202611071823"><link rel="modulepreload" href="src/mine.js?v=202611071823"><link rel="modulepreload" href="src/pages.js?v=202611071823"><link rel="modulepreload" href="src/search.js?v=202611071823"><link rel="modulepreload" href="src/shadow.js?v=202611071823"><link rel="modulepreload" href="src/state.js?v=202611071823"><link rel="modulepreload" href="src/store-map.js?v=202611071823"><link rel="modulepreload" href="src/store-supabase.js?v=202611071823"><link rel="modulepreload" href="src/store.js?v=202611071823"><link rel="modulepreload" href="src/timeline.js?v=202611071823"><link rel="modulepreload" href="src/travel.js?v=202611071823"><link rel="modulepreload" href="src/ui.js?v=202611071823">
+<link rel="preload" href="data/cities.json?v=202611071823" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -159,7 +159,7 @@ body.v2 :focus-visible{outline:2px solid var(--d1);outline-offset:2px}
 .line li{display:grid;grid-template-columns:62px 18px 1fr;align-items:start;column-gap:10px}
 .line li{background:linear-gradient(color-mix(in srgb,var(--c) 40%,transparent),color-mix(in srgb,var(--c) 40%,transparent)) no-repeat 80px 0/4px 100%}
 .line li.leg{min-height:24px;align-items:center}.line li.leg select{grid-column:3;justify-self:start;font-size:12.5px;width:auto;border-bottom:0;color:var(--faint)}
-.line li.stn{padding:2px 0;cursor:grab}.line.ro li.stn{cursor:default}.line li.stn time{font-size:20px;font-weight:800;line-height:1.3;text-align:right;letter-spacing:-.02em}
+.line li.stn{padding:2px 0}.line.edit li.stn{cursor:grab}.line li.stn time{font-size:20px;font-weight:800;line-height:1.3;text-align:right;letter-spacing:-.02em}
 .line li.stn .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:4px solid var(--c);margin-top:5px;justify-self:center}
 .line .nm{font-weight:700;font-size:16px;line-height:1.35}.line .star{color:var(--gold)}
 .line .meta{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px}
@@ -230,6 +230,11 @@ body.v2 .card .cap b{font-size:18px}body.v2 .card .cap span{font-size:14px}
 body.v2 .hero h2{font-size:34px}body.v2 .hero p{font-size:16.5px}
 body.v2 .st span{font-size:13px}body.v2 .mk span{font-size:12px}
 body.v2 #sunbox .sun{font-size:14px}
+/* ✎ 고치기 — 켜야 단추가 붙는다 · 나누는 방법 알약 */
+.btn.edit[aria-pressed=true]{background:var(--d1);border-color:var(--d1);color:#fff}
+.algos{margin:0 0 2px}.algos .chip{padding:4px 11px;font-size:14px}.algos .chip[aria-pressed=true]{background:var(--fg);color:#fff;border-color:var(--fg)}
+.line li.leg .legtxt{grid-column:3;font-size:13.5px;color:var(--faint)}
+.line li.stn .meta .txt{color:var(--muted)}
 </style>
 </head>
 <body class="v2">
@@ -244,6 +249,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611071800"></script>
+<script type="module" src="src/ui.js?v=202611071823"></script>
 </body>
 </html>

@@ -274,3 +274,68 @@ test('plan perDay: 날마다 시작 시각·이동수단·출발점을 따로 �
   assert.ok(r.days[1].stops[0].arrive >= 720);          // 2일차는 12:00 이후
   assert.equal(r.days[1].stops[0].travelMode, 'taxi');  // 2일차는 택시 (출발점이 멀어 2km 초과)
 });
+
+// ───── 나누는 방법 네 가지 (algo) ─────
+import { ALGOS } from '../src/engine.js';
+const ids = r => r.days.map(d => d.stops.map(s => s.place.id));
+const all = r => [...r.days.flatMap(d => d.stops.map(s => s.place.id)), ...r.dropped.map(x => x.place.id)].sort();
+
+test('algo: 네 방법 모두 — 장소는 전부 배정되거나 뺀 목록에 있고, 중복 없고, 어느 날도 dayEnd를 안 넘긴다', () => {
+  for (const algo of Object.keys(ALGOS)) {
+    const r = plan(LONDON, { days: 3, start: HOTEL, dayStart: 570, dayEnd: 1140, algo });
+    assert.deepEqual(all(r), LONDON.map(p => p.id).sort(), algo);
+    assert.equal(new Set(all(r)).size, LONDON.length, algo);
+    for (const d of r.days) assert.ok(d.end <= 1140 || d.over, algo);
+    assert.ok(r.days.length <= 3, algo);
+    assert.equal(r.algo, algo);
+  }
+});
+
+test('algo: 결정적 · 모르는 이름은 지역별로', () => {
+  for (const algo of Object.keys(ALGOS)) assert.equal(JSON.stringify(plan(LONDON, { days: 3, start: HOTEL, algo })), JSON.stringify(plan(LONDON, { days: 3, start: HOTEL, algo })));
+  const a = plan(LONDON, { days: 3, start: HOTEL, algo: 'nope' }), b = plan(LONDON, { days: 3, start: HOTEL });
+  assert.deepEqual(ids(a), ids(b)); assert.equal(a.algo, 'area');
+});
+
+test('algo route: 날들을 이으면 한 줄 순서 — 날 사이에 서로 겹쳐 되돌아가지 않는다 (각 날이 전체 순서의 연속 토막)', () => {
+  const r = plan(LONDON, { days: 3, start: HOTEL, algo: 'route' });
+  const chain = order(LONDON, HOTEL).map(p => p.id);
+  let pos = 0;
+  for (const day of ids(r)) {                       // 날 안은 출발점 기준으로 다시 정렬되니 집합으로 비교
+    assert.deepEqual([...day].sort(), chain.slice(pos, pos + day.length).sort());
+    pos += day.length;
+  }
+  assert.equal(pos, LONDON.length);
+});
+
+test('algo even: 날마다 부하가 고르다 — 가장 긴 날이 지역별보다 길지 않고 빈 날이 없다', () => {
+  const load = d => d.stops.length ? d.end - d.stops[0].arrive + d.stops[0].travelMin : 0;
+  const ev = plan(LONDON, { days: 3, start: HOTEL, algo: 'even' }), ar = plan(LONDON, { days: 3, start: HOTEL, algo: 'area' });
+  assert.equal(ev.days.length, 3);
+  assert.ok(ev.days.every(d => d.stops.length > 0));
+  assert.ok(Math.max(...ev.days.map(load)) <= Math.max(...ar.days.map(load)));
+});
+
+test('algo even: 장소가 일수보다 적으면 장소 수만큼만 날이 생긴다', () => {
+  const r = plan(LONDON.slice(0, 2), { days: 5, start: HOTEL, algo: 'even' });
+  assert.equal(r.days.length, 2);
+});
+
+test('algo priority: 예산이 빡빡하면 낮은 순위부터 빠지고 꼭 가기·1순위는 남는다', () => {
+  const r = plan(withMust(LONDON, ['garnier']), { days: 2, start: HOTEL, dayStart: 600, dayEnd: 900, algo: 'priority' });
+  const kept = new Set(r.days.flatMap(d => d.stops.map(s => s.place.id)));
+  assert.ok(kept.has('garnier'), '꼭 가기(3순위)도 남는다');
+  for (const x of r.dropped) assert.ok(x.place.weight >= 2, `뺀 것은 2·3순위: ${x.place.id}`);
+  for (const x of r.dropped) assert.match(x.reason, /2일 안에 자리가 없어서/);
+});
+
+test('algo priority: 넉넉하면 전부 들어가고 날마다 dayEnd 안', () => {
+  const r = plan(LONDON, { days: 3, start: HOTEL, algo: 'priority' });
+  assert.equal(r.dropped.length, 0);
+  for (const d of r.days) assert.ok(d.end <= 1140 && !d.over);
+});
+
+test('algo: manual이 맞으면 algo와 무관하게 직접 순서', () => {
+  const manual = [['stpaul', 'borough'], ['tower', 'towerbr', 'shard'], ['buck', 'garnier', 'soho', 'bm', 'traf']];
+  for (const algo of Object.keys(ALGOS)) assert.deepEqual(ids(plan(LONDON, { days: 3, start: HOTEL, manual, algo })), manual);
+});

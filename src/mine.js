@@ -369,7 +369,7 @@ async function renderProject(ctx) {
     else {
       const start = st.s || { lat: cd.center[0], lng: cd.center[1] };
       const perDay = Object.fromEntries(Object.entries(st.ds || {}).map(([k, d]) => [k, { dayStart: d.t, dayEnd: d.e, pref: d.v, start: d.s }]));
-      const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o, perDay });
+      const res = plan(places, { days: st.d, start, dayStart: st.t, dayEnd: st.e, pref: st.v, legs: st.l, manual: st.o, perDay, algo: st.a });
       const lines = $('div', 'v2lines'), bounds = [[start.lat, start.lng]], css = getComputedStyle(document.body);
       const key = `${p.id}:${li}`, sel = tripDay.get(key) ?? null;
       const pick = d => { d === null ? tripDay.delete(key) : tripDay.set(key, d); render(); };

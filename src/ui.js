@@ -1,4 +1,4 @@
-import { plan, hm } from './engine.js';
+import { plan, hm, ALGOS } from './engine.js';
 import { decode, encode, DEFAULTS, TABS, PAGES, resolvePlaces, legsOf, withLeg } from './state.js';
 import { renderPage } from './pages.js';
 import { esc } from './html.js';
@@ -491,7 +491,7 @@ function assignment() {
   }
   if (!places.length) return { days: Array.from({ length: state.d }, () => []), auto: true, dropped: [] };
   const start = state.s || { lat: city.center[0], lng: city.center[1] };
-  const res = plan(places, { days: state.d, start, dayStart: state.t, dayEnd: state.e, pref: state.v, legs: state.l, perDay: perDay() });
+  const res = plan(places, { days: state.d, start, dayStart: state.t, dayEnd: state.e, pref: state.v, legs: state.l, perDay: perDay(), algo: state.a });
   const days = res.days.map(d => d.stops.map(s => s.place.id)); while (days.length < state.d) days.push([]);
   return { days, auto: true, dropped: res.dropped.map(x => x.place.id) };
 }
@@ -606,13 +606,15 @@ function renderAiBox(host) {
 
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
+let editing = false;   // ✎ 고치기 — 켜야 역·구간·날에 고치는 단추가 붙는다. 열 때마다 꺼진 채로 시작(켜 두면 화면이 빽빽하다)
+const ALGO_HINT = { area: '가까운 곳끼리 하루', route: '전체를 한 줄로 이어 날과 날 사이 되돌아가기가 적게', even: '날마다 체류·이동이 비슷하게 — 빈 날·짧은 날이 안 생겨요', priority: '꼭 가기·1순위부터 채우고, 자리가 없으면 낮은 순위가 빠져요' };
 let mapFitAsked = false;   // 날을 켜고 끈 뒤 지도를 보이는 날에 맞춘다
 function renderPlan(side, entering) {
   const places = resolvePlaces(state, city);
   const byId = new Map(places.map(p => [p.id, p]));
   const a = assignment();
   const start = state.s || { lat: city.center[0], lng: city.center[1] };
-  const result = places.length ? plan(places, { days: state.d, start, dayStart: state.t, dayEnd: state.e, pref: state.v, legs: state.l, manual: a.auto ? null : a.days, perDay: perDay() }) : { days: [], dropped: [] };
+  const result = places.length ? plan(places, { days: state.d, start, dayStart: state.t, dayEnd: state.e, pref: state.v, legs: state.l, manual: a.auto ? null : a.days, perDay: perDay(), algo: state.a }) : { days: [], dropped: [] };
   const days = Array.from({ length: Math.max(state.d, result.days.length) }, (_, i) => result.days[i] || { stops: [], end: 0, moveMin: 0 });
 
   // 머리 — 도시 · 일수 · 저장 · 더보기
@@ -627,6 +629,9 @@ function renderPlan(side, entering) {
   const ttl = $('div', 'v2title');
   ttl.innerHTML = `<h2>${esc(city.name)}</h2><span>${state.d}일 · ${places.length}곳</span>`;
   head.appendChild(ttl);
+  const ed = $('button', 'btn sm edit', '✎ 고치기'); ed.type = 'button'; ed.setAttribute('aria-pressed', editing); ed.title = editing ? '고치기 끄기 — 보기만' : '역·구간·날을 고치는 단추를 켜요 (체류 바꾸기 · ★ · 빼기 · 끌어서 옮기기 · 이동수단 · 날 설정)';
+  ed.onclick = () => { editing = !editing; render(); };
+  if (places.length) head.appendChild(ed);
   const un = $('button', 'btn sm', '↶ 되돌리기'); un.type = 'button'; un.title = '방금 한 것 되돌리기 (⌘Z)'; un.disabled = !undoStack.length; un.onclick = undo;
   head.appendChild(un);
   const sv = $('button', 'btn primary', state.pr && curUser ? '저장' : '여행으로 저장'); sv.type = 'button';
@@ -649,6 +654,18 @@ function renderPlan(side, entering) {
   more.appendChild(menu);
   head.append(sv, more);
   side.appendChild(head);
+  // 나누는 방법 — 자동일 때 넷 중 하나, 직접 배정이면 자동으로 돌아가는 단추
+  if (places.length) {
+    const ar = $('div', 'row regions algos');
+    if (a.auto) {
+      ar.appendChild($('span', 'muted', '나누기'));
+      for (const [k, label] of Object.entries(ALGOS)) { const b = $('button', 'chip', label); b.type = 'button'; b.title = ALGO_HINT[k]; b.setAttribute('aria-pressed', (state.a || 'area') === k); b.onclick = () => setState({ a: k }); ar.appendChild(b); }
+    } else {
+      ar.appendChild($('span', 'muted', '직접 정한 배정이에요'));
+      const b = $('button', 'chip', '자동으로 다시 나누기'); b.type = 'button'; b.onclick = () => setState({ o: null }); ar.appendChild(b);
+    }
+    side.appendChild(ar);
+  }
 
   // 넣기 — 검색 + AI
   const add = $('div', 'v2add');
@@ -677,28 +694,33 @@ function renderPlan(side, entering) {
   }
   days.forEach((day, i) => {
     const col = `var(${DAY_COLORS[i] || '--d1'})`;
-    const ln = $('section', 'line' + (i === activeDay && !a.auto ? ' active' : '')); ln.style.setProperty('--c', col);
+    const ln = $('section', 'line' + (i === activeDay && !a.auto ? ' active' : '') + (editing ? ' edit' : '')); ln.style.setProperty('--c', col);
     const hd = $('header');
     const span = day.stops.length ? `${hm(day.stops[0].arrive)}–${hm(day.end)} · 이동 ${day.moveMin}분${day.over ? ' · <b class="warn">시간 초과</b>' : ''}` : '비어 있어요';
     hd.innerHTML = `<b>${i + 1}일차</b><span>${span}</span>`;
     if (sel !== null && i !== sel) ln.style.opacity = '.45';
-    const dc = $('details', 'daycfgbox'); dc.appendChild($('summary', null, '설정')); dc.appendChild(renderDayCfg(i)); hd.appendChild(dc);
-    if (days.length > 1) { const x = $('button', 'x', '×'); x.type = 'button'; x.title = '이 날 빼기 — 장소는 앞날로 옮겨요'; x.onclick = () => { const o = makeManual(); while (o.length < days.length) o.push([]); const j = Math.max(0, i - 1); if (i === 0) o[1] = [...o[0], ...(o[1] || [])]; else o[j].push(...o[i]); o.splice(i, 1); activeDay = Math.min(activeDay, o.length - 1); setState({ d: Math.max(1, state.d - 1), o }); }; hd.appendChild(x); }
+    if (editing) { const dc = $('details', 'daycfgbox'); dc.appendChild($('summary', null, '설정')); dc.appendChild(renderDayCfg(i)); hd.appendChild(dc); }
+    if (editing && days.length > 1) { const x = $('button', 'x', '×'); x.type = 'button'; x.title = '이 날 빼기 — 장소는 앞날로 옮겨요'; x.onclick = () => { const o = makeManual(); while (o.length < days.length) o.push([]); const j = Math.max(0, i - 1); if (i === 0) o[1] = [...o[0], ...(o[1] || [])]; else o[j].push(...o[i]); o.splice(i, 1); activeDay = Math.min(activeDay, o.length - 1); setState({ d: Math.max(1, state.d - 1), o }); }; hd.appendChild(x); }
     ln.appendChild(hd);
-    ln.ondragover = ev => { ev.preventDefault(); ln.classList.add('over'); }; ln.ondragleave = () => ln.classList.remove('over');
-    ln.ondrop = ev => { ev.preventDefault(); ln.classList.remove('over'); const id = ev.dataTransfer.getData('text/place') || dragId; if (id) dropToDay(id, i); };
+    if (editing) {
+      ln.ondragover = ev => { ev.preventDefault(); ln.classList.add('over'); }; ln.ondragleave = () => ln.classList.remove('over');
+      ln.ondrop = ev => { ev.preventDefault(); ln.classList.remove('over'); const id = ev.dataTransfer.getData('text/place') || dragId; if (id) dropToDay(id, i); };
+    }
     const ol = $('ol');
     let prevId = 'start';
     day.stops.forEach((st2, k) => {
       const pl = st2.place, key = `${prevId}>${pl.id}`; prevId = pl.id;
       const leg = $('li', 'leg');
+      if (!editing) { leg.appendChild($('span', 'legtxt', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`)); ol.appendChild(leg); }
+      else {
       const ls = $('select', 'quiet'); ls.title = '이 구간 이동';
       for (const [v, label] of [['', `${MODE[st2.travelMode] || ''} ${st2.travelMin}분`], ['walk', '도보로'], ['metro', '지하철로'], ['taxi', '택시로'], ['custom', '분 직접 입력']]) { const o = $('option', null, label); o.value = v; o.selected = v === '' ? state.l[key] == null : (typeof state.l[key] === 'number' ? v === 'custom' : state.l[key] === v); ls.appendChild(o); }
       ls.onchange = () => { const l = { ...state.l }; if (ls.value === 'custom') { const n = parseInt(prompt('이 구간은 몇 분 걸려요?', String(st2.travelMin))); if (!(n > 0)) { render(); return; } l[key] = n; } else if (ls.value) l[key] = ls.value; else delete l[key]; setState({ l }); };
       leg.appendChild(ls); ol.appendChild(leg);
-      const li = $('li', 'stn'); li.draggable = true;
-      li.ondragstart = ev => { dragId = pl.id; ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'move'; };
-      li.ondrop = ev => {   // 역 위에 떨어뜨리면 그 앞으로
+      }
+      const li = $('li', 'stn'); li.draggable = editing;
+      if (editing) li.ondragstart = ev => { dragId = pl.id; ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'move'; };
+      if (editing) li.ondrop = ev => {   // 역 위에 떨어뜨리면 그 앞으로
         ev.preventDefault(); ev.stopPropagation(); ln.classList.remove('over');
         const id = ev.dataTransfer.getData('text/place') || dragId; if (!id || id === pl.id) return;
         const o = makeManual().map(d => d.filter(x => x !== id)); while (o.length <= i) o.push([]);
@@ -710,6 +732,7 @@ function renderPlan(side, entering) {
       const body = $('div', 'body');
       body.appendChild($('div', 'nm', `${esc(pl.name)}${pl.must ? ' <span class="star" title="꼭 가기">★</span>' : ''}${who ? ` <span class="who">${esc(who)}</span>` : ''}`));
       const meta = $('div', 'meta');
+      if (!editing) { const o = pl.opts[pl.opt]; meta.appendChild($('span', 'txt', `${esc(o?.label && o.label !== '머물기' ? o.label + ' · ' : '')}${o?.min ?? ''}분`)); body.appendChild(meta); li.appendChild(body); ol.appendChild(li); return; }
       if (!pl.user) { const sel = $('select', 'quiet'); pl.opts.forEach((o, j) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = j; op.selected = pl.opt === j; sel.appendChild(op); }); sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } }); meta.appendChild(sel); }
       else meta.appendChild($('span', null, `${esc(pl.opts[0].min)}분`));
       const star = $('button', 'ic', pl.must ? '★' : '☆'); star.type = 'button'; star.title = pl.must ? '꼭 가기 해제' : '꼭 가기 — 시간이 모자라도 안 빠져요'; if (!pl.user) star.onclick = () => setState({ m: pl.must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
@@ -717,14 +740,16 @@ function renderPlan(side, entering) {
       meta.append(star, rm); body.appendChild(meta); li.appendChild(body); ol.appendChild(li);
     });
     ln.appendChild(ol);
-    const ad = $('button', 'addhere', i === activeDay && !a.auto ? '+ 여기에 추가 중 — 검색하거나 아래에서 고르세요' : '+ 이 날에 추가'); ad.type = 'button';
-    ad.onclick = () => { activeDay = i; setState({ o: makeManual() }); setTimeout(() => document.querySelector('.v2add .search input')?.focus(), 50); };
-    ln.appendChild(ad);
+    if (editing) {
+      const ad = $('button', 'addhere', i === activeDay && !a.auto ? '+ 여기에 추가 중 — 검색하거나 아래에서 고르세요' : '+ 이 날에 추가'); ad.type = 'button';
+      ad.onclick = () => { activeDay = i; setState({ o: makeManual() }); setTimeout(() => document.querySelector('.v2add .search input')?.focus(), 50); };
+      ln.appendChild(ad);
+    }
     lines.appendChild(ln);
   });
-  if (a.auto && places.length) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
+  if (a.auto && places.length && editing) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
   // 비거나 두 시간이 안 되는 날이 있으면 — 장소가 일수에 비해 적다는 뜻
-  if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나, 날 머리의 ×로 하루를 빼면 일정이 알차져요.'));
+  if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나 「균등」으로 나누거나, ✎ 고치기를 켜고 날 머리의 ×로 하루를 빼면 알차져요.'));
   if (result.dropped?.length) lines.appendChild($('p', 'warnline', `시간이 모자라 뺀 곳: ${result.dropped.map(x => esc(x.place.name)).join(', ')} — ☆를 ★로 바꾸면 꼭 넣어요.`));
   side.appendChild(lines);
 

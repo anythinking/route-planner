@@ -151,6 +151,70 @@ function why(day) {
   return `서로 ${maxD.toFixed(1)}km 안`;
 }
 
+// ───── 나누는 방법 네 가지 ─────
+//   area     지역별      — 가까운 곳끼리 하루 (씨앗 → k-means → 균형). 기본.
+//   route    한붓그리기  — 전체를 한 줄로 이은 뒤 하루 예산이 차면 끊는다. 날과 날 사이 되돌아가기가 가장 적다.
+//   even     균등        — 한 줄로 이은 뒤 날마다 체류+이동이 비슷하도록 자른다. 비는 날·짧은 날이 안 생긴다.
+//   priority 순위 우선   — 꼭 가기 → 1순위 → 2순위 순으로 가장 싸게 끼워 넣는다. 자리가 없으면 낮은 순위가 빠진다.
+export const ALGOS = { area: '지역별', route: '한붓그리기', even: '균등', priority: '순위 우선' };
+
+// 한붓그리기: 전체 순서를 하루 예산으로 순서대로 끊는다. 마지막 날에 남은 건 다 넣고 trim이 뺀다.
+function splitRoute(places, { days, start, pref, legs, forDay }) {
+  const chain = order(places, start, pref);
+  const groups = []; let cur = [];
+  for (const p of chain) {
+    const d = forDay(groups.length);
+    const trial = schedule([...cur, p], d.start, d.dayStart, { legs, pref: d.pref });
+    if (cur.length && trial.end > d.dayEnd && groups.length < days - 1) { groups.push(cur); cur = [p]; }
+    else cur.push(p);
+  }
+  if (cur.length) groups.push(cur);
+  return groups;
+}
+
+// 균등: 한 줄 순서를 k토막으로 — 토막의 부하(출발점 이동 + 체류 + 구간 이동)의 최댓값이 가장 작게 (선형 분할 DP)
+function splitEven(places, { days, start, pref }) {
+  const chain = order(places, start, pref), n = chain.length, k = Math.min(days, n);
+  const tStart = chain.map(p => travelMin(start, p, { pref }).min);
+  const acc = [0]; for (let t = 1; t < n; t++) acc[t] = acc[t - 1] + travelMin(chain[t - 1], chain[t], { pref }).min + dwell(chain[t]);
+  const cost = (i, j) => tStart[i] + dwell(chain[i]) + acc[j] - acc[i];
+  // f[m][j] = 앞 j+1개를 m토막으로 나눌 때 최댓값의 최솟값, cut[m][j] = 마지막 토막의 시작
+  const f = Array.from({ length: k + 1 }, () => Array(n).fill(Infinity)), cut = Array.from({ length: k + 1 }, () => Array(n).fill(0));
+  for (let j = 0; j < n; j++) f[1][j] = cost(0, j);
+  for (let m = 2; m <= k; m++) for (let j = m - 1; j < n; j++) for (let i = m - 1; i <= j; i++) {
+    const v = Math.max(f[m - 1][i - 1], cost(i, j));
+    if (v < f[m][j]) { f[m][j] = v; cut[m][j] = i; }
+  }
+  const groups = []; let j = n - 1;
+  for (let m = k; m >= 1; m--) { const i = m === 1 ? 0 : cut[m][j]; groups.unshift(chain.slice(i, j + 1)); j = i - 1; }
+  return groups;
+}
+
+// 순위 우선: 꼭 가기 → 1순위 → 2순위 → 3순위 순으로, 이동이 가장 적게 늘어나는 날의 가장 싼 자리에 끼운다.
+// 어느 날에도 안 들어가면 — 꼭 가기는 끝이 가장 이른 날에 억지로(over), 나머지는 뺀다.
+function fillPriority(places, { days, legs, forDay }) {
+  const k = Math.min(days, places.length);
+  const bins = Array.from({ length: k }, () => []), dropped = [];
+  const sorted = [...places].sort((a, b) => (Number(b.must) - Number(a.must)) || (a.weight - b.weight) || byId(a, b));
+  for (const p of sorted) {
+    let best = null;
+    bins.forEach((b, i) => {
+      const d = forDay(i), base = pathCost(b, d.start, d.pref);
+      let seq = null, added = Infinity;
+      for (let pos = 0; pos <= b.length; pos++) {
+        const cand = [...b.slice(0, pos), p, ...b.slice(pos)], c = pathCost(cand, d.start, d.pref) - base;
+        if (c < added) { added = c; seq = cand; }
+      }
+      const end = schedule(seq, d.start, d.dayStart, { legs, pref: d.pref }).end;
+      const fits = end <= d.dayEnd;
+      if (!best || (fits && !best.fits) || (fits === best.fits && (fits ? added < best.added : end < best.end))) best = { i, seq, added, end, fits };
+    });
+    if (best.fits || p.must) bins[best.i] = best.seq;
+    else dropped.push({ place: p, reason: `${days}일 안에 자리가 없어서` });
+  }
+  return { groups: bins.filter(g => g.length), dropped };
+}
+
 // manual = [[id,...],...] 이 지금 고른 장소 집합과 정확히 맞으면 그 배정·순서를 그대로 쓴다.
 function manualValid(manual, places) {
   if (!Array.isArray(manual) || !manual.length) return false;
@@ -159,9 +223,9 @@ function manualValid(manual, places) {
   return ids.length === have.size && ids.every(id => have.has(id)) && new Set(ids).size === ids.length;
 }
 
-// 전체: 씨앗 → 묶기 → (순서 → 시간 → 자르기) × 날. manual이 맞으면 묶기·순서·자르기를 건너뛰고 시간만 쌓는다.
+// 전체: 나누기(algo) → (순서 → 시간 → 자르기) × 날. manual이 맞으면 나누기·순서·자르기를 건너뛰고 시간만 쌓는다.
 // perDay = { [i]: { dayStart?, dayEnd?, pref?, start? } } — 그날만 다르게. 없는 칸은 전체 값.
-export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref = 'transit', legs = {}, manual = null, perDay = {} }) {
+export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref = 'transit', legs = {}, manual = null, perDay = {}, algo = 'area' }) {
   if (!places.length) return { days: [], dropped: [], manual: false };
   const forDay = i => { const o = perDay?.[i] || {}; return { start: o.start || start, dayStart: o.dayStart ?? dayStart, dayEnd: o.dayEnd ?? dayEnd, pref: o.pref || pref }; };
   if (manualValid(manual, places)) {
@@ -175,16 +239,22 @@ export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref 
     });
     return { days: out, dropped: [], manual: true };
   }
-  const M = Math.min(days, places.length);
-  const groups = cluster(places, seed(places, M), dayEnd - dayStart);
-  const out = [], dropped = [];
+  if (!Object.hasOwn(ALGOS, algo)) algo = 'area';
+  const M = Math.min(days, places.length), ctx = { days, start, pref, legs, forDay };
+  let groups, dropped = [];
+  if (algo === 'route') groups = splitRoute(places, ctx);
+  else if (algo === 'even') groups = splitEven(places, ctx);
+  else if (algo === 'priority') ({ groups, dropped } = fillPriority(places, ctx));
+  else groups = cluster(places, seed(places, M), dayEnd - dayStart);
+  const WHY = { route: i => `한붓그리기 ${i + 1}번째 토막`, even: () => '체류·이동을 고르게', priority: () => '순위 높은 것부터' };
+  const out = [];
   groups.forEach((g, i) => {
     const d = forDay(i);
     const d0 = schedule(order(g, d.start, d.pref), d.start, d.dayStart, { legs, pref: d.pref });
     const { day, dropped: dr } = trim(d0, { start: d.start, dayStart: d.dayStart, dayEnd: d.dayEnd, dayIndex: i, legs, pref: d.pref });
     dropped.push(...dr);
-    day.why = day.stops.length ? why(day) : '전부 예산을 넘겨 뺐다';   // 빈 날도 남겨 번호를 지킨다
+    day.why = day.stops.length ? (WHY[algo] ? WHY[algo](i) : why(day)) : '전부 예산을 넘겨 뺐다';   // 빈 날도 남겨 번호를 지킨다
     out.push(day);
   });
-  return { days: out, dropped, manual: false };
+  return { days: out, dropped, manual: false, algo };
 }

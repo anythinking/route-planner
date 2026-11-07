@@ -135,3 +135,9 @@ test('decode: 로그인 메일이 붙인 두 번째 #(토큰)은 무시한다', 
   assert.equal(decode('#tab=mine#access_token=abc&type=recovery').tab, 'mine');
   assert.equal(decode('#access_token=abc&refresh_token=x&type=recovery').tab, 'plan');
 });
+
+test('a(나누는 방법): 기본 area는 해시에 안 쓰고, 다른 값은 왕복하고, 모르는 값은 기본으로', () => {
+  assert.doesNotMatch(encode({ ...DEFAULTS }), /(^|&)a=/);
+  for (const a of ['route', 'even', 'priority']) { const h = encode({ ...DEFAULTS, a }); assert.match(h, new RegExp(`(^|&)a=${a}(&|$)`)); assert.equal(decode('#' + h).a, a); }
+  assert.equal(decode('#a=zzz').a, 'area');
+});

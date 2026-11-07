@@ -105,3 +105,21 @@ test.describe('휴대폰 폭 — 지도와 스크롤', () => {
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before + 200);
   });
 });
+
+test.describe('플랜 — 고치기와 나누는 방법', () => {
+  test('⑧ 보기 화면엔 고치는 단추가 없고, ✎ 고치기를 켜야 붙는다 · 나누기 알약이 해시 a=를 바꾼다', async ({ page }) => {
+    await page.goto('/?local=1#c=london&d=2&p=stpaul:0,tate:0,borough:0,tower:0');
+    await expect(page.locator('.v2lines')).toBeVisible();
+    await expect(page.locator('.line select')).toHaveCount(0);
+    await expect(page.locator('.line .addhere')).toHaveCount(0);
+    await expect(page.locator('.line .legtxt').first()).toBeVisible();
+    await page.getByRole('button', { name: '✎ 고치기' }).click();
+    await expect(page.locator('.line select').first()).toBeVisible();
+    await expect(page.locator('.line .addhere').first()).toBeVisible();
+    await page.getByRole('button', { name: '한붓그리기' }).click();
+    expect(await hash(page)).toContain('a=route');
+    await expect(page.getByRole('button', { name: '한붓그리기' })).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('button', { name: '지역별' }).click();
+    expect(await hash(page)).not.toContain('a=');
+  });
+});

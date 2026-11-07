@@ -1,6 +1,8 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
-export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null, lg: 0 };
+export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null, lg: 0, a: 'area' };
+// a: 자동으로 나누는 방법 — area(지역별) · route(한붓그리기) · even(균등) · priority(순위 우선). 직접 배정(o)이 있으면 안 쓴다
+export const ALGO_KEYS = ['area', 'route', 'even', 'priority'];
 // 여행(project.hash)은 도시 구간(플랜 해시) 여러 개를 줄바꿈으로 잇는다 — 런던→파리 같은 여행
 export const legsOf = h => { const l = String(h || '').split('\n').filter(Boolean); return l.length ? l : ['']; };
 export const withLeg = (h, i, leg) => { const l = legsOf(h); l[i] = leg; return l.join('\n'); };
@@ -18,6 +20,7 @@ export function encode(st) {
   if (st.m.length) q.set('m', [...st.m].sort().join(','));
   if (st.u.length) q.set('u', st.u.map(x => [x.name, x.lat.toFixed(5), x.lng.toFixed(5), x.min].join('~')).join('|'));
   if (st.v === 'taxi') q.set('v', 'taxi');
+  if (st.a && st.a !== 'area') q.set('a', st.a);
   const lk = Object.keys(st.l || {}).sort();
   if (lk.length) q.set('l', lk.map(k => `${k}:${st.l[k]}`).join(','));
   if (st.o && st.o.length) q.set('o', st.o.map(ids => ids.join(',')).join('|'));
@@ -59,6 +62,7 @@ export function decode(hash) {
       st.u.push({ name, lat: +lat, lng: +lng, min: parseInt(min) });
   }
   if (q.get('v') === 'taxi') st.v = 'taxi';
+  if (ALGO_KEYS.includes(q.get('a'))) st.a = q.get('a');
   for (const tok of (q.get('l') || '').split(',').filter(Boolean)) {
     const i = tok.lastIndexOf(':'); if (i < 0) continue;
     const key = tok.slice(0, i), val = tok.slice(i + 1);
