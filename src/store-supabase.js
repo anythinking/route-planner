@@ -50,8 +50,8 @@ export class SupabaseStore {
   // 탈퇴 — 사진 파일을 먼저 지우고(저장소는 표와 따로라 같이 안 지워진다), 서버 함수가 계정을 지우면 표는 연쇄로 지워진다
   async deleteAccount() {
     const uid = await this._uid(); if (!uid) throw new Error('로그인 필요');
-    const need = '서버에 docs/account.sql 을 먼저 돌려야 해요';
-    { const { error } = await this.sb.rpc('delete_my_account', { dry: true }); if (error) throw new Error(`${error.message} — ${need}`); }   // 함수가 없으면 아무것도 안 지운다
+    const need = '탈퇴 처리가 아직 준비되지 않았어요. GitHub 이슈로 요청해 주시면 바로 지워 드려요.';   // 운영자용: 서버에 docs/account.sql 을 돌리면 열린다
+    { const { error } = await this.sb.rpc('delete_my_account', { dry: true }); if (error) { console.warn('delete_my_account 없음 — docs/account.sql', error.message); throw new Error(need); } }   // 함수가 없으면 아무것도 안 지운다
     const { data: rows, error: e1 } = await this.sb.from('photos').select('path').eq('user_id', uid); if (e1) throw e1;
     if (rows.length) { const { error } = await this.sb.storage.from('photos').remove(rows.map(r => r.path)); if (error) throw error; }
     const { error } = await this.sb.rpc('delete_my_account'); if (error) throw new Error(`${error.message} — ${need}`);

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /tests/
+Disallow: /scripts/
+Disallow: /e2e/
+Disallow: /specs/
+
+Sitemap: https://anythinking.github.io/route-planner/sitemap.xml

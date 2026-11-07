@@ -5,7 +5,7 @@ import { esc } from './html.js';
 import { search } from './search.js';
 import { LocalStore } from './store.js';
 import { renderMine } from './mine.js';
-import { SUPABASE } from './config.js';
+import { SUPABASE, FEATURES } from './config.js';
 import { createMap } from './map.js';
 import { chat } from './ai.js';
 import { tagEdits } from './edits.js';
@@ -55,7 +55,7 @@ let curUser = null;              // 로그인한 사람 (store.user())
 let curProject = null;           // 플랜 탭에서 열어 둔 여행(이름표용) — pr이 있을 때만
 // 지금 플랜을 여행에 저장 — 바뀐 장소에 내 이름표를 붙인다
 async function saveToProject(pid) {
-  const prev = await store.getProject(pid); if (!prev) throw new Error('여행이 없다');
+  const prev = await store.getProject(pid); if (!prev) throw new Error('여행이 없어요');
   const i = state.lg || 0, leg = encode({ ...state, tab: 'plan', pr: null, lg: 0 });
   const edits = tagEdits(legsOf(prev.hash)[i], leg, prev.edits, curUser?.name || '나');
   const p = await store.updateProject(pid, { city: i === 0 ? state.c : prev.city, hash: withLeg(prev.hash, i, leg), edits, lastEditedBy: curUser?.name || null });
@@ -89,7 +89,7 @@ function renderPacking(side) {
   const head = $('div', 'panel');
   head.appendChild($('h2', null, `준비물 <span class="muted" style="font-weight:500">· ${n}/${total} 챙김</span>`));
   const bar = $('div', 'bar'); bar.innerHTML = `<i style="width:${total ? Math.round(n / total * 100) : 0}%"></i>`; head.appendChild(bar);
-  head.appendChild($('p', 'muted', state.pr && curUser ? '체크는 이 여행에 저장된다.' : '체크는 이 브라우저에 남는다 — 「내 여행」에서 여행을 열어 두면 여행에 저장된다.'));
+  head.appendChild($('p', 'muted', state.pr && curUser ? '체크는 이 여행에 저장돼요.' : '체크는 이 브라우저에 남아요 — 「내 여행」에서 여행을 열어 두면 여행에 저장돼요.'));
   const r = $('div', 'row'); const reset = $('button', 'btn sm', '전부 해제'); reset.type = 'button'; reset.onclick = async () => { packingCache = {}; await savePacking({}); render(); }; r.appendChild(reset); head.appendChild(r);
   side.appendChild(head);
   for (const g of PACKING.groups) {
@@ -181,7 +181,7 @@ function renderSettings(side) {   // 기본값(시간·이동·출발점) + 해�
   row0.appendChild($('span', null, `<b>${esc(CITIES[state.c])}</b> <span class="muted">${esc(INDEX.cities[state.c]?.countryName || '')}</span>`));
   const chg = $('button', 'btn sm', '도시 바꾸기'); chg.type = 'button'; chg.onclick = () => setState({ tab: 'home' }); row0.appendChild(chg);
   p.appendChild(row0);
-  p.appendChild($('p', 'muted', '아래는 모든 날의 기본값. 날짜 블록의 「이 날만 다르게」로 날마다 바꿀 수 있다.'));
+  p.appendChild($('p', 'muted', '아래는 모든 날의 기본값이에요. 날짜 블록의 「설정」에서 날마다 다르게 둘 수 있어요.'));
   const row2 = $('div', 'row');
   row2.append($('span', 'muted', `하루`), stepper(state.t, d => setState({ t: Math.max(0, Math.min(state.e - 60, state.t + d * 30)) }), hm), $('span', 'muted', '~'), stepper(state.e, d => setState({ e: Math.max(state.t + 60, Math.min(1440, state.e + d * 30)) }), hm));
   p.appendChild(row2);
@@ -192,7 +192,7 @@ function renderSettings(side) {   // 기본값(시간·이동·출발점) + 해�
   }
   p.appendChild(row3);
   const row4 = $('div', 'row regions'); row4.appendChild($('span', 'muted', '출발점'));
-  const pick = $('button', 'btn sm' + (pickStart ? ' primary' : ''), pickStart ? '지도를 클릭해라…' : (state.s ? '출발점 옮기기' : '지도에서 찍기'));
+  const pick = $('button', 'btn sm' + (pickStart ? ' primary' : ''), pickStart ? '지도를 눌러 주세요…' : (state.s ? '출발점 옮기기' : '지도에서 찍기'));
   pick.type = 'button'; pick.onclick = () => { pickStart = !pickStart; render(); };
   row4.appendChild(pick);
   row4.appendChild($('span', 'muted', state.s ? `${state.s.lat.toFixed(4)}, ${state.s.lng.toFixed(4)}` : '안 찍으면 도심에서 출발'));
@@ -265,7 +265,7 @@ let homeQuery = '';
 function renderHome(side, projects, pub = []) {
   const hero = $('div', 'hero');
   hero.appendChild($('h2', null, '어디로 가세요?'));
-  hero.appendChild($('p', null, '도시를 고르고 가고 싶은 곳에 표시하면, 며칠에 어떤 순서로 돌지 AlgoTrip이 짜 준다.'));
+  hero.appendChild($('p', null, '도시를 고르고 가고 싶은 곳에 표시하면, 며칠에 어떤 순서로 돌지 AlgoTrip이 짜 드려요.'));
   const sr = $('div', 'row');
   const inp = $('input', 'text big'); inp.type = 'search'; inp.placeholder = '도시 이름'; inp.value = homeQuery;
   inp.oninput = () => { homeQuery = inp.value; applyHomeFilter(side); };
@@ -290,7 +290,7 @@ function renderHome(side, projects, pub = []) {
   if (curUser) {
     const sec = $('section', 'region');
     sec.appendChild($('h3', null, `${esc(curUser.name)}의 여행`));
-    if (!projects.length) sec.appendChild($('p', 'muted', '아직 저장한 여행이 없다. 도시를 골라 플랜을 짜고 「저장」을 눌러라.'));
+    if (!projects.length) sec.appendChild($('p', 'muted', '아직 저장한 여행이 없어요. 도시를 골라 플랜을 짜고 「저장」을 눌러 보세요.'));
     const grid = $('div', 'cards');
     for (const p of projects.slice(0, 6)) {
       const c = INDEX.cities[p.city] || {};
@@ -311,7 +311,7 @@ function renderHome(side, projects, pub = []) {
   const others = pub.filter(p => !curUser || p.ownerId !== curUser.id);
   if (others.length) {
     const sec = $('section', 'region'); sec.appendChild($('h3', null, '다른 사람의 플랜'));
-    sec.appendChild($('p', 'muted', '공개로 둔 여행. 열어서 보고 「내 걸로 복사」하면 내 출발점이 된다.'));
+    sec.appendChild($('p', 'muted', '공개로 둔 여행이에요. 열어서 보고 「내 걸로 복사」하면 내 출발점이 돼요.'));
     const grid = $('div', 'cards');
     for (const p of others) {
       const c = INDEX.cities[p.city] || {};
@@ -419,7 +419,7 @@ async function render() {
   }
   if (!side.children.length) side.innerHTML = LOADING;            // 첫 화면 — 도시 파일을 받는 동안
   try { city = await loadCity(state.c); if (seq !== renderSeq) return; }
-  catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔다</h2><p>${esc(CITIES[state.c])} 장소 파일(data/${esc(state.c)}.json)을 읽지 못했다. 네트워크를 확인하고 새로고침해라.</p>`)); return; }
+  catch (e) { renderTabs(); side.innerHTML = ''; side.appendChild($('div', 'panel', `<h2>데이터를 못 불러왔어요</h2><p>${esc(CITIES[state.c])} 장소 정보를 읽지 못했어요. 네트워크를 확인하고 새로고침해 주세요.</p>`)); return; }
   if (lastStep === 0 && resolvePlaces(state, city).length) step = 3;   // 공유 링크는 결과로 바로 연다 (도시 가드 뒤에 판단)
   renderTabs();
   const sy = window.scrollY, st = side.scrollTop;        // 다시 그리는 동안 스크롤 자리를 지킨다
@@ -433,7 +433,7 @@ async function render() {
   const join = pendingJoin();
   if (join && curUser) {
     try { const pid = await store.acceptInvite(join, curUser.name); sessionStorage.removeItem('rp.join'); setState({ pr: pid, tab: 'mine' }); return; }
-    catch (e) { sessionStorage.removeItem('rp.join'); alert(`초대를 못 받았다 — ${e.message || e}`); }
+    catch (e) { sessionStorage.removeItem('rp.join'); alert(`초대를 받지 못했어요 — ${e.message || e}`); }
   }
   if (join && !curUser && state.tab !== 'mine') { setState({ tab: 'mine' }); return; }
 
@@ -538,7 +538,7 @@ function renderDayCfg(i) {
     const t0 = ov.t ?? state.t, e0 = ov.e ?? state.e;
     cfg.append(stepper(t0, dd => setDay(i, { t: Math.max(0, Math.min(e0 - 60, t0 + dd * 30)) }), hm), $('span', 'muted', '~'), stepper(e0, dd => setDay(i, { e: Math.max(t0 + 60, Math.min(1440, e0 + dd * 30)) }), hm));
     for (const [v, label] of [['transit', '걷기+지하철'], ['taxi', '택시']]) { const b = $('button', 'btn sm' + ((ov.v || state.v) === v ? ' primary' : ''), label); b.type = 'button'; b.onclick = () => setDay(i, { v }); cfg.appendChild(b); }
-    const ps = $('button', 'btn sm' + (pickDayStart === i ? ' primary' : ''), pickDayStart === i ? '지도를 클릭…' : (ov.s ? '출발점 옮기기' : '이 날 출발점')); ps.type = 'button'; ps.onclick = () => { pickDayStart = pickDayStart === i ? null : i; render(); }; cfg.appendChild(ps);
+    const ps = $('button', 'btn sm' + (pickDayStart === i ? ' primary' : ''), pickDayStart === i ? '지도를 눌러 주세요…' : (ov.s ? '출발점 옮기기' : '이 날 출발점')); ps.type = 'button'; ps.onclick = () => { pickDayStart = pickDayStart === i ? null : i; render(); }; cfg.appendChild(ps);
     if (ov.s) { const c = $('button', 'btn sm', '출발점 지우기'); c.type = 'button'; c.onclick = () => setDay(i, { s: null }); cfg.appendChild(c); }
   }
   return cfg;
@@ -571,7 +571,7 @@ function renderAiBox(host) {
   hd.appendChild(tg); hd.appendChild($('span', 'muted', '어떤 여행을 하고 싶은지 말하면 장소와 일정을 골라 줘요'));
   box.appendChild(hd);
   if (!aiOpen) { host.appendChild(box); return; }
-  if (!curUser) { box.appendChild($('p', null, '로그인하면 쓸 수 있다 — <b>내 여행</b> 탭에서.')); host.appendChild(box); return; }
+  if (!curUser) { box.appendChild($('p', null, '로그인하면 쓸 수 있어요 — <b>내 여행</b> 탭에서.')); host.appendChild(box); return; }
   const log = $('div', 'ailog');
   for (const m of aiMsgs) log.appendChild($('div', 'msg ' + m.role, esc(m.content)));
   if (aiBusy) log.appendChild($('div', 'msg assistant muted', '생각 중…'));
@@ -595,7 +595,7 @@ function renderAiBox(host) {
       const session = store.sb ? (await store.sb.auth.getSession()).data.session : null;
       const res = await chat({ session, city, places: city.places, state: { d: state.d, t: state.t, e: state.e, v: state.v, p: state.p, m: state.m }, messages: aiMsgs });
       aiMsgs.push({ role: 'assistant', content: res.reply || '(빈 답)' }); aiPending = res.apply && Object.keys(res.apply).length ? res.apply : null;
-    } catch (e) { aiMsgs.push({ role: 'assistant', content: /Failed to fetch/.test(e.message) ? '서버 함수(plan-chat)가 아직 배포되지 않았다 — docs/supabase.md의 ⑤를 보라.' : `못 불렀다 — ${e.message || e}` }); }
+    } catch (e) { aiMsgs.push({ role: 'assistant', content: /Failed to fetch|아직 없/.test(e.message) ? 'AI 기능이 아직 준비되지 않았어요.' : `답을 받지 못했어요 — ${e.message || e}` }); }
     aiBusy = false; render();
   };
   send.onclick = run; ta.onkeydown = e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) run(); };
@@ -653,7 +653,7 @@ function renderPlan(side, entering) {
   // 넣기 — 검색 + AI
   const add = $('div', 'v2add');
   add.appendChild(renderSearch());
-  renderAiBox(add);
+  if (FEATURES.ai) renderAiBox(add);   // 서버 함수(plan-chat)를 배포한 뒤 config.js에서 켠다
   side.appendChild(add);
 
   // 비었을 때 — 1순위로 첫 클릭을 만든다
@@ -723,6 +723,8 @@ function renderPlan(side, entering) {
     lines.appendChild(ln);
   });
   if (a.auto && places.length) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
+  // 비거나 두 시간이 안 되는 날이 있으면 — 장소가 일수에 비해 적다는 뜻
+  if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나, 날 머리의 ×로 하루를 빼면 일정이 알차져요.'));
   if (result.dropped?.length) lines.appendChild($('p', 'warnline', `시간이 모자라 뺀 곳: ${result.dropped.map(x => esc(x.place.name)).join(', ')} — ☆를 ★로 바꾸면 꼭 넣어요.`));
   side.appendChild(lines);
 
@@ -801,7 +803,7 @@ function renderSearch() {
   const run = async () => {
     const q = inp.value.trim(); if (!q) return;
     query = q; searching = true; searchErr = ''; results = null; render();
-    try { results = await search(q, city.center, INDEX.cities[state.c]?.bbox); } catch (e) { searchErr = '검색 서버에 닿지 못했다. 잠시 뒤 다시.'; }
+    try { results = await search(q, city.center, INDEX.cities[state.c]?.bbox); } catch (e) { searchErr = '검색 서버에 닿지 못했어요. 잠시 뒤 다시 해 주세요.'; }
     searching = false; render();
   };
   go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); run(); } };
@@ -809,7 +811,7 @@ function renderSearch() {
   if (searching) p.appendChild($('p', 'muted', '찾는 중…'));
   if (searchErr) p.appendChild($('p', null, `<b style="color:var(--warn)">${esc(searchErr)}</b>`));
   if (results) {
-    if (!results.length) p.appendChild($('p', 'muted', `「${esc(query)}」 — 이 도시 안에서 못 찾았다. 철자를 바꾸거나 지도의 빈 곳을 직접 클릭해라.`));
+    if (!results.length) p.appendChild($('p', 'muted', `「${esc(query)}」 — 이 도시 안에서 못 찾았어요. 철자를 바꾸거나 지도의 빈 곳을 직접 눌러 보세요.`));
     const a = assignment();
     for (const c of results) {
       const card = $('div', 'result');

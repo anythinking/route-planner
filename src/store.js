@@ -40,7 +40,7 @@ export class LocalStore {
   async myId() { return 'local'; }
   async listMembers() { return []; }
   async createInvite() { return null; }
-  async acceptInvite() { throw new Error('브라우저 저장에선 초대를 못 받는다'); }
+  async acceptInvite() { throw new Error('브라우저 저장에선 초대를 받을 수 없어요'); }
   async removeMember() {}
   async listPublic() { return []; }
   async deleteProject(id) { this._set(this._key(), this._get(this._key(), []).filter(p => p.id !== id)); }

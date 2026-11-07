@@ -4,7 +4,12 @@ import { shadowPolygons } from './shadow.js';
 const STYLE = 'https://tiles.openfreemap.org/styles/liberty';   // 컬러. 'bright'·'positron'도 있다
 
 function buildMap(containerId) {
-  const map = new maplibregl.Map({ container: containerId, style: STYLE, center: [0, 0], zoom: 2, attributionControl: { compact: true }, maxPitch: 70 });
+  // 좁은 화면(휴대폰)은 지도가 화면 위 68%를 차지한다 — 한 손가락 드래그·휠은 페이지 스크롤로 두고 지도는 두 손가락·Ctrl+휠로만 움직인다
+  const narrow = matchMedia('(max-width: 1000px)').matches;
+  const map = new maplibregl.Map({ container: containerId, style: STYLE, center: [0, 0], zoom: 2, attributionControl: { compact: true }, maxPitch: 70,
+    cooperativeGestures: narrow,
+    locale: { 'CooperativeGesturesHandler.WindowsHelpText': 'Ctrl 키를 누른 채 스크롤하면 지도가 확대돼요', 'CooperativeGesturesHandler.MacHelpText': '⌘ 키를 누른 채 스크롤하면 지도가 확대돼요', 'CooperativeGesturesHandler.MobileHelpText': '두 손가락으로 지도를 움직여요',
+      'NavigationControl.ZoomIn': '확대', 'NavigationControl.ZoomOut': '축소', 'NavigationControl.ResetBearing': '북쪽으로 · 기울기 초기화', 'AttributionControl.ToggleAttribution': '출처' } });
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-left');
   const groups = { places: [], route: [], start: [] };      // 그룹별 마커
   const lines = { places: [], route: [], start: [] };       // 그룹별 선(GeoJSON feature)

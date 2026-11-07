@@ -44,46 +44,46 @@ async function renderShare(ctx) {
   const { $, store, project: p, isOwner, user, render, setState } = ctx;
   const box = $('div', 'panel'); box.appendChild($('h2', null, '공유'));
   const note = (el, msg, warn) => { el.innerHTML = msg ? `<b style="color:${warn ? 'var(--warn)' : 'var(--d1)'}">${esc(msg)}</b>` : ''; };
-  if (store.kind !== 'supabase') { box.appendChild($('p', 'muted', '브라우저 저장에선 공유가 안 된다 — 로그인하면 된다.')); return box; }
+  if (store.kind !== 'supabase') { box.appendChild($('p', 'muted', '브라우저 저장에선 공유가 안 돼요 — 로그인하면 돼요.')); return box; }
   const vis = p.visibility || 'private';
   if (isOwner) {
     const r = $('div', 'row regions'); r.appendChild($('span', 'muted', '범위'));
     for (const [v, label, hint] of [['private', '비공개', '나만'], ['link', '링크 초대', '초대 링크를 받은 사람만'], ['public', '공개', '누구나 보고 복사']]) {
       const b = $('button', 'btn sm' + (vis === v ? ' primary' : ''), label); b.type = 'button'; b.title = hint;
-      b.onclick = async () => { try { await store.updateProject(p.id, { visibility: v }); render(); } catch (e) { alert(`서버 준비 전 — docs/sharing.sql 을 돌려야 한다 (${e.message || e})`); } };
+      b.onclick = async () => { try { await store.updateProject(p.id, { visibility: v }); render(); } catch (e) { alert(`공유 범위를 바꾸지 못했어요 — ${e.message || e}`); } };
       r.appendChild(b);
     }
     box.appendChild(r);
-    box.appendChild($('p', 'muted', vis === 'private' ? '지금은 나만 본다.' : vis === 'link' ? '초대 링크를 받은 사람만 본다. 편집 링크면 같이 고친다.' : '누구나 보고 「내 걸로 복사」할 수 있다. 홈 「다른 사람의 플랜」에 뜬다.'));
+    box.appendChild($('p', 'muted', vis === 'private' ? '지금은 나만 봐요.' : vis === 'link' ? '초대 링크를 받은 사람만 봐요. 편집 링크면 같이 고칠 수 있어요.' : '누구나 보고 「내 걸로 복사」할 수 있어요. 홈 「다른 사람의 플랜」에 떠요.'));
     if (vis !== 'private') {
       const ir = $('div', 'row'); const msg = $('span', null, '');
       for (const [role, label] of [['editor', '편집 링크 만들기'], ['viewer', '보기 링크 만들기']]) {
         const b = $('button', 'btn sm', label); b.type = 'button';
-        b.onclick = async () => { try { const t = await store.createInvite(p.id, role); const url = location.href.split('#')[0] + `#join=${t}`; try { await navigator.clipboard.writeText(url); note(msg, '링크를 복사했다 — 같이 갈 사람에게 보내라'); } catch { prompt('이 링크를 보내라', url); } } catch (e) { note(msg, e.message || e, true); } };
+        b.onclick = async () => { try { const t = await store.createInvite(p.id, role); const url = location.href.split('#')[0] + `#join=${t}`; try { await navigator.clipboard.writeText(url); note(msg, '링크를 복사했어요 — 같이 갈 사람에게 보내 주세요'); } catch { prompt('이 링크를 보내 주세요', url); } } catch (e) { note(msg, e.message || e, true); } };
         ir.appendChild(b);
       }
       ir.appendChild(msg); box.appendChild(ir);
-      if (vis === 'public') { const pr = $('div', 'row'); const pb = $('button', 'btn sm', '공개 링크 복사'); pb.type = 'button'; const pm = $('span', null, ''); pb.onclick = async () => { const url = location.href.split('#')[0] + `#pr=${p.id}&tab=mine`; try { await navigator.clipboard.writeText(url); note(pm, '복사했다'); } catch { prompt('공개 링크', url); } }; pr.append(pb, pm); box.appendChild(pr); }
+      if (vis === 'public') { const pr = $('div', 'row'); const pb = $('button', 'btn sm', '공개 링크 복사'); pb.type = 'button'; const pm = $('span', null, ''); pb.onclick = async () => { const url = location.href.split('#')[0] + `#pr=${p.id}&tab=mine`; try { await navigator.clipboard.writeText(url); note(pm, '복사했어요'); } catch { prompt('공개 링크', url); } }; pr.append(pb, pm); box.appendChild(pr); }
     }
     let members = []; try { members = await store.listMembers(p.id); } catch {}
     if (members.length) {
       box.appendChild($('p', null, `<b>같이 보는 사람</b> <span class="muted">${members.length}</span>`));
       for (const m of members) {
         const r2 = $('div', 'row'); r2.appendChild($('span', null, `${esc(m.name)} <span class="muted">· ${m.role === 'editor' ? '편집' : '보기'}</span>`));
-        const x = $('button', 'btn sm', '내보내기'); x.type = 'button'; x.onclick = async () => { if (!confirm(`${m.name}을 빼면 더는 못 본다. 뺄까?`)) return; await store.removeMember(p.id, m.userId); render(); };
+        const x = $('button', 'btn sm', '내보내기'); x.type = 'button'; x.onclick = async () => { if (!confirm(`${m.name} 님을 빼면 이 여행을 더는 못 봐요. 뺄까요?`)) return; await store.removeMember(p.id, m.userId); render(); };
         r2.appendChild(x); box.appendChild(r2);
       }
     }
   } else if (user) {
-    box.appendChild($('p', null, p.shared ? `<b>${esc(p.lastEditedBy || '주인')}</b>이 공유한 여행 · 나는 <b>${p.role === 'editor' ? '편집' : '보기'}</b> 권한` : '공개 플랜 — 복사해서 내 걸로 만들 수 있다.'));
+    box.appendChild($('p', null, p.shared ? `<b>${esc(p.lastEditedBy || '주인')}</b>이 공유한 여행 · 나는 <b>${p.role === 'editor' ? '편집' : '보기'}</b> 권한` : '공개 플랜 — 복사해서 내 걸로 만들 수 있어요.'));
     const r = $('div', 'row');
     const copy = $('button', 'btn primary', '내 걸로 복사'); copy.type = 'button';
     copy.onclick = async () => { const n = await store.createProject({ name: `${p.name} (복사)`, city: p.city, hash: p.hash }); setState({ pr: n.id }); };
     r.appendChild(copy);
-    if (p.shared) { const lv = $('button', 'btn sm', '나가기'); lv.type = 'button'; lv.onclick = async () => { if (!confirm('이 여행에서 나갈까?')) return; await store.removeMember(p.id, user.id); setState({ pr: null }); }; r.appendChild(lv); }
+    if (p.shared) { const lv = $('button', 'btn sm', '나가기'); lv.type = 'button'; lv.onclick = async () => { if (!confirm('이 여행에서 나갈까요?')) return; await store.removeMember(p.id, user.id); setState({ pr: null }); }; r.appendChild(lv); }
     box.appendChild(r);
   } else {
-    box.appendChild($('p', null, '공개 플랜이다. 로그인하면 「내 걸로 복사」할 수 있다.'));
+    box.appendChild($('p', null, '공개 플랜이에요. 로그인하면 「내 걸로 복사」할 수 있어요.'));
     const b = $('button', 'btn', '로그인'); b.type = 'button'; b.onclick = () => setState({ pr: null }); box.appendChild(b);
   }
   return box;
@@ -98,13 +98,13 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
   const head = $('div', 'panel');
   head.appendChild($('h2', null, '내 계정'));
   head.appendChild($('p', 'meta', `${esc(user.email || '이 브라우저에만 저장되는 계정')} · 여행 ${projects.length}개 · 사진 ${photos}장`));
-  head.appendChild($('p', null, store.kind === 'supabase' ? '계정 서버에 저장 — 어느 기기에서든 같은 걸 본다.' : '이 브라우저에만 저장 — 기기를 바꾸면 안 보인다.'));
+  head.appendChild($('p', null, store.kind === 'supabase' ? '계정 서버에 저장돼요 — 어느 기기에서든 같은 여행이 열려요.' : '이 브라우저에만 저장돼요 — 기기를 바꾸면 안 보여요.'));
   const last = projects.find(x => x.id === user.prefs?.lastPr);
   if (last) { const lr = $('div', 'row'); lr.appendChild($('span', null, `최근 여행 <b>${esc(last.name)}</b>`)); const lb = $('button', 'btn sm', '열기'); lb.type = 'button'; lb.onclick = () => setState({ tab: 'mine', pr: last.id }); lr.appendChild(lb); head.appendChild(lr); }
   const r0 = $('div', 'row');
   const list = $('button', 'btn primary', '내 여행 목록'); list.type = 'button'; list.onclick = () => backTo({ tab: 'mine', pr: null });
   const out = $('button', 'btn', '로그아웃'); out.type = 'button';
-  out.onclick = async () => { if (!confirm('로그아웃할까? 다시 들어오려면 비밀번호나 메일 링크가 필요하다.')) return; await store.signOut(); setState({ tab: 'mine', pr: null }); };
+  out.onclick = async () => { if (!confirm('로그아웃할까요? 다시 들어오려면 비밀번호나 메일 링크가 필요해요.')) return; await store.signOut(); setState({ tab: 'mine', pr: null }); };
   r0.append(list, out); head.appendChild(r0); side.appendChild(head);
 
   // 2. 프로필 — 표시 이름
@@ -113,7 +113,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
   const r1 = $('div', 'row');
   const nm = $('input', 'text'); nm.type = 'text'; nm.value = user.name; nm.maxLength = 40;
   const nmGo = $('button', 'btn sm', '바꾸기'); nmGo.type = 'button'; const nmMsg = $('span', null, '');
-  nmGo.onclick = async () => { try { await store.updateUser({ name: nm.value }); note(nmMsg, '바꿨다'); setTimeout(render, 500); } catch (e) { note(nmMsg, e.message || e, true); } };
+  nmGo.onclick = async () => { try { await store.updateUser({ name: nm.value }); note(nmMsg, '바꿨어요'); setTimeout(render, 500); } catch (e) { note(nmMsg, e.message || e, true); } };
   r1.append(nm, nmGo, nmMsg); prof.appendChild(r1); side.appendChild(prof);
 
   // 3. 비밀번호 (계정 서버일 때만) — 재설정 메일로 들어왔으면 맨 위에서 새 비밀번호부터
@@ -125,8 +125,8 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
     const p2 = $('input', 'text'); p2.type = 'password'; p2.placeholder = '한 번 더'; p2.autocomplete = 'new-password'; p2.style.width = '100%';
     const r2 = $('div', 'row'); const pwGo = $('button', 'btn sm', '바꾸기'); pwGo.type = 'button'; const pwMsg = $('span', null, '');
     pwGo.onclick = async () => {
-      if (p1.value.length < 8) return note(pwMsg, '8자 이상', true); if (p1.value !== p2.value) return note(pwMsg, '두 칸이 다르다', true);
-      try { await store.updateUser({ password: p1.value }); p1.value = p2.value = ''; note(pwMsg, '바꿨다'); if (store.recovering) { store.recovering = false; setTimeout(render, 800); } } catch (e) { note(pwMsg, e.message || e, true); }
+      if (p1.value.length < 8) return note(pwMsg, '8자 이상', true); if (p1.value !== p2.value) return note(pwMsg, '두 칸이 달라요', true);
+      try { await store.updateUser({ password: p1.value }); p1.value = p2.value = ''; note(pwMsg, '바꿨어요'); if (store.recovering) { store.recovering = false; setTimeout(render, 800); } } catch (e) { note(pwMsg, e.message || e, true); }
     };
     r2.append(pwGo, pwMsg); pwp.append(p1, p2, r2); if (!store.recovering) side.appendChild(pwp);
   }
@@ -140,8 +140,8 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
     b.onclick = async () => { await store.updateUser({ prefs: { lang: v } }); render(); }; rl.appendChild(b);
   }
   pp.appendChild(rl);
-  pp.appendChild($('p', 'muted', '장소 설명·팁은 한국어로 쓰여 있어 화면 글자만 바꿔서는 반쪽이 된다 — 영어는 데이터 번역과 같이 연다.'));
-  pp.appendChild($('p', null, '아래 값으로 「기본값으로 새 플랜」이 시작한다.'));
+  pp.appendChild($('p', 'muted', '장소 설명·팁이 한국어로 쓰여 있어 화면 글자만 바꾸면 반쪽이 돼요 — 다른 언어는 데이터 번역과 함께 열 예정이에요.'));
+  pp.appendChild($('p', null, '아래 값으로 「기본값으로 새 플랜」이 시작해요.'));
   const r3 = $('div', 'row'); r3.appendChild($('span', 'muted', '도시'));
   const csel = $('select'); for (const [id, name] of Object.entries(CITIES)) { const o = $('option', null, esc(name)); o.value = id; o.selected = (prefs.c || 'london') === id; csel.appendChild(o); }
   csel.onchange = async () => { await store.updateUser({ prefs: { c: csel.value } }); render(); }; r3.appendChild(csel);
@@ -161,7 +161,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
 
   // 5. 내 데이터 — 내보내기 (사진은 메타데이터만)
   const dp = $('div', 'panel'); dp.appendChild($('h2', null, '내 데이터'));
-  dp.appendChild($('p', null, '여행·플랜·살 것·사진 정보(좌표·장소·메모)를 JSON 한 파일로 받는다. 사진 원본은 들어가지 않는다.'));
+  dp.appendChild($('p', null, '여행·플랜·살 것·사진 정보(좌표·장소·메모)를 JSON 한 파일로 받아요. 사진 원본은 들어가지 않아요.'));
   const r7 = $('div', 'row'); const ex = $('button', 'btn', 'JSON으로 내보내기'); ex.type = 'button'; const exMsg = $('span', null, '');
   ex.onclick = async () => {
     try {
@@ -347,8 +347,8 @@ async function renderProject(ctx) {
   const load = $('button', 'btn primary', '이 플랜 열기'); load.type = 'button';
   load.onclick = () => setState({ ...legs[0], tab: 'plan', pr: p.id, lg: 0 });
   row.appendChild(load);
-  if (canEdit && legs.length === 1) { const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button'; save.onclick = async () => { try { await (saveToProject ? saveToProject(p.id) : store.updateProject(p.id, { city: state.c, hash: planHash(state) })); save.textContent = '저장됨'; setTimeout(render, 600); } catch (e) { alert(`저장 실패 — ${e.message || e}`); } }; row.appendChild(save); }
-  if (isOwner) { const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까? 사진도 같이 지워진다.`)) return; await store.deleteProject(p.id); setState({ pr: null }); }; row.appendChild(del); }
+  if (canEdit && legs.length === 1) { const save = $('button', 'btn', '지금 플랜을 여기 저장'); save.type = 'button'; save.onclick = async () => { try { await (saveToProject ? saveToProject(p.id) : store.updateProject(p.id, { city: state.c, hash: planHash(state) })); save.textContent = '저장됨'; setTimeout(render, 600); } catch (e) { alert(`저장하지 못했어요 — ${e.message || e}`); } }; row.appendChild(save); }
+  if (isOwner) { const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm(`「${p.name}」을 지울까요? 사진도 같이 지워져요.`)) return; await store.deleteProject(p.id); setState({ pr: null }); }; row.appendChild(del); }
   inner.appendChild(row);
   side.appendChild(head);
 
@@ -414,7 +414,7 @@ async function renderProject(ctx) {
   // 살 것
   const shop = $('div', 'panel'); shop.appendChild($('h2', null, `살 것 <span class="muted" style="font-weight:500">${p.shopping.filter(x => x.done).length}/${p.shopping.length}</span>`));
   const add = $('div', 'row');
-  const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '살 것 — 기념품 탭에서 「담기」로도 들어온다'; inp.maxLength = 80;
+  const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '살 것 — 가이드의 기념품에서 「담기」로도 들어와요'; inp.maxLength = 80;
   const ab = $('button', 'btn sm', '추가'); ab.type = 'button';
   const addRun = async () => { const t = inp.value.trim(); if (!t) return; await store.updateProject(p.id, { shopping: [...p.shopping, { text: t, done: false }] }); render(); };
   ab.onclick = addRun; inp.onkeydown = e => { if (e.key === 'Enter') addRun(); };
@@ -431,11 +431,11 @@ async function renderProject(ctx) {
 
   // 사진
   const ph = $('div', 'panel'); ph.appendChild($('h2', null, `사진 <span class="muted" style="font-weight:500">${p.photos.length}장</span>`));
-  ph.appendChild($('p', null, '올리면 사진 안의 GPS로 지도에 찍힌다. GPS가 없으면 아래에서 장소를 골라 붙여라.'));
+  ph.appendChild($('p', null, '올리면 사진 안의 GPS로 지도에 찍혀요. GPS가 없으면 아래에서 장소를 골라 붙여 주세요.'));
   const cityData = await loadCity(p.city).catch(() => ({ places: [] }));
   const placeName = id => cityData.places.find(x => x.id === id)?.name;
   // 올리기: 파일 고르기 + 끌어다 놓기. 한 장씩 진행을 보여준다
-  const drop = $('div', 'drop'); drop.innerHTML = '<b>사진을 여기 끌어다 놓거나</b> <span class="muted">눌러서 고른다 · 여러 장 가능 · 올릴 때 긴 변 1200px로 줄인다</span>';
+  const drop = $('div', 'drop'); drop.innerHTML = '<b>사진을 여기 끌어다 놓거나</b> <span class="muted">눌러서 골라요 · 여러 장 가능 · 올릴 때 긴 변 1200px로 줄여요</span>';
   const file = $('input'); file.type = 'file'; file.accept = 'image/*'; file.multiple = true; file.hidden = true;
   const prog = $('p', 'muted', '');
   const ingest = async files => {
@@ -446,7 +446,7 @@ async function renderProject(ctx) {
       try {
         const [dataUrl, gps] = await Promise.all([shrink(f), gpsOf(f)]);
         await store.addPhoto(p.id, { dataUrl, lat: gps?.lat ?? null, lng: gps?.lng ?? null, placeId: nearest(cityData, gps), note: '', takenAt: f.lastModified });
-      } catch (e) { alert(`「${f.name}」을 못 담았다 — ${e.message || '브라우저 저장 한도(약 5MB)를 넘었을 수 있다'}`); break; }
+      } catch (e) { alert(`「${f.name}」을 담지 못했어요 — ${e.message || '브라우저 저장 한도(약 5MB)를 넘었을 수 있어요'}`); break; }
     }
     render();
   };
@@ -474,8 +474,8 @@ async function renderProject(ctx) {
     const meta = $('div', 'muted', `${x.takenAt ? fmtDate(x.takenAt) : ''}${x.lat != null ? ` · ${x.lat.toFixed(4)}, ${x.lng.toFixed(4)}` : ' · GPS 없음'}`);
     const tools = $('div', 'row');
     const pick = $('button', 'btn sm', x.lat != null ? '지도에서 위치 옮기기' : '지도에서 위치 찍기'); pick.type = 'button';
-    pick.onclick = () => { ctx.pickPhoto?.(async ll => { await store.updatePhoto(p.id, x.id, { lat: ll.lat, lng: ll.lng, placeId: nearest(cityData, ll) || x.placeId || null }); render(); }); pick.textContent = '지도를 클릭해라…'; };
-    const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm('이 사진을 지울까?')) return; await store.deletePhoto(p.id, x.id); render(); };
+    pick.onclick = () => { ctx.pickPhoto?.(async ll => { await store.updatePhoto(p.id, x.id, { lat: ll.lat, lng: ll.lng, placeId: nearest(cityData, ll) || x.placeId || null }); render(); }); pick.textContent = '지도를 눌러 주세요…'; };
+    const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async () => { if (!confirm('이 사진을 지울까요?')) return; await store.deletePhoto(p.id, x.id); render(); };
     tools.append(pick, del);
     body.append(sel, note, meta, tools); r.appendChild(body);
     // 지도: 좌표가 있으면 그 자리, 없으면 고른 장소 자리

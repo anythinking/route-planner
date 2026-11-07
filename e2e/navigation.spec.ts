@@ -91,3 +91,17 @@ test.describe('휴대폰 폭', () => {
     await expect(page.locator('.crumb')).toContainText('테스트 여행');
   });
 });
+
+test.describe('휴대폰 폭 — 지도와 스크롤', () => {
+  test.use({ viewport: { width: 375, height: 812 }, hasTouch: true });
+
+  test('⑦ 지도 위에서 스크롤해도 페이지가 내려간다 (지도가 스크롤을 삼키지 않는다)', async ({ page }) => {
+    await page.goto('/?local=1#c=london&d=2&p=stpaul:0,tate:0,borough:0');
+    await expect(page.locator('.v2head')).toBeVisible();
+    await page.locator('#map canvas').waitFor();
+    const before = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(187, 400);
+    await page.mouse.wheel(0, 600);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before + 200);
+  });
+});

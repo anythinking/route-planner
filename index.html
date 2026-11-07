@@ -4,13 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AlgoTrip — 여행 동선 플래너</title>
+<meta name="description" content="가고 싶은 곳을 고르면 며칠에 어떻게 나누고 하루에 어떤 순서로 돌지 짜 주는 여행 동선 플래너. 런던·파리·로마·바르셀로나·도쿄·오사카·교토. 로그인 없이 바로, 링크 하나로 공유.">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://anythinking.github.io/route-planner/">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AlgoTrip">
+<meta property="og:title" content="AlgoTrip — 여행 동선 플래너">
+<meta property="og:description" content="가고 싶은 곳을 고르면 며칠에 어떤 순서로 돌지 바로 짜 드려요. 로그인 없이, 링크 하나로 공유.">
+<meta property="og:url" content="https://anythinking.github.io/route-planner/">
+<meta property="og:image" content="https://anythinking.github.io/route-planner/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AlgoTrip — 여행 동선 플래너">
+<meta name="twitter:description" content="가고 싶은 곳을 고르면 며칠에 어떤 순서로 돌지 바로 짜 드려요.">
+<meta name="twitter:image" content="https://anythinking.github.io/route-planner/assets/og.png">
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611012235","./src/config.js":"./src/config.js?v=202611012235","./src/edits.js":"./src/edits.js?v=202611012235","./src/engine.js":"./src/engine.js?v=202611012235","./src/html.js":"./src/html.js?v=202611012235","./src/map.js":"./src/map.js?v=202611012235","./src/mine.js":"./src/mine.js?v=202611012235","./src/pages.js":"./src/pages.js?v=202611012235","./src/search.js":"./src/search.js?v=202611012235","./src/shadow.js":"./src/shadow.js?v=202611012235","./src/state.js":"./src/state.js?v=202611012235","./src/store-map.js":"./src/store-map.js?v=202611012235","./src/store-supabase.js":"./src/store-supabase.js?v=202611012235","./src/store.js":"./src/store.js?v=202611012235","./src/timeline.js":"./src/timeline.js?v=202611012235","./src/travel.js":"./src/travel.js?v=202611012235","./src/ui.js":"./src/ui.js?v=202611012235"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611012235"><link rel="modulepreload" href="src/config.js?v=202611012235"><link rel="modulepreload" href="src/edits.js?v=202611012235"><link rel="modulepreload" href="src/engine.js?v=202611012235"><link rel="modulepreload" href="src/html.js?v=202611012235"><link rel="modulepreload" href="src/map.js?v=202611012235"><link rel="modulepreload" href="src/mine.js?v=202611012235"><link rel="modulepreload" href="src/pages.js?v=202611012235"><link rel="modulepreload" href="src/search.js?v=202611012235"><link rel="modulepreload" href="src/shadow.js?v=202611012235"><link rel="modulepreload" href="src/state.js?v=202611012235"><link rel="modulepreload" href="src/store-map.js?v=202611012235"><link rel="modulepreload" href="src/store-supabase.js?v=202611012235"><link rel="modulepreload" href="src/store.js?v=202611012235"><link rel="modulepreload" href="src/timeline.js?v=202611012235"><link rel="modulepreload" href="src/travel.js?v=202611012235"><link rel="modulepreload" href="src/ui.js?v=202611012235">
-<link rel="preload" href="data/cities.json?v=202611012235" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611071800","./src/config.js":"./src/config.js?v=202611071800","./src/edits.js":"./src/edits.js?v=202611071800","./src/engine.js":"./src/engine.js?v=202611071800","./src/html.js":"./src/html.js?v=202611071800","./src/map.js":"./src/map.js?v=202611071800","./src/mine.js":"./src/mine.js?v=202611071800","./src/pages.js":"./src/pages.js?v=202611071800","./src/search.js":"./src/search.js?v=202611071800","./src/shadow.js":"./src/shadow.js?v=202611071800","./src/state.js":"./src/state.js?v=202611071800","./src/store-map.js":"./src/store-map.js?v=202611071800","./src/store-supabase.js":"./src/store-supabase.js?v=202611071800","./src/store.js":"./src/store.js?v=202611071800","./src/timeline.js":"./src/timeline.js?v=202611071800","./src/travel.js":"./src/travel.js?v=202611071800","./src/ui.js":"./src/ui.js?v=202611071800"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611071800"><link rel="modulepreload" href="src/config.js?v=202611071800"><link rel="modulepreload" href="src/edits.js?v=202611071800"><link rel="modulepreload" href="src/engine.js?v=202611071800"><link rel="modulepreload" href="src/html.js?v=202611071800"><link rel="modulepreload" href="src/map.js?v=202611071800"><link rel="modulepreload" href="src/mine.js?v=202611071800"><link rel="modulepreload" href="src/pages.js?v=202611071800"><link rel="modulepreload" href="src/search.js?v=202611071800"><link rel="modulepreload" href="src/shadow.js?v=202611071800"><link rel="modulepreload" href="src/state.js?v=202611071800"><link rel="modulepreload" href="src/store-map.js?v=202611071800"><link rel="modulepreload" href="src/store-supabase.js?v=202611071800"><link rel="modulepreload" href="src/store.js?v=202611071800"><link rel="modulepreload" href="src/timeline.js?v=202611071800"><link rel="modulepreload" href="src/travel.js?v=202611071800"><link rel="modulepreload" href="src/ui.js?v=202611071800">
+<link rel="preload" href="data/cities.json?v=202611071800" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -215,7 +235,7 @@ body.v2 #sunbox .sun{font-size:14px}
 <body class="v2">
 <div class="app">
   <header>
-    <h1><a href="#" id="home" title="홈 — 플랜으로">AlgoTrip</a></h1>
+    <h1><a href="#" id="home" title="홈으로">AlgoTrip</a></h1>
     <nav class="tabs" id="tabs"></nav>
     <div id="who" style="margin-left:auto"></div>
   </header>
@@ -224,6 +244,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611012235"></script>
+<script type="module" src="src/ui.js?v=202611071800"></script>
 </body>
 </html>

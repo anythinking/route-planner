@@ -97,7 +97,8 @@ create policy "own comments" on comments for insert with check (auth.uid() = use
 create policy "delete own comments" on comments for delete using (auth.uid() = user_id);
 ```
 
-### ⑤ AI 플랜 대화 — Edge Function 배포 (영철, 10분)
+### ⑤ AI 플랜 대화 — Edge Function 배포 (영철, 10분 · **2026-11-08 기준 미배포**, 함수 주소가 404)
+화면에선 `src/config.js`의 `FEATURES.ai`가 `false`라 「✦ AI에게 말하기」가 숨어 있다. 아래를 마치면 `true`로 바꾸고 `npm run bump`.
 코드는 `supabase/functions/plan-chat/index.ts`. 브라우저에서 Anthropic 키를 못 쓰니 이 함수가 대신 부른다(로그인 토큰 확인 → Claude → JSON).
 1. https://console.anthropic.com 에서 API 키 하나 만들기 (소액 결제 수단 필요. 대화 한 번 ≈ 1~2원).
 2. Supabase → 왼쪽 **Edge Functions** → **Deploy a new function** → 「Via Editor」 → 이름 `plan-chat` → 편집기에 `index.ts` 내용 전체 붙여 넣기 → Deploy.
@@ -116,6 +117,6 @@ create policy "delete own comments" on comments for delete using (auth.uid() = u
 `docs/sharing.sql` 을 새 탭에 통째로 붙여 Run. 들어가는 것: 공유 범위(비공개·링크 초대·공개), 멤버·초대 표, 멤버도 읽고(편집자는 고치고) 사진도 보는 RLS, 초대 수락 함수, 공개 플랜은 로그인 없이 읽기.
 실행 전엔 사이트의 「공유」 패널이 "서버 준비 전"이라고 뜬다.
 
-### ⑦ 회원 탈퇴 (2026-11-02)
+### ⑧ 회원 탈퇴 (2026-11-02 추가 · **2026-11-08 기준 미실행** — anon 키로 `delete_my_account` rpc를 불러 보면 PGRST202)
 `docs/account.sql` 을 SQL Editor 에서 한 번 돌린다. 안 돌리면 「탈퇴」가 아무것도 지우지 않고 "서버에 docs/account.sql 을 먼저 돌려야 해요"로 멈춘다.
 비밀번호 재설정 메일이 돌아올 주소: Authentication → URL Configuration 의 Redirect URLs 에 `https://anythinking.github.io/route-planner/` 가 있어야 한다(로그인 링크 때 이미 넣었으면 그대로).
