@@ -123,3 +123,36 @@ test.describe('플랜 — 고치기와 나누는 방법', () => {
     expect(await hash(page)).not.toContain('a=');
   });
 });
+
+test.describe('플랜 — 브라우저 창 대신 화면 안 입력', () => {
+  test('⑨ 「여행으로 저장」은 이름 칸이 화면에 뜨고, 저장하면 여행이 열린다', async ({ page }) => {
+    await page.goto('/?local=1#tab=home');
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('/?local=1#tab=mine');
+    await page.getByPlaceholder('이름').fill('테스터');
+    await page.getByRole('button', { name: '시작' }).click();
+    await page.goto('/?local=1#c=london&d=2&p=stpaul:0,tate:0');
+    await page.getByRole('button', { name: '여행으로 저장' }).click();
+    const inp = page.locator('.result.ask input.text');
+    await expect(inp).toHaveValue('런던 2일');
+    await inp.fill('주말 런던');
+    await page.locator('.result.ask').getByRole('button', { name: '저장' }).click();
+    await expect(page.locator('.v2head')).toBeVisible();
+    expect(await hash(page)).toContain('pr=');
+    await page.locator('.v2head').getByRole('button', { name: '← 여행' }).click();
+    await expect(page.locator('.crumb')).toContainText('주말 런던');
+  });
+
+  test('⑩ 구간 「분 직접 입력」은 숫자 칸이 그 자리에 뜨고, 확인하면 해시 l=에 남는다', async ({ page }) => {
+    await page.goto('/?local=1#c=london&d=1&p=stpaul:0,tate:0,borough:0');
+    await page.getByRole('button', { name: '✎ 고치기' }).click();
+    const sel = page.locator('.line li.leg select').first();
+    await sel.selectOption('custom');
+    const num = page.locator('.line li.leg .legedit input');
+    await expect(num).toBeVisible();
+    await num.fill('42');
+    await page.locator('.legedit').getByRole('button', { name: '확인' }).click();
+    expect(await hash(page)).toMatch(/l=[^&]*%3A42|l=[^&]*:42/);
+    await expect(page.locator('.line li.leg select').first().locator('option:checked')).toHaveText(/직접 42분/);
+  });
+});

@@ -28,9 +28,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611071823","./src/config.js":"./src/config.js?v=202611071823","./src/edits.js":"./src/edits.js?v=202611071823","./src/engine.js":"./src/engine.js?v=202611071823","./src/html.js":"./src/html.js?v=202611071823","./src/map.js":"./src/map.js?v=202611071823","./src/mine.js":"./src/mine.js?v=202611071823","./src/pages.js":"./src/pages.js?v=202611071823","./src/search.js":"./src/search.js?v=202611071823","./src/shadow.js":"./src/shadow.js?v=202611071823","./src/state.js":"./src/state.js?v=202611071823","./src/store-map.js":"./src/store-map.js?v=202611071823","./src/store-supabase.js":"./src/store-supabase.js?v=202611071823","./src/store.js":"./src/store.js?v=202611071823","./src/timeline.js":"./src/timeline.js?v=202611071823","./src/travel.js":"./src/travel.js?v=202611071823","./src/ui.js":"./src/ui.js?v=202611071823"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611071823"><link rel="modulepreload" href="src/config.js?v=202611071823"><link rel="modulepreload" href="src/edits.js?v=202611071823"><link rel="modulepreload" href="src/engine.js?v=202611071823"><link rel="modulepreload" href="src/html.js?v=202611071823"><link rel="modulepreload" href="src/map.js?v=202611071823"><link rel="modulepreload" href="src/mine.js?v=202611071823"><link rel="modulepreload" href="src/pages.js?v=202611071823"><link rel="modulepreload" href="src/search.js?v=202611071823"><link rel="modulepreload" href="src/shadow.js?v=202611071823"><link rel="modulepreload" href="src/state.js?v=202611071823"><link rel="modulepreload" href="src/store-map.js?v=202611071823"><link rel="modulepreload" href="src/store-supabase.js?v=202611071823"><link rel="modulepreload" href="src/store.js?v=202611071823"><link rel="modulepreload" href="src/timeline.js?v=202611071823"><link rel="modulepreload" href="src/travel.js?v=202611071823"><link rel="modulepreload" href="src/ui.js?v=202611071823">
-<link rel="preload" href="data/cities.json?v=202611071823" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611071832","./src/config.js":"./src/config.js?v=202611071832","./src/edits.js":"./src/edits.js?v=202611071832","./src/engine.js":"./src/engine.js?v=202611071832","./src/html.js":"./src/html.js?v=202611071832","./src/map.js":"./src/map.js?v=202611071832","./src/mine.js":"./src/mine.js?v=202611071832","./src/pages.js":"./src/pages.js?v=202611071832","./src/search.js":"./src/search.js?v=202611071832","./src/shadow.js":"./src/shadow.js?v=202611071832","./src/state.js":"./src/state.js?v=202611071832","./src/store-map.js":"./src/store-map.js?v=202611071832","./src/store-supabase.js":"./src/store-supabase.js?v=202611071832","./src/store.js":"./src/store.js?v=202611071832","./src/timeline.js":"./src/timeline.js?v=202611071832","./src/travel.js":"./src/travel.js?v=202611071832","./src/ui.js":"./src/ui.js?v=202611071832"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611071832"><link rel="modulepreload" href="src/config.js?v=202611071832"><link rel="modulepreload" href="src/edits.js?v=202611071832"><link rel="modulepreload" href="src/engine.js?v=202611071832"><link rel="modulepreload" href="src/html.js?v=202611071832"><link rel="modulepreload" href="src/map.js?v=202611071832"><link rel="modulepreload" href="src/mine.js?v=202611071832"><link rel="modulepreload" href="src/pages.js?v=202611071832"><link rel="modulepreload" href="src/search.js?v=202611071832"><link rel="modulepreload" href="src/shadow.js?v=202611071832"><link rel="modulepreload" href="src/state.js?v=202611071832"><link rel="modulepreload" href="src/store-map.js?v=202611071832"><link rel="modulepreload" href="src/store-supabase.js?v=202611071832"><link rel="modulepreload" href="src/store.js?v=202611071832"><link rel="modulepreload" href="src/timeline.js?v=202611071832"><link rel="modulepreload" href="src/travel.js?v=202611071832"><link rel="modulepreload" href="src/ui.js?v=202611071832">
+<link rel="preload" href="data/cities.json?v=202611071832" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -235,6 +235,9 @@ body.v2 #sunbox .sun{font-size:14px}
 .algos{margin:0 0 2px}.algos .chip{padding:4px 11px;font-size:14px}.algos .chip[aria-pressed=true]{background:var(--fg);color:#fff;border-color:var(--fg)}
 .line li.leg .legtxt{grid-column:3;font-size:13.5px;color:var(--faint)}
 .line li.stn .meta .txt{color:var(--muted)}
+.result.ask,.result.pincard{border-color:var(--d1);background:color-mix(in srgb,var(--d1) 5%,#fff)}.result .row input.text{flex:1 1 200px;min-width:160px}.result p.muted{margin:4px 0 0;font-size:13px}
+.line li.leg .legedit{grid-column:3;display:flex;align-items:center;gap:6px}.line li.leg .legedit input{border-radius:6px}
+.v2chips.more{align-items:center}.v2chips.more>span{font-size:14px;margin-right:2px}
 </style>
 </head>
 <body class="v2">
@@ -249,6 +252,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611071823"></script>
+<script type="module" src="src/ui.js?v=202611071832"></script>
 </body>
 </html>
