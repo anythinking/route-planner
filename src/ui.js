@@ -825,7 +825,7 @@ function renderPlan(side, entering) {
   if (state.d < 10) { const ad = $('button', 'addday', '+ 하루 추가'); ad.type = 'button'; ad.onclick = () => setState({ d: state.d + 1, o: state.o ? [...state.o.map(d => [...d]), []] : null }); lines.appendChild(ad); }
   if (a.auto && places.length && editing) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
   // 비거나 두 시간이 안 되는 날이 있으면 — 장소가 일수에 비해 적다는 뜻
-  if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나 「균등」으로 나누거나, ✎ 고치기를 켜고 날 머리의 ×로 하루를 빼면 알차져요.'));
+  if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나 「균등」으로 나누거나, 날 머리의 ×로 하루를 빼면 알차져요.'));
   if (result.dropped?.length) lines.appendChild($('p', 'warnline', `시간이 모자라 뺀 곳: ${result.dropped.map(x => esc(x.place.name)).join(', ')} — ☆를 ★로 바꾸면 꼭 넣어요.`));
   side.appendChild(lines);
 
