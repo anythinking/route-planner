@@ -904,7 +904,8 @@ const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 �
 document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); setState({ tab: 'home', pr: null }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
 window.addEventListener('popstate', () => { const h = decode(location.hash); if (encode(h) !== encode(state)) { state = h; render(); } });   // 뒤로·앞으로
-window.addEventListener('load', () => { lastStep = 0; render(); });   // 스타일·폰트까지 다 잡힌 뒤 한 번 더 뷰를 맞춘다
+// 스타일·폰트까지 다 잡힌 뒤 지도 뷰를 한 번 더 맞춘다 — 지도가 있는 화면에서만. 다른 화면까지 통째로 다시 그리면 그 순간 누른 단추(예: 내 여행의 「시작」)가 갈아끼워진 옛 DOM이라 클릭이 허공으로 갔다
+window.addEventListener('load', () => { if (state.tab === 'plan' || (state.tab === 'mine' && state.pr)) { lastStep = 0; render(); } else map.resize(); });
 render();
 
 // 어디서든 처리 못 한 오류 — 조용히 멈추지 않고 아래에 알린다
