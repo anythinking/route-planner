@@ -124,7 +124,7 @@ const NAV_KEYS = ['tab', 'pr', 'c'];
 export function setState(patch) {
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
   const nav = NAV_KEYS.some(k => k in patch && patch[k] !== state[k]);
-  if (('c' in patch && patch.c !== state.c) || ('lg' in patch && patch.lg !== state.lg)) { hidden.clear(); editing = false; pin = null; askSave = false; legCustom = null; results = null; query = ''; searchErr = ''; }   // 다른 도시의 검색 결과·고치기 상태가 남지 않게
+  if (('c' in patch && patch.c !== state.c) || ('lg' in patch && patch.lg !== state.lg)) { hidden.clear(); pin = null; askSave = false; legCustom = null; results = null; query = ''; searchErr = ''; }   // 다른 도시의 검색 결과·고치기 상태가 남지 않게
   const before = encode(state);
   state = { ...state, ...patch };
   const after = encode(state);
@@ -163,7 +163,6 @@ function renderTabs() {
     host.appendChild(b);
   }
   const who = document.getElementById('who'); who.innerHTML = '';
-  const ed = $('button', 'btn sm edit', '✎ 고치기'); ed.type = 'button'; ed.setAttribute('aria-pressed', editing); ed.title = '켜면 어느 화면에서든 고치는 단추가 붙어요 — 플랜의 역·구간·날, 홈·내 여행의 여행 카드'; ed.onclick = () => { editing = !editing; render(); }; who.appendChild(ed);
   if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => setState({ tab: 'account', pr: null }); who.appendChild(b); }
   else { const b = $('button', 'btn sm', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   // 단계 토글은 없다 — 플랜은 한 화면
@@ -562,13 +561,13 @@ function dropToDay(id, i) {
 }
 
 let query = '', results = null, searching = false, searchErr = '';   // 검색 상자 상태 (화면 상태)
-const openGroups = new Set([1]);   // 펼쳐 둔 추천 묶음 — 처음엔 1순위만
 
 // 입력한 글자로 목록을 거른다 — 다시 그리지 않고 숨기기만 (입력 포커스를 지키려고)
 function applyFilter(side) {
   const q = query.trim().toLowerCase();
   side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
-  side.querySelectorAll('details.group').forEach(g => { g.hidden = !!q && ![...g.querySelectorAll('.place')].some(r => !r.hidden); if (q && !g.hidden) g.open = true; });
+  side.querySelectorAll('.v2zone').forEach(z => { z.hidden = !!q && ![...z.querySelectorAll('.chip')].some(c => !c.hidden); });
+  const pk = side.querySelector('.v2pickbox'); if (pk && q) pk.open = true;
 }
 
 let aiMsgs = [], aiBusy = false, aiOpen = false, aiPending = null;   // AI 대화 (화면 상태)
@@ -616,12 +615,12 @@ function renderAiBox(host) {
 
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
-let pickOpen = true, recOpen = false;   // 담기 상자 · 전체 목록 접힘 (화면 상태)
+let pickOpen = true;   // 담기 상자 접힘 (화면 상태)
 let lastFit = null;                     // 마지막으로 지도를 맞춘 점들 — 창 크기가 바뀌면 다시 맞춘다
 let pin = null;        // 지도에서 찍은 자리 {lat,lng} — 이름·시간을 적는 칸이 뜬다 (옛 prompt 둘 대신)
 let askSave = false;   // 「여행으로 저장」 이름 칸
 let legCustom = null;  // 분을 직접 적는 중인 구간 키
-let editing = false;   // ✎ 고치기 — 켜야 역·구간·날에 고치는 단추가 붙는다. 열 때마다 꺼진 채로 시작(켜 두면 화면이 빽빽하다)
+const editing = true;   // 수정 모드가 기본 — 역·구간·날의 단추가 늘 붙는다 (고칠 것 11-08: 토글은 필요 없다)
 const ALGO_HINT = { area: '가까운 곳끼리 하루', route: '전체를 한 줄로 이어 날과 날 사이 되돌아가기가 적게', even: '날마다 체류·이동이 비슷하게 — 빈 날·짧은 날이 안 생겨요', priority: '꼭 가기·1순위부터 채우고, 자리가 없으면 낮은 순위가 빠져요' };
 let mapFitAsked = false;   // 날을 켜고 끈 뒤 지도를 보이는 날에 맞춘다
 function renderPlan(side, entering) {
@@ -707,21 +706,18 @@ function renderPlan(side, entering) {
   pk.appendChild($('summary', null, `담기 <span class="muted">${city.places.length}곳 중 ${places.length} 골랐어요${city.areas ? ' · 굵은 것이 1순위' : ''}</span>`));
   const e = $('div', 'v2empty');
   if (!places.length) e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.`));
-  const chipOf = pl => { const on = pl.id in state.p; const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), `${on ? '✓ ' : ''}${esc(pl.name)}`); c.type = 'button'; c.setAttribute('aria-pressed', on); c.title = on ? '누르면 빼요' : (pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''); c.onclick = () => togglePlace(pl.id); return c; };
-  if (city.areas) {   // 구역별 — 지도의 테두리와 같은 색
-    city.areas.forEach((ar, i) => {
-      const z = $('div', 'v2zone'); z.style.setProperty('--c', `var(${DAY_COLORS[i] || '--d1'})`);
-      z.appendChild($('b', null, `<i></i>${esc(ar.name)} <span class="muted">${esc(ar.blurb || '')}</span>`));
-      const chips = $('div', 'v2chips');
-      for (const pl of [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight)) chips.appendChild(chipOf(pl));
-      z.appendChild(chips); e.appendChild(z);
-    });
-  } else {
-    const chips = $('div', 'v2chips');
-    for (const pl of city.places.filter(p => p.weight === 1)) chips.appendChild(chipOf(pl));
-    e.appendChild(chips); e.appendChild($('p', 'muted', '2·3순위는 아래 「전체 목록」에서.'));
+  const chipOf = pl => { const on = pl.id in state.p; const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), `${on ? '✓ ' : ''}${esc(pl.name)}`); c.type = 'button'; c.dataset.name = pl.name.toLowerCase(); c.setAttribute('aria-pressed', on); c.title = on ? '누르면 빼요' : (pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''); c.onclick = () => togglePlace(pl.id); return c; };
+  // 묶음 — 구역(areas)이 있으면 구역별(지도 테두리와 같은 색), 없으면 1·2·3순위별. 체류 선택지·★·빼기는 담긴 뒤 노선의 역에서
+  const groups = city.areas ? city.areas.map((ar, i) => ({ name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
+    : [1, 2, 3].map(w => ({ name: WEIGHT_LABEL[w], blurb: '', color: ['', 'var(--gold)', 'var(--d1)', 'var(--line)'][w], list: city.places.filter(p => p.weight === w) })).filter(g => g.list.length);
+  for (const g of groups) {
+    const z = $('div', 'v2zone'); z.style.setProperty('--c', g.color);
+    z.appendChild($('b', null, `<i></i>${esc(g.name)} <span class="muted">${esc(g.blurb)}</span>`));
+    const chips = $('div', 'v2chips'); for (const pl of g.list) chips.appendChild(chipOf(pl));
+    z.appendChild(chips); e.appendChild(z);
   }
   pk.appendChild(e); side.appendChild(pk);
+  applyFilter(pk);
 
   // 노선 — 날마다 하나
   const lines = $('div', 'v2lines');
@@ -803,13 +799,10 @@ function renderPlan(side, entering) {
   side.appendChild(lines);
 
   // 추천 — 접어 둔다 (비었을 땐 펼침)
-  const rec = $('details', 'v2rec'); rec.open = recOpen; rec.ontoggle = () => { recOpen = rec.open; };
-  rec.appendChild($('summary', null, `전체 목록 <span class="muted">${city.places.length}곳 · 체크하고 체류를 골라요</span>`));
-  renderRecs(rec); side.appendChild(rec);
 
   // 지도 — 노선색 선 + 역 번호·이름표, 안 고른 곳은 흐린 점(누르면 추가)
   const chosen = new Set(places.map(p => p.id));
-  if (!places.length && city.areas) drawAreas();   // 어디가 어디인지 — 구역 테두리와 이름
+  if (city.areas) drawAreas(places.length ? 0.3 : 0.55);   // 어디가 어디인지 — 구역 테두리와 이름, 고른 뒤엔 흐리게 (고칠 것 11-08)
   for (const pl of city.places) if (!chosen.has(pl.id)) map.html('places', pl, `<div class="mk${pl.weight === 1 ? ' w1' : ''}"><i></i>${pl.weight === 1 ? `<span>${esc(pl.name)}</span>` : ''}</div>`, { title: pl.name + ' — 눌러서 추가', onClick: () => togglePlace(pl.id) });
   const bounds = [[start.lat, start.lng]];
   days.forEach((day, i) => {
@@ -858,7 +851,7 @@ function hull(pts) {
   const upper = []; for (const p of [...P].reverse()) { while (upper.length >= 2 && cross(upper.at(-2), upper.at(-1), p) <= 0) upper.pop(); upper.push(p); }
   return [...lower.slice(0, -1), ...upper.slice(0, -1)];
 }
-function drawAreas() {
+function drawAreas(opacity = 0.55) {
   const css = getComputedStyle(document.body);
   city.areas.forEach((ar, i) => {
     const pts = city.places.filter(p => p.area === ar.id).map(p => [p.lat, p.lng]); if (!pts.length) return;
@@ -867,58 +860,17 @@ function drawAreas() {
     if (h.length >= 3) {   // 살짝 부풀린 테두리 — 점이 선 위에 딱 붙지 않게
       const c = [h.reduce((s, p) => s + p[0], 0) / h.length, h.reduce((s, p) => s + p[1], 0) / h.length];
       const ring = h.map(p => [c[0] + (p[0] - c[0]) * 1.25, c[1] + (p[1] - c[1]) * 1.25]);
-      map.line('places', [...ring, ring[0]], { color: col, weight: 2, opacity: 0.55 });
+      map.line('places', [...ring, ring[0]], { color: col, weight: 2, opacity });
     }
     const top = pts.reduce((m, p) => p[0] > m[0] ? p : m, pts[0]);
     map.html('places', { lat: top[0] + 0.006, lng: pts.reduce((s, p) => s + p[1], 0) / pts.length }, `<div class="zone" style="--c:${col}">${esc(ar.name)} <span>${pts.length}곳</span></div>`);
   });
 }
 
-// 전체 장소 목록 — 순위별 묶음, 체크로 고르고, 끌어서 날짜에 놓는다
-function renderRecs(box) {
-    const f = $('input', 'text'); f.type = 'search'; f.placeholder = '목록 거르기'; f.value = query; f.oninput = () => { query = f.value; applyFilter(box); };
-    box.appendChild(f);
-    for (const w of [1, 2, 3]) {
-      const group = city.places.filter(p => p.weight === w);
-      if (!group.length) continue;
-      const panel = $('details', 'group'); panel.open = openGroups.has(w); panel.ontoggle = () => { panel.open ? openGroups.add(w) : openGroups.delete(w); };
-      const chosenN = group.filter(p => p.id in state.p).length;
-      panel.appendChild($('summary', null, `<b>${WEIGHT_LABEL[w]}</b> <span class="muted">${group.length}곳${chosenN ? ` · 고른 ${chosenN}` : ''}</span>`));
-      for (const pl of group) {
-        const chosen = pl.id in state.p, must = state.m.includes(pl.id);
-        const row = $('div', 'row place drag'); row.dataset.name = pl.name.toLowerCase(); row.draggable = true;
-        row.ondragstart = ev => { ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'copyMove'; };
-        const cb = $('input'); cb.type = 'checkbox'; cb.checked = chosen; cb.id = 'cb-' + pl.id; cb.onchange = () => togglePlace(pl.id);
-        const lab = $('label', null, esc(pl.name)); lab.htmlFor = cb.id; lab.style.fontWeight = '600';
-        row.append(cb, lab);
-        if (chosen) {
-          const mustBtn = $('button', 'btn sm' + (must ? ' primary' : ''), '꼭'); mustBtn.type = 'button';
-          mustBtn.onclick = () => setState({ m: must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
-          const sel = $('select', 'quiet');
-          pl.opts.forEach((o, i) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = i; op.selected = state.p[pl.id] === i; sel.appendChild(op); });
-          sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } });
-          row.append(mustBtn, sel);
-        }
-        panel.appendChild(row);
-        if (chosen) { const note = $('p', 'muted', pl.note); note.dataset.name = row.dataset.name; panel.appendChild(note); }
-      }
-      box.appendChild(panel);
-    }
-    applyFilter(box);
-    if (state.u.length) {
-      const panel = $('details', 'group'); panel.open = true; panel.appendChild($('summary', null, `<b>내 장소</b> <span class="muted">${state.u.length}곳</span>`));
-      state.u.forEach((u, i) => {
-        const row = $('div', 'row', `<b>${esc(u.name)}</b> <span class="muted">${esc(u.min)}분</span>`);
-        const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = () => setState({ u: state.u.filter((_, j) => j !== i), o: null });
-        row.appendChild(del); panel.appendChild(row);
-      });
-      box.appendChild(panel);
-    }
-  }
 function renderSearch() {
   const p = $('div', 'search');
   const row = $('div', 'row');
-  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 검색 — 글자로 목록을 거르고, Enter로 지도에서 찾아요'; inp.value = query;
+  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 검색 — 글자로 담기 목록을 거르고, Enter로 지도(OpenStreetMap·위키데이터)에서 찾아요'; inp.value = query;
   inp.oninput = () => { query = inp.value; applyFilter(document.getElementById('side')); };
   const go = $('button', 'btn', '지도에서 찾기'); go.type = 'button';
   const run = async () => {

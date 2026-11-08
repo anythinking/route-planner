@@ -107,13 +107,10 @@ test.describe('휴대폰 폭 — 지도와 스크롤', () => {
 });
 
 test.describe('플랜 — 고치기와 나누는 방법', () => {
-  test('⑧ 보기 화면엔 고치는 단추가 없고, ✎ 고치기를 켜야 붙는다 · 나누기 알약이 해시 a=를 바꾼다', async ({ page }) => {
+  test('⑧ 수정 모드가 기본 — 역·구간 단추가 바로 있고, 나누기 알약이 해시 a=를 바꾼다', async ({ page }) => {
     await page.goto('/?local=1#c=london&d=2&p=stpaul:0,tate:0,borough:0,tower:0');
     await expect(page.locator('.v2lines')).toBeVisible();
-    await expect(page.locator('.line select')).toHaveCount(0);
-    await expect(page.locator('.line .addhere')).toHaveCount(0);
-    await expect(page.locator('.line .legtxt').first()).toBeVisible();
-    await page.getByRole('button', { name: '✎ 고치기' }).click();
+    await expect(page.locator('#who .btn.edit')).toHaveCount(0);
     await expect(page.locator('.line select').first()).toBeVisible();
     await expect(page.locator('.line .addhere').first()).toBeVisible();
     await page.getByRole('button', { name: '한붓그리기' }).click();
@@ -145,7 +142,6 @@ test.describe('플랜 — 브라우저 창 대신 화면 안 입력', () => {
 
   test('⑩ 구간 「분 직접 입력」은 숫자 칸이 그 자리에 뜨고, 확인하면 해시 l=에 남는다', async ({ page }) => {
     await page.goto('/?local=1#c=london&d=1&p=stpaul:0,tate:0,borough:0');
-    await page.getByRole('button', { name: '✎ 고치기' }).click();
     const sel = page.locator('.line li.leg select').first();
     await sel.selectOption('custom');
     const num = page.locator('.line li.leg .legedit input');
@@ -157,15 +153,11 @@ test.describe('플랜 — 브라우저 창 대신 화면 안 입력', () => {
   });
 });
 
-test('⑪ ✎ 고치기는 헤더에 항상 있고, 켜면 홈·내 여행의 여행 카드에 이름·삭제가 붙는다', async ({ page }) => {
+test('⑪ 홈·내 여행의 여행 카드에 이름·삭제가 늘 붙어 있다 (수정 모드가 기본)', async ({ page }) => {
   await startWithTrip(page);
   await tab(page, '홈').click();
-  await expect(page.locator('#who .btn.edit')).toBeVisible();
-  await expect(page.locator('.card.trip .cardtools')).toHaveCount(0);
-  await page.locator('#who .btn.edit').click();
-  await expect(page.locator('.card.trip .cardtools').first()).toBeVisible();
+  await expect(page.locator('#who .btn.edit')).toHaveCount(0);
+  await expect(page.locator('.card.trip .cardtools').first()).toBeAttached();
   await tab(page, '내 여행').click();
-  await expect(page.locator('.card.trip .cardtools').first()).toBeVisible();
-  await tab(page, '플랜').click();
-  await expect(page.locator('#who .btn.edit')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.card.trip .cardtools').first()).toBeAttached();
 });
