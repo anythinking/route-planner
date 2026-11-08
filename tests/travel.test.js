@@ -69,3 +69,17 @@ test('pref=taxi: 2km 넘으면 지하철 대신 택시, 아래는 도보', () =>
 test('옵션 없으면 기존 규칙 그대로', () => {
   assert.deepEqual(travelMin(STPAUL, BOROUGH), travelMin(STPAUL, BOROUGH, {}));
 });
+
+test('30km 넘는 시외 구간은 차(국도 45km/h) — 세부시티→오슬롭 95km가 세 시간 안팎, 도시 안 공식(택시)보다 훨씬 짧다', () => {
+  const cebu = { lat: 10.3157, lng: 123.8854 }, oslob = { lat: 9.4616, lng: 123.378 };
+  const r = travelMin(cebu, oslob);
+  assert.equal(r.mode, 'car');
+  assert.ok(r.min >= 150 && r.min <= 190, String(r.min));
+  assert.ok(travelMin(cebu, oslob, { mode: 'taxi' }).min > r.min * 1.5);
+  // pref와 무관하게 시외는 차
+  assert.equal(travelMin(cebu, oslob, { pref: 'taxi' }).mode, 'car');
+  // 30km 안쪽은 전과 같다
+  const near = { lat: 10.3157, lng: 124.05 };
+  assert.equal(travelMin(cebu, near).mode, 'metro');
+  assert.equal(travelMin(cebu, near, { pref: 'taxi' }).mode, 'taxi');
+});

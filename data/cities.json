@@ -6,7 +6,8 @@
    "cities": [
     "tokyo",
     "osaka",
-    "kyoto"
+    "kyoto",
+    "cebu"
    ]
   },
   {
@@ -139,6 +140,24 @@
    ],
    "image": "assets/cities/barcelona.jpg",
    "tz": "Europe/Madrid"
+  },
+  "cebu": {
+   "name": "세부",
+   "country": "philippines",
+   "countryName": "필리핀",
+   "center": [
+    10.3157,
+    123.8854
+   ],
+   "bbox": [
+    9.4,
+    10.45,
+    123.3,
+    124.1
+   ],
+   "image": "assets/cities/cebu.jpg",
+   "tz": "Asia/Manila",
+   "pref": "taxi"
   }
  }
 }

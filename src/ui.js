@@ -14,7 +14,7 @@ import { tagEdits } from './edits.js';
 const INDEX = await fetch('data/cities.json' + (new URL(import.meta.url).search || ''), { credentials: 'same-origin', mode: 'cors' }).then(r => r.json()).catch(() => ({ regions: [], cities: {} }));   // 홈을 그리는 데 꼭 필요한 유일한 선행 로드
 const CITIES = Object.fromEntries(Object.entries(INDEX.cities).map(([id, c]) => [id, c.name]));
 const REGIONS = INDEX.regions;
-const MODE = { walk: '도보', metro: '지하철', taxi: '택시', custom: '직접' };
+const MODE = { walk: '도보', metro: '지하철', taxi: '택시', car: '차', custom: '직접' };
 const TAB_LABEL = { home: '홈', plan: '플랜', guide: '가이드', mine: '내 여행' };
 // 계정 서버가 설정돼 있으면 Supabase, 아니면(또는 못 불러오면) 브라우저 저장
 let store = new LocalStore();
@@ -272,7 +272,7 @@ function renderHome(side, projects, pub = []) {
   sr.appendChild(inp); hero.appendChild(sr);
   side.appendChild(hero);
 
-  const openCity = id => { step = 2; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan' }); };
+  const openCity = id => { step = 2; setState({ c: id, p: {}, m: [], u: [], s: null, l: {}, o: null, pr: null, tab: 'plan', v: INDEX.cities[id]?.pref || 'transit' }); };   // 지하철이 없는 도시(세부)는 택시 위주가 기본
   for (const r of REGIONS) {
     const sec = $('section', 'region'); sec.dataset.region = r.id;
     sec.appendChild($('h3', null, esc(r.name)));
