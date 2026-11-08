@@ -39,7 +39,12 @@
     ],
     "package": {
      "count": 1,
-     "sources": [
+     "agencies": [
+      "하나투어"
+     ],
+     "minutes": null,
+     "when": "4일차 오후",
+     "urls": [
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
     }
@@ -78,7 +83,13 @@
     ],
     "package": {
      "count": 2,
-     "sources": [
+     "agencies": [
+      "에어텔",
+      "하나투어"
+     ],
+     "minutes": null,
+     "when": "4일차 오후, 산페드로 요새·마젤란 십자가 직후",
+     "urls": [
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD",
       "https://airteltour.com/airtels/751054"
      ]
@@ -147,7 +158,13 @@
     ],
     "package": {
      "count": 2,
-     "sources": [
+     "agencies": [
+      "에어텔",
+      "하나투어"
+     ],
+     "minutes": null,
+     "when": "4일차 12시 체크아웃 후 중식 뒤 오후(세부시티 코스 첫 순서)",
+     "urls": [
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD",
       "https://airteltour.com/airtels/751054"
      ]
@@ -416,10 +433,20 @@
     ],
     "package": {
      "count": 6,
-     "sources": [
+     "agencies": [
+      "모두투어",
+      "에어텔",
+      "온라인투어"
+     ],
+     "minutes": null,
+     "when": "3일차 또는 4일차 오후(12시 체크아웃 후), 탑오브세부 석식 전",
+     "urls": [
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450",
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287",
-      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323"
+      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323",
+      "https://airteltour.com/airtels/751054",
+      "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484",
+      "https://www.modetour.com/package/70822795"
      ]
     }
    }
@@ -453,10 +480,18 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 5,
-     "sources": [
+     "agencies": [
+      "모두투어",
+      "에어텔"
+     ],
+     "minutes": null,
+     "when": "3~4일차 저녁(석식 장소), 이후 공항 이동",
+     "urls": [
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450",
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287",
-      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323"
+      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323",
+      "https://airteltour.com/airtels/751054",
+      "https://www.modetour.com/package/70822795"
      ]
     }
    }
@@ -493,10 +528,20 @@
     ],
     "package": {
      "count": 6,
-     "sources": [
+     "agencies": [
+      "모두투어",
+      "에어텔",
+      "온라인투어"
+     ],
+     "minutes": null,
+     "when": "3~4일차 오후, 레아신전 전후",
+     "urls": [
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450",
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287",
-      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323"
+      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323",
+      "https://airteltour.com/airtels/751054",
+      "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484",
+      "https://www.modetour.com/package/70822795"
      ]
     }
    }
@@ -530,10 +575,17 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 4,
-     "sources": [
+     "agencies": [
+      "모두투어",
+      "온라인투어"
+     ],
+     "minutes": null,
+     "when": "3~4일차 오후",
+     "urls": [
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287",
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323",
-      "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484"
+      "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484",
+      "https://www.modetour.com/package/70822795"
      ]
     }
    }
@@ -595,7 +647,12 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 1,
-     "sources": [
+     "agencies": [
+      "에어텔"
+     ],
+     "minutes": 180,
+     "when": "3일차 저녁",
+     "urls": [
       "https://airteltour.com/airtels/751054"
      ]
     }
@@ -629,7 +686,12 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 2,
-     "sources": [
+     "agencies": [
+      "하나투어"
+     ],
+     "minutes": null,
+     "when": "4일차 오후 시티 관광 뒤~석식 전",
+     "urls": [
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD",
       "https://www.hanatour.com/mkt/fet/PL00113003"
      ]
@@ -664,7 +726,12 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 1,
-     "sources": [
+     "agencies": [
+      "모두투어"
+     ],
+     "minutes": null,
+     "when": "3일차 중식 후 오후",
+     "urls": [
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"
      ]
     }
@@ -757,10 +824,26 @@
     "file": "research/cebu/cebu-sites-city.json",
     "package": {
      "count": 9,
-     "sources": [
+     "agencies": [
+      "노랑풍선",
+      "롯데관광",
+      "에어텔",
+      "온라인투어",
+      "참좋은여행",
+      "트립스토어"
+     ],
+     "minutes": null,
+     "when": "마지막 관광일(5일 상품 4일차 / 4일 상품 4일차) 체크아웃 후 오후, 공항 이동 전 '막탄 시내관광'의 첫 코스",
+     "urls": [
       "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR",
       "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098",
-      "https://m.airteltour.com/packages/750599"
+      "https://m.airteltour.com/packages/750599",
+      "https://airteltour.com/packages/755104",
+      "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010",
+      "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004",
+      "https://www.tripstore.kr/products/T0B9D103FDD6B",
+      "https://www.tripstore.kr/products/T728886AC0FA6",
+      "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"
      ]
     }
    }
@@ -889,10 +972,29 @@
     ],
     "package": {
      "count": 11,
-     "sources": [
+     "agencies": [
+      "노랑풍선",
+      "모두투어",
+      "에어텔",
+      "온라인투어",
+      "참좋은여행",
+      "트립스토어",
+      "하나투어"
+     ],
+     "minutes": 240,
+     "when": "2일차 또는 3일차 오전 09:00 출발~오후 1~2시 종료 (조식 후 가이드 미팅)",
+     "urls": [
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD",
       "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098",
-      "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"
+      "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR",
+      "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450",
+      "https://airteltour.com/packages/755104",
+      "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP276-250713LJ&PriceSeq=0",
+      "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1",
+      "https://www.tripstore.kr/products/T0B9D103FDD6B",
+      "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484",
+      "https://tripstore.kr/products/T584B5A0E91A9",
+      "https://www.modetour.com/package/70822795"
      ]
     }
    }
@@ -932,7 +1034,12 @@
     ],
     "package": {
      "count": 1,
-     "sources": [
+     "agencies": [
+      "하나투어"
+     ],
+     "minutes": 720,
+     "when": "새벽 출발 종일(2일차 또는 3일차)",
+     "urls": [
       "https://www.hanatour.com/mkt/fet/PL00113003",
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
@@ -1067,7 +1174,13 @@
     ],
     "package": {
      "count": 1,
-     "sources": [
+     "agencies": [
+      "모두투어",
+      "하나투어"
+     ],
+     "minutes": 480,
+     "when": "종일",
+     "urls": [
       "https://www.modetour.com/package/70822795",
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
