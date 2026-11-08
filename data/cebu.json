@@ -48,7 +48,8 @@
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
     }
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "santonino",
@@ -94,7 +95,8 @@
       "https://airteltour.com/airtels/751054"
      ]
     }
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "cathedral",
@@ -123,7 +125,8 @@
      "https://cebuinsights.com/?p=47102"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "fortsanpedro",
@@ -169,7 +172,8 @@
       "https://airteltour.com/airtels/751054"
      ]
     }
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "colon",
@@ -198,7 +202,8 @@
      "https://cebudailynews.inquirer.net/624252/explainer-why-colon-might-not-be-the-oldest-street-in-ph"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "carbon",
@@ -227,7 +232,8 @@
      "https://www.philstar.com/cebu-news/2026/04/29/2524404/move-against-carbon-privatization-vendors-launch-nationwide-campaign"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "yapsandiego",
@@ -256,7 +262,8 @@
      "https://www.mycebu.ph/article/yap-sandiego-ancestral-home-parian/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "casagorordo",
@@ -286,7 +293,8 @@
      "https://www.travelcebu.ph/blog/casa-gorordo-museum/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "heritage",
@@ -314,7 +322,8 @@
      "https://sugbo.ph/?p=47924"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "jesuithouse",
@@ -343,7 +352,8 @@
      "https://sugbo.ph/?p=15852"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "natmuseum",
@@ -371,7 +381,8 @@
      "https://suroy.ph/colon-street-cebu/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "museosugbo",
@@ -399,7 +410,8 @@
      "https://cebucitytour.com/cebu-destinations/cebu-museo-sugbo/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "downtown"
   },
   {
    "id": "templeofleah",
@@ -449,7 +461,8 @@
       "https://www.modetour.com/package/70822795"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "tops",
@@ -494,7 +507,8 @@
       "https://www.modetour.com/package/70822795"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "sirao",
@@ -544,7 +558,8 @@
       "https://www.modetour.com/package/70822795"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "taoist",
@@ -588,7 +603,8 @@
       "https://www.modetour.com/package/70822795"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "laparisienne",
@@ -617,7 +633,8 @@
      "https://sugbo.ph/?p=15606"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "ayala",
@@ -656,7 +673,8 @@
       "https://airteltour.com/airtels/751054"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "smcity",
@@ -696,7 +714,8 @@
       "https://www.hanatour.com/mkt/fet/PL00113003"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "smseaside",
@@ -735,7 +754,8 @@
       "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"
      ]
     }
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "itpark",
@@ -764,7 +784,8 @@
      "https://www.arveesblog.com/2018/03/sugbo-mercado-it-park-schedule.html"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "oceanpark",
@@ -793,7 +814,8 @@
      "https://lakbaypinas.com/?p=13163"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "uptown"
   },
   {
    "id": "mactanshrine",
@@ -846,7 +868,8 @@
       "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"
      ]
     }
-   }
+   },
+   "area": "mactan"
   },
   {
    "id": "newtown",
@@ -876,7 +899,8 @@
      "https://cebu.ahroundph.com/blog/2023/05/21/mactan-newtown-beach/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "mactan"
   },
   {
    "id": "roses",
@@ -905,7 +929,8 @@
      "https://sugbo.ph/?p=74148"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "mactan"
   },
   {
    "id": "lantaw",
@@ -932,7 +957,8 @@
      "https://www.lakwatsero.com/spots/10000-roses-cafe-cordova-cebu/"
     ],
     "file": "research/cebu/cebu-sites-city.json"
-   }
+   },
+   "area": "mactan"
   },
   {
    "id": "hopping",
@@ -997,7 +1023,8 @@
       "https://www.modetour.com/package/70822795"
      ]
     }
-   }
+   },
+   "area": "mactan"
   },
   {
    "id": "oslob",
@@ -1044,7 +1071,8 @@
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
     }
-   }
+   },
+   "area": "south"
   },
   {
    "id": "tumalog",
@@ -1073,7 +1101,8 @@
      "https://lakbaypinas.com/?p=18919"
     ],
     "file": "research/cebu/cebu-sites-trips.json"
-   }
+   },
+   "area": "south"
   },
   {
    "id": "sumilon",
@@ -1103,7 +1132,8 @@
      "https://www.pelago.com/en/activity/pqbc1mmvi-bluewater-sumilon-day-pass-cebu"
     ],
     "file": "research/cebu/cebu-sites-trips.json"
-   }
+   },
+   "area": "south"
   },
   {
    "id": "kawasan",
@@ -1139,7 +1169,8 @@
     "dwell": [
      "https://experiences.myrealtrip.com/products/5541464"
     ]
-   }
+   },
+   "area": "south"
   },
   {
    "id": "moalboal",
@@ -1185,7 +1216,8 @@
       "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"
      ]
     }
-   }
+   },
+   "area": "south"
   },
   {
    "id": "simala",
@@ -1214,7 +1246,8 @@
      "https://lakbaypinas.com/?p=16941"
     ],
     "file": "research/cebu/cebu-sites-trips.json"
-   }
+   },
+   "area": "south"
   },
   {
    "id": "carcar",
@@ -1243,7 +1276,8 @@
      "https://newsinfo.inquirer.net/?p=1123256"
     ],
     "file": "research/cebu/cebu-sites-trips.json"
-   }
+   },
+   "area": "south"
   },
   {
    "id": "osmenapeak",
@@ -1272,7 +1306,8 @@
      "https://www.pinoymountaineer.com/?p=1162"
     ],
     "file": "research/cebu/cebu-sites-trips.json"
-   }
+   },
+   "area": "south"
   }
  ],
  "pack": [
@@ -1405,5 +1440,27 @@
   ],
   "excluded": "보홀 5곳(배 2시간)·반타얀·말라파스쿠아·칼랑가만(1박)·올랑고·페스카도르·화이트 비치(옵션으로 흡수)·막탄 성당(좌표 미확인)·푸엔테 오스메냐·비즈니스 파크·주청사·플라자 인디펜덴시아·라훅 도교 사원(좌표 없음)",
   "image": "assets/cities/credits.json"
- }
+ },
+ "areas": [
+  {
+   "id": "downtown",
+   "name": "다운타운",
+   "blurb": "옛 시가 — 마젤란 십자가·산토니뇨·요새·파리안 유산 가옥, 걸어서 돈다"
+  },
+  {
+   "id": "uptown",
+   "name": "업타운·몰",
+   "blurb": "아얄라·IT 파크와 언덕 위 전망(레아·톱스·시라오), 그랩으로"
+  },
+  {
+   "id": "mactan",
+   "name": "막탄·코르도바",
+   "blurb": "공항·리조트가 있는 섬 — 슈라인·호핑·10000 로지스"
+  },
+  {
+   "id": "south",
+   "name": "남부 당일",
+   "blurb": "차로 2~3시간 — 오슬롭·카와산·모알보알은 새벽 출발 하루"
+  }
+ ]
 }

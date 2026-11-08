@@ -72,4 +72,5 @@ research/<city>/      조사 원자료(출처 URL 포함) — 장소의 src·도
 3. 나라가 처음이면 `scripts/country/<country>.json`에 준비물·기념품·사진 공통 팁.
 4. `node scripts/build-city.js <id>` → `data/<id>.json` 초안. 설명(`note`)·사진 팁(`photo.places`)이 빈 곳은 손으로 채우고 `npm run validate`. 이미 있는 파일의 note·opts·photo는 다시 돌려도 지켜진다.
 5. 도시 사진은 Wikimedia Commons에서 CC BY/BY-SA로 골라 `assets/cities/<id>.jpg`(560×420 안팎)에 두고 `credits.json`에 출처를 적는다.
-6. 웹 조사로 만든 도시는 조사 JSON을 `research/<id>/`에 두고, 장소마다 `src`(좌표 출처·참고 URL), 파일 아래 `sources`(조사일·뺀 곳)를 적는다. 조사하기 전에 `research/`부터 본다 — 같은 걸 두 번 찾지 않게.
+6. 장소가 여러 구역(도심·섬·근교)에 흩어진 도시는 도시 파일에 `areas: [{id, name, blurb}]`를 두고 장소마다 `area`를 적는다 — 빈 플랜이 구역별 목록과 지도 테두리로 열린다(세부). 없으면 1순위 칩만 보인다.
+7. 웹 조사로 만든 도시는 조사 JSON을 `research/<id>/`에 두고, 장소마다 `src`(좌표 출처·참고 URL), 파일 아래 `sources`(조사일·뺀 곳)를 적는다. 조사하기 전에 `research/`부터 본다 — 같은 걸 두 번 찾지 않게.

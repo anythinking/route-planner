@@ -694,10 +694,22 @@ function renderPlan(side, entering) {
   // 비었을 때 — 1순위로 첫 클릭을 만든다
   if (!places.length) {
     const e = $('div', 'v2empty');
-    e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.`));
-    const chips = $('div', 'v2chips');
-    for (const pl of city.places.filter(p => p.weight === 1)) { const c = $('button', 'chip', esc(pl.name)); c.type = 'button'; c.onclick = () => togglePlace(pl.id); chips.appendChild(c); }
-    e.appendChild(chips); side.appendChild(e);
+    e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.${city.areas ? ' 굵은 것이 1순위예요.' : ''}`));
+    const chipOf = pl => { const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), esc(pl.name)); c.type = 'button'; c.title = pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''; c.onclick = () => togglePlace(pl.id); return c; };
+    if (city.areas) {   // 구역별 — 지도의 테두리와 같은 색
+      city.areas.forEach((ar, i) => {
+        const z = $('div', 'v2zone'); z.style.setProperty('--c', `var(${DAY_COLORS[i] || '--d1'})`);
+        z.appendChild($('b', null, `<i></i>${esc(ar.name)} <span class="muted">${esc(ar.blurb || '')}</span>`));
+        const chips = $('div', 'v2chips');
+        for (const pl of [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight)) chips.appendChild(chipOf(pl));
+        z.appendChild(chips); e.appendChild(z);
+      });
+    } else {
+      const chips = $('div', 'v2chips');
+      for (const pl of city.places.filter(p => p.weight === 1)) chips.appendChild(chipOf(pl));
+      e.appendChild(chips);
+    }
+    side.appendChild(e);
   }
 
   // 노선 — 날마다 하나
@@ -780,12 +792,15 @@ function renderPlan(side, entering) {
   side.appendChild(lines);
 
   // 추천 — 접어 둔다 (비었을 땐 펼침)
-  const rec = $('details', 'v2rec'); rec.open = !places.length;
-  rec.appendChild($('summary', null, `추천 장소 <span class="muted">${city.places.length}곳</span>`));
-  renderRecs(rec); side.appendChild(rec);
+  if (places.length || !city.areas) {   // 빈 상태에 구역 목록이 있으면 같은 걸 두 번 보여 주지 않는다
+    const rec = $('details', 'v2rec'); rec.open = !places.length;
+    rec.appendChild($('summary', null, `전체 목록 <span class="muted">${city.places.length}곳 · 체크하고 체류를 골라요</span>`));
+    renderRecs(rec); side.appendChild(rec);
+  }
 
   // 지도 — 노선색 선 + 역 번호·이름표, 안 고른 곳은 흐린 점(누르면 추가)
   const chosen = new Set(places.map(p => p.id));
+  if (!places.length && city.areas) drawAreas();   // 어디가 어디인지 — 구역 테두리와 이름
   for (const pl of city.places) if (!chosen.has(pl.id)) map.html('places', pl, `<div class="mk${pl.weight === 1 ? ' w1' : ''}"><i></i>${pl.weight === 1 ? `<span>${esc(pl.name)}</span>` : ''}</div>`, { title: pl.name + ' — 눌러서 추가', onClick: () => togglePlace(pl.id) });
   const bounds = [[start.lat, start.lng]];
   days.forEach((day, i) => {
@@ -824,7 +839,32 @@ function renderPin() {
   return card;
 }
 
-// 추천 장소 목록 — 순위별 묶음, 체크로 고르고, 끌어서 날짜에 놓는다
+// 구역 테두리 — 그 구역 장소들의 볼록 껍질을 점선으로, 가운데 이름표. 장소가 둘 이하면 이름표만
+function hull(pts) {
+  const P = [...pts].sort((a, b) => a[1] - b[1] || a[0] - b[0]);   // [lat,lng] → lng 기준 정렬
+  if (P.length < 3) return P;
+  const cross = (o, a, b) => (a[1] - o[1]) * (b[0] - o[0]) - (a[0] - o[0]) * (b[1] - o[1]);
+  const lower = []; for (const p of P) { while (lower.length >= 2 && cross(lower.at(-2), lower.at(-1), p) <= 0) lower.pop(); lower.push(p); }
+  const upper = []; for (const p of [...P].reverse()) { while (upper.length >= 2 && cross(upper.at(-2), upper.at(-1), p) <= 0) upper.pop(); upper.push(p); }
+  return [...lower.slice(0, -1), ...upper.slice(0, -1)];
+}
+function drawAreas() {
+  const css = getComputedStyle(document.body);
+  city.areas.forEach((ar, i) => {
+    const pts = city.places.filter(p => p.area === ar.id).map(p => [p.lat, p.lng]); if (!pts.length) return;
+    const col = css.getPropertyValue(DAY_COLORS[i] || '--d1').trim() || '#1F4FA8';
+    const h = hull(pts);
+    if (h.length >= 3) {   // 살짝 부풀린 테두리 — 점이 선 위에 딱 붙지 않게
+      const c = [h.reduce((s, p) => s + p[0], 0) / h.length, h.reduce((s, p) => s + p[1], 0) / h.length];
+      const ring = h.map(p => [c[0] + (p[0] - c[0]) * 1.25, c[1] + (p[1] - c[1]) * 1.25]);
+      map.line('places', [...ring, ring[0]], { color: col, weight: 2, opacity: 0.55 });
+    }
+    const top = pts.reduce((m, p) => p[0] > m[0] ? p : m, pts[0]);
+    map.html('places', { lat: top[0] + 0.006, lng: pts.reduce((s, p) => s + p[1], 0) / pts.length }, `<div class="zone" style="--c:${col}">${esc(ar.name)} <span>${pts.length}곳</span></div>`);
+  });
+}
+
+// 전체 장소 목록 — 순위별 묶음, 체크로 고르고, 끌어서 날짜에 놓는다
 function renderRecs(box) {
     const f = $('input', 'text'); f.type = 'search'; f.placeholder = '목록 거르기'; f.value = query; f.oninput = () => { query = f.value; applyFilter(box); };
     box.appendChild(f);

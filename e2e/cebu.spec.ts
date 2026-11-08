@@ -26,6 +26,10 @@ test('세부: 빈 플랜을 열면 지도가 섬 전체가 아니라 세부시�
   await page.waitForTimeout(1500);
   await page.screenshot({ path: testInfo.outputPath('cebu-empty.png') });
   // 지도 안에 보이는 역 이름표: 도심(마젤란·톱스·슈라인)은 보이고 오슬롭은 화면 밖
+  // 빈 상태 — 구역 4개가 목록과 지도 이름표에 같이 나오고, 「전체 목록」은 숨는다
+  await expect(page.locator('.v2zone')).toHaveCount(4);
+  await expect(page.locator('#map .zone')).toHaveCount(4);
+  await expect(page.locator('.v2rec')).toHaveCount(0);
   const labels = await page.locator('#map .mk span').allTextContents();
   expect(labels.some(t => t.includes('톱스') || t.includes('마젤란') || t.includes('슈라인'))).toBeTruthy();
   const oslob = page.locator('#map .mk span', { hasText: '오슬롭' });

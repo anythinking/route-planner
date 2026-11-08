@@ -30,6 +30,7 @@ for (const f of files.filter(f => existsSync(`data/${f}`))) {
     const m = (p.note || '').match(LEAK); if (m) fail(tag, `note에 여행 맥락 누출: "${m[0]}"`);
   }
   for (const k of ['pack', 'photo', 'gift']) if (!(k in c)) fail(f, `${k} 없음`);
+  const areaIds = new Set((c.areas || []).map(a => a.id)); for (const p of c.places) if (p.area && !areaIds.has(p.area)) fail(`${f}#${p.id}`, `모르는 area ${p.area}`);   // 구역은 선택이지만 쓰면 areas에 있어야
   for (const x of c.pack || []) if (!x.item || !x.why) fail(f, `pack 항목 이상 ${JSON.stringify(x)}`);
   for (const x of c.gift || []) if (!x.item || !x.where || !x.note) fail(f, `gift 항목 이상 ${JSON.stringify(x)}`);
   if (!Array.isArray(c.photo?.general) || !c.photo.general.length) fail(f, 'photo.general 비어 있음');
