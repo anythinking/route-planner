@@ -29,7 +29,13 @@ test('세부: 빈 플랜을 열면 지도가 섬 전체가 아니라 세부시�
   // 빈 상태 — 구역 4개가 목록과 지도 이름표에 같이 나오고, 「전체 목록」은 숨는다
   await expect(page.locator('.v2zone')).toHaveCount(4);
   await expect(page.locator('#map .zone')).toHaveCount(4);
-  await expect(page.locator('.v2rec')).toHaveCount(0);
+  await expect(page.locator('.v2rec')).toHaveCount(1);
+  // 칩을 눌러도 담기 상자는 남고, 고른 칩은 눌린 모양·고치기는 켜진다
+  await page.locator('.v2zone .chip', { hasText: '마젤란 십자가' }).click();
+  await expect(page.locator('.v2zone')).toHaveCount(4);
+  await expect(page.locator('.v2zone .chip[aria-pressed="true"]')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: '✎ 고치기' })).toBeEnabled();
+  await expect(page.locator('.startrow')).toContainText('출발점(숙소)');
   const labels = await page.locator('#map .mk span').allTextContents();
   expect(labels.some(t => t.includes('톱스') || t.includes('마젤란') || t.includes('슈라인'))).toBeTruthy();
   const oslob = page.locator('#map .mk span', { hasText: '오슬롭' });

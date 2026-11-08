@@ -607,6 +607,8 @@ function renderAiBox(host) {
 
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
+let pickOpen = true, recOpen = false;   // 담기 상자 · 전체 목록 접힘 (화면 상태)
+let lastFit = null;                     // 마지막으로 지도를 맞춘 점들 — 창 크기가 바뀌면 다시 맞춘다
 let pin = null;        // 지도에서 찍은 자리 {lat,lng} — 이름·시간을 적는 칸이 뜬다 (옛 prompt 둘 대신)
 let askSave = false;   // 「여행으로 저장」 이름 칸
 let legCustom = null;  // 분을 직접 적는 중인 구간 키
@@ -615,7 +617,6 @@ const ALGO_HINT = { area: '가까운 곳끼리 하루', route: '전체를 한 �
 let mapFitAsked = false;   // 날을 켜고 끈 뒤 지도를 보이는 날에 맞춘다
 function renderPlan(side, entering) {
   const places = resolvePlaces(state, city);
-  if (!places.length) editing = false;   // 고칠 역이 없으면 고치기 단추도 없다
   const byId = new Map(places.map(p => [p.id, p]));
   const a = assignment();
   const start = state.s || { lat: city.center[0], lng: city.center[1] };
@@ -636,7 +637,7 @@ function renderPlan(side, entering) {
   head.appendChild(ttl);
   const ed = $('button', 'btn sm edit', '✎ 고치기'); ed.type = 'button'; ed.setAttribute('aria-pressed', editing); ed.title = editing ? '고치기 끄기 — 보기만' : '역·구간·날을 고치는 단추를 켜요 (체류 바꾸기 · ★ · 빼기 · 끌어서 옮기기 · 이동수단 · 날 설정)';
   ed.onclick = () => { editing = !editing; render(); };
-  if (places.length) head.appendChild(ed);
+  ed.disabled = !places.length; head.appendChild(ed);
   const un = $('button', 'btn sm', '↶ 되돌리기'); un.type = 'button'; un.title = '방금 한 것 되돌리기 (⌘Z)'; un.disabled = !undoStack.length; un.onclick = undo;
   head.appendChild(un);
   const sv = $('button', 'btn primary', state.pr && curUser ? '저장' : '여행으로 저장'); sv.type = 'button';
@@ -680,37 +681,41 @@ function renderPlan(side, entering) {
     }
     side.appendChild(ar);
   }
+  // 출발점(숙소) — 날마다 여기서 시작한다. 전엔 ⋯ 메뉴 안에만 있어 못 찾았다
+  const sr = $('div', 'row regions startrow'); sr.appendChild($('span', 'muted', '출발점(숙소)'));
+  sr.appendChild($('span', null, state.s ? `<b>${state.s.lat.toFixed(4)}, ${state.s.lng.toFixed(4)}</b>` : '<b>도심</b> <span class="muted">— 숙소를 찍으면 동선이 거기서 시작해요</span>'));
+  const sp = $('button', 'chip' + (pickStart ? ' on' : ''), pickStart ? '지도를 눌러 주세요…' : (state.s ? '지도에서 옮기기' : '지도에서 찍기')); sp.type = 'button'; sp.onclick = () => { pickStart = !pickStart; pin = null; render(); }; sr.appendChild(sp);
+  if (state.s) { const sc = $('button', 'chip', '지우기'); sc.type = 'button'; sc.onclick = () => setState({ s: null }); sr.appendChild(sc); }
+  sr.appendChild($('span', 'muted', '검색 결과의 「출발점으로」로도 정해요'));
+  side.appendChild(sr);
 
   // 넣기 — 검색 + AI
   const add = $('div', 'v2add');
   add.appendChild(renderSearch());
   if (pin) add.appendChild(renderPin());
   if (FEATURES.ai) renderAiBox(add);   // 서버 함수(plan-chat)를 배포한 뒤 config.js에서 켠다
-  // 더 담기 — 아직 안 고른 1순위를 한 번에 (전체 목록은 아래 「추천 장소」)
-  const rest = places.length ? city.places.filter(p => p.weight === 1 && !(p.id in state.p)).slice(0, 8) : [];
-  if (rest.length) { const mr = $('div', 'v2chips more'); mr.appendChild($('span', 'muted', '더 담기')); for (const pl of rest) { const c = $('button', 'chip', esc(pl.name)); c.type = 'button'; c.title = '1순위 — 누르면 담겨요'; c.onclick = () => togglePlace(pl.id); mr.appendChild(c); } add.appendChild(mr); }
   side.appendChild(add);
 
-  // 비었을 때 — 1순위로 첫 클릭을 만든다
-  if (!places.length) {
-    const e = $('div', 'v2empty');
-    e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.${city.areas ? ' 굵은 것이 1순위예요.' : ''}`));
-    const chipOf = pl => { const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), esc(pl.name)); c.type = 'button'; c.title = pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''; c.onclick = () => togglePlace(pl.id); return c; };
-    if (city.areas) {   // 구역별 — 지도의 테두리와 같은 색
-      city.areas.forEach((ar, i) => {
-        const z = $('div', 'v2zone'); z.style.setProperty('--c', `var(${DAY_COLORS[i] || '--d1'})`);
-        z.appendChild($('b', null, `<i></i>${esc(ar.name)} <span class="muted">${esc(ar.blurb || '')}</span>`));
-        const chips = $('div', 'v2chips');
-        for (const pl of [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight)) chips.appendChild(chipOf(pl));
-        z.appendChild(chips); e.appendChild(z);
-      });
-    } else {
+  // 담기 — 구역별(areas) 또는 1순위 칩. 고른 건 채워진 모양으로 남고, 눌러서 넣고 뺀다. 접어 둘 수 있다
+  const pk = $('details', 'v2pickbox'); pk.open = pickOpen; pk.ontoggle = () => { pickOpen = pk.open; };
+  pk.appendChild($('summary', null, `담기 <span class="muted">${city.places.length}곳 중 ${places.length} 골랐어요${city.areas ? ' · 굵은 것이 1순위' : ''}</span>`));
+  const e = $('div', 'v2empty');
+  if (!places.length) e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.`));
+  const chipOf = pl => { const on = pl.id in state.p; const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), `${on ? '✓ ' : ''}${esc(pl.name)}`); c.type = 'button'; c.setAttribute('aria-pressed', on); c.title = on ? '누르면 빼요' : (pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''); c.onclick = () => togglePlace(pl.id); return c; };
+  if (city.areas) {   // 구역별 — 지도의 테두리와 같은 색
+    city.areas.forEach((ar, i) => {
+      const z = $('div', 'v2zone'); z.style.setProperty('--c', `var(${DAY_COLORS[i] || '--d1'})`);
+      z.appendChild($('b', null, `<i></i>${esc(ar.name)} <span class="muted">${esc(ar.blurb || '')}</span>`));
       const chips = $('div', 'v2chips');
-      for (const pl of city.places.filter(p => p.weight === 1)) chips.appendChild(chipOf(pl));
-      e.appendChild(chips);
-    }
-    side.appendChild(e);
+      for (const pl of [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight)) chips.appendChild(chipOf(pl));
+      z.appendChild(chips); e.appendChild(z);
+    });
+  } else {
+    const chips = $('div', 'v2chips');
+    for (const pl of city.places.filter(p => p.weight === 1)) chips.appendChild(chipOf(pl));
+    e.appendChild(chips); e.appendChild($('p', 'muted', '2·3순위는 아래 「전체 목록」에서.'));
   }
+  pk.appendChild(e); side.appendChild(pk);
 
   // 노선 — 날마다 하나
   const lines = $('div', 'v2lines');
@@ -792,11 +797,9 @@ function renderPlan(side, entering) {
   side.appendChild(lines);
 
   // 추천 — 접어 둔다 (비었을 땐 펼침)
-  if (places.length || !city.areas) {   // 빈 상태에 구역 목록이 있으면 같은 걸 두 번 보여 주지 않는다
-    const rec = $('details', 'v2rec'); rec.open = !places.length;
-    rec.appendChild($('summary', null, `전체 목록 <span class="muted">${city.places.length}곳 · 체크하고 체류를 골라요</span>`));
-    renderRecs(rec); side.appendChild(rec);
-  }
+  const rec = $('details', 'v2rec'); rec.open = recOpen; rec.ontoggle = () => { recOpen = rec.open; };
+  rec.appendChild($('summary', null, `전체 목록 <span class="muted">${city.places.length}곳 · 체크하고 체류를 골라요</span>`));
+  renderRecs(rec); side.appendChild(rec);
 
   // 지도 — 노선색 선 + 역 번호·이름표, 안 고른 곳은 흐린 점(누르면 추가)
   const chosen = new Set(places.map(p => p.id));
@@ -814,7 +817,8 @@ function renderPlan(side, entering) {
   if (entering || mapFitAsked) {
     mapFitAsked = false;
     const c = { lat: city.center[0], lng: city.center[1] }, core = city.places.filter(p => distanceKm(c, p) <= 20);
-    map.fitBounds(bounds.length > 1 ? bounds : (core.length >= 3 ? core : city.places).map(p => [p.lat, p.lng]), 40);
+    lastFit = bounds.length > 1 ? bounds : (core.length >= 3 ? core : city.places).map(p => [p.lat, p.lng]);
+    map.fitBounds(lastFit, 40);
   }
   if (sunOpen) mountSun(result.days.length ? result : { days }, start);
   if (pin) map.circle('places', pin, { radius: 9, color: '#1f4fa8', weight: 2.5, fillColor: '#fff', dashed: true, title: '찍은 자리' });
@@ -949,6 +953,9 @@ const hidden = new Set();   // 숨긴 날 인덱스 (화면 상태, 해시에 �
 // 제목 클릭 = 홈(플랜 탭). 고른 장소·열어 둔 여행은 그대로 둔다
 document.getElementById('home')?.addEventListener('click', e => { e.preventDefault(); setState({ tab: 'home', pr: null }); });
 window.addEventListener('hashchange', () => { state = decode(location.hash); render(); });
+// 창 크기가 바뀌면 — 캔버스만 늘지 않고 지금 노선에 다시 맞춘다 (플랜 화면만)
+let resizeT = null;
+window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(() => { map.resize(); if (state.tab === 'plan' && lastFit?.length) map.fitBounds(lastFit, 40); }, 250); });
 window.addEventListener('popstate', () => { const h = decode(location.hash); if (encode(h) !== encode(state)) { state = h; render(); } });   // 뒤로·앞으로
 // 스타일·폰트까지 다 잡힌 뒤 지도 뷰를 한 번 더 맞춘다 — 지도가 있는 화면에서만. 다른 화면까지 통째로 다시 그리면 그 순간 누른 단추(예: 내 여행의 「시작」)가 갈아끼워진 옛 DOM이라 클릭이 허공으로 갔다
 window.addEventListener('load', () => { if (state.tab === 'plan' || (state.tab === 'mine' && state.pr)) { lastStep = 0; render(); } else map.resize(); });
