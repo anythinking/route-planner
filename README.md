@@ -19,11 +19,16 @@
 ## 실행 · 테스트
 
 ```bash
-npm run serve        # http://localhost:8080
+python3 scripts/serve.py   # http://localhost:8080 — 사이트 + 「📝 고칠 것」·클로드 (바탕화면 「알고트립 열기」가 이걸 켠다)
+npm run serve              # 같은 주소, API 없이 정적만
 npm test             # 단위 테스트 (엔진·상태·저장소 매핑·타임라인 …)
 npm run test:e2e     # Playwright — 이동·뒤로 가기·휴대폰 지도 스크롤
 npm run validate     # 도시 데이터 검사 (필수 필드·bbox·사진 팁 누락)
 ```
+
+## 고칠 것 · 화면 속 클로드 (로컬 전용)
+
+`scripts/serve.py`로 연 화면엔 왼쪽 아래 「📝 고칠 것」 단추와 클로드 단추가 붙는다(`src/memo.js` — 광 연산 지도·통합 관리 프로그램과 같은 것). 화면에서 이상한 곳을 찍고 한 줄 적으면 `docs/고칠것.md`에 `- [ ] 시각 · 화면 · 자리 — 내용`으로 쌓이고(같은 와이파이의 다른 기기가 적으면 그 주소가 붙는다), 클로드 단추는 이 맥의 Claude Code로 그 자리에서 고친다(이 맥에서 연 화면만). 공개 사이트엔 `/api`가 없어 단추가 안 그려진다. 고친 줄은 `[x]`로 바꾼다.
 
 ## 배포 (GitHub Pages)
 
