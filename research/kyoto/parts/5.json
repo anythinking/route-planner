@@ -1,0 +1,360 @@
+{
+ "nijo": {
+  "refs": [
+   "https://nijo-jocastle.city.kyoto.lg.jp/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/admission/fee/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/guide/caution/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/guide/model_course/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/teien/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/ninomaru/",
+   "https://nijo-jocastle.city.kyoto.lg.jp/admission/honmaru/",
+   "https://ko.wikipedia.org/wiki/니조성",
+   "https://en.wikipedia.org/wiki/Nijo_Castle",
+   "https://www.japan-guide.com/e/e3918.html"
+  ],
+  "official": "https://nijo-jocastle.city.kyoto.lg.jp/",
+  "hours": "개성 8:45~16:00(입성 마감), 폐성 17:00",
+  "closed": "휴성 12/29~12/31. 니노마루 고텐은 12/26~28·1/1~3 및 1·7·8·12월 매주 화요일 관람 중지. 혼마루 고텐은 매월 제3월요일과 다음날·12/26~28·1/1~3 관람 중지(사전예약제)",
+  "fee": "입성권 일반 800엔(중고생 400·초등생 300). 입성권+니노마루 고텐 1,300엔. 혼마루 고텐 +1,000엔(웹티켓 사전예약, 입성권 별도)",
+  "facts": [
+   {
+    "claim": "에도 시대 때 지어진 성으로 윤곽식 평성",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/니조성",
+    "fix": null
+   },
+   {
+    "claim": "유네스코 세계문화유산으로 지정(1994, 고도 교토의 문화재)",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/니조성",
+    "fix": null
+   },
+   {
+    "claim": "교토시 나카교구 니조도오리 호리카와 (위치)",
+    "status": "ok",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/admission/fee/",
+    "fix": null
+   },
+   {
+    "claim": "니노마루 어전 내부는 촬영 금지",
+    "status": "ok",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/guide/caution/",
+    "fix": null
+   },
+   {
+    "claim": "밖에선 가라몬의 금장 조각을 정면 가까이",
+    "status": "unverified",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/ninomaru/",
+    "fix": "공식 설명은 唐門 안쪽을 '松竹梅に鶴'·'唐獅子' 등 극채색(極彩色) 조각으로 소개. '금장' 표현과 정면 근접 구도는 공식에서 확인 못함. 영문 위키는 니노마루 어전 장식에 금박이 많다고만 기술"
+   },
+   {
+    "claim": "혼마루 천수각 터 위에서 ... 내려다본다",
+    "status": "ok",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/teien/",
+    "fix": "[보충] 천수각 터(天守台)는 혼마루 남서쪽 모서리 석축. 공식: 천수대에서 혼마루 어전·정원·시가지를 조망. 일반 입성권으로 혼마루 정원·천수대 이용 가능(Japan Guide)"
+   },
+   {
+    "claim": "천수각 터에서 성 전체와 해자를 내려다본다",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3918.html",
+    "fix": "조망 대상은 공식 기준 혼마루 어전·혼마루 정원·시가지, Japan Guide는 성 경내 조망. '해자'가 보인다는 서술은 확인 못함"
+   },
+   {
+    "claim": "opts 90분(내부까지)",
+    "status": "ok",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/guide/model_course/",
+    "fix": "공식 모델코스: 빠른 코스 1시간, 추천 2시간, 욕심 코스 2시간30분. 니노마루 고텐 관람 자체가 약 30분(혼마루 고텐 사이트 안내)"
+   },
+   {
+    "claim": "opts 45분(밖과 정원)",
+    "status": "unverified",
+    "url": "https://nijo-jocastle.city.kyoto.lg.jp/guide/model_course/",
+    "fix": "공식 최단 모델코스가 1시간(니노마루 고텐 포함). 내부를 빼면 45분이 가능한지는 근거 없음"
+   }
+  ]
+ },
+ "heian": {
+  "refs": [
+   "https://www.heianjingu.or.jp/",
+   "https://www.heianjingu.or.jp/map/garden/",
+   "https://www.heianjingu.or.jp/map/guide/",
+   "https://www.heianjingu.or.jp/map/season/",
+   "https://www.heianjingu.or.jp/attention/",
+   "https://www.heianjingu.or.jp/visit/worship/",
+   "https://www.heianjingu.or.jp/news_list/%e3%80%90%e5%a2%83%e5%86%85%e5%b7%a5%e4%ba%8b%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91/",
+   "https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%AE%89%E7%A5%9E%E5%AE%AE",
+   "https://ko.wikipedia.org/wiki/%ED%97%A4%EC%9D%B4%EC%95%88_%EC%8B%A0%EA%B6%81",
+   "https://www.japan-guide.com/e/e3904.html"
+  ],
+  "official": "https://www.heianjingu.or.jp/",
+  "hours": "참배(경내) 6:00~18:00(3/1~9/30)·6:00~17:30(10월)·6:00~17:00(11/1~2월말). 신엔(神苑) 8:30~ 같은 시각 폐문, 입원 마감은 폐문 30분 전(3~9월 17:30, 10월 17:00, 11~2월 16:30). 10/22 시대제는 신엔 9:30~11:30 접수",
+  "closed": null,
+  "fee": "경내 참배 무료. 신엔 성인 600엔(소인 300엔, 중학생 이하)",
+  "facts": [
+   {
+    "claim": "교토부 교토시 사쿄구에 있는 신궁",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%ED%97%A4%EC%9D%B4%EC%95%88_%EC%8B%A0%EA%B6%81",
+    "fix": null
+   },
+   {
+    "claim": "본전 앞 넓은 백사 마당(대극전 앞마당)",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3904.html",
+    "fix": "[주의] 공식 FAQ: 大極殿から本殿へ向けての撮影は禁止(그 외 경내는 촬영 가능). 마당에서 대극전·회랑 쪽을 찍는 것은 무방. 대극전 안쪽 본전 방향은 금지"
+   },
+   {
+    "claim": "주홍 회랑을 양끝까지 광각으로(蒼龍楼·白虎楼와 歩廊)",
+    "status": "ok",
+    "url": "https://www.heianjingu.or.jp/map/guide/",
+    "fix": "공식: 大極殿·應天門·蒼龍楼·白虎楼·歩廊 등은 1895년 창건 당시 건물로 헤이안쿄 朝堂院을 약 5/8 규모로 재현"
+   },
+   {
+    "claim": "본전 앞 마당·회랑 구도(현재 상태)",
+    "status": "unverified",
+    "url": "https://www.heianjingu.or.jp/news_list/%e3%80%90%e5%a2%83%e5%86%85%e5%b7%a5%e4%ba%8b%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91/",
+    "fix": "공식 공지(2026-11-06): 130년제 기념사업으로 社殿 耐震塗替え工事 중. Japan Guide: 2024년 여름~FY2030에 단계적 수리, 일부 건물 가림. 구도에 가림이 들어갈 수 있음"
+   },
+   {
+    "claim": "참도 남쪽 24m 대토리이",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%AE%89%E7%A5%9E%E5%AE%AE",
+    "fix": "높이 정확히는 24.4m(일본어 위키)·24.2m(한국어 위키). 1929년 건립, 국가등록유형문화재. 공식 사이트는 높이 수치 없음"
+   },
+   {
+    "claim": "신엔 정원의 수양벚꽃은 4월 중순",
+    "status": "wrong",
+    "url": "https://www.heianjingu.or.jp/map/season/",
+    "fix": "공식 見ごろ: 3월 하순~4월 상순(南神苑 紅しだれ桜). 공식 신엔 안내는 벚꽃 시기를 3월 말~4월 중순(혼잡, 삼각대·일각대 사용 금지)로 적음. Japan Guide는 늦게 피는 수양벚꽃이 4월 중순 즈음이라 함 — 연도 편차 있으나 공식 기준 절정은 3월 하순~4월 상순"
+   },
+   {
+    "claim": "신엔 수양벚꽃(紅しだれ桜)은 남신원 입구에서 가장 먼저 보임",
+    "status": "ok",
+    "url": "https://www.heianjingu.or.jp/map/garden/",
+    "fix": "공식: 입구 문을 지나면 南神苑에서 紅しだれ桜가 하늘을 덮음. 팁에는 없는 보충"
+   },
+   {
+    "claim": "opts 30분(참배길까지)·50분(경내 한 바퀴)",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3904.html",
+    "fix": "Japan Guide 체류 기준: 신사 15~60분, 신엔 20~45분"
+   }
+  ]
+ },
+ "imperialkyoto": {
+  "refs": [
+   "https://kyoto-gosho.kunaicho.go.jp/",
+   "https://kyoto-gosho.kunaicho.go.jp/visit",
+   "https://sankan.kunaicho.go.jp/",
+   "https://www.env.go.jp/garden/kyotogyoen/2_guide/qa.html",
+   "https://www.env.go.jp/garden/kyotogyoen/1_intro/flower.html",
+   "https://www.japan-guide.com/e/e3917.html",
+   "https://kumanichi.com/articles/2044412",
+   "https://ko.wikipedia.org/wiki/%EA%B5%90%ED%86%A0_%EC%96%B4%EC%86%8C",
+   "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E5%BE%A1%E6%89%80"
+  ],
+  "official": "https://kyoto-gosho.kunaicho.go.jp/",
+  "hours": "공식 참관요령 페이지에 개문·폐문 시각 표기 없음. 안내 해설 투어(약 50분): 일본어 9:30·10:30·13:30·14:30, 영어 10:00·14:00, 중국어 10:00·14:00. 입장은 세이쇼몬(清所門), 사전신청 불필요",
+  "closed": "월요일(공휴일이면 다음날), 12/28~1/4, 행사 등으로 지장 있는 날(참관 캘린더 확인)",
+  "fee": "무료",
+  "facts": [
+   {
+    "claim": "교토부 교토시 가미교구에 있는 일본의 황궁(주소: 上京区京都御苑内)",
+    "status": "ok",
+    "url": "https://kyoto-gosho.kunaicho.go.jp/",
+    "fix": null
+   },
+   {
+    "claim": "천황이 1869년에 도쿄로 옮기기 전까지 거주",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E5%BE%A1%E6%89%80",
+    "fix": "일본어 위키: 1337년~1869년(메이지 2년)의 内裏"
+   },
+   {
+    "claim": "헤이안 시대부터 에도 시대 말까지 역대 천황이 거주",
+    "status": "wrong",
+    "url": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E5%BE%A1%E6%89%80",
+    "fix": "정밀도 오류: 현재 교토 고쇼 터는 헤이안쿄 원래 다이다이리(약 1.7km 서쪽 센본도리 일대)가 아니라 쓰치미카도 히가시노토인도노라는 사토다이리(임시 내리) 자리. 정식 황궁은 1392년 남북조 합일 이후~1869년이고 1337년부터 북조 천황 거처. 현 건물은 1855년 재건(안세이도 내리)"
+   },
+   {
+    "claim": "시신덴 정면을 광각으로",
+    "status": "wrong",
+    "url": "https://kumanichi.com/articles/2044412",
+    "fix": "시신덴은 지붕 히와다부키 교체 등 약 9년 공사(2034년경까지) — 2026-10-08~12 가을 특별공개가 개수 전 마지막 모습이었고 공사 중에는 素屋根으로 덮임. Japan Guide도 2026년 10월부터 약 9년간 가림 공지. 현재 정면 촬영 팁은 성립하지 않음"
+   },
+   {
+    "claim": "고쇼 안에서 삼각대는 금지",
+    "status": "ok",
+    "url": "https://kyoto-gosho.kunaicho.go.jp/visit",
+    "fix": "공식: 写真撮影は可能, 業務用大型カメラ及び三脚・脚立の使用不可. 스케치·음식·드론 반입 촬영도 금지"
+   },
+   {
+    "claim": "둘레 교엔은 공원이라 자유롭게 찍는다",
+    "status": "ok",
+    "url": "https://www.env.go.jp/garden/kyotogyoen/2_guide/qa.html",
+    "fix": "환경성 Q&A: 개인 기념촬영은 자유, 영리 목적은 촬영 신청서 필요. 고쇼(외벽 포함) 촬영은 궁내청 교토사무소에 별도 문의"
+   },
+   {
+    "claim": "3월 이토자쿠라(수양벚꽃)가 교엔 북서쪽",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3917.html",
+    "fix": "Japan Guide: 近衛池(Konoe Pond) 북서쪽 모서리의 수양벚꽃, 3월 말~4월 중순 2~3주. 환경성: 近衞邸跡의 수양벚꽃은 3월 중순부터 피기 시작. 연도 편차 있음"
+   },
+   {
+    "claim": "opts 120분(내부까지)",
+    "status": "unverified",
+    "url": "https://kyoto-gosho.kunaicho.go.jp/visit",
+    "fix": "공식 해설 투어 소요 약 50분. 입장은 자유 참관이라 120분은 교엔 산책 포함 여부에 달림 — 근거 없음"
+   },
+   {
+    "claim": "opts 45분(밖과 정원)",
+    "status": "unverified",
+    "url": null,
+    "fix": "체류시간 근거 URL 못 찾음"
+   }
+  ]
+ },
+ "nishiki": {
+  "refs": [
+   "https://www.kyoto-nishiki.or.jp/",
+   "https://www.kyoto-nishiki.or.jp/about/",
+   "https://www.kyoto-nishiki.or.jp/access/",
+   "https://www.kyoto-nishiki.or.jp/manner/",
+   "https://www.kyoto-nishiki.or.jp/contact/",
+   "https://www.kyoto-nishiki.or.jp/en/stores/kinshin/",
+   "https://ja.wikipedia.org/wiki/%E9%8C%A6%E5%B8%82%E5%A0%B4",
+   "https://cdn.gltjp.com/en/article/item/21360/",
+   "https://www.japan-guide.com/e/e3931.html"
+  ],
+  "official": "https://www.kyoto-nishiki.or.jp/",
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "시조 거리의 북쪽(한 블록 북쪽의 니시키코지 통)",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E9%8C%A6%E5%B8%82%E5%A0%B4",
+    "fix": "일본어 위키: 四条通の一本北の錦小路通. 공식: 高倉通~御幸町通 사이 북쪽에 아케이드"
+   },
+   {
+    "claim": "데라마치 거리의 서쪽",
+    "status": "ok",
+    "url": "https://www.kyoto-nishiki.or.jp/access/",
+    "fix": "공식 길 안내: 高倉通 ~ 御幸町通 구간. 시장 동쪽 끝이 데라마치와 맞닿음(寺町 바로 서쪽)"
+   },
+   {
+    "claim": "교토의 다양한 먹거리와 기념품 가게",
+    "status": "ok",
+    "url": "https://www.kyoto-nishiki.or.jp/",
+    "fix": "공식: 식재료·교토 식문화 중심의 상점가, 동서 약 390m, 폭 3.3~5m"
+   },
+   {
+    "claim": "아케이드 지붕 아래",
+    "status": "ok",
+    "url": "https://www.kyoto-nishiki.or.jp/about/",
+    "fix": "공식: 약 390m 아케이드, 비 오는 날도 산책 가능"
+   },
+   {
+    "claim": "아케이드 아래라 빛이 약하다",
+    "status": "unverified",
+    "url": null,
+    "fix": "조도에 대한 주관적 서술, 근거 URL 없음"
+   },
+   {
+    "claim": "식재료 가게는 촬영 금지 표지가 붙은 곳이 많으니 먼저 확인",
+    "status": "ok",
+    "url": "https://cdn.gltjp.com/en/article/item/21360/",
+    "fix": "[주의] 출처는 '일부 가게는 점포·상품 촬영을 허용하지 않으니 직원에게 허락을 구하라'고만 기술. '표지가 많다'는 직접 확인 못함, 과장 가능"
+   },
+   {
+    "claim": "걸어 먹기 금지",
+    "status": "ok",
+    "url": "https://www.kyoto-nishiki.or.jp/manner/",
+    "fix": "[주의] 법적 금지가 아니라 상점가의 요청(食べながら市場の中を歩く行為はご遠慮下さい). 산 가게 앞이나 가게 안에서 먹기"
+   },
+   {
+    "claim": "opts 90분(먹으며)",
+    "status": "ok",
+    "url": "https://cdn.gltjp.com/en/article/item/21360/",
+    "fix": "여행 매체: 먹고 쇼핑까지 약 1~2시간"
+   },
+   {
+    "claim": "opts 45분(훑기)",
+    "status": "unverified",
+    "url": "https://cdn.gltjp.com/en/article/item/21360/",
+    "fix": "여행 매체 기준 1~2시간. 45분은 빠른 훑기 기준으로 근거 없음"
+   }
+  ]
+ },
+ "uji": {
+  "refs": [
+   "https://www.byodoin.or.jp/",
+   "https://www.byodoin.or.jp/guide/",
+   "https://www.byodoin.or.jp/guide/internal-view/",
+   "https://www.byodoin.or.jp/faq/public/",
+   "https://www.byodoin.or.jp/around/watch/",
+   "https://www.byodoin.or.jp/saijiki/",
+   "https://www.byodoin.or.jp/news/cat23/post-90/",
+   "https://www.byodoin.or.jp/news/cat1/20256/",
+   "https://www.byodoin.or.jp/news/cat23/2022-1/",
+   "https://www.japan-guide.com/e/e3923.html",
+   "https://ko.wikipedia.org/wiki/%EB%B5%A4%EB%8F%84%EC%9D%B8",
+   "https://ja.wikipedia.org/wiki/10%E5%86%86%E7%A1%AC%E8%B2%A8"
+  ],
+  "official": "https://www.byodoin.or.jp/",
+  "hours": "정원 8:45~17:30(접수 17:15). 호오도(鳳凰堂) 내부 9:30~16:10(20분마다 회당 35명, 접수 9:10~, 선착순). 뮤지엄 호쇼칸 9:00~17:00(접수 16:45)",
+  "closed": "정원·호쇼칸 연중무휴. 호오도 내부는 악천후·법요 행사 시 중지. 찻집 藤花는 월·화·수 휴무(공휴일 영업)",
+  "fee": "정원+호쇼칸 성인 700엔(중고생 400·초등생 300), 정원만 요금 없음. 호오도 내부 +300엔(志納)",
+  "facts": [
+   {
+    "claim": "교토부 우지시에 있는 불교 사원",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EB%B5%A4%EB%8F%84%EC%9D%B8",
+    "fix": null
+   },
+   {
+    "claim": "고도 교토의 문화재의 일부로서 유네스코 세계유산",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EB%B5%A4%EB%8F%84%EC%9D%B8",
+    "fix": null
+   },
+   {
+    "claim": "아지이케 연못 건너편에서 봉황당 정면 반영",
+    "status": "ok",
+    "url": "https://www.byodoin.or.jp/around/watch/",
+    "fix": "공식: 호오도는 연못 중도에 지어져 수면에 모습이 비침. 연못은 阿字池, 歳時記에 '鳳凰堂対岸'이라는 표현 있음. [주의] 2026-11-10·11일 호오도 정기 점검(사다리 작업자가 지붕·주변에 보여 사진에 찍힐 수 있음, 큰 비계는 없음)"
+   },
+   {
+    "claim": "10엔 동전의 그 구도다(봉황당)",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3923.html",
+    "fix": "일본 10엔 동전 뒷면 디자인이 平等院 鳳凰堂(일본어 위키 10円硬貨). '그 구도'가 정면 반영인지는 별도 확인 안 함"
+   },
+   {
+    "claim": "봉황당 내부 촬영 금지",
+    "status": "ok",
+    "url": "https://www.byodoin.or.jp/news/cat23/post-90/",
+    "fix": "공식 촬영 공지: 鳳凰堂内·ミュージアム鳳翔館内·集印所는 촬영 불가"
+   },
+   {
+    "claim": "늦봄 등나무꽃이 입구에",
+    "status": "wrong",
+    "url": "https://www.byodoin.or.jp/saijiki/",
+    "fix": "공식: 藤 見ごろ 4월 중순~5월 초순. 경내 등나무 시렁 3곳 중 가장 대표적인 것은 阿字池를 바라보는 쪽(수령 약 280년, 砂ずりの藤). 입구가 아니라 연못 쪽"
+   },
+   {
+    "claim": "opts 60분(경내+정원)",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3923.html",
+    "fix": "Japan Guide 체류 기준 45~90분"
+   },
+   {
+    "claim": "opts 30분(경내만)",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3923.html",
+    "fix": "Japan Guide 기준 최소 45분. 30분은 호오도 내부 대기를 빼야 가능"
+   }
+  ]
+ }
+}

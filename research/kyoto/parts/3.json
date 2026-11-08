@@ -1,0 +1,292 @@
+{
+ "kiyomizu": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%9A%94%EB%AF%B8%EC%A6%88%EB%8D%B0%EB%9D%BC",
+   "https://www.kiyomizudera.or.jp/en/visit/",
+   "https://www.kiyomizudera.or.jp/en/faq/",
+   "https://www.kiyomizudera.or.jp/en/learn/",
+   "https://www.kiyomizudera.or.jp/en/visit/special_night_viewing/",
+   "https://www.kiyomizudera.or.jp/en/news/2026/autumn2026.php",
+   "https://www.kiyomizudera.or.jp/access.php",
+   "https://www.kiyomizudera.or.jp/news/etiquette-inside-the-temple-grounds.php",
+   "https://www.japan-guide.com/e/e3901.html"
+  ],
+  "official": "https://www.kiyomizudera.or.jp/",
+  "hours": "6:00 개문. 2026년 공식 시간표: 폐문 18:00 (7/1~8/13·8/17~8/31은 18:30). 야간특별관람(3/27~4/5, 8/14~8/16, 11/21~11/30)은 21:30까지(입장 21:00 마감)",
+  "closed": "공식 개문 시간표가 1/1~12/31 전 기간을 포함하며 휴무일 표기 없음",
+  "fee": null,
+  "facts": [
+   {
+    "claim": "교토부 교토시 히가시야마구에 있는 사원",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%9A%94%EB%AF%B8%EC%A6%88%EB%8D%B0%EB%9D%BC",
+    "fix": null
+   },
+   {
+    "claim": "정식 이름은 오토와산 키요미즈데라(音羽山清水寺)",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%9A%94%EB%AF%B8%EC%A6%88%EB%8D%B0%EB%9D%BC",
+    "fix": null
+   },
+   {
+    "claim": "본당 무대는 안쪽 오쿠노인 난간에서 돌아보면 무대와 교토 시내가 한 프레임에 든다",
+    "status": "ok",
+    "url": "https://www.kiyomizudera.or.jp/en/visit/",
+    "fix": null
+   },
+   {
+    "claim": "본당 내진은 촬영 금지",
+    "status": "unverified",
+    "url": null,
+    "fix": "공식 learn 페이지: 내진·내내진은 평소 일반 비공개(천일참배 같은 특별 때만 내내진 입장). 촬영 금지 문구는 공식 페이지에서 확인 못 함. 공식 규정은 드론·모노포드·삼각대 촬영 금지"
+   },
+   {
+    "claim": "봄·가을 야간 특별 개방 때 라이트업",
+    "status": "ok",
+    "url": "https://www.kiyomizudera.or.jp/en/visit/special_night_viewing/",
+    "fix": "보강: 2026년 야간특별관람은 봄(3/27~4/5)·가을(11/21~11/30) 외에 여름(8/14~8/16)도 있음"
+   },
+   {
+    "claim": "체류시간 경내만 30분 / 경내+정원 60분",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3901.html",
+    "fix": "Japan Guide 전형 방문 소요 30~60분"
+   }
+  ]
+ },
+ "gion": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%98%A8_%28%EA%B5%90%ED%86%A0%EC%8B%9C%29",
+   "https://en.wikipedia.org/wiki/Gion",
+   "https://ja.wikipedia.org/wiki/%E7%A5%87%E5%9C%92",
+   "https://www.japan-guide.com/e/e3902.html",
+   "https://ktvz.com/entertainment/cnn-style/2024/02/28/geisha-paparazzi-are-back-in-kyoto-and-the-japanese-city-is-ready-to-take-action/"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "교토부 교토시 히가시야마구에 위치한 유흥가",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%98%A8_%28%EA%B5%90%ED%86%A0%EC%8B%9C%29",
+    "fix": null
+   },
+   {
+    "claim": "센고쿠 시대에 개발됐다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Gion",
+    "fix": null
+   },
+   {
+    "claim": "야사카 신사(기온 신사) 앞에 위치",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Gion",
+    "fix": null
+   },
+   {
+    "claim": "하나미코지 양옆 사도(私道)는 촬영 금지 표지가 서 있다",
+    "status": "ok",
+    "url": "https://ktvz.com/entertainment/cnn-style/2024/02/28/geisha-paparazzi-are-back-in-kyoto-and-the-japanese-city-is-ready-to-take-action/",
+    "fix": "보강: 금지는 하나미코지에서 갈라지는 사도·골목 대상. 본 거리 하나미코지는 공적 도로라 금지 불가(CNN 2024). 2024년부터 일부 골목은 관광객 출입 자체를 막음(Japan Guide 경고 문구)"
+   },
+   {
+    "claim": "(사도 촬영은) 벌금 대상이다",
+    "status": "wrong",
+    "url": "https://ktvz.com/entertainment/cnn-style/2024/02/28/geisha-paparazzi-are-back-in-kyoto-and-the-japanese-city-is-ready-to-take-action/",
+    "fix": "표지에는 허가 없는 게이샤 촬영 시 최대 1만엔 벌금이 적혀 있으나, 기온 지구 협의회 대표가 이 벌금은 집행 불가(강제력 없음)라고 밝힘. '표지에 벌금 명시'로 고치는 편이 정확"
+   },
+   {
+    "claim": "사진은 기온 시라카와의 다쓰미바시(巽橋) 쪽에서",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E7%A5%87%E5%9C%92",
+    "fix": "다쓰미바시는 기온 시라카와(祇園新橋 보존지구)의 다리로 확인(ja 위키 祇園, en 위키 'Gion Tatsumi Bridge' 사진 설명)"
+   },
+   {
+    "claim": "버드나무와 찻집 담이 같이 잡힌다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3902.html",
+    "fix": "Japan Guide: 시라카와 수로변에 버드나무와 오차야가 늘어섬. 한 프레임 구도 자체는 출처 없음"
+   },
+   {
+    "claim": "체류시간 한 바퀴 60분 / 골목까지 120분",
+    "status": "unverified",
+    "url": null,
+    "fix": "소요시간 근거 URL 못 찾음(Japan Guide Gion 페이지에 소요시간 항목 없음)"
+   }
+  ]
+ },
+ "ninenzaka": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%EB%8B%88%EB%84%A8%EC%9E%90%EC%B9%B4",
+   "https://en.wikipedia.org/wiki/Ninenzaka",
+   "https://ja.wikipedia.org/wiki/%E5%85%AB%E5%9D%82%E9%80%9A",
+   "https://ja.wikipedia.org/wiki/%E6%B3%95%E8%A6%B3%E5%AF%BA",
+   "https://kyoto.travel/en/itineraries/higashiyama-at-dawn/",
+   "https://www.japan-guide.com/e/e3959.html"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "일본 교토시 히가시야마구에 위치한 거리",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EB%8B%88%EB%84%A8%EC%9E%90%EC%B9%B4",
+    "fix": null
+   },
+   {
+    "claim": "길이는 약 150m",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Ninenzaka",
+    "fix": null
+   },
+   {
+    "claim": "산넨자카에서 야사카도리로 꺾으면 골목 끝 위로 야사카 탑이 서는 구도가 정석",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E5%85%AB%E5%9D%82%E9%80%9A",
+    "fix": "ja 위키 八坂通: 동쪽 연장이 산넨자카로 이어지고, 돌길 끝에 야사카 탑이 솟는 유명 풍경은 이 거리에서 찍음. 보강: 탑은 야사카도리 동쪽 끝(호칸지 문전)에 있어 정석 샷은 야사카도리 서쪽에서 동쪽 오르막 끝의 탑을 보는 방향"
+   },
+   {
+    "claim": "야사카 탑(호칸지)",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E6%B3%95%E8%A6%B3%E5%AF%BA",
+    "fix": "야사카 탑은 호칸지(法観寺)의 오층탑, 야사카 신사~기요미즈데라 중간 위치"
+   },
+   {
+    "claim": "9시 전이 사람이 적다",
+    "status": "unverified",
+    "url": null,
+    "fix": "kyoto.travel(Higashiyama at dawn)은 '이른 아침'이 한산하다고만 하고 9시 기준은 없음. Japan Guide: 상점은 보통 9~10시에 열고 17~18시에 닫음"
+   },
+   {
+    "claim": "가게 처마는 세로로",
+    "status": "unverified",
+    "url": null,
+    "fix": "구도 조언이라 출처 없음"
+   },
+   {
+    "claim": "체류시간 걸어 지나기 30분 / 구경하며 60분",
+    "status": "unverified",
+    "url": null,
+    "fix": "니넨자카 소요시간 근거 URL 못 찾음(Japan Guide: 기요미즈데라~야사카 신사 약 2km, 걷기만 30분 정도)"
+   }
+  ]
+ },
+ "yasaka": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%EC%95%BC%EC%82%AC%EC%B9%B4_%EC%8B%A0%EC%82%AC",
+   "https://ja.wikipedia.org/wiki/%E5%85%AB%E5%9D%82%E7%A5%9E%E7%A4%BE",
+   "https://www.japan-guide.com/e/e3903.html",
+   "https://www.japan-guide.com/e/e3959.html",
+   "https://www.yasaka-jinja.or.jp/access/",
+   "https://www.yasaka-jinja.or.jp/about/sightseeing_spot/",
+   "https://www.yasaka-jinja.or.jp/en/"
+  ],
+  "official": "https://www.yasaka-jinja.or.jp/",
+  "hours": "24시간 참배 가능(공식 접근 페이지). 사무소(社務所) 9:00~17:00",
+  "closed": "없음(24시간 참배 가능, 공식 접근 페이지 기준)",
+  "fee": null,
+  "facts": [
+   {
+    "claim": "교토부 교토시 히가시야마구에 위치한 신사",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EC%95%BC%EC%82%AC%EC%B9%B4_%EC%8B%A0%EC%82%AC",
+    "fix": null
+   },
+   {
+    "claim": "시조도리 동쪽 끝에서 거리 정면에 서쪽 누문(西楼門)을 두는 구도",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E5%85%AB%E5%9D%82%E7%A5%9E%E7%A4%BE",
+    "fix": "ja 위키: 신사는 시조도리 동쪽 끝에 있고 서루문은 시조도리 막다른 곳에 선다(중요문화재)"
+   },
+   {
+    "claim": "밤에는 무대(舞殿)의 제등이 켜진다",
+    "status": "ok",
+    "url": "https://www.yasaka-jinja.or.jp/about/sightseeing_spot/",
+    "fix": "공식 境内見どころ: 마이도노에 걸린 제등이 밤에 불을 밝힘"
+   },
+   {
+    "claim": "삼각대 없이도 찍힌다",
+    "status": "unverified",
+    "url": null,
+    "fix": "주관적 촬영 조언이라 출처 없음. 야사카 신사의 삼각대 규정은 공식 페이지에서 확인 못 함"
+   },
+   {
+    "claim": "체류시간 참배길까지 30분 / 경내 한 바퀴 50분",
+    "status": "unverified",
+    "url": null,
+    "fix": "Japan Guide 전형 방문 소요 10~20분으로 앱 값(30/50)이 더 김. 마루야마 공원 포함 여부에 따라 달라 근거는 불충분"
+   }
+  ]
+ },
+ "pontocho": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%ED%8F%B0%ED%86%A0%EC%B5%B8",
+   "https://en.wikipedia.org/wiki/Ponto-ch%C5%8D",
+   "https://ja.wikipedia.org/wiki/%E5%85%88%E6%96%97%E7%94%BA",
+   "https://www.ponto-chou.com/",
+   "https://www.kamogawa-odori.com/pontocho/",
+   "https://www.japan-guide.com/e/e3921.html",
+   "https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000281/281770/pontocho_d_2_2.pdf",
+   "https://www.pref.kyoto.jp/kamogawa/documents/20kaisiryou3.pdf",
+   "https://kyoto.travel/en/season_festivals/noryoyuka_kawadoko.html"
+  ],
+  "official": "https://www.ponto-chou.com/",
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "게이코(기방), 마이코, 다방 등으로 유명한 하나마치",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%ED%8F%B0%ED%86%A0%EC%B5%B8",
+    "fix": null
+   },
+   {
+    "claim": "기온거리처럼 전통 건물과 문화가 잘 보존되어 있다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Ponto-ch%C5%8D",
+    "fix": null
+   },
+   {
+    "claim": "골목이 좁다",
+    "status": "ok",
+    "url": "https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000281/281770/pontocho_d_2_2.pdf",
+    "fix": "교토시 자료: 에도 시대 이후 도로 폭이 넓어지지 않은 좁은 길. Japan Guide도 'narrow alley'"
+   },
+   {
+    "claim": "골목이 좁아 세로 구도",
+    "status": "unverified",
+    "url": null,
+    "fix": "구도 조언이라 출처 없음"
+   },
+   {
+    "claim": "등불이 켜지는 해 질 녘 이후가 살고",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Ponto-ch%C5%8D",
+    "fix": "en 위키: 밤에 전통 등롱이 켜짐. '해 질 녘 이후가 낫다'는 평가 자체는 출처 없음"
+   },
+   {
+    "claim": "5월부터 9월까지 가모가와 쪽 노료유카가 선다",
+    "status": "ok",
+    "url": "https://www.pref.kyoto.jp/kamogawa/documents/20kaisiryou3.pdf",
+    "fix": "교토부 자료: 납량상 점용기간 매년 5/1~9/30(설치·철거 전후 15일). Japan Guide Pontocho도 5~9월. 단 kyoto.travel은 가모가와 노료유카를 5/1~10/15로 표기"
+   },
+   {
+    "claim": "가게 안이나 손님은 찍지 마라",
+    "status": "unverified",
+    "url": null,
+    "fix": "폰토초 개별 점포·손님 촬영 규정 출처 못 찾음(일반 매너 수준)"
+   },
+   {
+    "claim": "체류시간 걸어 지나기 30분 / 구경하며 60분",
+    "status": "unverified",
+    "url": null,
+    "fix": "소요시간 근거 URL 못 찾음. Japan Guide: 점포는 보통 17:00~23:00 영업"
+   }
+  ]
+ }
+}

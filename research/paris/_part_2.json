@@ -1,0 +1,406 @@
+{
+ "saintechapelle": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Sainte-Chapelle",
+   "https://fr.wikipedia.org/wiki/Sainte-Chapelle_de_Paris",
+   "https://www.sainte-chapelle.fr/en/visit/practical-information",
+   "https://worldinparis.com/sainte-chapelle-stained-glass-windows",
+   "https://www.visitparisregion.com/en/sainte-chapelle"
+  ],
+  "official": "https://www.sainte-chapelle.fr/en",
+  "hours": "4/1~9/30 09:00-19:00, 10/1~3/31 09:00-17:00 (마지막 입장 폐관 30분 전)",
+  "closed": "1/1, 5/1, 12/25",
+  "fee": "22유로(EEA 외)/16유로(EEA·거주자), 2026-01-12~; 콩시에르주리 통합 30/23유로",
+  "facts": [
+   {
+    "claim": "1248년",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Sainte-Chapelle",
+    "fix": null
+   },
+   {
+    "claim": "벽 대신 15m짜리 스테인드글라스 15장",
+    "status": "ok",
+    "url": "https://worldinparis.com/sainte-chapelle-stained-glass-windows",
+    "fix": null
+   },
+   {
+    "claim": "유리가 벽 면적의 3분의 2를 넘는다",
+    "status": "unverified",
+    "url": null,
+    "fix": "3분의 2라는 수치 출처 없음. 위키(en/fr)는 '벽이 거의 전부 유리'(약 615~670㎡)로만 서술. '거의 전부' 정도로 표현 권장"
+   },
+   {
+    "claim": "하중을 바깥 버팀대와 가는 기둥으로 전부 빼냈다 / 벽이 거의 없다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Sainte-Chapelle",
+    "fix": null
+   },
+   {
+    "claim": "오전에 가야 동쪽 창에 해가 든다",
+    "status": "unverified",
+    "url": null,
+    "fix": "상충: 성당은 동서축(후진=동쪽)이라 아침엔 동쪽 후진 창에 해가 든다는 설명(검색 요약)이 있으나 남쪽창이 오후에 좋다는 글도 있어 출처 불일치. 확정 불가"
+   },
+   {
+    "claim": "스테인드글라스는 맑은 날 오전 11시~오후 2시에 빛이 들어온다",
+    "status": "unverified",
+    "url": "https://worldinparis.com/sainte-chapelle-stained-glass-windows",
+    "fix": "상충: worldinparis는 해가 머리 위인 한낮은 사진에 불리, 일몰 1시간 전 추천, 맑은 날엔 창의 절반만 밝다고 함"
+   },
+   {
+    "claim": "삼각대 없이 ISO 1600으로 벽에 기대 찍는다 (플래시 금지)",
+    "status": "ok",
+    "url": "https://worldinparis.com/sainte-chapelle-stained-glass-windows",
+    "fix": null
+   },
+   {
+    "claim": "체류 opts: 보기 60분 / 천천히 85분",
+    "status": "unverified",
+    "url": null,
+    "fix": "공식 가이드 투어 30분이라는 정보만 있고(visitparisregion), 보안검색·줄 포함 총 체류 권장시간 공식 출처 못 찾음"
+   }
+  ]
+ },
+ "garnier": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Palais_Garnier",
+   "https://fr.wikipedia.org/wiki/Op%C3%A9ra_Garnier",
+   "https://www.operadeparis.fr/en/visits/palais-garnier",
+   "https://www.operadeparis.fr/en/about/theaters-and-workshops/palais-garnier",
+   "https://www.artvisitguide.com/opera-garnier-museum-guide/"
+  ],
+  "official": "https://www.operadeparis.fr/en/visits/palais-garnier",
+  "hours": null,
+  "closed": null,
+  "fee": "자유관람 15유로(France/EEA)·25유로(EEA 외), 온라인 예약 필수",
+  "facts": [
+   {
+    "claim": "샤를 가르니에, 1875년",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/about/theaters-and-workshops/palais-garnier",
+    "fix": null
+   },
+   {
+    "claim": "핵심은 계단실이고 객석보다 계단에 더 큰 공간을 썼다",
+    "status": "unverified",
+    "url": null,
+    "fix": "공식은 '계단 자체가 see and be seen의 쇼케이스'까지만. 계단실이 객석보다 넓다는 실측 출처 없음(블로그는 '비슷한 크기'). artvisitguide는 그랜드 포이에가 객석보다 길다고 함"
+   },
+   {
+    "claim": "19세기 오페라는 보여지러 가는 곳 / 계단 자체가 무대",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/about/theaters-and-workshops/palais-garnier",
+    "fix": null
+   },
+   {
+    "claim": "천장화는 1964년 샤갈이 원래 그림 위에 덧씌운 것",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Palais_Garnier",
+    "fix": null
+   },
+   {
+    "claim": "리허설이 있으면 객석은 못 들어간다",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/visits/palais-garnier",
+    "fix": null
+   },
+   {
+    "claim": "대계단은 2층 발코니에서 내려다보기",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/about/theaters-and-workshops/palais-garnier",
+    "fix": null
+   },
+   {
+    "claim": "샤갈 천장은 객석 안에서만 보이니 입장권이 필요하다",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/visits/palais-garnier",
+    "fix": null
+   },
+   {
+    "claim": "체류 opts: 계단실·로비 60분 / 객석까지 90분 / 천천히 120분",
+    "status": "ok",
+    "url": "https://www.operadeparis.fr/en/visits/palais-garnier",
+    "fix": null
+   }
+  ]
+ },
+ "lafayette": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Galeries_Lafayette",
+   "https://haussmann.galerieslafayette.com/en/the-terrace-at-galeries-lafayette",
+   "https://haussmann.galerieslafayette.com/en/our-opening-hours-2/",
+   "https://www.france.fr/ko/article/galerieslafayette-shopping-list/",
+   "https://www.europeforvisitors.com/paris/articles/galeries-lafayette-rooftop-terrace.htm"
+  ],
+  "official": "https://haussmann.galerieslafayette.com/en/",
+  "hours": "매장 월~토 10:00-20:30, 일 11:00-20:00 / 옥상 월~토 10:00-20:00, 일·공휴일 11:00-20:00",
+  "closed": null,
+  "fee": "옥상 테라스 무료(비 오면 임시 폐쇄)",
+  "facts": [
+   {
+    "claim": "오페라 가르니에 바로 뒤",
+    "status": "ok",
+    "url": "https://haussmann.galerieslafayette.com/en/the-terrace-at-galeries-lafayette",
+    "fix": null
+   },
+   {
+    "claim": "1912년 네오비잔틴 유리 돔, 높이 43m",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Galeries_Lafayette",
+    "fix": null
+   },
+   {
+    "claim": "옥상 테라스는 무료",
+    "status": "ok",
+    "url": "https://haussmann.galerieslafayette.com/en/the-terrace-at-galeries-lafayette",
+    "fix": null
+   },
+   {
+    "claim": "옥상에서 가르니에 지붕과 에펠탑이 같이 보인다",
+    "status": "ok",
+    "url": "https://haussmann.galerieslafayette.com/en/the-terrace-at-galeries-lafayette",
+    "fix": null
+   },
+   {
+    "claim": "식품관에 안젤리나 밤잼, 트러플 오일·소금 같은 선물거리",
+    "status": "ok",
+    "url": "https://www.france.fr/ko/article/galerieslafayette-shopping-list/",
+    "fix": null
+   },
+   {
+    "claim": "에펠탑 야간 조명은 해진 뒤 매시 정각 5분 반짝임",
+    "status": "ok",
+    "url": "https://www.europeforvisitors.com/paris/articles/galeries-lafayette-rooftop-terrace.htm",
+    "fix": null
+   },
+   {
+    "claim": "체류 opts: 돔+옥상 35분 / 선물까지 60분 / 충분히 95분",
+    "status": "unverified",
+    "url": null,
+    "fix": "공식·여행가이드에서 권장 체류시간 출처 못 찾음"
+   }
+  ]
+ },
+ "orangerie": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+   "https://fr.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+   "https://www.musee-orangerie.fr/en/visit-orangerie",
+   "https://www.artvisitguide.com/musee-orangerie-tickets-guide/"
+  ],
+  "official": "https://www.musee-orangerie.fr/en",
+  "hours": "월·수~일 09:00-18:00 (금 21:00까지는 기획전 기간 한정), 입장마감 17:15",
+  "closed": "화요일, 5/1, 7/14 오전, 12/25",
+  "fee": "일반 12.50유로(온라인)/11유로(현장)",
+  "facts": [
+   {
+    "claim": "수련 연작 8점이 타원형 방 두 개의 벽을 둘러싼다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+    "fix": null
+   },
+   {
+    "claim": "모네가 죽기 직전까지 그린",
+    "status": "unverified",
+    "url": null,
+    "fix": "검색 요약에서 1914~1926 작업은 확인되나 직접 열람한 1차 출처 없음(모네 1926.12 사망, 1927.5 개관은 위키로 확인)"
+   },
+   {
+    "claim": "모네가 이 방을 직접 설계했다",
+    "status": "wrong",
+    "url": "https://en.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+    "fix": "건축가 카미유 르페브르가 모네의 요구·지시에 맞춰 설계/시공(모네 협업·감독). 모네 단독 설계는 아님"
+   },
+   {
+    "claim": "자연광이 위에서 떨어지게 (천창)",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+    "fix": null
+   },
+   {
+    "claim": "벽이 곡면이 되게 요구했다",
+    "status": "unverified",
+    "url": null,
+    "fix": "타원형 방은 확인되나 '곡면 벽 요구'를 명시한 출처 없음"
+   },
+   {
+    "claim": "지하에 세잔·르누아르·수틴 컬렉션",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Mus%C3%A9e_de_l%27Orangerie",
+    "fix": null
+   },
+   {
+    "claim": "화요일 휴관",
+    "status": "ok",
+    "url": "https://www.musee-orangerie.fr/en/visit-orangerie",
+    "fix": null
+   },
+   {
+    "claim": "입장 직후(9시)가 한산하다",
+    "status": "ok",
+    "url": "https://www.artvisitguide.com/musee-orangerie-tickets-guide/",
+    "fix": null
+   },
+   {
+    "claim": "9시 아니면 사람이 그림을 가린다",
+    "status": "wrong",
+    "url": "https://www.artvisitguide.com/musee-orangerie-tickets-guide/",
+    "fix": "11~14시가 가장 붐비고, 15시 이후도 비교적 한산. 개관 직후만 유일한 시간대는 아님"
+   },
+   {
+    "claim": "미술관은 플래시 금지",
+    "status": "ok",
+    "url": "https://www.artvisitguide.com/musee-orangerie-tickets-guide/",
+    "fix": null
+   },
+   {
+    "claim": "미술관은 삼각대 금지(오랑주리)",
+    "status": "unverified",
+    "url": null,
+    "fix": "오랑주리 삼각대 규정을 공식/가이드에서 확인 못 함(artvisitguide는 언급 없음)"
+   },
+   {
+    "claim": "체류 opts: 수련만 50분 / 지하 컬렉션까지 90분",
+    "status": "wrong",
+    "url": "https://www.artvisitguide.com/musee-orangerie-tickets-guide/",
+    "fix": "artvisitguide: 미술관 전체 1~1.5시간, 수련 방만 20~30분(+지하 30~45분). 수련만 50분은 길게 잡힘, 90분은 상한"
+   }
+  ]
+ },
+ "saintgermain": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Le_Procope",
+   "https://en.wikipedia.org/wiki/Caf%C3%A9_Procope",
+   "https://en.wikipedia.org/wiki/Saint-Germain-des-Pr%C3%A9s_(abbey)",
+   "https://www.pariszigzag.fr/histoire-insolite-paris/eglise-ancienne-paris-saint-germain",
+   "https://www.perfumato.com/pouchard-niche-perfume-paris/",
+   "https://en.wikipedia.org/wiki/Caf%C3%A9_de_Flore",
+   "https://en.wikipedia.org/wiki/Les_Deux_Magots"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "Procope는 1686년에 연 카페",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Le_Procope",
+    "fix": null
+   },
+   {
+    "claim": "Procope는 프랑스 최초의 카페",
+    "status": "wrong",
+    "url": "https://en.wikipedia.org/wiki/Le_Procope",
+    "fix": "1686 개점은 맞지만 '최초'는 논쟁적: 위키는 '가장 오래된 카페' 주장은 근거 없다고 하고(원 카페는 1872 폐업, 현 식당 1957 개점), 그 전에 파스칼의 노점(1670년대)이 있었음. '파리 최초의 상설 카페 중 하나/문학 카페' 정도가 안전"
+   },
+   {
+    "claim": "볼테르·루소·디드로의 단골",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Le_Procope",
+    "fix": null
+   },
+   {
+    "claim": "생제르맹데프레 성당은 파리에서 가장 오래된 교회",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Saint-Germain-des-Pr%C3%A9s_(abbey)",
+    "fix": null
+   },
+   {
+    "claim": "성당은 11세기",
+    "status": "wrong",
+    "url": "https://www.pariszigzag.fr/histoire-insolite-paris/eglise-ancienne-paris-saint-germain",
+    "fix": "종탑·네이브는 10세기 말(990년경 모라르 수도원장 재건), 성가대는 12세기 중반(1163 봉헌). 수도원 창건은 558년. 11세기 아님"
+   },
+   {
+    "claim": "Pouchard의 조개 모양 립밤",
+    "status": "ok",
+    "url": "https://www.perfumato.com/pouchard-niche-perfume-paris/",
+    "fix": null
+   },
+   {
+    "claim": "카페 드 플로르·레 되 마고 테라스는 길 건너에서 간판과 차양을 넣어서",
+    "status": "unverified",
+    "url": null,
+    "fix": "두 카페 위치(블루바르 생제르맹/뤼 생브누아 모퉁이, 플라스 생제르맹데프레 6번지)만 확인. 촬영 구도는 출처 없음"
+   },
+   {
+    "claim": "체류 opts: 짧게 60분 / 천천히 100분",
+    "status": "unverified",
+    "url": null,
+    "fix": "출처 없음"
+   }
+  ]
+ },
+ "orsay": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Gare_d%27Orsay",
+   "https://fr.wikipedia.org/wiki/Mus%C3%A9e_d%27Orsay",
+   "https://www.visitparisregion.com/en/musee-d-orsay",
+   "https://francetravelplanner.com/go/paris/museums/orsay.html",
+   "https://eurovistatrips.com/how-long-does-musee-dorsay-take/",
+   "https://www.paristickets.com/orsay-museum/clock/"
+  ],
+  "official": "https://www.musee-orsay.fr/en",
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "1900년 만국박람회에 맞춰 지은 기차역",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Gare_d%27Orsay",
+    "fix": null
+   },
+   {
+    "claim": "1939년에 승강장이 짧아 쓸모없어졌다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Gare_d%27Orsay",
+    "fix": null
+   },
+   {
+    "claim": "1986년 미술관이 됐다",
+    "status": "ok",
+    "url": "https://fr.wikipedia.org/wiki/Mus%C3%A9e_d%27Orsay",
+    "fix": null
+   },
+   {
+    "claim": "인상파 층이 핵심 / 거대한 역 시계 뒤에서 내다보는 자리",
+    "status": "ok",
+    "url": "https://francetravelplanner.com/go/paris/museums/orsay.html",
+    "fix": null
+   },
+   {
+    "claim": "월요일 휴관",
+    "status": "ok",
+    "url": "https://www.visitparisregion.com/en/musee-d-orsay",
+    "fix": null
+   },
+   {
+    "claim": "목요일 야간(21:45)",
+    "status": "ok",
+    "url": "https://www.visitparisregion.com/en/musee-d-orsay",
+    "fix": null
+   },
+   {
+    "claim": "5층 시계 창 뒤에서 역광 실루엣",
+    "status": "ok",
+    "url": "https://www.paristickets.com/orsay-museum/clock/",
+    "fix": null
+   },
+   {
+    "claim": "미술관은 플래시 금지·삼각대 금지(오르세 시계 구역)",
+    "status": "ok",
+    "url": "https://www.paristickets.com/orsay-museum/clock/",
+    "fix": null
+   },
+   {
+    "claim": "체류 opts: 인상파 층 120분 / 한 바퀴 180분 / 천천히 220분",
+    "status": "ok",
+    "url": "https://eurovistatrips.com/how-long-does-musee-dorsay-take/",
+    "fix": null
+   }
+  ]
+ }
+}

@@ -1,0 +1,140 @@
+{
+  "montmartre": {
+    "refs": [
+      "https://fr.wikipedia.org/wiki/Montmartre",
+      "https://en.wikipedia.org/wiki/Montmartre",
+      "https://www.sacre-coeur-montmartre.com/en/hours-and-directions/",
+      "https://www.sacre-coeur-montmartre.com/en/the-dome-tour/",
+      "https://www.pariszigzag.fr/insolite/lieux-insolites/maison-rose-montmartre-histoire/",
+      "https://afrenchcollection.com/la-maison-rose-the-pink-house-of-montmartre-paris",
+      "https://www.paristickets.com/montmartre/plan-your-visit/",
+      "https://www.solosophie.com/?p=3509"
+    ],
+    "official": "https://www.sacre-coeur-montmartre.com",
+    "hours": "성당 매일 6:30~22:30 (돔 10:15~17:30, 정오 휴식, 마지막 입장 17:00)",
+    "closed": "연중무휴 (성체강복 등 일부 시간대 제외)",
+    "fee": "성당 무료 / 돔 성인 8유로·아동(15세 이하) 5유로 (현장 구매만)",
+    "facts": [
+      {"claim": "파리에서 가장 높은 언덕", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Montmartre", "fix": null},
+      {"claim": "사크레쾨르 앞 계단에서 도시 전체가 내려다보이고", "status": "ok", "url": "https://www.paristickets.com/montmartre/plan-your-visit/", "fix": null},
+      {"claim": "테르트르 광장에 화가들이 있다", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Montmartre", "fix": null},
+      {"claim": "사크레쾨르 계단은 아래 회전목마와 함께", "status": "ok", "url": "https://www.solosophie.com/?p=3509", "fix": null},
+      {"claim": "골목은 '뤼 드 라베르부아'의", "status": "wrong", "url": "https://www.pariszigzag.fr/insolite/lieux-insolites/maison-rose-montmartre-histoire/", "fix": "거리 자체는 맞다(rue de l'Abreuvoir, 몽마르트). 표기만 틀림: '라베르부아'가 아니라 '뤼 드 라브뢰부아르'(Abreuvoir = 가축 물먹이터)."},
+      {"claim": "분홍 카페(La Maison Rose)", "status": "ok", "url": "https://afrenchcollection.com/la-maison-rose-the-pink-house-of-montmartre-paris", "fix": null},
+      {"claim": "La Maison Rose = 뤼 드 라브뢰부아르 위치", "status": "ok", "url": "https://www.pariszigzag.fr/insolite/lieux-insolites/maison-rose-montmartre-histoire/", "fix": null},
+      {"claim": "'뤼 드 라베르부아'의 담쟁이 집", "status": "unverified", "url": null, "fix": null},
+      {"claim": "체류 opts: 성당과 광장 90분 / 언덕 전체 150분", "status": "ok", "url": "https://www.paristickets.com/montmartre/plan-your-visit/", "fix": null}
+    ]
+  },
+  "pantheon": {
+    "refs": [
+      "https://www.paris-pantheon.fr/en/visit/practical-information",
+      "https://fr.wikipedia.org/wiki/Panth%C3%A9on_de_Paris",
+      "https://en.wikipedia.org/wiki/Panth%C3%A9on",
+      "https://en.wikipedia.org/wiki/Foucault_pendulum",
+      "https://paristickets.com/pantheon/plan-your-visit"
+    ],
+    "official": "https://www.paris-pantheon.fr",
+    "hours": "4/1~9/30 10:00~18:30, 10/1~3/31 10:00~18:00 (폐장 45분 전 마지막 입장)",
+    "closed": "1/1, 5/1, 12/25 휴관 / 매월 첫 평일 월요일은 정오 개관 / 12/24·12/31은 17:00 폐장",
+    "fee": "개인 13유로(2025.10~2026.3 요금표), 여름 16유로. 공식 페이지 요금표가 2026.3까지라 현재가는 재확인 필요",
+    "facts": [
+      {"claim": "수플로, 1790", "status": "ok", "url": "https://en.wikipedia.org/wiki/Panth%C3%A9on", "fix": null},
+      {"claim": "신고전주의 돔", "status": "ok", "url": "https://en.wikipedia.org/wiki/Panth%C3%A9on", "fix": null},
+      {"claim": "라탱 지구 한가운데", "status": "ok", "url": "https://en.wikipedia.org/wiki/Panth%C3%A9on", "fix": null},
+      {"claim": "소르본이 바로 옆이다", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Panth%C3%A9on_de_Paris", "fix": null},
+      {"claim": "정면 기둥은 수플로 거리에서 뤽상부르 쪽으로 내려오며", "status": "wrong", "url": "https://fr.wikipedia.org/wiki/Panth%C3%A9on_de_Paris", "fix": "수플로 거리는 판테온 서쪽 정면에서 뤽상부르 공원 쪽으로 내려가는 약 300m 직선 시선축. 뤽상부르 쪽에서 거리를 올라가며(동쪽, 판테온을 바라보며) 찍어야 정면 기둥이 잡힌다. 내려오면 판테온을 등지게 된다."},
+      {"claim": "안의 푸코 진자", "status": "ok", "url": "https://en.wikipedia.org/wiki/Foucault_pendulum", "fix": null},
+      {"claim": "푸코 진자는 긴 노출로 흔들림을", "status": "wrong", "url": "https://www.paris-pantheon.fr/en/visit/practical-information", "fix": "공식 안내: 개인 촬영만 허용(비상업), 삼각대 금지. 플래시도 불가(paristickets). 삼각대 없이 손으로 버티는 긴 노출/고감도로 바꿀 것. 진자는 1995년부터 걸린 복제품(원본 추는 Arts et Métiers 박물관)."},
+      {"claim": "체류 opts: 안까지 75분", "status": "ok", "url": "https://paristickets.com/pantheon/plan-your-visit", "fix": null},
+      {"claim": "체류 opts: 밖에서만 30분", "status": "unverified", "url": null, "fix": null}
+    ]
+  },
+  "luxembourg": {
+    "refs": [
+      "https://jardin.senat.fr/",
+      "https://jardin.senat.fr/infos-pratiques/horaires-douverture.html",
+      "https://jardin.senat.fr:443/fileadmin/Jardin/Accueil_Jardin/Brochure_Jardin_maj2022.pdf",
+      "https://www.barcelo.com/guia-turismo/en/france/paris/things-to-do/luxembourg-gardens/",
+      "https://fr.wikipedia.org/wiki/Palais_du_Luxembourg"
+    ],
+    "official": "https://jardin.senat.fr",
+    "hours": "상원이 일출·일몰에 맞춰 15일마다 조정: 개장 7:30~8:15, 폐장 16:30~21:30 (11월 8:00~17:00, 11/16~30은 16:45)",
+    "closed": null,
+    "fee": "입장 무료 (조랑말·돛단배 대여 등은 유료)",
+    "facts": [
+      {"claim": "의자를 끌어다 분수 앞에 앉는 게 정석이다", "status": "ok", "url": "https://jardin.senat.fr:443/fileadmin/Jardin/Accueil_Jardin/Brochure_Jardin_maj2022.pdf", "fix": null},
+      {"claim": "궁 앞 팔각 연못에서 초록 의자와 돛단배", "status": "ok", "url": "https://www.barcelo.com/guia-turismo/en/france/paris/things-to-do/luxembourg-gardens/", "fix": null},
+      {"claim": "오후에 궁 정면이 순광", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Palais_du_Luxembourg", "fix": null},
+      {"claim": "체류 opts: 걷기 45분 / 앉아서 쉬기 75분", "status": "unverified", "url": "https://www.barcelo.com/guia-turismo/en/france/paris/things-to-do/luxembourg-gardens/", "fix": "(참고) 안내서는 중앙부·메디치 분수 빠른 산책 약 1시간, 전체 최소 2시간. opts가 짧은 편."}
+    ]
+  },
+  "hoteldeville": {
+    "refs": [
+      "https://www.paris.fr/pages/visiter-l-hotel-de-ville-2316",
+      "https://fr.wikipedia.org/wiki/H%C3%B4tel_de_ville_de_Paris",
+      "https://en.wikipedia.org/wiki/H%C3%B4tel_de_Ville,_Paris",
+      "https://www.paris.fr/pages/cinq-raisons-d-aller-au-village-de-noel-de-l-hotel-de-ville-25624",
+      "https://www.paris.fr/pages/pour-les-fetes-de-fin-d-annee-paris-devient-enchantee-22493",
+      "https://www.paris-friendly.fr/bon_plan_paris_detaille.php?id=1596"
+    ],
+    "official": "https://www.paris.fr/pages/visiter-l-hotel-de-ville-2316",
+    "hours": null,
+    "closed": "개별 방문 중단('jusqu'à nouvel ordre'); 파리시의회 회기·국빈 방문 시 단체 방문도 불가",
+    "fee": "단체 가이드 방문 무료(약 1시간, 약 2개월 전 이메일 예약), 전시 무료",
+    "facts": [
+      {"claim": "19세기 신르네상스 양식의 시청사", "status": "ok", "url": "https://fr.wikipedia.org/wiki/H%C3%B4tel_de_ville_de_Paris", "fix": null},
+      {"claim": "겨울엔 회전목마가 전경", "status": "ok", "url": "https://www.paris.fr/pages/cinq-raisons-d-aller-au-village-de-noel-de-l-hotel-de-ville-25624", "fix": "(참고) 2022·2023 시즌 시청 앞 크리스마스 마을에 무료 회전목마(2층)와 루지 슬로프. 매년 구성이 달라 올해 확정은 아님."},
+      {"claim": "겨울엔 아이스링크가 전경", "status": "unverified", "url": "https://www.paris-friendly.fr/bon_plan_paris_detaille.php?id=1596", "fix": "(참고) 시청 앞 아이스링크 기록은 2015-16 시즌(그것도 '취소' 표기)뿐. 2022·2023 시즌 공식 안내는 링크 없이 회전목마·루지·암벽. 확인 못 함."},
+      {"claim": "체류 opts: 광장에서 20분", "status": "unverified", "url": null, "fix": null}
+    ]
+  },
+  "notredame": {
+    "refs": [
+      "https://en.wikipedia.org/wiki/Notre-Dame_de_Paris",
+      "https://en.wikipedia.org/wiki/Flying_buttress",
+      "https://www.paris.fr/equipements/square-jean-xxiii-35",
+      "https://fr.wikipedia.org/wiki/Square_Jean-XXIII",
+      "https://paris-notredame.com/?p=3615",
+      "https://paris-notredame.com/faqs/",
+      "https://www.zigzagonearth.com/best-spots-photograph-notre-dame-cathedral-paris/"
+    ],
+    "official": "https://www.notredamedeparis.fr",
+    "hours": null,
+    "closed": null,
+    "fee": null,
+    "facts": [
+      {"claim": "2019년 화재 뒤", "status": "ok", "url": "https://en.wikipedia.org/wiki/Notre-Dame_de_Paris", "fix": null},
+      {"claim": "2024년 12월 재개관", "status": "ok", "url": "https://en.wikipedia.org/wiki/Notre-Dame_de_Paris", "fix": null},
+      {"claim": "공중 부벽은 동쪽 뒤편에서 가장 잘 보인다", "status": "ok", "url": "https://paris-notredame.com/?p=3615", "fix": null},
+      {"claim": "벽이 하중을 못 받으니 밖에서 받쳐 미는 구조다", "status": "ok", "url": "https://en.wikipedia.org/wiki/Flying_buttress", "fix": null},
+      {"claim": "뒤쪽 '장 23세 광장'에서 플라잉 버트레스가 더 좋다", "status": "wrong", "url": "https://www.paris.fr/equipements/square-jean-xxiii-35", "fix": "장 23세 광장(Square Jean-XXIII)은 성당 재건 공사로 2023-09-01~2027-06-30 매일 폐쇄(파리시 공식). 지금은 못 들어간다. 대안: 아르슈베셰 다리(Pont de l'Archevêché)나 투르넬 다리, 좌안 Quai de Montebello에서 뒤편·측면을 찍는다."},
+      {"claim": "센 강 좌안 생미셸 다리에서 측면 전체", "status": "unverified", "url": "https://paris-notredame.com/?p=3615", "fix": "(참고) 확인한 안내서들은 측면·뒤편 촬영지로 Pont de l'Archevêché·Pont de la Tournelle·Quai de Montebello(북쪽 정면 측면)를 권하고 생미셸 다리는 언급하지 않음."},
+      {"claim": "체류 opts: 안까지 90분", "status": "ok", "url": "https://paris-notredame.com/faqs/", "fix": null},
+      {"claim": "체류 opts: 외관 한 바퀴 40분", "status": "unverified", "url": null, "fix": null}
+    ]
+  },
+  "tuileries": {
+    "refs": [
+      "https://www.louvre.fr/preparer-sa-visite/dans-les-jardins",
+      "https://fr.wikipedia.org/wiki/Jardin_des_Tuileries",
+      "https://en.wikipedia.org/wiki/Tuileries_Garden",
+      "https://fr.wikipedia.org/wiki/Axe_historique_de_Paris",
+      "https://frenchmoments.eu/historical-axis-of-paris-la-voie-triomphale/",
+      "https://www.pleinsoleilparis.fr/jardin-des-tuileries-votre-guide-complet-pour-une-visite-inoubliable/"
+    ],
+    "official": "https://www.louvre.fr/preparer-sa-visite/dans-les-jardins",
+    "hours": "1~3월·11~12월 7:30~19:30 (퇴장은 폐장 30분 전)",
+    "closed": null,
+    "fee": "연중 무료",
+    "facts": [
+      {"claim": "르 노트르, 1664", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Jardin_des_Tuileries", "fix": null},
+      {"claim": "프랑스식 정형 정원의 원형이고", "status": "wrong", "url": "https://fr.wikipedia.org/wiki/Jardin_des_Tuileries", "fix": "'원형(prototype)'은 근거 없음. 위키는 '파리에서 가장 중요하고 오래된 프랑스식 정원(jardin à la française)'이라고 쓴다. 표현을 그렇게 고칠 것."},
+      {"claim": "이 축이 루브르에서 콩코르드·샹젤리제·개선문·라데팡스까지", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Axe_historique_de_Paris", "fix": null},
+      {"claim": "8km를 직선으로 관통한다", "status": "unverified", "url": "https://frenchmoments.eu/historical-axis-of-paris-la-voie-triomphale/", "fix": "(참고) 자료마다 7~10km로 갈림: fr 위키 '약 10km', frenchmoments 카루젤~오벨리스크 1+오벨리스크~개선문 2+개선문~라데팡스 4 = 약 7km(연장 계획 기준으로는 약 8km). '약 8km'는 대략치로만."},
+      {"claim": "루브르 쪽에서 콩코르드 방향으로 보면 오벨리스크·개선문이 한 줄", "status": "ok", "url": "https://fr.wikipedia.org/wiki/Axe_historique_de_Paris", "fix": null},
+      {"claim": "초록 의자를 전경에", "status": "ok", "url": "https://www.pleinsoleilparis.fr/jardin-des-tuileries-votre-guide-complet-pour-une-visite-inoubliable/", "fix": null},
+      {"claim": "체류 opts: 걷기 40분 / 앉아서 쉬기 60분", "status": "unverified", "url": "https://www.pleinsoleilparis.fr/jardin-des-tuileries-votre-guide-complet-pour-une-visite-inoubliable/", "fix": "(참고) 안내서는 루브르~콩코르드 빠른 산책 약 1시간, 오랑주리 포함 반나절. opts가 짧은 편."}
+    ]
+  }
+}

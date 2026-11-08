@@ -1,0 +1,354 @@
+{
+ "kinkakuji": {
+  "refs": [
+   "https://www.shokoku-ji.jp/en/kinkakuji/",
+   "https://www.shokoku-ji.jp/en/kinkakuji/about/",
+   "https://www.shokoku-ji.jp/en/kinkakuji/guide/",
+   "https://www.shokoku-ji.jp/en/kinkakuji/access/",
+   "https://www.shokoku-ji.jp/en/kinkakuji/faq/",
+   "https://ko.wikipedia.org/wiki/%EB%A1%9C%EC%BF%A0%EC%98%A8%EC%A7%80",
+   "https://en.wikipedia.org/wiki/Kinkaku-ji",
+   "https://www.japan-guide.com/e/e3908.html",
+   "https://www.minnacamera.com/spots/1913",
+   "https://banzokubiology.com/kinkakuji-sakura-congestion-guide/"
+  ],
+  "official": "https://www.shokoku-ji.jp/en/kinkakuji/",
+  "hours": "9:00-17:00",
+  "closed": "연중무휴",
+  "fee": "성인 500엔, 초중학생 300엔",
+  "facts": [
+   {
+    "claim": "로쿠온지(鹿苑寺)는 교토시 기타구에 있는 사찰",
+    "status": "ok",
+    "url": "https://www.shokoku-ji.jp/en/kinkakuji/access/",
+    "fix": null
+   },
+   {
+    "claim": "일본 선불교(임제종) 사찰",
+    "status": "ok",
+    "url": "https://www.shokoku-ji.jp/en/kinkakuji/about/",
+    "fix": null
+   },
+   {
+    "claim": "비공식 명칭 긴카쿠지(金閣寺)로 더 잘 알려져 있다",
+    "status": "ok",
+    "url": "https://www.shokoku-ji.jp/en/kinkakuji/about/",
+    "fix": null
+   },
+   {
+    "claim": "긴카쿠는 금박 입힌 샤리덴(사리전) 건물",
+    "status": "ok",
+    "url": "https://www.shokoku-ji.jp/en/kinkakuji/guide/",
+    "fix": null
+   },
+   {
+    "claim": "일본에서 가장 유명한 건물 중 하나로 매년 수많은 관광객을 끌어모은다",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "교코치(鏡湖池) 연못 건너편에서 보는 금각",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3908.html",
+    "fix": null
+   },
+   {
+    "claim": "바람 없는 아침에 반영(역사 금각)이 선다",
+    "status": "ok",
+    "url": "https://www.minnacamera.com/spots/1913",
+    "fix": null
+   },
+   {
+    "claim": "그 자리 하나뿐이라 줄이 선다(정석 반영 포인트 대기)",
+    "status": "unverified",
+    "url": "https://banzokubiology.com/kinkakuji-sakura-congestion-guide/",
+    "fix": null
+   },
+   {
+    "claim": "내부 비공개",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3908.html",
+    "fix": null
+   },
+   {
+    "claim": "삼각대 금지",
+    "status": "unverified",
+    "url": "https://banzokubiology.com/kinkakuji-sakura-congestion-guide/",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내만 30분",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3908.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내+정원 60분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "ryoanji": {
+  "refs": [
+   "http://www.ryoanji.jp/smph/eng/index.html",
+   "http://www.ryoanji.jp/smph/index.html",
+   "http://www.ryoanji.jp/smph/answer/index.html",
+   "https://www.japan-guide.com/e/e3909.html",
+   "https://en.wikipedia.org/wiki/Ry%C5%8Dan-ji",
+   "https://ko.wikipedia.org/wiki/%EB%A3%8C%EC%95%88%EC%A7%80"
+  ],
+  "official": "http://www.ryoanji.jp/",
+  "hours": "3/1-11/30 8:00-17:00, 12/1-2월말 8:30-16:30",
+  "closed": "연중무휴",
+  "fee": "성인 600엔, 고교생 500엔, 초중학생 300엔",
+  "facts": [
+   {
+    "claim": "료안지는 교토시 우쿄구에 있는 선종 사원",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EB%A3%8C%EC%95%88%EC%A7%80",
+    "fix": null
+   },
+   {
+    "claim": "돌로 꾸민 정원으로 알려져 있다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3909.html",
+    "fix": null
+   },
+   {
+    "claim": "돌 15개는 어느 자리에서도 다 안 보인다(툇마루에서 한 번에 14개까지)",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Ry%C5%8Dan-ji",
+    "fix": null
+   },
+   {
+    "claim": "툇마루 끝에서 담장 끝까지 광각으로 넓게 잡는다",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "개장 직후 아니면 툇마루가 사람으로 찬다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3909.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내만 30분",
+    "status": "ok",
+    "url": "http://www.ryoanji.jp/smph/answer/index.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내+정원 60분",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3909.html",
+    "fix": null
+   }
+  ]
+ },
+ "ginkakuji": {
+  "refs": [
+   "https://www.shokoku-ji.jp/en/ginkakuji/",
+   "https://www.shokoku-ji.jp/en/ginkakuji/access/",
+   "https://www.shokoku-ji.jp/en/ginkakuji/guide/",
+   "https://www.japan-guide.com/e/e3907.html",
+   "https://en.wikipedia.org/wiki/Ginkaku-ji",
+   "https://ko.wikipedia.org/wiki/%EC%A7%80%EC%87%BC%EC%A7%80"
+  ],
+  "official": "https://www.shokoku-ji.jp/en/ginkakuji/",
+  "hours": "3/1-11/30 8:30-17:00, 12/1-2/28 9:00-16:30",
+  "closed": "연중무휴",
+  "fee": "성인 1,000엔, 초중학생 500엔",
+  "facts": [
+   {
+    "claim": "지쇼지(慈照寺)는 교토시 사쿄구에 위치한 선불교 사찰",
+    "status": "ok",
+    "url": "https://www.shokoku-ji.jp/en/ginkakuji/access/",
+    "fix": null
+   },
+   {
+    "claim": "비공식 명칭 긴카쿠지(銀閣寺)로 더 잘 알려져 있다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3907.html",
+    "fix": null
+   },
+   {
+    "claim": "경내 뒤편 산길을 올라 전망대에서 경내와 교토 시내를 조망한다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3907.html",
+    "fix": null
+   },
+   {
+    "claim": "전망대 한 장에 은각과 긴샤단 모래 정원, 교토 시내를 같이 넣는다",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3907.html",
+    "fix": null
+   },
+   {
+    "claim": "입구 모래 원뿔은 아침 햇빛에 능선이 선명하다",
+    "status": "wrong",
+    "url": "https://www.shokoku-ji.jp/en/ginkakuji/guide/",
+    "fix": "모래 원뿔(고게쓰다이)과 긴샤단은 입구가 아니라 중문 안쪽 방장(본당) 앞에 있다. 입구는 약 50m의 긴카쿠지가키 대나무 울타리 참배로(총문~중문). '아침 햇빛에 능선이 선명' 부분은 근거 못 찾음"
+   },
+   {
+    "claim": "체류 경내만 30분",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3907.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내+정원 60분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "philosopher": {
+  "refs": [
+   "https://www.japan-guide.com/e/e3906.html",
+   "https://en.wikipedia.org/wiki/Philosopher%27s_Walk",
+   "https://ja.wikipedia.org/wiki/%E5%93%B2%E5%AD%A6%E3%81%AE%E9%81%93",
+   "https://ko.wikipedia.org/wiki/%EC%B2%A0%ED%95%99%EC%9D%98_%EA%B8%B8",
+   "https://sp.jorudan.co.jp/hanami/spot_302.html",
+   "https://sp.jorudan.co.jp/leaf/spot_61409.html",
+   "https://www.jrailpass.com/blog/philosophers-walk"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "철학의 길은 교토시 사쿄구에 있는 산책길",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/%E5%93%B2%E5%AD%A6%E3%81%AE%E9%81%93",
+    "fix": null
+   },
+   {
+    "claim": "은각사부터 난넨지까지 이어지는",
+    "status": "wrong",
+    "url": "https://www.japan-guide.com/e/e3906.html",
+    "fix": "난넨지가 아니라 난젠지(南禅寺). 철학의 길 남단은 난젠지 인근(일본어 위키는 남단을 若王子橋로 명시)"
+   },
+   {
+    "claim": "약 2km의 산책로",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3906.html",
+    "fix": null
+   },
+   {
+    "claim": "철학자 니시다 기타로가 산책하며 사색해 이름이 붙었다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3906.html",
+    "fix": null
+   },
+   {
+    "claim": "수로 따라 벚나무가 터널을 이룬다",
+    "status": "ok",
+    "url": "https://sp.jorudan.co.jp/hanami/spot_302.html",
+    "fix": null
+   },
+   {
+    "claim": "길 중앙에서 정면으로 깊이를 잡는다",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "4월 초 벚꽃",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3906.html",
+    "fix": null
+   },
+   {
+    "claim": "11월 하순 단풍",
+    "status": "ok",
+    "url": "https://sp.jorudan.co.jp/leaf/spot_61409.html",
+    "fix": null
+   },
+   {
+    "claim": "난젠지 쪽 남단이 사람이 적다",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "체류 걸어 지나기 30분",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Philosopher%27s_Walk",
+    "fix": null
+   },
+   {
+    "claim": "체류 구경하며 60분",
+    "status": "unverified",
+    "url": "https://en.wikipedia.org/wiki/Philosopher%27s_Walk",
+    "fix": null
+   }
+  ]
+ },
+ "nanzenji": {
+  "refs": [
+   "https://nanzenji.or.jp/",
+   "https://nanzenji.or.jp/about_rinzaishu/visit",
+   "https://www.nanzenji.or.jp/equipment/sanmon",
+   "https://www.nanzenji.or.jp/equipment/sosui",
+   "https://www.nanzenji.or.jp/information/notices/20191001",
+   "https://www.nanzenji.or.jp/information/202609024",
+   "https://www.japan-guide.com/e/e3905.html",
+   "https://en.wikipedia.org/wiki/Nanzen-ji",
+   "https://ko.wikipedia.org/wiki/%EB%82%9C%EC%A0%A0%EC%A7%80"
+  ],
+  "official": "https://www.nanzenji.or.jp/",
+  "hours": "3/1-11/30 8:40-17:00, 12/1-2/28 8:40-16:30 (접수 종료 20분 전)",
+  "closed": "12/28-31 일반 참배 불가, 연시 무휴",
+  "fee": "방장정원 일반 600엔·삼문 일반 600엔·남선원 500엔(고교생 500/450·초중생 400/350). 경내 자체는 무료(JG). 남선원은 보수로 정지 중이었고 2026-11-01~30 한정 공개",
+  "facts": [
+   {
+    "claim": "난젠지(南禅寺)는 교토시 사쿄구 난젠지후쿠치초에 있는 사찰",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EB%82%9C%EC%A0%A0%EC%A7%80",
+    "fix": null
+   },
+   {
+    "claim": "수로각 벽돌 아치(붉은 벽돌 수도교)가 경내를 지난다",
+    "status": "ok",
+    "url": "https://www.nanzenji.or.jp/equipment/sosui",
+    "fix": null
+   },
+   {
+    "claim": "아치가 연속으로 멀어지는 구도가 정석",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "산몬 2층에 오르면 교토 시내가 내려다보인다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3905.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내만 30분",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3905.html",
+    "fix": null
+   },
+   {
+    "claim": "체류 경내+정원 60분",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3905.html",
+    "fix": null
+   },
+   {
+    "claim": "(참고) 경내 삼각대·일각대 촬영 금지",
+    "status": "ok",
+    "url": "https://www.nanzenji.or.jp/information/notices/20191001",
+    "fix": null
+   }
+  ]
+ }
+}

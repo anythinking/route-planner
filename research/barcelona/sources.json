@@ -1,0 +1,1000 @@
+{
+ "city": "barcelona",
+ "checked": "2026-11-08",
+ "places": {
+  "sagrada": {
+   "refs": [
+    "https://sagradafamilia.org/en/faqs",
+    "https://sagradafamilia.org/documents/20142/942618/Normativa_ENG%202022.pdf/13e9745c-99a3-d612-28bb-de2fe0d23260",
+    "https://en.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+    "https://ca.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia"
+   ],
+   "official": "https://sagradafamilia.org",
+   "hours": "11~2월 월~토 9:00~18:00·일 10:30~18:00 / 3·10월 월~금 9:00~19:00·토 9:00~18:00·일 10:30~19:00 / 4~9월 월~금 9:00~20:00·토 9:00~18:00·일 10:30~20:00 (12/25·26, 1/1·6은 9:00~14:00)",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "짓고 있는 로마 가톨릭교회 성당",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+     "fix": null
+    },
+    {
+     "claim": "탄생의 파사드는 아침, 수난의 파사드는 오후 (탄생=동쪽, 수난=서쪽)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+     "fix": null
+    },
+    {
+     "claim": "탄생의 파사드 앞 플라사 데 가우디 연못에 성당이 비친다",
+     "status": "ok",
+     "url": "https://ca.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+     "fix": null
+    },
+    {
+     "claim": "바람 없는 아침이 반영이 낫다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "내부는 삼각대 금지",
+     "status": "ok",
+     "url": "https://sagradafamilia.org/documents/20142/942618/Normativa_ENG%202022.pdf/13e9745c-99a3-d612-28bb-de2fe0d23260",
+     "fix": null
+    },
+    {
+     "claim": "opts 내부까지 45분",
+     "status": "wrong",
+     "url": "https://sagradafamilia.org/en/sagrada-familia-ticket",
+     "fix": "경미: 공식 소요시간은 기본 입장 약 1시간(타워 포함 약 1시간 30분). 오디오가이드만 45분(익스프레스 25분)"
+    }
+   ]
+  },
+  "parkguell": {
+   "refs": [
+    "https://parkguell.barcelona/en/planning-your-visit/prices-and-times",
+    "https://parkguell.barcelona/en/planning-your-visit/faqs",
+    "https://parkguell.barcelona/en/park-guell/over-hundred-years-history",
+    "https://en.wikipedia.org/wiki/Park_G%C3%BCell"
+   ],
+   "official": "https://parkguell.barcelona/en",
+   "hours": "티켓 판매 시간대 9:30~17:30(티켓 시각 후 30분 안에 입장). 7:00~9:30·18:00~22:00은 주민·Passi Verd 전용",
+   "closed": "연중 무휴(공식: park is open all the year round)",
+   "fee": "일반 18€(7~12세·65세+ 13.5€, 0~6세 무료)",
+   "facts": [
+    {
+     "claim": "1984년 유네스코 세계유산 등록",
+     "status": "ok",
+     "url": "https://parkguell.barcelona/en/park-guell/over-hundred-years-history",
+     "fix": null
+    },
+    {
+     "claim": "유료 구역은 시간 지정 입장",
+     "status": "ok",
+     "url": "https://parkguell.barcelona/en/planning-your-visit/prices-and-times",
+     "fix": null
+    },
+    {
+     "claim": "첫 타임이 한산하다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "도마뱀 분수 앞은 줄이 길다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 지나며 30분/한 바퀴 60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "상업·전문 촬영은 허가 필요(노트에는 없음, 참고)",
+     "status": "ok",
+     "url": "https://parkguell.barcelona/en/planning-your-visit/access-regulations",
+     "fix": null
+    }
+   ]
+  },
+  "casabatllo": {
+   "refs": [
+    "https://www.casabatllo.es/en/visit/faqs/",
+    "https://www.casabatllo.es/en/antoni-gaudi/casa-batllo/inside/",
+    "https://en.wikipedia.org/wiki/Casa_Batll%C3%B3"
+   ],
+   "official": "https://www.casabatllo.es",
+   "hours": "일반 방문(General Visit) 9:00~19:15. 한적한 시간은 16:00~19:00 권장(공식 FAQ)",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "2005년 유네스코 세계 문화 유산 등록",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Casa_Batll%C3%B3",
+     "fix": null
+    },
+    {
+     "claim": "opts 가까이 45분",
+     "status": "wrong",
+     "url": "https://www.casabatllo.es/en/visit/faqs/",
+     "fix": "경미: 공식 방문 소요 일반 약 1시간, 그 외 약 1시간 15분"
+    },
+    {
+     "claim": "사진: 개인용·삼각대 없이 허용(노트에는 없음, 참고)",
+     "status": "ok",
+     "url": "https://www.casabatllo.es/en/visit/faqs/",
+     "fix": null
+    },
+    {
+     "claim": "내부 채광정의 파란 타일은 위층에서 내려다보는 각도",
+     "status": "ok",
+     "url": "https://www.casabatllo.es/en/antoni-gaudi/casa-batllo/inside/",
+     "fix": null
+    },
+    {
+     "claim": "저녁 조명이 켜진 뒤 정면이 산다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "길 건너 인도에서 세로로 세워야 지붕 비늘까지 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "pedrera": {
+   "refs": [
+    "https://www.lapedrera.com/en/practical-information/",
+    "https://www.lapedrera.com/en/casa-mila/history/",
+    "https://www.lapedrera.com/en/regulations/",
+    "https://en.wikipedia.org/wiki/Casa_Mil%C3%A0"
+   ],
+   "official": "https://www.lapedrera.com",
+   "hours": "2026-11-02~2027-02-25 매일 9:00~18:30, 야간 세션 19:00~23:00 / 2027-02-26~11-01 매일 9:00~20:30, 야간 20:40~22:20 / 12/26~1/3 9:00~20:30(야간 21:00~23:00)",
+   "closed": "비 오면 옥상 폐쇄(일정 변경 가능)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "1912년 공동주택(1906~1912, 1912-10-31 준공 확인서)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Casa_Mil%C3%A0",
+     "fix": null
+    },
+    {
+     "claim": "옥상은 예약제(시간 지정 티켓)",
+     "status": "ok",
+     "url": "https://www.lapedrera.com/en/practical-information/",
+     "fix": null
+    },
+    {
+     "claim": "밤에 옥상을 여는 날도 있다(야간 세션 매일 운영)",
+     "status": "ok",
+     "url": "https://www.lapedrera.com/en/practical-information/",
+     "fix": null
+    },
+    {
+     "claim": "옥상 굴뚝 사이로 사그라다 파밀리아 첨탑이 보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "입면은 프로벤사 거리 모퉁이 대각선(공식: 나비 안뜰이 Provença 쪽)",
+     "status": "ok",
+     "url": "https://www.lapedrera.com/en/practical-information/",
+     "fix": null
+    },
+    {
+     "claim": "삼각대·촬영은 특별 허가 필요(노트에는 없음, 참고)",
+     "status": "ok",
+     "url": "https://www.lapedrera.com/en/regulations/",
+     "fix": null
+    },
+    {
+     "claim": "옥상은 바람이 세다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "rambla": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/La_Rambla,_Barcelona",
+    "https://www.amicsdelarambla.cat/en/turismo-detalle/miros-mosaic-at-pla-de-los",
+    "https://barcelonaturisme.com/wv3/en/page/369/pla-de-l-os.html",
+    "https://barcelonaurbana.com/en/blog/barcelona-pickpockets-zones-tourist-guide"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "길이 1.2km 가로수길",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/La_Rambla,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "리세우 역 앞 미로의 모자이크 바닥(플라 데 로스)",
+     "status": "ok",
+     "url": "https://www.amicsdelarambla.cat/en/turismo-detalle/miros-mosaic-at-pla-de-los",
+     "fix": null
+    },
+    {
+     "claim": "소매치기가 많다",
+     "status": "ok",
+     "url": "https://barcelonaurbana.com/en/blog/barcelona-pickpockets-zones-tourist-guide",
+     "fix": null
+    },
+    {
+     "claim": "opts 걸어 지나기 30분/구경하며 60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "boqueria": {
+   "refs": [
+    "https://www.boqueria.barcelona/contacto",
+    "https://www.barcelona.cat/en/discoverbcn/pics/mercat-de-sant-josep-la-boqueria-92086009447",
+    "https://ajuntament.barcelona.cat/ciutatvella/es/guia-del-distrito/equipamientos-por-temas/listado/mercat-boqueria-sant-josep-92086009447",
+    "https://en.wikipedia.org/wiki/La_Boqueria"
+   ],
+   "official": "https://www.boqueria.barcelona",
+   "hours": "월~토 8:00~20:30",
+   "closed": "일요일, 12/25·12/26·1/1(12월·연말 특별 개장일 별도 공지)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "산트 주제프 시장이라고도 한다",
+     "status": "ok",
+     "url": "https://www.barcelona.cat/en/discoverbcn/pics/mercat-de-sant-josep-la-boqueria-92086009447",
+     "fix": null
+    },
+    {
+     "claim": "일요일은 닫는다",
+     "status": "ok",
+     "url": "https://www.boqueria.barcelona/contacto",
+     "fix": null
+    },
+    {
+     "claim": "상인은 허락 받고 찍는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 훑기 45분/먹으며 90분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "gothic": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Gothic_Quarter,_Barcelona",
+    "https://www.meet.barcelona/en/visit-and-love-it/points-interest-city/la-muralla-romana-99400387424",
+    "https://barcelona.cat/en/coneixbcn/pics/el-gotic-99400387351"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마 성벽 안(바르시노)의 중세 골목",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Gothic_Quarter,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "대성당·왕의 광장·유대인 지구(엘 칼)가 골목으로 이어진다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Gothic_Quarter,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "비스베 거리의 다리(폰트 델 비스베)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Gothic_Quarter,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "골목 폭 2m",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 한 바퀴 60분/골목까지 120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "cathedral": {
+   "refs": [
+    "https://catedralbcn.org/en/tourist-visit/visiting-hours/",
+    "https://catedralbcn.org/en/tourist-visit/visitable-spaces/",
+    "https://en.wikipedia.org/wiki/Barcelona_Cathedral"
+   ],
+   "official": "https://catedralbcn.org",
+   "hours": "관광(문화) 방문 평일 9:30~18:30(입장 마감 17:45), 토 9:30~17:15, 일·축일은 14:00~17:00 예배 방문만(공식 페이지, 갱신일 불명 — 재확인 필요)",
+   "closed": null,
+   "fee": "일반 16€(공식 티켓 페이지 검색 요약)",
+   "facts": [
+    {
+     "claim": "13~15세기 고딕 대성당",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Barcelona_Cathedral",
+     "fix": null
+    },
+    {
+     "claim": "안뜰 회랑에 거위 13마리(성 에울랄리아가 13세에 순교)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Barcelona_Cathedral",
+     "fix": null
+    },
+    {
+     "claim": "옥상에 오를 수 있다(엘리베이터)",
+     "status": "ok",
+     "url": "https://catedralbcn.org/en/tourist-visit/visitable-spaces/",
+     "fix": null
+    },
+    {
+     "claim": "미사 중엔 촬영을 삼간다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 내부까지 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "born": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/El_Born",
+    "https://www.catalannews.com/culture/item/a-new-museum-shows-barcelona-in-1700-and-explains-the-military-and-political-defeat-of-1714",
+    "https://www.enciclopedia.cat/gran-enciclopedia-catalana/el-born.-museu-dhistoria-de-barcelona"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "피카소 미술관·산타 마리아 델 마르가 있는 지구",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/El_Born",
+     "fix": null
+    },
+    {
+     "claim": "보른 문화센터 바닥의 18세기 유적(1714년 포위전 이후 철거된 빌라노바 데 마르)",
+     "status": "ok",
+     "url": "https://www.catalannews.com/culture/item/a-new-museum-shows-barcelona-in-1700-and-explains-the-military-and-political-defeat-of-1714",
+     "fix": null
+    },
+    {
+     "claim": "명칭 「보른 문화센터」",
+     "status": "wrong",
+     "url": "https://www.enciclopedia.cat/gran-enciclopedia-catalana/el-born.-museu-dhistoria-de-barcelona",
+     "fix": "2025년 4월부터 공식 명칭은 「El Born. Museu d'Història de Barcelona」(옛 El Born Centre de Cultura i Memòria). 현장 표지판도 바뀜"
+    },
+    {
+     "claim": "고딕 지구 동쪽의 옛 상인 지구",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "위 회랑에서 내려다봐야 유적 전체가 든다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "몬트카다 골목은 낮에도 어둡다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "picasso": {
+   "refs": [
+    "https://museupicassobcn.cat/en/planifica-la-visita/normativa-de-acces-i-visita",
+    "http://www.museupicasso.bcn.cat/gomobile/en/buy-tickets/",
+    "https://en.wikipedia.org/wiki/El_Born"
+   ],
+   "official": "https://www.museupicasso.bcn.cat",
+   "hours": "화~일 10:00~19:00(구 공식 페이지 기준, 계절별 연장 시간 있음 — 재확인 필요)",
+   "closed": "월요일, 1/1·5/1·6/24·12/25",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "몬트카다 거리의 고딕 궁전 건물",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/El_Born",
+     "fix": null
+    },
+    {
+     "claim": "촬영 정책: 개인용·플래시 없이 허용, 삼각대·셀카봉은 사전 허가(전시별 표지 확인)",
+     "status": "ok",
+     "url": "https://museupicassobcn.cat/en/planifica-la-visita/normativa-de-acces-i-visita",
+     "fix": null
+    },
+    {
+     "claim": "opts 핵심만 60분/한 바퀴 120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "santamaria": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Santa_Maria_del_Mar,_Barcelona",
+    "https://meet.barcelona.cat/en/discover-barcelona/districts/ciutat-vella/santa-maria-del-mar",
+    "https://en.wikipedia.org/wiki/Cathedral_of_the_Sea"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "1329~1383년 55년 만에 지은 카탈루냐 고딕(1383-11-03 마지막 돌, 1384-08-15 봉헌)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Santa_Maria_del_Mar,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "장식 없이 기둥만 높이 뻗은 내부",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Santa_Maria_del_Mar,_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "소설 「바다의 성당」 배경(팔콘스, 2006)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Cathedral_of_the_Sea",
+     "fix": null
+    },
+    {
+     "claim": "창 빛만으로 형태가 나온다 / 외관은 정면 광장에서 올려다보는 각도",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "barceloneta": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Barceloneta,_Barcelona",
+    "https://en.wikipedia.org/wiki/W_Barcelona"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "남쪽 끝 W 호텔 돛 실루엣(Hotel Vela)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/W_Barcelona",
+     "fix": null
+    },
+    {
+     "claim": "해 뜰 때 바다 쪽에서 빛이 온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "아침 8시 전이 비어 있다 / 낮엔 파라솔과 사람뿐",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 산책 45분/머물기 120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "montjuic": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Estadi_Ol%C3%ADmpic_Llu%C3%ADs_Companys",
+    "https://en.wikipedia.org/wiki/Montju%C3%AFc",
+    "https://en.wikipedia.org/wiki/Montju%C3%AFc_Castle"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "에스타디 올림픽 류이스 쿰파니스 = 옛 몬주익 올림픽 경기장(1927 건립, 1989 개조, 1992 올림픽)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Estadi_Ol%C3%ADmpic_Llu%C3%ADs_Companys",
+     "fix": null
+    },
+    {
+     "claim": "몬주익 성 성벽에서 항구 크레인·크루즈가 내려다보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "케이블카 안은 유리 반사가 심하다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "mnac": {
+   "refs": [
+    "https://www.museunacional.cat/en/opening-hours-and-prices",
+    "https://en.wikipedia.org/wiki/Museu_Nacional_d%27Art_de_Catalunya"
+   ],
+   "official": "https://www.museunacional.cat",
+   "hours": "10~4월 화~토 10:00~18:00, 5~9월 화~토 10:00~20:00, 일·공휴일 10:00~15:00(매표 마감 30분 전)",
+   "closed": "월요일(공휴일 제외), 1/1·5/1·12/25",
+   "fee": "일반 12€(옥상 전망대 포함), 기본 2€(옥상 전망대만)",
+   "facts": [
+    {
+     "claim": "1934년 설립(팔라우 나시오날 입주), 로마네스크 벽화로 유명",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Museu_Nacional_d%27Art_de_Catalunya",
+     "fix": null
+    },
+    {
+     "claim": "옥상 테라스(전망대)",
+     "status": "ok",
+     "url": "https://www.museunacional.cat/en/opening-hours-and-prices",
+     "fix": null
+    },
+    {
+     "claim": "로마네스크 벽화실은 어둡고 플래시 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "테라스에서 에스파냐 광장 야경",
+     "status": "unverified",
+     "url": null,
+     "fix": "전망대는 박물관 개장 시간 안에서만 열림(겨울 18시/여름 20시 마감, 일 15시) — 공식 페이지에 야간 개방 언급 없음"
+    },
+    {
+     "claim": "정면 계단에서 분수·베네치아 탑·에스파냐 광장이 일직선",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "magic": {
+   "refs": [
+    "https://ajuntament.barcelona.cat/premsa/2026/10/21/la-font-magica-de-montjuic-saturara-de-l1-al-15-de-novembre-per-fer-les-tasques-de-manteniment-anual/",
+    "https://www.barcelona.cat/en/what-to-do-in-bcn/parks-and-gardens/horari-il-luminacio-font-magica-fonts-de-montjuic-96318091405",
+    "https://en.wikipedia.org/wiki/Magic_Fountain_of_Montju%C3%AFc"
+   ],
+   "official": "https://www.barcelona.cat/en/what-to-do-in-bcn/parks-and-gardens/horari-il-luminacio-font-magica-fonts-de-montjuic-96318091405",
+   "hours": "겨울(~2027-03-31) 목·금·토 20:00~21:00, 2026-11-19 재개 / 여름 수~일 21:30~22:30 (시 보도자료·안내 검색 요약)",
+   "closed": "2026-11-01~15 연간 정비로 쇼 중단",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "쇼 시간이 요일·계절마다 다르고 겨울엔 쉬는 기간이 있다",
+     "status": "ok",
+     "url": "https://ajuntament.barcelona.cat/premsa/2026/10/21/la-font-magica-de-montjuic-saturara-de-l1-al-15-de-novembre-per-fer-les-tasques-de-manteniment-anual/",
+     "fix": null
+    },
+    {
+     "claim": "1929년 박람회 때 건설된 분수",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Magic_Fountain_of_Montju%C3%AFc",
+     "fix": null
+    },
+    {
+     "claim": "MNAC 계단 위에서 분수와 베네치아 탑을 같이",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "miro": {
+   "refs": [
+    "https://www.fmirobcn.org/en/visit-us/plan-your-visit/",
+    "https://en.wikipedia.org/wiki/Fundaci%C3%B3_Joan_Mir%C3%B3"
+   ],
+   "official": "https://www.fmirobcn.org",
+   "hours": "화~토 10:00~20:00, 일 10:00~19:00(11/1~3/31은 화~일 10:00~19:00, 입장 마감 30분 전) — 검색 요약, 페이지 구버전일 수 있음",
+   "closed": "월요일",
+   "fee": "일반 18€(현장)/17€(온라인) — 구버전일 수 있음",
+   "facts": [
+    {
+     "claim": "1975년 개관한 호안 미로 재단(몬주익)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Fundaci%C3%B3_Joan_Mir%C3%B3",
+     "fix": null
+    },
+    {
+     "claim": "옥상 테라스의 조각 뒤로 도시가 내려다보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "전시실 촬영 정책은 입구 표시 확인",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 핵심만 60분/한 바퀴 120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "palau": {
+   "refs": [
+    "https://www.palaumusica.cat/ca/prepara-la-visita_1567692",
+    "https://www.palaumusica.cat/ca/visita-el-palau_1674202",
+    "https://en.wikipedia.org/wiki/Palau_de_la_M%C3%BAsica_Catalana"
+   ],
+   "official": "https://www.palaumusica.cat",
+   "hours": null,
+   "closed": null,
+   "fee": "자유 방문 20€ / 가이드 방문 24€ (소요 약 50분)",
+   "facts": [
+    {
+     "claim": "1905년 시공, 1908년 2월 9일 준공",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Palau_de_la_M%C3%BAsica_Catalana",
+     "fix": null
+    },
+    {
+     "claim": "내부는 가이드 투어로만 들어간다",
+     "status": "wrong",
+     "url": "https://www.palaumusica.cat/ca/visita-el-palau_1674202",
+     "fix": "공식: 가이드 방문(24€) 외에 리플릿 자유 방문(20€)도 있음"
+    },
+    {
+     "claim": "플래시 금지(삼각대도 금지, 플래시 없는 촬영은 허용)",
+     "status": "ok",
+     "url": "https://www.palaumusica.cat/ca/prepara-la-visita_1567692",
+     "fix": null
+    },
+    {
+     "claim": "스테인드글라스 천창은 낮 투어라야 빛이 든다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "opts 가까이 45분",
+     "status": "ok",
+     "url": "https://www.palaumusica.cat/ca/visita-el-palau_1674202",
+     "fix": null
+    }
+   ]
+  },
+  "santpau": {
+   "refs": [
+    "https://santpaubarcelona.org/en/visita/visita-lliure/",
+    "https://santpaubarcelona.org/en/prepara-la-teva-visita/",
+    "https://en.wikipedia.org/wiki/Hospital_de_la_Santa_Creu_i_Sant_Pau",
+    "https://ca.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia"
+   ],
+   "official": "https://santpaubarcelona.org",
+   "hours": "자유 방문 매일 9:30~17:00(11~3월), 9:30~18:30(4~10월), 입장 마감 30분 전",
+   "closed": "12/25",
+   "fee": "자유 방문 18€(14시 전)/17€(14시 후), 오디오가이드 +4€",
+   "facts": [
+    {
+     "claim": "1901~1930년 지은 복합건축물(루이스 도메네크 이 몬타네르)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Hospital_de_la_Santa_Creu_i_Sant_Pau",
+     "fix": null
+    },
+    {
+     "claim": "정문 계단에서 가우디 대로 끝에 사그라다 파밀리아가 정면으로 선다",
+     "status": "ok",
+     "url": "https://ca.wikipedia.org/wiki/Sagrada_Fam%C3%ADlia",
+     "fix": null
+    },
+    {
+     "claim": "opts 가까이 45분",
+     "status": "wrong",
+     "url": "https://santpaubarcelona.org/en/visita/visita-lliure/",
+     "fix": "경미: 공식 오디오가이드 방문 소요 60~90분"
+    },
+    {
+     "claim": "지하 터널은 조명이 낮다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "bunkers": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Tur%C3%B3_de_la_Rovira",
+    "https://barcelonahacks.com/bunkers-del-carmel/",
+    "https://barcelonaurbana.com/en/blog/bunkers-carmel-barcelona-guide"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": "무료(예약 불필요, 야외 전망대)",
+   "facts": [
+    {
+     "claim": "내전 때 대공포(대공 방어) 진지였던 언덕",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tur%C3%B3_de_la_Rovira",
+     "fix": null
+    },
+    {
+     "claim": "해질녘엔 젊은이들이 맥주를 들고 모인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "구엘 공원에서 걸어 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "도시 360도가 한눈에",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "tibidabo": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Tibidabo",
+    "https://es.wikipedia.org/wiki/Tibidabo",
+    "https://ca.wikipedia.org/wiki/Tibidabo",
+    "https://tibidabo.cat/en/panoramic-area",
+    "https://en.wikipedia.org/wiki/Temple_Expiatori_del_Sagrat_Cor"
+   ],
+   "official": "https://tibidabo.cat",
+   "hours": "전망대(Panoramic Area) 11:00~17:00(2026-11-02 스냅샷), 놀이공원은 개장일이 달력에 따라 다름",
+   "closed": "12/25·26, 1/1(전망대)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "티비다보 고도 516.6m",
+     "status": "wrong",
+     "url": "https://es.wikipedia.org/wiki/Tibidabo",
+     "fix": "영·스 위키 512m, 카탈루냐 위키 516.2m — 516.6은 못 찾음. \"약 512m\"로 쓰거나 출처 명시"
+    },
+    {
+     "claim": "성당(사그라트 코르)이 산 위에 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Temple_Expiatori_del_Sagrat_Cor",
+     "fix": null
+    },
+    {
+     "claim": "관람차가 있는 유원지",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tibidabo",
+     "fix": null
+    },
+    {
+     "claim": "맑은 날 아침이 시야가 멀다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "campnou": {
+   "refs": [
+    "https://www.fcbarcelona.com/en/club/facilities/spotify-camp-nou",
+    "https://en.wikipedia.org/wiki/Camp_Nou",
+    "https://barcelonahacks.com/visit-camp-nou-barcelona/"
+   ],
+   "official": "https://www.fcbarcelona.com/en/club/facilities/spotify-camp-nou",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "관중 수용인원 99,876명",
+     "status": "wrong",
+     "url": "https://www.fcbarcelona.com/en/club/facilities/spotify-camp-nou",
+     "fix": "구장 공식 소개는 99,354석(개축 전). 현재 개축 중이라 임시 수용(2026-03 기준 약 6만 명대)이고 완공 목표 105,000석 — 숫자 고정 말고 \"개축 중, 완공 시 약 10만 5천 석\""
+    },
+    {
+     "claim": "유럽에서 가장 큰 축구 경기장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Camp_Nou",
+     "fix": null
+    },
+    {
+     "claim": "공사 중인 기간엔 투어·입장 범위가 자주 바뀐다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Camp_Nou",
+     "fix": null
+    },
+    {
+     "claim": "투어는 피치 뷰 포토 스팟이 정석",
+     "status": "unverified",
+     "url": null,
+     "fix": "2026 비공식 가이드: 임시 투어(Barça Immersive Tour)는 박물관+전망대 중심, 피치·라커룸 미포함 — 공식 사이트 확인 필요"
+    }
+   ]
+  },
+  "gracia": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Gr%C3%A0cia",
+    "https://en.wikipedia.org/wiki/Casa_Vicens",
+    "https://casavicens.org/visit"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "한때 독립된 마을(1897년 바르셀로나에 병합)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Gr%C3%A0cia",
+     "fix": null
+    },
+    {
+     "claim": "8월 축제(페스타 마요르 데 그라시아)의 골목 장식",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Gr%C3%A0cia",
+     "fix": null
+    },
+    {
+     "claim": "카사 비센스(가우디 첫 건물)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Casa_Vicens",
+     "fix": null
+    },
+    {
+     "claim": "비르헤이나 광장 성당 정면이 무난",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "ciutadella": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Parc_de_la_Ciutadella",
+    "https://ca.wikipedia.org/wiki/Parc_de_la_Ciutadella"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "공원 내에 카탈루냐 의회, 동물원",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Parc_de_la_Ciutadella",
+     "fix": null
+    },
+    {
+     "claim": "카스카다 분수와 호수",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Parc_de_la_Ciutadella",
+     "fix": null
+    },
+    {
+     "claim": "보트 호수에서 노 젓는 사람을 전경으로",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "의회 건물은 바깥에서만 찍는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "arc": {
+   "refs": [
+    "https://ca.wikipedia.org/wiki/Arc_de_Triomf_(Barcelona)"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "주제프 빌라세카 이 카사노바스가 1888년 박람회 주 출입구로 설계",
+     "status": "ok",
+     "url": "https://ca.wikipedia.org/wiki/Arc_de_Triomf_(Barcelona)",
+     "fix": null
+    },
+    {
+     "claim": "붉은 벽돌이라 흐린 날에도 색이 산다",
+     "status": "ok",
+     "url": "https://ca.wikipedia.org/wiki/Arc_de_Triomf_(Barcelona)",
+     "fix": null
+    },
+    {
+     "claim": "주말엔 버스킹과 사람이 많다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "santcaterina": {
+   "refs": [
+    "https://ca.wikipedia.org/wiki/Mercat_de_Santa_Caterina",
+    "https://en.wikipedia.org/wiki/Santa_Caterina_Market",
+    "https://agenda500.barcelona.cat/ca/detall/mercat-santa-caterina_92086009448.html",
+    "https://www.barcelona.cat/ca/que-pots-fer-a-bcn/parcs-i-jardins/restaurant-cuines-de-santa-caterina-mercat-de-santa-caterina-99400141924"
+   ],
+   "official": "https://mercatsantacaterina.com",
+   "hours": "9/1~6/30 월·수·토 7:30~14:30(시 안내) 또는 15:30(시장 사이트), 화·목·금 7:30~20:30 — 출처마다 다름",
+   "closed": "일요일(정규 시간표에 없음)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "물결 타일 지붕, 미라예스(EMBT) 설계, 2005",
+     "status": "ok",
+     "url": "https://ca.wikipedia.org/wiki/Mercat_de_Santa_Caterina",
+     "fix": null
+    },
+    {
+     "claim": "안의 쿠이네스 산타 카테리나에서 점심",
+     "status": "ok",
+     "url": "https://www.barcelona.cat/ca/que-pots-fer-a-bcn/parcs-i-jardins/restaurant-cuines-de-santa-caterina-mercat-de-santa-caterina-99400141924",
+     "fix": null
+    },
+    {
+     "claim": "일요일 휴무",
+     "status": "ok",
+     "url": "https://agenda500.barcelona.cat/ca/detall/mercat-santa-caterina_92086009448.html",
+     "fix": null
+    },
+    {
+     "claim": "보케리아보다 조용하다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  }
+ }
+}

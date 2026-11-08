@@ -1,0 +1,1593 @@
+{
+ "city": "london",
+ "checked": "2026-11-08",
+ "places": {
+  "stpaul": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/St_Paul%27s_Cathedral",
+    "https://en.wikipedia.org/wiki/Paternoster_Square",
+    "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+    "https://www.stpauls.co.uk/planning-your-visit",
+    "https://www.stpauls.co.uk/visit-us"
+   ],
+   "official": "https://www.stpauls.co.uk/",
+   "hours": "관광: 월~토 8:30~16:30(마지막 입장 약 16:00), 돔 갤러리 9:30~(마지막 입장 16:15). 일요일은 예배 전용이라 관광 불가(2026-03-15~10-25 일요일에만 돔 갤러리 3곳 개방 — 오늘 11/8은 기간 밖)",
+   "closed": "일요일(관광 불가, 예배만). 행사·예배 따라 시간 변동",
+   "fee": "성인 £27 · 어린이 £10.50 (예배 참석은 무료, 건물 관람은 관광 티켓 필요)",
+   "facts": [
+    {
+     "claim": "렌(Christopher Wren), 1710년 완공",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Paul%27s_Cathedral",
+     "fix": null
+    },
+    {
+     "claim": "돔이 겉과 속이 다른 이중 껍질 — 바깥 납 돔... 안쪽 벽돌 원뿔이 꼭대기 랜턴 무게를 받는다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Paul%27s_Cathedral",
+     "fix": null
+    },
+    {
+     "claim": "남쪽(밀레니엄 브릿지 쪽)에서 올려다보는 각이 정면이고",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "한 바퀴 돌면 파터노스터 광장까지 본다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Paternoster_Square",
+     "fix": null
+    },
+    {
+     "claim": "1710년부터 1963년까지 런던에서 가장 높은 건물이었다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Paul%27s_Cathedral",
+     "fix": null
+    },
+    {
+     "claim": "밀레니엄 브릿지 남단(테이트 모던 앞)에서 다리를 선으로 삼아 돔을 정면에 넣는 구도",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "오후에 돔에 빛이 든다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 밖에서만 30분 / 한 바퀴 + 광장까지 50분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "millennium": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+    "https://www.citybridgefoundation.org.uk/news-and-blog/its-25-up-for-londons-iconic-millennium-bridge",
+    "https://www.citybridgefoundation.org.uk/news-and-blog/millennium-bridge-reopens-after-three-week-closure"
+   ],
+   "official": "https://www.citybridgefoundation.org.uk/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "포스터 + 애럽 + 조각가 앤서니 카로, 2000년",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "개통 이틀 만에 흔들려서 닫은 그 다리",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "사람들이 무의식적으로 흔들림에 발을 맞추면서 증폭됐고",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "댐퍼 91개를 달아",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": "댐퍼는 점성 유체 댐퍼 37개 + 동조질량 댐퍼 52개 = 89개(위키백과). 91개라는 출처는 찾지 못함. '댐퍼 약 90개'나 '점성 37 + 동조질량 52'로 표기"
+    },
+    {
+     "claim": "2년 뒤에 다시 열었다",
+     "status": "ok",
+     "url": "https://www.citybridgefoundation.org.uk/news-and-blog/its-25-up-for-londons-iconic-millennium-bridge",
+     "fix": null
+    },
+    {
+     "claim": "다리 중간에서 북쪽을 보면 세인트폴, 남쪽을 보면 테이트 모던",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Millennium_Bridge,_London",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 서서 보기 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "tate": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Tate_Modern",
+    "https://en.wikipedia.org/wiki/Bankside_Power_Station",
+    "https://www.tate.org.uk/visit/tate-modern",
+    "https://www.tate.org.uk/visit/tate-modern/level-10",
+    "https://www.tate.org.uk/visit/tate-modern/5-free-things-to-do-at-tate-modern",
+    "https://www.tate.org.uk/visit/tate-modern/visual-story",
+    "https://timeout.com/london/news/the-tate-modern-has-reopened-its-majestic-tenth-floor-viewing-gallery-090623",
+    "https://www.artvisitguide.com/tate-modern-london/"
+   ],
+   "official": "https://www.tate.org.uk/visit/tate-modern",
+   "hours": "미술관 일~목 10:00~18:00, 금·토 10:00~21:00(마지막 입장 30분 전). Level 10(블라바트닉 10층, 카페+전망): 일~목 10:00~17:00, 금·토 10:00~21:00(라스트오더 16:30/20:15), 엘리베이터로 Level 0~4에서만 접근. 2023 재개장 이후 3면만 개방(남쪽 주거동 쪽 폐쇄)",
+   "closed": null,
+   "fee": "상설 컬렉션 무료(모두), 특별전은 유료·예약 권장. Level 10 전망은 Tate가 '무료 전망'으로 안내",
+   "facts": [
+    {
+     "claim": "자일스 길버트 스콧이 1947년에 지은 발전소",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Bankside_Power_Station",
+     "fix": "스콧이 설계한 뱅크사이드 발전소는 1947년 착공, 두 단계(1947~52·1958~63)로 지어 1952년 서쪽 반과 굴뚝이 가동, 동쪽 반은 1963년 12월 완공. '1947~1963년에 지은'이 정확"
+    },
+    {
+     "claim": "헤르초크 & 드 뫼롱이 2000년에 미술관으로 바꾼 것",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tate_Modern",
+     "fix": null
+    },
+    {
+     "claim": "굴뚝을 안 헐고 남긴 게 전부를 결정했다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tate_Modern",
+     "fix": null
+    },
+    {
+     "claim": "10층 블라바트닉 전망 테라스는 무료",
+     "status": "ok",
+     "url": "https://www.tate.org.uk/visit/tate-modern/5-free-things-to-do-at-tate-modern",
+     "fix": null
+    },
+    {
+     "claim": "거기서 세인트폴 돔이 강 건너 정면으로 선다",
+     "status": "ok",
+     "url": "https://www.tate.org.uk/visit/tate-modern/5-free-things-to-do-at-tate-modern",
+     "fix": null
+    },
+    {
+     "claim": "10층 전망대(무료)에서 세인트폴·시티 스카이라인",
+     "status": "ok",
+     "url": "https://www.tate.org.uk/visit/tate-modern/5-free-things-to-do-at-tate-modern",
+     "fix": null
+    },
+    {
+     "claim": "터빈 홀은 2층 발코니에서 내려다보는 각도가 규모가 산다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 외관만 30분 / + 무료 전망 테라스 55분 / 터빈홀까지 80분",
+     "status": "unverified",
+     "url": "https://www.artvisitguide.com/tate-modern-london/",
+     "fix": null
+    }
+   ]
+  },
+  "borough": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Borough_Market",
+    "https://boroughmarket.org.uk/",
+    "https://boroughmarket.org.uk/visit-us/",
+    "https://boroughmarket.org.uk/traders/bread-ahead-bakery-school/",
+    "https://boroughmarket.org.uk/traders/turnips/",
+    "https://boroughmarket.org.uk/traders/neals-yard-dairy/",
+    "https://boroughmarket.org.uk/traders/monmouth-coffee-company/",
+    "https://boroughmarket.org.uk/market-blog/far-from-the-madding-crowd/",
+    "https://www.traverse-blog.com/need-to-know-borough-market/",
+    "https://boroughmarket.org.uk/traders/kappacasein/",
+    "https://boroughmarket.org.uk/recipes/a-borough-market-toastie/"
+   ],
+   "official": "https://boroughmarket.org.uk/",
+   "hours": "화~금 10:00~17:00, 토 9:00~17:00, 일 10:00~16:00. 12월(11/30~)과 공휴일은 별도 시간",
+   "closed": "월요일 휴무(12월 11/30 이후는 7일 영업, 크리스마스 기간 별도)",
+   "fee": "무료(시장 입장)",
+   "facts": [
+    {
+     "claim": "런던에서 가장 오래된 식품 시장",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Borough_Market",
+     "fix": "'가장 오래된'은 과장. 위키백과는 '런던에서 가장 크고 오래된 식품 시장 중 하나'. 시장은 자체적으로 약 1,000년 역사를 내세우고(1014년설) 지금 자리에는 1756년부터"
+    },
+    {
+     "claim": "지금 구조물은 1851년 철골이고 머리 위로 철도 고가가 지나간다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Borough_Market",
+     "fix": null
+    },
+    {
+     "claim": "카파카제인 치즈토스티",
+     "status": "ok",
+     "url": "https://boroughmarket.org.uk/traders/kappacasein/",
+     "fix": null
+    },
+    {
+     "claim": "브레드어헤드 도넛",
+     "status": "ok",
+     "url": "https://boroughmarket.org.uk/traders/bread-ahead-bakery-school/",
+     "fix": null
+    },
+    {
+     "claim": "몬머스 커피",
+     "status": "ok",
+     "url": "https://boroughmarket.org.uk/traders/monmouth-coffee-company/",
+     "fix": "(참고) 몬머스는 월~토 7:30~18:00, 일요일 휴무"
+    },
+    {
+     "claim": "생산자 좌판 쪽이 볼 게 많다 — 닐스야드 데어리, 터닙스, 생선 좌판",
+     "status": "wrong",
+     "url": "https://boroughmarket.org.uk/traders/neals-yard-dairy/",
+     "fix": "닐스야드 데어리는 치즈를 직접 만들지 않고 전국 제작자 치즈를 숙성·판매하는 치즈 소매상, 터닙스는 농장이 아니라 과채 도매·소매상. '생산자'가 아니라 '전문 소매·도매 좌판'으로 쓰고, 직접 만드는 곳을 꼽으려면 카파카제인(자체 치즈)이 맞음. 근거 https://boroughmarket.org.uk/traders/turnips/"
+    },
+    {
+     "claim": "토요일 11시 이후는 사람에 밀린다",
+     "status": "wrong",
+     "url": "https://boroughmarket.org.uk/visit-us/",
+     "fix": "공식 안내는 '주말·점심·공휴일이 가장 붐비고, 특히 토요일 오후'. 11시라는 시각 근거는 없음. 토요일 개장은 9시"
+    },
+    {
+     "claim": "체류 옵션: 안까지 · 먹기 120분 / 느긋하게 150분",
+     "status": "ok",
+     "url": "https://www.traverse-blog.com/need-to-know-borough-market/",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 훑기 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "shard": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/The_Shard",
+    "https://www.theviewfromtheshard.com/",
+    "https://www.theviewfromtheshard.com/plan-your-visit",
+    "https://www.theviewfromtheshard.com/opening-times/",
+    "https://fen-court.com/faqs/",
+    "https://iris.londoncouncils.gov.uk/en/the-shard-tickets.html"
+   ],
+   "official": "https://www.theviewfromtheshard.com/",
+   "hours": "오늘(일, 11/8) 11:00~19:00, 마지막 입장 18:00(바는 약 18:30 마감, 일몰 16:21). 요일·행사에 따라 변동 — 공식 opening-times 달력 확인",
+   "closed": null,
+   "fee": "유료. 공식 페이지엔 성인 요금 미표기(제3자 가이드: 사전예약 £28~32, 현장 £39~45)",
+   "facts": [
+    {
+     "claim": "렌초 피아노, 2012년, 310m",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/The_Shard",
+     "fix": null
+    },
+    {
+     "claim": "런던브릿지역 바로 위",
+     "status": "wrong",
+     "url": "https://www.theviewfromtheshard.com/",
+     "fix": "공식 안내는 런던브릿지역에서 도보 2분(주소 Joiner Street). 역 '바로 위'가 아니라 '바로 옆'"
+    },
+    {
+     "claim": "유료라서, 건물 자체를 보러 가는 거라면 무료인 가든 앳 120과 비교해 보라",
+     "status": "ok",
+     "url": "https://fen-court.com/faqs/",
+     "fix": null
+    },
+    {
+     "claim": "전망대보다 바깥에서 찍는 게 낫다 — 런던 브리지 역 앞 또는 타워 브리지에서 전체가 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "전망대 유리는 반사가 심하니 렌즈를 유리에 붙여라",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 낮 전망 90분 / 느긋하게 120분",
+     "status": "ok",
+     "url": "https://iris.londoncouncils.gov.uk/en/the-shard-tickets.html",
+     "fix": null
+    }
+   ]
+  },
+  "cityarch": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Leadenhall_Market",
+    "https://en.wikipedia.org/wiki/Lloyd%27s_building",
+    "https://en.wikipedia.org/wiki/122_Leadenhall_Street",
+    "https://en.wikipedia.org/wiki/30_St_Mary_Axe",
+    "https://en.wikipedia.org/wiki/20_Fenchurch_Street",
+    "https://en.wikipedia.org/wiki/Monument_to_the_Great_Fire_of_London",
+    "https://en.wikipedia.org/wiki/St_Andrew_Undershaft",
+    "https://en.wikipedia.org/wiki/Tower_Bridge",
+    "https://www.leadenhallmarket.co.uk/"
+   ],
+   "official": "https://www.leadenhallmarket.co.uk/",
+   "hours": "공공 구역은 24시간 통행 가능, 상점·바·식당 시간은 가게마다 다름",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "400m 반경에 로저스 둘, 포스터 하나, 비뇰리 하나가 모여 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/20_Fenchurch_Street",
+     "fix": null
+    },
+    {
+     "claim": "레든홀 마켓(호러스 존스, 1881",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Leadenhall_Market",
+     "fix": null
+    },
+    {
+     "claim": "타워브릿지와 같은 건축가",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tower_Bridge",
+     "fix": null
+    },
+    {
+     "claim": "로이즈 빌딩(리처드 로저스, 1986, 배관·엘리베이터를 바깥에 내건 그 건물)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Lloyd%27s_building",
+     "fix": null
+    },
+    {
+     "claim": "레든홀 빌딩(치즈그레이터)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/122_Leadenhall_Street",
+     "fix": null
+    },
+    {
+     "claim": "거킨(포스터, 2004)",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/30_St_Mary_Axe",
+     "fix": "2003년 12월 완공, 2004년 4월 개관. '2003 완공·2004 개관'으로 표기"
+    },
+    {
+     "claim": "모뉴먼트(렌 + 훅, 1677)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Monument_to_the_Great_Fire_of_London",
+     "fix": null
+    },
+    {
+     "claim": "거킨 발밑의 1532년 교회",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Andrew_Undershaft",
+     "fix": null
+    },
+    {
+     "claim": "주말엔 상점이 닫혀 사람이 없다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Leadenhall_Market",
+     "fix": null
+    },
+    {
+     "claim": "거킨·치즈그레이터·워키토키는 리든홀 스트리트에서 올려다보면 한 프레임에 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 핵심만 60분 / 한 바퀴 90분 / 천천히 120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "garden120": {
+   "refs": [
+    "https://fen-court.com/",
+    "https://fen-court.com/garden-at-120/",
+    "https://fen-court.com/faqs/",
+    "https://www.horizon22.co.uk/",
+    "https://flolondon.co.uk/all-posts/the-garden-at-120-the-best-free-views-in-london",
+    "https://en.wikipedia.org/wiki/The_Shard",
+    "https://en.wikipedia.org/wiki/20_Fenchurch_Street",
+    "https://en.wikipedia.org/wiki/Tower_Bridge",
+    "https://www.ianvisits.co.uk/articles/roof-garden-at-120-fenchurch-street-to-remain-open-at-weekends-35601/",
+    "https://www.timeout.com/london/attractions/garden-at-120"
+   ],
+   "official": "https://fen-court.com/garden-at-120/",
+   "hours": "여름(4/1~9/30) 평일 10:00–21:00, 주말 10:00–17:00 / 겨울(10/1~3/31) 평일 10:00–18:30, 주말 10:00–17:00 (오늘 11/8은 일요일 → 17:00까지)",
+   "closed": "공휴일(bank holidays) 휴무. 학교 방학 중 단체 예약 없음",
+   "fee": "무료, 개별 방문은 사전 예약 불필요(입장 전 공항식 보안검색)",
+   "facts": [
+    {
+     "claim": "펜처치가 120번지 15층 옥상정원",
+     "status": "ok",
+     "url": "https://fen-court.com/garden-at-120/",
+     "fix": null
+    },
+    {
+     "claim": "무료고 예약도 필요 없다",
+     "status": "ok",
+     "url": "https://fen-court.com/faqs/",
+     "fix": null
+    },
+    {
+     "claim": "거킨·로이즈·워키토키를",
+     "status": "wrong",
+     "url": "https://fen-court.com/garden-at-120/",
+     "fix": "공식 페이지는 보이는 건물로 거킨과 리든홀 빌딩(치즈그레이터)을 든다(fen-court 소개문). 워키토키·샤드·타워 브리지는 flolondon이 보인다고 명시. 로이즈는 어느 출처에서도 언급을 못 찾음 → 로이즈는 미확인으로 빼거나 '리든홀 빌딩'을 넣을 것"
+    },
+    {
+     "claim": "눈높이에 가까운 데서 본다",
+     "status": "wrong",
+     "url": "https://fen-court.com/garden-at-120/",
+     "fix": "공식 소개는 15층에서 거킨·리든홀 빌딩을 '올려다본다(look up at)'고 표현한다. 거킨(약 180m)·워키토키(약 160m)는 15층보다 한참 높아 눈높이가 아니라 올려다보는 각도 — '눈높이'는 과장 (높이 수치는 일반 상식, 문장 자체는 공식 출처)"
+    },
+    {
+     "claim": "300m 샤드",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/The_Shard",
+     "fix": null
+    },
+    {
+     "claim": "호라이즌 22(58층, 무료)",
+     "status": "ok",
+     "url": "https://www.horizon22.co.uk/",
+     "fix": null
+    },
+    {
+     "claim": "예약이 금방 매진되고 워크인은 보장이 안 된다",
+     "status": "unverified",
+     "url": "https://www.horizon22.co.uk/",
+     "fix": "공식 페이지는 날짜·시간을 골라 QR을 받는 사전예약 방식만 안내하고 매진·워크인 가능 여부는 명시하지 않음(오픈 초기 '30일 매진' 기사는 열람 못 함)"
+    },
+    {
+     "claim": "호라이즌 22가 더 높지만",
+     "status": "ok",
+     "url": "https://www.horizon22.co.uk/",
+     "fix": null
+    },
+    {
+     "claim": "타워 브리지·샤드·시티 스카이라인이 동쪽으로 열린다",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/20_Fenchurch_Street",
+     "fix": "위키 좌표로 계산하면 정원(데이터 좌표 51.5118,-0.0805) 기준 타워 브리지는 남동(약 152°, 780m), 샤드는 남남서(약 207°, 910m), 워키토키(20 Fenchurch, 위키 좌표 51.5113,-0.0835)는 서남서(약 255°, 220m). 동쪽이 아니라 주로 '남쪽'으로 열린다 (방위는 좌표 기반 계산 — 공식 출처는 방향을 말하지 않음)"
+    },
+    {
+     "claim": "오후 역광이라 아침이 낫다",
+     "status": "unverified",
+     "url": null,
+     "fix": "뷰가 남쪽이라 겨울엔 한낮 태양이 정면(고도 낮음)이라 종일 역광 쪽이고, 아침 해(남동)도 타워 브리지 쪽에서 오는 정면광. '아침이 낫다'는 근거 없음. 또 겨울엔 10:00 개장·평일 18:30/주말 17:00 마감이라 해질녘 시간대는 아예 못 감"
+    },
+    {
+     "claim": "체류 옵션: 올라가기 40분",
+     "status": "unverified",
+     "url": null,
+     "fix": "소요시간을 말하는 출처 없음(보안검색+엘리베이터+둘러보기 추정으로 무리 없음)"
+    }
+   ]
+  },
+  "tower": {
+   "refs": [
+    "https://media.hrp.org.uk/media/qgtbo2vf/tower-of-london-access-guide.pdf",
+    "https://en.wikipedia.org/wiki/Tower_of_London",
+    "https://parksandgardens.org/places/tower-gardens",
+    "https://travellinghan.com/2024/12/04/visiting-the-tower-of-london-everything-you-need-to-know/"
+   ],
+   "official": "https://www.hrp.org.uk/tower-of-london/",
+   "hours": "겨울(11/1~2/28) 화~토 09:00–16:30, 일·월 10:00–16:30, 마지막 입장 16:00 / 여름(3/1~10/31) 화~토 09:00–17:30, 일·월 10:00–17:30, 마지막 입장 17:00 (HRP 접근성 가이드 PDF에서 확인; hrp.org.uk 본 페이지는 403으로 못 열어 현재판 대조는 못 함)",
+   "closed": "12/24·25·26, 1/1",
+   "fee": "유료(성인 약 £35.8~38.0 — HRP 검색 결과 요약 기준, 가격 페이지는 직접 못 열음). 외곽 보도는 무료",
+   "facts": [
+    {
+     "claim": "정복왕 윌리엄이 1078년에 착공한 화이트 타워",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tower_of_London",
+     "fix": null
+    },
+    {
+     "claim": "13세기 성벽이 동심원으로 둘러싼다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tower_of_London",
+     "fix": null
+    },
+    {
+     "claim": "성벽과 해자를 끼고 도는 길은 공공 보도라 폐관시간이 없다",
+     "status": "ok",
+     "url": "https://parksandgardens.org/places/tower-gardens",
+     "fix": null
+    },
+    {
+     "claim": "17:30 마감은 안으로 들어갈 때만 걸린다",
+     "status": "wrong",
+     "url": "https://media.hrp.org.uk/media/qgtbo2vf/tower-of-london-access-guide.pdf",
+     "fix": "17:30 마감은 여름(3/1~10/31)뿐이다. 겨울(11/1~2/28)은 16:30 폐장·마지막 입장 16:00이라 오늘(11/8) 기준 16:30. 노트의 17:30은 시즌을 안 적은 채 여름 값"
+    },
+    {
+     "claim": "타워 브리지 북단 강변 산책로에서 성벽과 화이트 타워가 같이 잡힌다",
+     "status": "unverified",
+     "url": "https://travellinghan.com/2024/12/04/visiting-the-tower-of-london-everything-you-need-to-know/",
+     "fix": "출처는 타워 앞 강변에서 타워 브리지가 보인다고만 함. 화이트 타워가 같은 프레임에 들어오는지는 확인 못 함"
+    },
+    {
+     "claim": "내부에선 왕실 보석관 촬영 금지",
+     "status": "ok",
+     "url": "https://travellinghan.com/2024/12/04/visiting-the-tower-of-london-everything-you-need-to-know/",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 들어가기 180분",
+     "status": "ok",
+     "url": "https://media.hrp.org.uk/media/qgtbo2vf/tower-of-london-access-guide.pdf",
+     "fix": "(공식 권장: 최소 2~3시간 — 180분은 상단값)"
+    },
+    {
+     "claim": "체류 옵션: 밖에서만 35분",
+     "status": "unverified",
+     "url": null,
+     "fix": "출처 없음. 외곽 보도 한 바퀴 시간을 말하는 자료 못 찾음"
+    }
+   ]
+  },
+  "towerbridge": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Tower_Bridge",
+    "https://en.wikipedia.org/wiki/Horace_Jones_(architect)",
+    "https://en.wikipedia.org/wiki/Leadenhall_Market",
+    "https://www.towerbridge.org.uk/",
+    "https://www.towerbridge.org.uk/plan-your-visit",
+    "https://www.london-tickets.co.uk/tower-bridge/tower-bridge-at-night",
+    "https://atlondonbridge.com/directory/potters-fields-park",
+    "https://en.wikipedia.org/wiki/Potters_Fields_Park",
+    "https://democracy.cityoflondon.gov.uk/documents/s168641/Item 14 - BHE Bridge Lighting Policy - FINAL.pdf",
+    "https://www.ge.com/news/press-releases/glittering-lighting-makeover-tower-bridge-readies-londons-world-famous-icon-0",
+    "https://www.booking.com/attractions/gb/prbcb8atvur6-admission-to-the-tower-bridge-exhibition.html"
+   ],
+   "official": "https://www.towerbridge.org.uk/",
+   "hours": "전시(고가 보도·유리바닥·엔진룸) 매일 09:30–18:00, 마지막 입장 17:00 (겨울 별도 시간 없음). 다리 도로·보도는 상시 통행",
+   "closed": "12/24·25·26 (1/1은 10:00 개장)",
+   "fee": "다리 건너기 무료; 전시는 유료(가격은 공식 페이지에서 못 읽음, 6주 전부터 예약)",
+   "facts": [
+    {
+     "claim": "호러스 존스, 1894년",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Tower_Bridge",
+     "fix": "1894년(6/30 개통)은 맞지만 존스는 1887년에 죽어 완공을 못 봤다. 존스는 석조 외관 디자인, 엔지니어 존 울프 배리가 개폐 구조를 설계하고 존스 사후 건축까지 이어 완공 → '호러스 존스 + 존 울프 배리, 1894년'으로 표기"
+    },
+    {
+     "claim": "레든홀 마켓과 같은 사람이 지었다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Leadenhall_Market",
+     "fix": "레든홀 마켓은 존스가 1881년 설계(엄밀히는 '설계했다')"
+    },
+    {
+     "claim": "고딕 석조는 빅토리아식 외피일 뿐이고 속은 강철 뼈대",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tower_Bridge",
+     "fix": null
+    },
+    {
+     "claim": "낮에는 회색 철교 한 채지만",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Tower_Bridge",
+     "fix": "다리는 파랑·흰색으로 칠해져 있다(위키: 최근 작업이 'repainting in blue and white'). 회색이 아님"
+    },
+    {
+     "claim": "밤 조명은 파란색이라",
+     "status": "wrong",
+     "url": "https://democracy.cityoflondon.gov.uk/documents/s168641/Item 14 - BHE Bridge Lighting Policy - FINAL.pdf",
+     "fix": "시티 오브 런던 문서: 2012년 LED 설치 이후 매일 밤 '깨끗한 흰색(clean white)' 조명이 기본이고 파랑은 NHS 등 특별한 날 한정. 제3자 사이트는 따뜻한 금빛 석조+파란 포인트로 묘사 → '흰빛 조명'으로 고칠 것"
+    },
+    {
+     "claim": "타워 브리지 정면은 템스 남쪽 '포터스 필즈 공원'에서 찍는다",
+     "status": "ok",
+     "url": "https://atlondonbridge.com/directory/potters-fields-park",
+     "fix": "포터스 필즈는 다리 남서쪽(위키). 타워 브리지 쪽에서 두 탑·고가 보도·템스를 한 프레임에 담는 야간 촬영지로 소개(london-tickets)"
+    },
+    {
+     "claim": "해진 직후 30분이 가장 예쁘다",
+     "status": "ok",
+     "url": "https://www.london-tickets.co.uk/tower-bridge/tower-bridge-at-night",
+     "fix": "출처: 일몰 후 20~40분 블루아워가 조명과 하늘색 균형이 좋다고 함(의견성, 시간대는 일치)"
+    },
+    {
+     "claim": "버틀러스 워프 쪽에서 보는 각이 제일 좋다",
+     "status": "unverified",
+     "url": "https://www.london-tickets.co.uk/tower-bridge/tower-bridge-at-night",
+     "fix": "출처는 버틀러스 워프를 '가까이서 보는 극적인 각', 포터스 필즈를 '두 탑 전체가 들어오는 넓은 각'으로 구분. 같은 데이터의 photo 팁은 포터스 필즈를 추천해 서로 어긋남"
+    },
+    {
+     "claim": "체류 옵션: 건너기 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": "출처 없음(다리 길이 약 290m라 건너기만이면 무리 없음)"
+    },
+    {
+     "claim": "체류 옵션: 유리바닥 전시까지 75분",
+     "status": "unverified",
+     "url": "https://www.booking.com/attractions/gb/prbcb8atvur6-admission-to-the-tower-bridge-exhibition.html",
+     "fix": "리셀러(booking.com) 표기는 1시간30분. 공식 페이지는 소요시간 미표기 → 75분은 다소 짧을 수 있음(75~90분)"
+    }
+   ]
+  },
+  "buckingham": {
+   "refs": [
+    "https://www.householddivision.org.uk/changing-the-guard",
+    "https://www.householddivision.org.uk/changing-the-guard-calendar",
+    "https://www.householddivision.org.uk/changing-the-guard-schedule",
+    "https://en.wikipedia.org/wiki/Buckingham_Palace",
+    "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+    "https://www.royal.uk/changing-guard"
+   ],
+   "official": "https://www.householddivision.org.uk/changing-the-guard-calendar",
+   "hours": "근위 교대(Buckingham Palace) 11:00, 약 45분. 2026-11 일정: 11/9(월)·11(수)·13(금)·16·18·20·23·25·27·30. 일요일 10:00은 별도 퍼레이드. 궁 내부 State Rooms는 여름 개방(다음 2027-07-08~09-26), 겨울엔 East Wing 가이드 투어 2026-11-06~2027-01-31 (rct.uk는 403으로 못 열고 검색 결과 요약 기준)",
+   "closed": "교대식은 월·수·금만, 우천·행사 시 직전 변경·취소 가능(10:45까지 결정)",
+   "fee": "밖에서 보기·교대식 관람 무료. 내부 입장은 유료(예약)",
+   "facts": [
+    {
+     "claim": "경비병 교대식은 11:00 시작",
+     "status": "ok",
+     "url": "https://www.householddivision.org.uk/changing-the-guard-calendar",
+     "fix": "(군 지휘 기준 궁 앞 11:00; 부대는 10:30 웰링턴 배럭 출발)"
+    },
+    {
+     "claim": "45분",
+     "status": "ok",
+     "url": "https://www.householddivision.org.uk/changing-the-guard",
+     "fix": null
+    },
+    {
+     "claim": "좋은 자리를 잡으려면 한 시간 전엔 와야 한다",
+     "status": "ok",
+     "url": "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+     "fix": "울타리 앞 최전열은 45~60분 전, 빅토리아 기념비는 조금 덜"
+    },
+    {
+     "claim": "빅토리아 기념비 계단이 전체를 보기 좋고",
+     "status": "ok",
+     "url": "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+     "fix": null
+    },
+    {
+     "claim": "더 몰 쪽은 군악대 행진을 가까이 본다",
+     "status": "ok",
+     "url": "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+     "fix": null
+    },
+    {
+     "claim": "정면은 1913년 애스턴 웹이 새로 붙인 포틀랜드 석재 껍데기",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Buckingham_Palace",
+     "fix": "위키는 포틀랜드 석재 개장(1913, 애스턴 웹)까지 확인. 이전 외벽이 캉(Caen) 석재였다는 건 이 페이지에서 확인 못 함"
+    },
+    {
+     "claim": "교대식까지(11시)",
+     "status": "wrong",
+     "url": "https://www.householddivision.org.uk/changing-the-guard-calendar",
+     "fix": "교대식은 매일이 아니라 월·수·금(2026-11 일정은 11/9·11·13·16·18·20·23·25·27·30). 일요일(오늘 11/8)은 교대식 없음, 10:00 퍼레이드. 노트에 요일 규칙이 없어 옵션이 매일 가능한 것처럼 읽힘"
+    },
+    {
+     "claim": "교대식은 빅토리아 기념비 계단 위에서 보는 게 가장 잘 보인다(10시 전 도착)",
+     "status": "ok",
+     "url": "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+     "fix": "'가장 잘'은 과장 소지: 출처는 기념비=가장 넓은 시야, 울타리 앞=가장 가까운 시야로 구분"
+    },
+    {
+     "claim": "궁 정면은 오후 순광",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Buckingham_Palace",
+     "fix": "정면(East Front)은 동향이라 순광은 오전. 오후엔 해가 궁 뒤(남서~서)에 있어 기념비에서 찍으면 역광 (방향은 위키 East Front 기준, 해 위치는 추론)"
+    },
+    {
+     "claim": "체류 옵션: 교대식까지(11시) 105분",
+     "status": "ok",
+     "url": "https://travjoy.com/blog/changing-of-the-guard-at-buckingham-palace-a-complete-guide-to-times-route-and-the-best-places-to-watch",
+     "fix": "한 시간 전 도착 + 45분 = 105분, 출처 수치와 부합"
+    },
+    {
+     "claim": "체류 옵션: 밖에서 보기 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": "소요시간 출처 없음(추정으로 무리 없음)"
+    }
+   ]
+  },
+  "greenpark": {
+   "refs": [
+    "https://www.royalparks.org.uk/visit/parks/green-park",
+    "https://royalparks.org.uk/visit/parks/green-park/faqs",
+    "https://en.wikipedia.org/wiki/Green_Park",
+    "https://strawberrytours.com/green-park-london"
+   ],
+   "official": "https://www.royalparks.org.uk/visit/parks/green-park",
+   "hours": "일부 보행자·차량 게이트 05:00–24:00, 연중무휴",
+   "closed": "정기 휴무 없음(행사·정비 시 임시 폐쇄는 공식 페이지에 공지)",
+   "fee": "공식 페이지에 요금 언급 없음(공원 출입은 무료로 알려짐 — 제3자 strawberrytours; 공중화장실 20p)",
+   "facts": [
+    {
+     "claim": "버킹엄 궁전 북쪽의 왕립공원",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Green_Park",
+     "fix": "콘스티튜션 힐 건너 궁전 정원·앞마당의 북쪽, Royal Parks 관리"
+    },
+    {
+     "claim": "궁전에서 피카딜리 쪽으로 가로질러 걷는 길",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Green_Park",
+     "fix": "공원 북쪽 경계가 피카딜리"
+    },
+    {
+     "claim": "가을 낙엽 길이 좋다",
+     "status": "unverified",
+     "url": "https://royalparks.org.uk/visit/parks/green-park/faqs",
+     "fix": "공식 소개는 성숙한 나무·풀밭 공원으로 설명하고 가을 단풍 정보는 없음(의견성)"
+    },
+    {
+     "claim": "나무 사이로 궁전이 보이는 구도",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Green_Park",
+     "fix": "위키 사진 설명 'Buckingham Palace, as seen from Green Park' — 가시성 확인, '나무 사이' 구도는 사진 설명 수준"
+    },
+    {
+     "claim": "체류 옵션: 빠르게 15분",
+     "status": "unverified",
+     "url": "https://strawberrytours.com/green-park-london",
+     "fix": "궁 정문~피카딜리 구간 시간 출처 없음. 참고: 공원 출구~피카딜리 서커스 도보 약 11분, 하이드파크~궁 통과 약 20분(제3자)"
+    },
+    {
+     "claim": "체류 옵션: 걸으며 30분",
+     "status": "unverified",
+     "url": "https://strawberrytours.com/green-park-london",
+     "fix": "출처는 방문 1~1.5시간 권장, 통과 20분 등 시나리오별로 다름. 30분은 범위 안(추정)"
+    }
+   ]
+  },
+  "fortnum": {
+   "refs": [
+    "https://www.fortnumandmason.com/stores/piccadilly",
+    "https://www.fortnumandmason.com/",
+    "https://en.wikipedia.org/wiki/Fortnum_%26_Mason"
+   ],
+   "official": "https://www.fortnumandmason.com/stores/piccadilly",
+   "hours": "월~토 10:00–20:00, 일 12:00–18:00(11:30부터 둘러보기). 11/5 10:00–21:00, 11/10 10:00–18:00, 11/12~12/13 10:00–21:00(일 12:00–18:00), 12/14~23 09:00–22:00",
+   "closed": "12/25·12/26 휴무 (12/24 09:00–18:00, 1/1 11:00–19:00)",
+   "fee": "입장 무료",
+   "facts": [
+    {
+     "claim": "피카딜리 181번지",
+     "status": "ok",
+     "url": "https://www.fortnumandmason.com/stores/piccadilly",
+     "fix": null
+    },
+    {
+     "claim": "옷 파는 백화점이 아니라 본체가 식품관이다",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Fortnum_%26_Mason",
+     "fix": "위키는 '고급 백화점(upmarket department store)'이며 식품이 중심. 공식 층 안내: 식품관은 지하1층(Lower Ground), 지상층은 티·레스토랑·선물·뷰티·홈(2층 선물/뷰티, 4층 다이아몬드 주빌리 티 살롱). '식품·선물 중심 백화점'이 정확"
+    },
+    {
+     "claim": "차·잼·비스킷·초콜릿·꿀",
+     "status": "unverified",
+     "url": "https://www.fortnumandmason.com/",
+     "fix": "공식 사이트에서 차·비스킷·초콜릿·햄퍼는 확인, 잼·꿀은 메뉴에서 확인 못 함"
+    },
+    {
+     "claim": "규모가 작아 40분이면 돈다",
+     "status": "wrong",
+     "url": "https://www.fortnumandmason.com/stores/piccadilly",
+     "fix": "공식 층 안내상 지하1층~5층(7개 층, 4층 티 살롱·5층 프라이빗 다이닝). '규모가 작다'는 부정확. 식품관(지하1층)만 훑는 최소 40분은 가능(추정), 선물 쇼핑은 1시간+ 잡는 게 안전"
+    },
+    {
+     "claim": "1층 차 진열대와 나선 계단",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Fortnum_%26_Mason",
+     "fix": "공식: 지상층(Ground)에 티 카운터. 위키 사진 설명에 이중나선(double-helix) 계단"
+    },
+    {
+     "claim": "점원에게 미리 물어보면 대부분 괜찮다고 한다",
+     "status": "unverified",
+     "url": null,
+     "fix": "매장 촬영 규정 출처 못 찾음"
+    },
+    {
+     "claim": "체류 옵션: 식품관만 40분",
+     "status": "unverified",
+     "url": null,
+     "fix": "출처 없음(식품관은 지하1층 — '1층' 아님)"
+    },
+    {
+     "claim": "체류 옵션: 천천히 70분",
+     "status": "unverified",
+     "url": null,
+     "fix": "출처 없음(검색 요약은 1~2시간 안내이나 열람 못 한 페이지 기반)"
+    }
+   ]
+  },
+  "britishmuseum": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/British_Museum",
+    "https://www.ianvisits.co.uk/venues/british-museum/",
+    "https://www.london-tickets.co.uk/british-museum/collections/",
+    "https://www.london-tickets.co.uk/pt/british-museum/mummies/",
+    "https://en.wikipedia.org/wiki/British_Museum_Department_of_Ancient_Egypt_and_Sudan",
+    "https://en.wikipedia.org/wiki/Rosetta_Stone"
+   ],
+   "official": "https://www.britishmuseum.org/visit",
+   "hours": "매일 10:00–17:00, 금요일 20:30까지",
+   "closed": "12/24–26",
+   "fee": "무료(특별전은 유료)",
+   "facts": [
+    {
+     "claim": "돈 안 낸다. … 유료는 특별전뿐이다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/British_Museum",
+     "fix": null
+    },
+    {
+     "claim": "로제타석·파르테논 마블·그레이트 코트 전부 상설이라 무료",
+     "status": "ok",
+     "url": "https://www.ianvisits.co.uk/venues/british-museum/",
+     "fix": null
+    },
+    {
+     "claim": "홈페이지에서 무료 시간대 예약을 해두면 줄을 건너뛴다",
+     "status": "ok",
+     "url": "https://www.ianvisits.co.uk/venues/british-museum/",
+     "fix": null
+    },
+    {
+     "claim": "파르테논 마블(18실)",
+     "status": "ok",
+     "url": "https://www.london-tickets.co.uk/british-museum/collections/",
+     "fix": null
+    },
+    {
+     "claim": "이집트 미라(62·63실)",
+     "status": "ok",
+     "url": "https://www.london-tickets.co.uk/pt/british-museum/mummies/",
+     "fix": null
+    },
+    {
+     "claim": "그레이트 코트 유리 지붕",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/British_Museum",
+     "fix": null
+    },
+    {
+     "claim": "로제타 스톤은 사람이 많으니",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Rosetta_Stone",
+     "fix": null
+    },
+    {
+     "claim": "개장 직후(10시)에 바로 간다",
+     "status": "ok",
+     "url": "https://www.ianvisits.co.uk/venues/british-museum/",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 찍어서 90분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 제대로 150분",
+     "status": "ok",
+     "url": "https://www.london-tickets.co.uk/british-museum/collections/",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 통째로 210분",
+     "status": "ok",
+     "url": "https://www.london-tickets.co.uk/british-museum/collections/",
+     "fix": null
+    }
+   ]
+  },
+  "trafalgar": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Trafalgar_Square",
+    "https://en.wikipedia.org/wiki/National_Gallery,_London",
+    "https://www.nationalgallery.org.uk/visiting/opening-times-and-admission",
+    "https://www.london.gov.uk/who-we-are/city-halls-buildings-and-squares/trafalgar-square",
+    "https://lasttrip.uk/walk-from/trafalgar-square.html",
+    "https://coventgarden.london/about/getting-to-covent-garden",
+    "https://en.wikipedia.org/wiki/Whitehall",
+    "https://www.london-tickets.co.uk/national-gallery/plan-your-visit/"
+   ],
+   "official": "https://www.london.gov.uk/who-we-are/city-halls-buildings-and-squares/trafalgar-square",
+   "hours": "광장: 공식 페이지에 시간 명시 없음 / 내셔널 갤러리: 매일 10:00–18:00, 금요일 21:00까지",
+   "closed": "내셔널 갤러리 12/24–26, 1/1(11/17은 동관만 17:00 종료)",
+   "fee": "내셔널 갤러리 상설전 무료(특별전 일부 유료), 광장 요금 공식 명시 없음",
+   "facts": [
+    {
+     "claim": "넬슨 기둥과 분수가 있는 광장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Trafalgar_Square",
+     "fix": null
+    },
+    {
+     "claim": "내셔널 갤러리(윌킨스 1838 …",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/National_Gallery,_London",
+     "fix": null
+    },
+    {
+     "claim": "세인스버리 윙 1991",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/National_Gallery,_London",
+     "fix": null
+    },
+    {
+     "claim": "북쪽 내셔널 갤러리 … 상설 무료",
+     "status": "ok",
+     "url": "https://www.nationalgallery.org.uk/visiting/opening-times-and-admission",
+     "fix": null
+    },
+    {
+     "claim": "코벤트 가든이 도보 7분이다",
+     "status": "wrong",
+     "url": "https://lasttrip.uk/walk-from/trafalgar-square.html",
+     "fix": "트라팔가 광장→코벤트 가든 약 761m, 도보 약 10분 (https://lasttrip.uk/walk-from/trafalgar-square.html). 코벤트 가든 공식 페이지의 6분은 차링크로스 역에서 잰 값."
+    },
+    {
+     "claim": "내셔널 갤러리 계단 위에서 광장 전체와 빅벤 방향이 한 프레임",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "사자상 위에 올라가는 사진은 줄을 선다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 광장만 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 내셔널 갤러리까지 80분",
+     "status": "wrong",
+     "url": "https://www.london-tickets.co.uk/national-gallery/plan-your-visit/",
+     "fix": "내셔널 갤러리 하이라이트만 봐도 약 1.5–2시간, 보통 2–3시간 (광장 20분 포함 시 약 110–140분 이상)."
+    }
+   ]
+  },
+  "themall": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/The_Mall,_London",
+    "https://en.wikipedia.org/wiki/Carlton_House_Terrace",
+    "https://en.wikipedia.org/wiki/Admiralty_Arch",
+    "https://en.wikipedia.org/wiki/John_Nash_(architect)",
+    "https://www.royalparks.org.uk/visit/parks/st-jamess-park"
+   ],
+   "official": "https://www.royalparks.org.uk/visit/parks/st-jamess-park",
+   "hours": "인접 St James's Park 보행자 출입구 일부 05:00–24:00 (더 몰 자체 시간 명시 없음)",
+   "closed": "토·일·공휴일·의식 행사일에는 차량 통제(보행 영향 명시 없음)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "버킹엄 궁전에서 동쪽으로 뻗은 1km 직선",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/The_Mall,_London",
+     "fix": null
+    },
+    {
+     "claim": "존 내시가 1820년대에 섭정 왕자를 위해 그린 런던 최대의 도시설계 축",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/The_Mall,_London",
+     "fix": "더 몰의 의례 가로 정비·애드미럴티 아치·빅토리아 기념비는 애스턴 웹(1900년대) 설계. 내시는 칼튼 하우스 테라스(1827–32, 왕실령 개발)·리젠트가·세인트제임스 공원 조경을 맡음. 칼튼 하우스 테라스는 섭정 왕자의 주문이 아니라 그가 조지 4세가 되어 떠난 칼튼 하우스 부지에 지은 왕실령 개발."
+    },
+    {
+     "claim": "칼튼 하우스 테라스(내시, 1832 — 하얀 기둥 열이 끝없이 이어지는 그것)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Carlton_House_Terrace",
+     "fix": null
+    },
+    {
+     "claim": "왼쪽에 칼튼 하우스 테라스",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "애드미럴티 아치(애스턴 웹, 1912)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Admiralty_Arch",
+     "fix": null
+    },
+    {
+     "claim": "궁전에서 트라팔가까지 통째로 한 사람의 그림이다",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Admiralty_Arch",
+     "fix": "한 사람의 설계가 아니다. 더 몰·애드미럴티 아치·빅토리아 기념비·궁전 정면은 애스턴 웹(1900년대), 칼튼 하우스 테라스는 내시(1827–32)."
+    },
+    {
+     "claim": "붉은 길이 길게 뻗는 구도",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/The_Mall,_London",
+     "fix": null
+    },
+    {
+     "claim": "깃발이 걸린 날이면 더 좋다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/The_Mall,_London",
+     "fix": "국빈 방문 때 영국기와 방문국 국기가 걸림."
+    },
+    {
+     "claim": "체류 옵션: 빠르게 20분 / 걸으며 보기 35분 / 천천히 55분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "carnaby": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Regent_Street",
+    "https://en.wikipedia.org/wiki/Liberty_(department_store)",
+    "https://en.wikipedia.org/wiki/Carnaby_Street",
+    "https://en.wikipedia.org/wiki/Soho",
+    "https://en.wikipedia.org/wiki/Lush_(company)",
+    "https://www.thisissoho.co.uk/carnaby-street/",
+    "https://www.regentstreetonline.com",
+    "https://retail-week.com/stores/lush-to-open-the-largest-store-in-its-armoury-on-oxford-street/5063934.article",
+    "https://en.wikipedia.org/wiki/John_Nash_(architect)"
+   ],
+   "official": "https://www.thisissoho.co.uk/carnaby-street/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "피카딜리 서커스에서 활처럼 휘는 쿼드런트(내시가 땅 모양 때문에 꺾을 수밖에 없던 걸 설계의 중심으로 삼은 자리)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Regent_Street",
+     "fix": null
+    },
+    {
+     "claim": "한 블록 동쪽이 카나비",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Soho",
+     "fix": null
+    },
+    {
+     "claim": "그 끝이 리버티",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Liberty_(department_store)",
+     "fix": null
+    },
+    {
+     "claim": "1924년 모조 튜더인데 해체한 군함 두 척의 목재로 지었다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Liberty_(department_store)",
+     "fix": null
+    },
+    {
+     "claim": "러쉬 플래그십(3층, 세계 최대)",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Lush_(company)",
+     "fix": "옥스퍼드 스트리트 매장은 2015년 개점 당시 러쉬의 최대 매장(9,500 sq ft)이었으나 '세계 최대'는 아님. 2019년 리버풀에 세계 최대 매장이 개점. (3층은 미확인)"
+    },
+    {
+     "claim": "올 소울즈 랭엄 플레이스(내시, 1824)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Regent_Street",
+     "fix": null
+    },
+    {
+     "claim": "입구 아치 간판과 거리 장식(계절마다 바뀐다)",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Carnaby_Street",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 걷기만 35 / 쇼핑까지 60 / 러쉬까지 80 / 충분히 110분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "somerset": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Somerset_House",
+    "https://www.somersethouse.org.uk/visit-us",
+    "https://www.somersethouse.org.uk/visit-us/opening-times-and-prices",
+    "https://www.somersethouse.org.uk/getting-here",
+    "https://www.somersethouse.org.uk/whats-on/skate-somerset-house",
+    "https://next.hirespace.com/Spaces/London/268708/Somerset-House/The-River-Terrace/Pop-Up"
+   ],
+   "official": "https://www.somersethouse.org.uk/visit-us",
+   "hours": "매일 08:00–23:00 (스트랜드 입구·리버 테라스 08:00–23:00, 빅토리아 임뱅크먼트 그레이트 아치 입구 08:00–19:00, 코톨드 갤러리 10:00–18:00)",
+   "closed": "정기 휴무 명시 없음(안뜰은 콘서트 등 행사로 간헐 폐쇄)",
+   "fee": "입장 무료(스케이팅은 유료 티켓, 2026-11-11~2027-01-10)",
+   "facts": [
+    {
+     "claim": "윌리엄 체임버스, 1776년",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Somerset_House",
+     "fix": null
+    },
+    {
+     "claim": "영국 신고전주의의 대표작",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Somerset_House",
+     "fix": null
+    },
+    {
+     "claim": "55개 분수가 깔린 안뜰은 무료로 들어간다",
+     "status": "ok",
+     "url": "https://www.somersethouse.org.uk/whats-on/skate-somerset-house",
+     "fix": "분수는 현재(11월) 꺼져 있음(공식 방문 페이지)."
+    },
+    {
+     "claim": "밤에 조명이 들어오면 사각 안뜰이 통째로 무대가 된다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "스트랜드와 템스 사이",
+     "status": "ok",
+     "url": "https://www.somersethouse.org.uk/getting-here",
+     "fix": null
+    },
+    {
+     "claim": "코벤트 가든에서 도보 5분",
+     "status": "wrong",
+     "url": "https://www.somersethouse.org.uk/getting-here",
+     "fix": "공식: 코벤트 가든 역에서 도보 약 8–10분(템플 역이 약 5분)."
+    },
+    {
+     "claim": "겨울엔 아이스링크",
+     "status": "ok",
+     "url": "https://www.somersethouse.org.uk/whats-on/skate-somerset-house",
+     "fix": null
+    },
+    {
+     "claim": "여름엔 아이들이 뛰어드는 장면",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "강변 테라스에서 워털루 브리지 야경",
+     "status": "unverified",
+     "url": "https://next.hirespace.com/Spaces/London/268708/Somerset-House/The-River-Terrace/Pop-Up",
+     "fix": "리버 테라스는 08:00–23:00 개방, 템스 조망은 확인되나 워털루 브리지가 보인다는 명시는 못 찾음."
+    },
+    {
+     "claim": "체류 옵션: 안뜰 30 / 강변 테라스까지 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "stpancras": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+    "https://en.wikipedia.org/wiki/Midland_Grand_Hotel",
+    "https://en.wikipedia.org/wiki/Giles_Gilbert_Scott",
+    "https://stpancras-highspeed.com/faqs/",
+    "https://stpancras-highspeed.com/",
+    "https://www.kingscross.co.uk/coal-drops-yard"
+   ],
+   "official": "https://stpancras-highspeed.com/faqs/",
+   "hours": "역은 24시간 연중무휴 공개(상점·카페는 별도). 인접 Coal Drops Yard 상점 11:00–19:00, 일 17:00까지",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "붉은 벽돌 고딕 전면은 조지 길버트 스콧의 … 미들랜드 그랜드 호텔",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": null
+    },
+    {
+     "claim": "1873년 미들랜드 그랜드 호텔",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Midland_Grand_Hotel",
+     "fix": "동익 1873년 5월 개관, 호텔 전체는 1876년 봄 완공."
+    },
+    {
+     "claim": "발로의 1868년 열차고",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": null
+    },
+    {
+     "claim": "당시 세계 최대 단일 경간(73m)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": "위키 기준 폭 240ft(73.2m), 벽 간 245ft 6in(74.8m); 완공 당시 세계 최대 구조물·실내 공간."
+    },
+    {
+     "claim": "조지 길버트 스콧이 테이트 모던(뱅크사이드 발전소)을 지은 자일스 길버트 스콧의 할아버지",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Giles_Gilbert_Scott",
+     "fix": null
+    },
+    {
+     "claim": "유로스타가 여기서 뜬다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": null
+    },
+    {
+     "claim": "길 건너(유스턴 로드)에서 전체가 들어온다",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": "호텔 정면이 유스턴 로드 쪽이라는 것은 확인(Euston Road 촬영 캡션), '전체가 한 프레임'은 미확인."
+    },
+    {
+     "claim": "안에선 시계 아래 연인상",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St_Pancras_railway_station",
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 역 구경 40 / 콜드롭스 야드까지 100분",
+     "status": "unverified",
+     "url": null,
+     "fix": "콜드롭스 야드는 도보 약 5–7분(검색 요약, 직접 열람 페이지는 거리 명시 없음)."
+    }
+   ]
+  },
+  "bigben": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Big_Ben",
+    "https://en.wikipedia.org/wiki/Elizabeth_Tower",
+    "https://en.wikipedia.org/wiki/Palace_of_Westminster",
+    "https://en.wikipedia.org/wiki/Westminster_Bridge",
+    "https://londonwebcam.co.uk/blog/best-places-to-photograph-big-ben/"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "국회의사당 시계탑",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Elizabeth_Tower",
+     "fix": null
+    },
+    {
+     "claim": "강 건너 남쪽 둑이나 웨스트민스터 다리에서 정면이 잡힌다",
+     "status": "ok",
+     "url": "https://londonwebcam.co.uk/blog/best-places-to-photograph-big-ben/",
+     "fix": null
+    },
+    {
+     "claim": "밤에 조명이 들어오면 그때가 본체다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "웨스트민스터 브리지 남단에서 시계탑과 국회의사당이 같이 잡힌다",
+     "status": "ok",
+     "url": "https://londonwebcam.co.uk/blog/best-places-to-photograph-big-ben/",
+     "fix": null
+    },
+    {
+     "claim": "밤 조명이 켜진 뒤가 가장 유명한 장면",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Big_Ben",
+     "fix": "시계 문자판은 1876년부터 해질녘~새벽 상시 점등(위키 확인)까지만 사실. '가장 유명한 장면'은 의견이라 미확인."
+    },
+    {
+     "claim": "체류 옵션: 밖에서 보기 30분",
+     "status": "ok",
+     "url": "https://londonwebcam.co.uk/blog/best-places-to-photograph-big-ben/",
+     "fix": null
+    }
+   ]
+  },
+  "londoneye": {
+   "refs": [
+    "https://www.londoneye.com/tickets-and-prices/",
+    "https://www.londoneye.com/plan-your-visit/",
+    "https://www.londoneye.com/plan-your-visit/before-you-visit/opening-hours/",
+    "https://www.londoneye.com/plan-your-visit/information-and-support/faqs/",
+    "https://en.wikipedia.org/wiki/London_Eye",
+    "https://en.wikipedia.org/wiki/Westminster_Bridge",
+    "https://www.london-tickets.co.uk/london-eye-tickets/views-from-london-eye/",
+    "https://www.londoneye.com/our-company/blog/best-view-of-london/",
+    "https://londonwebcam.co.uk/blog/best-places-to-photograph-big-ben/"
+   ],
+   "official": "https://www.londoneye.com/",
+   "hours": "11:00-18:00 (공식 페이지 11/8 당일 표기, 윈터). 5~9월 10:00-20:30, 주말·학교/공휴일은 보통 10:00-20:30. 입장 마감은 폐장 30-45분 전. 리버크루즈 10:45-17:45 별도",
+   "closed": "12/25 휴무, 매년 1월 한 달 정비 휴장",
+   "fee": "스탠다드 온라인 £29(현장 £39), 아동 2-15세 £26(현장 £35), 2세 미만 무료. 온라인 예매가 저렴하고 타임슬롯 보장",
+   "facts": [
+    {
+     "claim": "2000년 밀레니엄 관람차",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/London_Eye",
+     "fix": null
+    },
+    {
+     "claim": "한 바퀴 30분",
+     "status": "ok",
+     "url": "https://www.londoneye.com/plan-your-visit/information-and-support/faqs/",
+     "fix": null
+    },
+    {
+     "claim": "빅벤 건너편이라 둘을 한 자리에서 본다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Westminster_Bridge",
+     "fix": null
+    },
+    {
+     "claim": "대관람차 자체는 웨스트민스터 브리지에서",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/London_Eye",
+     "fix": null
+    },
+    {
+     "claim": "캡슐 안에선 빅벤 쪽 창을 잡아라(올라갈 때 서쪽 창)",
+     "status": "unverified",
+     "url": "https://www.london-tickets.co.uk/london-eye-tickets/views-from-london-eye/",
+     "fix": "회전 방향·올라갈 때 어느 창인지 공식·매체 어디도 명시 안 함. 매체는 '정점에서 국회의사당이 정북 방향', '올라가며 동쪽은 시티 스카이라인'이라고만 서술. 방위 단정 대신 '빅벤은 강 건너 서쪽·남서쪽, 한 바퀴 내내 보인다'로 쓰는 게 안전."
+    },
+    {
+     "claim": "체류 옵션: 밖에서 보기 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 타기 60분",
+     "status": "ok",
+     "url": "https://www.londoneye.com/plan-your-visit/information-and-support/faqs/",
+     "fix": "FAQ 기준 대기 20-30분(스탠다드)+탑승 30분 = 50-60분, 성수기 1시간+ 대기 가능"
+    }
+   ]
+  },
+  "covent": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Covent_Garden",
+    "https://en.wikipedia.org/wiki/Covent_Garden_Piazza",
+    "https://www.coventgarden.london/",
+    "https://www.coventgarden.london/faq/",
+    "https://www.coventgarden.london/shop/markets",
+    "https://coventgarden.london/visit/market-building-piazza",
+    "https://www.theclermont.co.uk/charing-cross/out-about/covent-garden-market-guide/"
+   ],
+   "official": "https://www.coventgarden.london/",
+   "hours": "광장·마켓 빌딩 상시 개방(매장 월-토 10:00-20:00, 일 11:00-18:00 안팎). 애플 마켓 매일 10:00-18:00(월=골동품, 화-일=수공예). 이스트 콜로네이드 10:30-19:00. 주빌리 마켓 월 05:00-17:00 골동품 / 화-금 10:30-19:30 일반 / 주말 10:00-18:00 공예",
+   "closed": null,
+   "fee": "무료(광장·마켓 빌딩은 공공 공간, 낮밤 자유 통행)",
+   "facts": [
+    {
+     "claim": "이니고 존스가 1630년대에 만든",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Covent_Garden_Piazza",
+     "fix": null
+    },
+    {
+     "claim": "영국 최초의 계획 광장",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Covent_Garden_Piazza",
+     "fix": "출처는 '런던 최초의 근대식(계획) 광장(first modern square in London)'. '영국 최초'는 근거 없음 → '런던 최초의 계획 광장'으로."
+    },
+    {
+     "claim": "시장 건물은 1830년",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Covent_Garden_Piazza",
+     "fix": "찰스 파울러 설계, 1830년 의뢰·건립(공식 사이트는 1828년 법안 이후 재개발로 서술)"
+    },
+    {
+     "claim": "거리 공연이 상설이다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Covent_Garden_Piazza",
+     "fix": "크리스마스 제외 매일, 회당 약 30분. 공식 FAQ상 마켓 빌딩 공연은 분기 오디션제"
+    },
+    {
+     "claim": "중앙 마켓 홀 2층 난간에서 아래 거리 공연과 아케이드를 내려다본다",
+     "status": "unverified",
+     "url": "https://www.coventgarden.london/faq/",
+     "fix": "공식 FAQ는 공연 구역을 지상층 North Hall과 한 층 아래 South Hall(lower courtyard)로 안내. '2층 난간' 근거 없음 → 지상층 난간에서 아래 안뜰을 내려다보는 구도로 쓰는 게 안전(현장 확인 필요)."
+    },
+    {
+     "claim": "체류 옵션: 광장만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 시장 안까지 70분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "hydepark": {
+   "refs": [
+    "https://www.royalparks.org.uk/visit/parks/hyde-park",
+    "https://en.wikipedia.org/wiki/Hyde_Park,_London",
+    "https://en.wikipedia.org/wiki/Serpentine_Lake",
+    "https://en.wikipedia.org/wiki/Royal_Parks_of_London",
+    "https://www.royalparks.org.uk/autumn-walk-hyde-park"
+   ],
+   "official": "https://www.royalparks.org.uk/visit/parks/hyde-park",
+   "hours": "보행자 게이트 05:00-24:00 (연중)",
+   "closed": null,
+   "fee": "입장료 안내 없음(개방 공원)",
+   "facts": [
+    {
+     "claim": "런던에서 가장 큰 왕립공원",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Royal_Parks_of_London",
+     "fix": "런던 최대 왕립공원은 리치먼드 파크(955ha). 하이드 파크는 약 140ha로, 중심부 왕립공원 중에서도 리젠츠 파크(166ha)가 더 큼 → '런던 중심부의 대표적인 큰 왕립공원(약 140ha)'로."
+    },
+    {
+     "claim": "서펜타인 호수 둘레를 걷는다",
+     "status": "ok",
+     "url": "https://www.royalparks.org.uk/visit/parks/hyde-park",
+     "fix": null
+    },
+    {
+     "claim": "서펜타인 호수 다리에서 물에 비친 하늘",
+     "status": "unverified",
+     "url": "https://www.royalparks.org.uk/autumn-walk-hyde-park",
+     "fix": "서펜타인 다리가 호수 전망 명소라는 점은 확인(Royal Parks). 물에 비친 하늘은 의견."
+    },
+    {
+     "claim": "가을 단풍은 10월 말",
+     "status": "unverified",
+     "url": "https://www.royalparks.org.uk/autumn-walk-hyde-park",
+     "fix": "Royal Parks는 시기를 명시하지 않음('잎이 물들기 시작할 때 러버스 워크가 특히 아름답다')."
+    },
+    {
+     "claim": "체류 옵션: 걷기 60분",
+     "status": "unverified",
+     "url": "https://www.royalparks.org.uk/autumn-walk-hyde-park",
+     "fix": "Royal Parks 공원 전체 가을 코스는 6.6km/약 1시간 30분. 서펜타인 둘레만의 공식 소요시간은 없음(비공식 앱 기준 약 1시간 내외)."
+    }
+   ]
+  },
+  "kensington": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Kensington_Palace",
+    "https://en.wikipedia.org/wiki/Round_Pond_(London)",
+    "https://en.wikipedia.org/wiki/Kensington_Gardens",
+    "https://en.wikipedia.org/wiki/Albert_Memorial",
+    "https://en.wikipedia.org/wiki/Serpentine_Lake",
+    "https://www.royalparks.org.uk/visit/parks/kensington-gardens",
+    "https://www.ianvisits.co.uk/venues/kensington-palace/",
+    "https://www.london-tickets.co.uk/kensington-palace/opening-hours",
+    "https://www.thegeographicalcure.com/post/guide-to-kensington-palace"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "하이드파크 서쪽 끝",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Kensington_Gardens",
+     "fix": "궁은 켄싱턴 가든 안. 켄싱턴 가든이 '하이드파크의 서쪽 연장부'로 간주되긴 하나 엄밀히는 별개 공원(경계=서펜타인 다리·웨스트 캐리지 드라이브). '하이드파크 서쪽에 이어진 켄싱턴 가든 안'으로."
+    },
+    {
+     "claim": "다이애나가 살던 궁",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Kensington_Palace",
+     "fix": "아파트먼트 8·9에서 1981년~1997년 사망까지 거주"
+    },
+    {
+     "claim": "궁 정면 연못(라운드 폰드)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Round_Pond_(London)",
+     "fix": "약 200x150m, 궁 앞에 위치"
+    },
+    {
+     "claim": "건너편에서 궁전이 물에 비친다",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Round_Pond_(London)",
+     "fix": "연못과 궁의 반사 구도에 대한 근거 없음. 연못이 궁 앞에 있다는 사실까지만 확인."
+    },
+    {
+     "claim": "앨버트 기념비는 금색",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Albert_Memorial",
+     "fix": "앨버트 좌상은 금박 입힌 청동"
+    },
+    {
+     "claim": "앨버트 기념비 (궁전 사진 팁에 한 묶음으로)",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Kensington_Gardens",
+     "fix": "앨버트 기념비는 켄싱턴 가든 남동쪽 코너, 로열 앨버트 홀 맞은편으로 궁에서 직선 약 0.8km(좌표 계산). 궁·연못 프레임에 같이 안 잡힘 → 별도 포인트로 분리."
+    },
+    {
+     "claim": "오후 햇빛에",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Albert_Memorial",
+     "fix": "기념비가 남향이라는 것만 확인. 시간대별 빛 방향 근거는 없음."
+    },
+    {
+     "claim": "체류 옵션: 밖에서만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 옵션: 안까지 90분",
+     "status": "wrong",
+     "url": "https://www.thegeographicalcure.com/post/guide-to-kensington-palace",
+     "fix": "매체는 궁+정원 2-3시간 권장 → 안까지는 120분 이상. 참고: 운영시간 출처 상충(ianvisits '대부분 날 10-18시'; 판매처·가이드 '11/1-2/28 수-일 10-16시', 월·화 휴관 가능). 공식 hrp.org.uk 403으로 못 열어 확인 불가. 켄싱턴 가든 보행 게이트(공식 Royal Parks)는 06:00-16:30."
+    }
+   ]
+  },
+  "portobello": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Portobello_Road",
+    "https://www.timeout.com/london/shopping/portobello-road-market-3",
+    "https://londonwebcam.co.uk/blog/notting-hill-self-guided-walk/",
+    "https://sothebysrealty.co.uk/the-journal/notting-hill-colourful-houses"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "노팅힐의 골동품·빈티지 거리 시장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Portobello_Road",
+     "fix": null
+    },
+    {
+     "claim": "토요일이 본장이다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Portobello_Road",
+     "fix": "토요일만 5개 구역 전부 개장(위키). 타임아웃: 금·토 가장 붐빔, 골동품 노점 금·토 09-19시. 월-수 09-18, 목 09-13, 일 휴무"
+    },
+    {
+     "claim": "파스텔색 집들은 '랜즈다운 로드' 골목",
+     "status": "unverified",
+     "url": "https://londonwebcam.co.uk/blog/notting-hill-self-guided-walk/",
+     "fix": "랜즈다운 로드는 '웅장한 타운하우스·영화 속 정원 문'으로 소개될 뿐 색 언급 없음. 파스텔로 확인되는 곳: 엘긴 크레센트(파스텔), 콜빌 테라스(마켓 바로 옆), 세인트 루크스 뮤스(핑크·노랑), 팜 플레이스. 랭커스터 로드(Lancaster Road)는 원색. 교체 권장: 엘긴 크레센트 또는 콜빌 테라스."
+    },
+    {
+     "claim": "마켓은 토요일 아침 9시 전이 사람이 없다",
+     "status": "wrong",
+     "url": "https://www.timeout.com/london/shopping/portobello-road-market-3",
+     "fix": "골동품 노점 개장이 09시(타임아웃)라 9시 전엔 대부분 열지 않고, 토요일은 가장 붐비는 날. 한적한 시간은 평일 이른 아침·금요일(상대적으로 한산). '토요일 개장(09시) 직후가 비교적 덜 붐빈다'는 근거도 출처에 없음."
+    },
+    {
+     "claim": "체류 옵션: 둘러보기 90분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  }
+ }
+}

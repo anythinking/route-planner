@@ -1,0 +1,255 @@
+{
+ "arashiyama": {
+  "refs": [
+   "https://ja.wikipedia.org/wiki/嵐山竹林の小径",
+   "https://en.wikipedia.org/wiki/Arashiyama_Bamboo_Grove",
+   "https://banzokubiology.com/arashiyama-chikurin-time/",
+   "https://banzokubiology.com/arashiyama-chikurin-konzatsu/",
+   "https://banzokubiology.com/arashiyama-chikurin-guide/",
+   "https://www.japan-guide.com/e/e3912.html",
+   "https://www.japan.travel/en/spot/1141/"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "죽림은 교토부 교토시 우쿄구에 있는 대나무숲 / 지쿠린노코미치(嵐山竹林の小径)라고 부른다",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/嵐山竹林の小径",
+    "fix": null
+   },
+   {
+    "claim": "노노미야 신사 쪽에서 덴류지 북문을 지나 오코치산소 쪽으로 이어지는 길(구간 설명)",
+    "status": "ok",
+    "url": "https://banzokubiology.com/arashiyama-chikurin-time/",
+    "fix": null
+   },
+   {
+    "claim": "오코치산소 입구 쪽이 가장 빽빽하다",
+    "status": "unverified",
+    "url": null,
+    "fix": "밀도 비교를 뒷받침하는 출처 없음. japan.travel은 오코치산소가 숲길 맨 위쪽 끝에 있다고만 함. 블로그는 붐비는 곳으로 도게츠쿄 부근·숲길 입구·노노미야 진입로·덴류지 북문 부근을 꼽음"
+   },
+   {
+    "claim": "8시 이후는 사람에 밀리니 7시 전에",
+    "status": "unverified",
+    "url": "https://banzokubiology.com/arashiyama-chikurin-konzatsu/",
+    "fix": "일본어 블로그 단일 출처 기준 7~8시가 낮 시간대 중 가장 한산, 9~10시 보통, 10~12시 매우 혼잡, 13~16시 최고. '8시 이후 밀린다'는 과장. 숲길은 24시간 통행 가능이라고 서술됨(공식 아님)"
+   },
+   {
+    "claim": "길 한가운데서 대나무 꼭대기까지 세로로 올려 찍어라",
+    "status": "unverified",
+    "url": null,
+    "fix": "구도 조언이라 사실 출처 없음. 대나무가 하늘을 덮는 구간이 인기 촬영 포인트라는 개인 여행기만 있음"
+   },
+   {
+    "claim": "opts 지나며 30분 / 한 바퀴 60분",
+    "status": "ok",
+    "url": "https://banzokubiology.com/arashiyama-chikurin-time/",
+    "fix": null
+   }
+  ]
+ },
+ "tenryuji": {
+  "refs": [
+   "https://www.tenryuji.com/",
+   "https://www.tenryuji.com/visit/",
+   "https://www.tenryuji.com/precincts/",
+   "https://ja.wikipedia.org/wiki/天龍寺",
+   "https://en.wikipedia.org/wiki/Tenry%C5%AB-ji",
+   "https://banzokubiology.com/tenryuji-time-guide/",
+   "https://www.japan-guide.com/e/e3912.html"
+  ],
+  "official": "https://www.tenryuji.com/",
+  "hours": "정원 8:30~17:00 (접수 16:50 종료), 제당(大方丈·書院·多宝殿) 8:30~16:45 (접수 16:30 종료). 2026-11-14~11-30 특별 조조 참배: 정원 7:30~(북문 접수는 8:30~)",
+  "closed": "정기 휴무일 표기는 확인하지 못함. 행사로 제당 참배가 불가한 날이 있음(예: 2026-10-29·30 오전 등)",
+  "fee": "정원(曹源池·百花苑) 고교생 이상 500엔·초중생 300엔·미취학 무료. 제당 참배는 +300엔. 법당 雲龍図 특별공개 별도 500엔",
+  "facts": [
+   {
+    "claim": "덴류지는 교토부 교토시 우쿄구 사가노에 있는 사찰",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/天龍寺",
+    "fix": null
+   },
+   {
+    "claim": "1994년 고도 교토의 문화재의 일부로 유네스코 세계유산 등록",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Tenry%C5%AB-ji",
+    "fix": null
+   },
+   {
+    "claim": "호조 툇마루에서 소겐치 연못과 뒤의 아라시야마 산을 함께 잡는 차경",
+    "status": "ok",
+    "url": "https://www.tenryuji.com/precincts/",
+    "fix": null
+   },
+   {
+    "claim": "북문으로 나가면 대나무숲이 바로 이어진다",
+    "status": "ok",
+    "url": "https://www.tenryuji.com/precincts/",
+    "fix": null
+   },
+   {
+    "claim": "opts 경내만 30분 / 경내+정원 60분",
+    "status": "ok",
+    "url": "https://banzokubiology.com/tenryuji-time-guide/",
+    "fix": null
+   }
+  ]
+ },
+ "togetsukyo": {
+  "refs": [
+   "https://ja.wikipedia.org/wiki/渡月橋",
+   "https://en.wikipedia.org/wiki/Togetsukyo_Bridge",
+   "https://www.pref.kyoto.jp/kanko/news/2021/r3hanatouro.html",
+   "https://www.japan-guide.com/e/e3912.html",
+   "https://www.gltjp.com/en/directory/item/12630/"
+  ],
+  "official": null,
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "가쓰라강 위의 다리, 좌안(북쪽)과 나카노시마 공원 사이, 우쿄구에 속한다",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/渡月橋",
+    "fix": null
+   },
+   {
+    "claim": "나카노시마 공원 쪽 강변에서 다리 전체와 아라시야마 산을 한 프레임에",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3912.html",
+    "fix": "다리와 숲 덮인 산자락의 조합이 좋다는 서술은 있으나 어느 쪽 강변에서 찍는지(나카노시마 vs 북안)는 출처에서 특정되지 않음"
+   },
+   {
+    "claim": "12월 하나토로 기간은 다리와 산이 라이트업된다",
+    "status": "wrong",
+    "url": "https://www.pref.kyoto.jp/kanko/news/2021/r3hanatouro.html",
+    "fix": "교토부 공식: 嵐山花灯路는 2021년(12/10~19)을 마지막으로 종료. 12월 하나토로 전제는 현재 성립하지 않음. 후속 嵐山月灯路는 가을(2026년 9/30~11/8, 검색 결과 기준·미열람) 개최이고 대나무숲길 중심. 이 문장은 삭제하거나 과거형으로"
+   },
+   {
+    "claim": "opts 건너기 15분 / 사진까지 30분",
+    "status": "unverified",
+    "url": null,
+    "fix": "다리 길이 155m(ja 위키)라 건너기만이면 수 분. 체류시간 근거 출처는 못 찾음"
+   }
+  ]
+ },
+ "kokedera": {
+  "refs": [
+   "https://saihoji-kokedera.com/",
+   "https://intosaihoji.com/faq/",
+   "https://intosaihoji.com/nichinichi/",
+   "https://intosaihoji.com/nichinichi/online/",
+   "https://intosaihoji.com/saihoji/keidai/",
+   "https://intosaihoji.com/en/saihoji/goki/",
+   "https://www.japan-guide.com/e/e3937.html",
+   "https://ja.wikipedia.org/wiki/西芳寺",
+   "https://en.wikipedia.org/wiki/Saih%C5%8D-ji"
+  ],
+  "official": "https://saihoji-kokedera.com/",
+  "hours": "사전 예약제 시간대 입장(일별 폐문 시각은 예약 캘린더에 표시, 본 조사에서 캘린더 미열람). 일일 참배(日々参拝)=본당 사경 후 정원 관람, 소요 약 60분",
+  "closed": null,
+  "fee": "참배 명하료(志納) 4,000엔 이상, 온라인 결제 시 시스템 이용료 165엔/인(10/29 결제분~). 13세 이상, 1회 2명까지, 취소규정: 4일 전까지 무료·3일 전~전날 50%·당일 100%",
+  "facts": [
+   {
+    "claim": "사이호지는 교토부 교토시 니시쿄구에 있는 불교 사원, 1994년 고도 교토의 문화재로 세계유산 등록",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Saih%C5%8D-ji",
+    "fix": null
+   },
+   {
+    "claim": "사전 예약제라 당일 입장은 없다",
+    "status": "ok",
+    "url": "https://intosaihoji.com/nichinichi/",
+    "fix": null
+   },
+   {
+    "claim": "이끼 색은 비 온 뒤·장마철 6월과 7월이 가장 진하다",
+    "status": "ok",
+    "url": "https://intosaihoji.com/en/saihoji/goki/",
+    "fix": null
+   },
+   {
+    "claim": "황금지 연못 둘레 길에서 낮게",
+    "status": "unverified",
+    "url": "https://intosaihoji.com/saihoji/keidai/",
+    "fix": "황금지(黄金池)를 중심으로 한 연못 회유식 정원은 공식으로 확인됨. '낮게 찍어라'는 구도 조언이라 출처 없음. 공식 FAQ: 園路를 벗어난 촬영 금지·건물 안(본당 포함)에서 밖을 찍는 것도 금지"
+   },
+   {
+    "claim": "삼각대 금지",
+    "status": "ok",
+    "url": "https://intosaihoji.com/faq/",
+    "fix": null
+   },
+   {
+    "claim": "opts 한 바퀴 45분 / 천천히 75분",
+    "status": "wrong",
+    "url": "https://intosaihoji.com/nichinichi/",
+    "fix": "공식은 사경(약 15분)+정원 관람 합계 약 60분. 정원만 보는 관람은 받지 않음(사경 필수). 45분은 짧고 60분 안팎이 기본값"
+   }
+  ]
+ },
+ "kuramadera": {
+  "refs": [
+   "http://www.kuramadera.or.jp/",
+   "http://www.kuramadera.or.jp/nyuzan.html",
+   "http://www.kuramadera.or.jp/access.html",
+   "http://www.kuramadera.or.jp/annai.html",
+   "https://ja.wikipedia.org/wiki/鞍馬寺",
+   "https://www.japan-guide.com/e/e3933.html",
+   "https://koyo.walkerplus.com/detail/ar0726e13174/data.html"
+  ],
+  "official": "http://www.kuramadera.or.jp/",
+  "hours": "본전 개문 9:00~16:15. 케이블 첫차 8:40(산문역 출발), 막차 16:20 상행/16:25 하행, 20분 간격",
+  "closed": "霊宝殿(박물관) 화요일(공휴일이면 다음날)·12/12~2월 말 휴관. 본전 자체의 정기 휴무 표기는 확인하지 못함. 케이블은 11/27 오전·12/21~25 운휴",
+  "fee": "愛山費 500엔(고교생 이상, 2023-04-01~). 케이블 기부금 편도 어른 200엔·초등생 이하 100엔. 霊宝殿 입관료 200엔",
+  "facts": [
+   {
+    "claim": "구라마데라는 교토부 교토시 사쿄구 구라마 혼마치에 있는 불교 사원, 산호는 구라마산",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/鞍馬寺",
+    "fix": null
+   },
+   {
+    "claim": "산문부터 본당까지 계단 30분",
+    "status": "ok",
+    "url": "http://www.kuramadera.or.jp/access.html",
+    "fix": null
+   },
+   {
+    "claim": "또는 케이블카",
+    "status": "ok",
+    "url": "http://www.kuramadera.or.jp/access.html",
+    "fix": null
+   },
+   {
+    "claim": "본당 앞 광장에서 기타야마 산줄기가 열린다",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3933.html",
+    "fix": "본당 건물이 산비탈 테라스에 있고 숲 덮인 계곡을 내려다본다는 서술까지만 확인. '기타야마 산줄기' 명시 출처 없음"
+   },
+   {
+    "claim": "11월 단풍",
+    "status": "ok",
+    "url": "https://koyo.walkerplus.com/detail/ar0726e13174/data.html",
+    "fix": null
+   },
+   {
+    "claim": "뒤로 넘어가면 기부네",
+    "status": "ok",
+    "url": "http://www.kuramadera.or.jp/access.html",
+    "fix": null
+   },
+   {
+    "claim": "opts 경내만 30분 / 경내+정원 60분",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3933.html",
+    "fix": "걸어 오르면 편도만 30~45분(japan-guide)·공식 산문→본전 약 25분. 케이블 이용 시 산문역→다보탑역 2분+도보 10분. 체류 30분은 케이블 이용 전제에서만 현실적"
+   }
+  ]
+ }
+}

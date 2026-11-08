@@ -1,0 +1,1081 @@
+{
+ "city": "osaka",
+ "checked": "2026-11-08",
+ "places": {
+  "osakacastle": {
+   "refs": [
+    "https://www.osakacastle.net/guide/",
+    "https://ja.wikipedia.org/wiki/大阪城",
+    "https://osaka-info.jp/spot/osaka-castle-nishinomaru-garden/"
+   ],
+   "official": "https://www.osakacastle.net/",
+   "hours": "9:00~18:00 (입관 17:30까지, 2025-04-01 변경)",
+   "closed": "12/28~1/1",
+   "fee": "천수각 1,200엔(어른) · 대학·고교생 600엔 · 중학생 이하 무료(2025-04-01 개정)",
+   "facts": [
+    {
+     "claim": "아즈치모모야마 시대~에도 시대의 성 / 셋쓰국 히가시나리군",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/大阪城",
+     "fix": null
+    },
+    {
+     "claim": "별칭 긴조(金城)·긴조(錦城)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 45분(밖과 정원)·90분(내부까지)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "니시노마루 정원(유료) 잔디에서 해자 너머 천수각이 보인다",
+     "status": "ok",
+     "url": "https://osaka-info.jp/spot/osaka-castle-nishinomaru-garden/",
+     "fix": null
+    },
+    {
+     "claim": "고쿠라쿠바시 다리 위가 천수각에 가장 가깝다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "천수각 전시층 일부 촬영 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "벚꽃은 4월 초",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "dotonbori": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/道頓堀",
+    "https://ja.wikipedia.org/wiki/道頓堀グリコサイン",
+    "https://www.dotonbori.or.jp/ja/"
+   ],
+   "official": "https://www.dotonbori.or.jp/ja/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "도톤보리는 과거 극장(극장가)이 밀집했다",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/道頓堀",
+     "fix": null
+    },
+    {
+     "claim": "현재는 음식점·간판이 밀집한 번화가",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/道頓堀",
+     "fix": null
+    },
+    {
+     "claim": "글리코 간판은 에비스바시 다리 위 정면이 정석",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "점등 후 밤에 / 강변 데크 네온 반사",
+     "status": "unverified",
+     "url": "https://www.watch.impress.co.jp/docs/news/2148018.html",
+     "fix": null
+    }
+   ]
+  },
+  "kuromon": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/黒門市場"
+   ],
+   "official": "https://kuromon.com/jp/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "구로몬 시장은 주오구 닛폰바시에 있는 시장·상점가",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/黒門市場",
+     "fix": null
+    },
+    {
+     "claim": "총연장 약 580m 아케이드, 150~160점포(2019년)",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/黒門市場",
+     "fix": null
+    },
+    {
+     "claim": "정오 전후가 가장 붐빈다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "가게 사람을 찍을 땐 허락을 구하라",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 45분·90분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "shinsekai": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/新世界_(大阪市)",
+    "https://ja.wikipedia.org/wiki/通天閣"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "신세카이는 나니와구의 유흥가, 쓰텐카쿠가 중심",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/通天閣",
+     "fix": null
+    },
+    {
+     "claim": "초대 쓰텐카쿠는 1943년 1월 화재로 손상, 1956년 재건",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/通天閣",
+     "fix": null
+    },
+    {
+     "claim": "쓰텐카쿠가 일본 최초로 엘리베이터가 설치된 전망대 [메모: 확인된 것은 '원통형 엘리베이터는 쓰텐카쿠가 세계 최초로 알려져 있다'(ja위키 通天閣). '일본 최초 엘리베이터 전망대'는 근거를 못 찾음]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "복어 간판과 조명은 해진 뒤가 산다",
+     "status": "wrong",
+     "url": "https://www.daily.co.jp/leisure/kansai/2020/09/03/0013661979.shtml",
+     "fix": "신세카이 명물이던 입체 복어 초롱(즈보라야)은 2020-09-03 철거, 가게는 9/15 폐점. 지금은 그 간판이 없다"
+    },
+    {
+     "claim": "쓰텐카쿠혼도리 상점가 입구에서 간판 사이로 세로 구도",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "tsutenkaku": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/通天閣",
+    "https://www.tsutenkaku.co.jp/annai/index.html",
+    "https://osaka-info.jp/spot/tsutenkaku/"
+   ],
+   "official": "https://www.tsutenkaku.co.jp/",
+   "hours": "9:00~21:45 (일반전망대 최종입장 21:15, 특별옥외전망대 21:35)",
+   "closed": null,
+   "fee": "대인 1,500엔 · 어린이(5~14세) 800엔 (2026-04-01 개정, 2026-12-30~2027-01-03은 1,800엔); 시간 지정 예약제",
+   "facts": [
+    {
+     "claim": "국가가 지정한 유형문화재",
+     "status": "wrong",
+     "url": "https://osaka-info.jp/spot/tsutenkaku/",
+     "fix": "'지정'이 아니라 국가 등록유형문화재(2007-05-15 등록). 공식 연표·오사카 관광국 모두 '登録有形文化財'"
+    },
+    {
+     "claim": "1943년 1월 초대 탑이 인근 영화관 화재로 타 해체, 1956년 재건",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/通天閣",
+     "fix": null
+    },
+    {
+     "claim": "일본 최초로 엘리베이터가 설치된 전망대",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "야간 조명 색은 다음 날 날씨 예보로 바뀐다",
+     "status": "wrong",
+     "url": "https://ja.wikipedia.org/wiki/通天閣",
+     "fix": "천기예보 네온 서비스는 2022-07-31 22시로 종료. 2022-08~2023-09 리뉴얼에서 탑 꼭대기 일루미네이션 조명으로 교체됨"
+    },
+    {
+     "claim": "전망대는 유리라 렌즈를 붙여라",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 15분(밖)·60분(전망대)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "업무 목적 촬영·취재는 사전 허가 필요(공식)",
+     "status": "ok",
+     "url": "https://www.tsutenkaku.co.jp/other/property.html",
+     "fix": null
+    }
+   ]
+  },
+  "umedasky": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/梅田スカイビル",
+    "https://www.skybldg.co.jp/",
+    "https://www.skybldg.co.jp/observatory/"
+   ],
+   "official": "https://www.skybldg.co.jp/",
+   "hours": "9:30~22:30 (최종입장 22:00), 특별영업일 있음",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "오사카시에서 21번째로 높은 건물",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "두 동을 잇는 공중 에스컬레이터",
+     "status": "ok",
+     "url": "https://www.skybldg.co.jp/observatory/",
+     "fix": null
+    },
+    {
+     "claim": "연결형 고층건축(두 동 정상부를 잇는 공중정원 전망대)",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/梅田スカイビル",
+     "fix": null
+    },
+    {
+     "claim": "옥상 스카이워크는 유리가 없다(옥외) [메모: 공식 페이지에는 'RF 옥상' 구성만 있고 유리 유무 기술 없음. 일반 여행 매체는 옥상이 오픈에어라고 설명(2차 출처)]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "kaiyukan": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/海遊館",
+    "https://www.kaiyukan.com/info/area/prohibition/",
+    "https://www.kaiyukan.com/info/hours/",
+    "https://www.gov-online.go.jp/hlj/ja/september_2024/september_2024-05.html"
+   ],
+   "official": "https://www.kaiyukan.com/",
+   "hours": "10:00~20:00(조회일 기준), 최종입관은 폐관 1시간 전, 월별 영업시간 상이",
+   "closed": "월별 캘린더 공지",
+   "fee": "가격변동제(날짜별 상이)",
+   "facts": [
+    {
+     "claim": "길이 9m, 넓이 34m에 물 5,400톤의 초대형 수조",
+     "status": "wrong",
+     "url": "https://ja.wikipedia.org/wiki/海遊館",
+     "fix": "태평양 수조는 최대 길이 34m·깊이 9m·수량 5,400톤. '길이 9m'가 아니라 깊이 9m, 폭/길이 34m"
+    },
+    {
+     "claim": "14개 전시수조",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/海遊館",
+     "fix": null
+    },
+    {
+     "claim": "플래시 금지(특설수조·고리무늬물범 수조는 종일 플래시 불가) [메모: 관 전체 금지가 아니라 눈부신 플래시·촬영용 라이트가 금지, 특설수조·물범 수조는 플래시 종일 불가. 삼각대·셀카봉은 자제(삼각대는 모노포드로만)]",
+     "status": "ok",
+     "url": "https://www.kaiyukan.com/info/area/prohibition/",
+     "fix": null
+    },
+    {
+     "claim": "고래상어는 나선 통로 중간층에서 수조 폭이 가장 넓게 보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "usj": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/ユニバーサル・スタジオ・ジャパン",
+    "https://www.usj.co.jp/web/ja/jp/areas/super-nintendo-world"
+   ],
+   "official": "https://www.usj.co.jp/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "2001년 3월 31일 개장",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/ユニバーサル・スタジオ・ジャパン",
+     "fix": null
+    },
+    {
+     "claim": "닌텐도 월드는 입장 정리권 필수 [메모: '필수'는 과함: 정리권·확약권이 필요할 때가 있으나 상황에 따라 없이 입장 가능한 경우도 있다고 취급 사이트가 안내(공식 확인 불가)]",
+     "status": "unverified",
+     "url": "https://l-tike.com/leisure/usj/express_pass/",
+     "fix": null
+    },
+    {
+     "claim": "라이드 안은 촬영 금지 [메모: 코스터류는 소지품 보관·촬영 불가로 알려졌지만 어트랙션마다 다름(2017 기사). 공식 규정은 확인 못 함]",
+     "status": "unverified",
+     "url": "https://www.j-cast.com/2017/06/01299511.html",
+     "fix": null
+    },
+    {
+     "claim": "호그스미드 거리 끝에서 성 전체",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "입구 지구본은 개장 직후가 한산",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 반나절 240분·하루 480분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "shitennoji": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/四天王寺",
+    "https://www.shitennoji.or.jp/admission.html",
+    "https://www.shitennoji.or.jp/faq.html"
+   ],
+   "official": "https://www.shitennoji.or.jp/",
+   "hours": "당·중심가람·정원 8:30~16:30(4~9월)/ 8:30~16:00(10~3월, 21일·법요 기간 8:00~), 육시당 8:30~18:00; 문은 24시간 열려 당 밖 참배 가능",
+   "closed": null,
+   "fee": "중심가람 500엔(어른); 매월 21일·22일 및 춘추 히간은 중심가람 무료 개방",
+   "facts": [
+    {
+     "claim": "note가 시텐노지마에유히가오카역(지하철역) 설명이다",
+     "status": "wrong",
+     "url": "https://ja.wikipedia.org/wiki/四天王寺",
+     "fix": "사찰 시텐노지 설명으로 교체해야 함: 쇼토쿠태자 창건 전해지는 일본 최초의 관사(官寺), 오사카시 덴노지구"
+    },
+    {
+     "claim": "오층탑은 중심가람(유료) 안에서 금당과 나란히",
+     "status": "ok",
+     "url": "https://www.shitennoji.or.jp/admission.html",
+     "fix": null
+    },
+    {
+     "claim": "매월 21·22일 벼룩시장 날은 경내가 사람으로 찬다 [메모: 21일이 대규모(약 500점포), 22일은 점포 수가 훨씬 적다고 공식 FAQ에 명시. 두 날 모두 중심가람 무료 개방]",
+     "status": "ok",
+     "url": "https://www.shitennoji.or.jp/faq.html",
+     "fix": null
+    },
+    {
+     "claim": "불상이 있는 당 내부는 촬영 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분(경내만)·60분(경내+정원)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "sumiyoshi": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/住吉大社",
+    "https://www.sumiyoshitaisha.net/",
+    "https://www.sumiyoshitaisha.net/access/"
+   ],
+   "official": "https://www.sumiyoshitaisha.net/",
+   "hours": "개문 6:00(4~9월)/6:30(10~3월); 폐문 외주문 16:00·미가키 안 17:00",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "스미요시 대사는 전국 스미요시 신사의 총본사",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/住吉大社",
+     "fix": null
+    },
+    {
+     "claim": "아치형 소리하시(태고교)는 스미요시의 상징",
+     "status": "ok",
+     "url": "https://www.sumiyoshitaisha.net/",
+     "fix": null
+    },
+    {
+     "claim": "정월 하쓰모데는 인파(200만 명 이상)",
+     "status": "ok",
+     "url": "https://www.sumiyoshitaisha.net/",
+     "fix": null
+    },
+    {
+     "claim": "연못 옆 낮은 위치에서 다리와 수면 반사를 같이 넣는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "본전 내부·기도 중인 참배객은 찍지 않는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분(참배길까지)·50분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "namba": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/なんばパークス",
+    "https://ja.wikipedia.org/wiki/難波駅_(南海)",
+    "https://www.nambaparks.com/"
+   ],
+   "official": "https://www.nambaparks.com/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "note가 난카이 난바역 설명이다(지역이 아니라 역)",
+     "status": "wrong",
+     "url": "https://ja.wikipedia.org/wiki/難波駅_(南海)",
+     "fix": "지역 소개로 교체 권장: 미나미의 관문이 되는 번화가. 역 설명은 영철의 '난바·센니치마에' 항목과 어긋남"
+    },
+    {
+     "claim": "난바 파크스는 계단식(단구형) 옥상 정원",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/なんばパークス",
+     "fix": null
+    },
+    {
+     "claim": "옥상 정원 파크스가든은 3층~9층까지 녹지",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/なんばパークス",
+     "fix": null
+    },
+    {
+     "claim": "센니치마에 아케이드는 세로로 간판을 겹쳐 담는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "그랜드 가게쓰 앞은 공연 입장 때 붐빈다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "amerika": {
+   "refs": [
+    "https://osaka-info.jp/spot/america-mura-american-village/",
+    "https://www.mec-h.com/town/mh-nanba/171"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "아메리카무라는 주오구의 상가, 미국풍 물건을 판다",
+     "status": "ok",
+     "url": "https://osaka-info.jp/spot/america-mura-american-village/",
+     "fix": null
+    },
+    {
+     "claim": "삼각공원(정식명 미쓰공원) 주변 벽화·간판 [메모: 삼각공원은 통칭, 정식 명칭은 御津公園]",
+     "status": "ok",
+     "url": "https://www.mec-h.com/town/mh-nanba/171",
+     "fix": null
+    },
+    {
+     "claim": "주말 오후가 가장 북적인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "nakanoshima": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/大阪市中央公会堂",
+    "https://happyell.co.jp/event/osaka-chuo2026"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "나카노시마는 길이 3km, 넓이 50ha의 모래톱 / 도사보리강·도지마강으로 갈라진다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "중앙공회당은 붉은 벽돌 건물, 중요문화재 [메모: 중요문화재는 확인(위키 첫 문장). 붉은 벽돌 외관은 위키 발췌에 직접 표기 없음]",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/大阪市中央公会堂",
+     "fix": null
+    },
+    {
+     "claim": "12월 외벽에 프로젝션 맵핑이 돈다 [메모: 2026년은 12/11~25, 17:30~21:30, 무료, 대한 '오사카·빛의 향연' 실행위원회 주최]",
+     "status": "ok",
+     "url": "https://happyell.co.jp/event/osaka-chuo2026",
+     "fix": null
+    },
+    {
+     "claim": "행사 이름 '빛의 르네상스' [메모: 2026 행사 명칭은 '오사카·빛의 향연'(테마 '오사카, 빛의 축야제'). '빛의 르네상스'는 현재 통용 여부 미확인]",
+     "status": "unverified",
+     "url": "https://happyell.co.jp/event/osaka-chuo2026",
+     "fix": null
+    },
+    {
+     "claim": "중앙공회당은 해진 뒤 라이트업",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "장미원 쪽에서 정면 전체",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "abeno": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/あべのハルカス",
+    "https://www.abenoharukas-300.jp/observatory/information.html",
+    "https://www.abenoharukas-300.jp/observatory/guide.html",
+    "https://www.abenoharukas-300.jp/observatory/ticket/"
+   ],
+   "official": "https://www.abenoharukas-300.jp/observatory/",
+   "hours": "9:00~22:00 (최종입장 21:30)",
+   "closed": "연중무휴",
+   "fee": "당일권 2,200엔(어른, 15세 이상) · 6~14세 900엔",
+   "facts": [
+    {
+     "claim": "높이 300m",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/あべのハルカス",
+     "fix": null
+    },
+    {
+     "claim": "60층은 사방 유리 회랑, 58층은 하늘이 열린 옥외 광장",
+     "status": "ok",
+     "url": "https://www.abenoharukas-300.jp/observatory/guide.html",
+     "fix": null
+    },
+    {
+     "claim": "덴노지 공원 잔디에서 올려다보면 전체 높이가 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "tennoji": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/天王寺公園",
+    "https://www.tennojizoo.jp/",
+    "https://www.mapple.net/article/5108/"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "덴노지 공원 입장료는 150엔 [메모: 확인 못 함: 2차 출처는 공원 본체·덴시바를 무료로 안내하고 게이타쿠엔·미술관·동물원을 유료 시설로 취급. 150엔 근거 못 찾음(옛 위키 값일 수 있음)]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "공원 안에 덴노지 동물원·오사카 시립미술관",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/天王寺公園",
+     "fix": null
+    },
+    {
+     "claim": "동물원 입원료·시간: 어른 800엔, 9:30~17:00(입원 16:00까지), 월요일 휴원 — 참고",
+     "status": "ok",
+     "url": "https://www.tennojizoo.jp/",
+     "fix": null
+    },
+    {
+     "claim": "동물원은 플래시 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "덴시바 잔디에서 올려다보면 아베노 하루카스 전체",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "hozenji": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/法善寺",
+    "https://www.gltjp.com/ja/directory/item/14647/"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "정토종 사찰, 산호는 천룡산",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/法善寺",
+     "fix": null
+    },
+    {
+     "claim": "이끼 덮인 미즈카케 후도(水掛不動)가 유명",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/法善寺",
+     "fix": null
+    },
+    {
+     "claim": "돌길 골목은 초롱이 켜진 밤",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "참배하는 사람 정면은 피한다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "tempozan": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/天保山大観覧車",
+    "https://www.kaiyukan.com/thv/",
+    "https://happyell.co.jp/spot/tenpouzan"
+   ],
+   "official": "http://tempozan-kanransya.com/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "지름 100m",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/天保山大観覧車",
+     "fix": null
+    },
+    {
+     "claim": "바닥이 투명한 칸이 따로 있다 [메모: 60기 중 4기가 '시스루 캐빈'(2차 출처는 56기 외 시스루로 표기)]",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/天保山大観覧車",
+     "fix": null
+    },
+    {
+     "claim": "한 바퀴 15분 [메모: 여러 2차 출처가 약 15분으로 일치. 공식 사이트는 열지 못함]",
+     "status": "unverified",
+     "url": "https://happyell.co.jp/spot/tenpouzan",
+     "fix": null
+    },
+    {
+     "claim": "가이유칸 바로 옆",
+     "status": "ok",
+     "url": "https://www.kaiyukan.com/thv/",
+     "fix": null
+    },
+    {
+     "claim": "투명 바닥 칸은 줄이 따로다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 20분(밖)·45분(가까이)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "minoh": {
+   "refs": [
+    "https://www.city.minoh.lg.jp/brandsenryaku/kankou/takmichi_tsukodome.html",
+    "https://ja.wikipedia.org/wiki/箕面滝",
+    "https://tabi-mag.jp/os0137/"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "한큐 미노오역에서 계곡 길 2.7km, 33m 폭포 [메모: 낙차 33m·'일본의 폭포 100선'. 거리는 2.7~2.8km로 출처마다 다름]",
+     "status": "ok",
+     "url": "https://sp.jorudan.co.jp/leaf/spot_55094.html",
+     "fix": null
+    },
+    {
+     "claim": "가을 단풍은 11월 중하순, 단풍잎 튀김이 유명",
+     "status": "ok",
+     "url": "https://allabout.co.jp/gm/gc/401670/",
+     "fix": null
+    },
+    {
+     "claim": "폭포 바로 앞까지 갈 수 있다 [메모: 2025-11-24 폭포 앞 가게 화재로 滝道 일부 통행금지, 2026-08-07 해제됨(미노시 공지 2026-08-10 갱신). 현재는 통행 가능]",
+     "status": "unverified",
+     "url": "https://www.city.minoh.lg.jp/brandsenryaku/kankou/takmichi_tsukodome.html",
+     "fix": null
+    },
+    {
+     "claim": "시내에서 왕복 반나절",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "kitashinchi": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/北新地",
+    "https://ja.wikipedia.org/wiki/北新地駅"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "note는 JR 기타신치역 설명 / 역의 상징은 벼 [메모: 역 심볼은 '稲穂'(이나호, 벼 이삭) 맞음. 다만 항목이 지역(고급 음식점가)이 아니라 역 설명이라 교체 권장: 일본 대표 환락가, 도쿄 긴자와 나란한 고급 음식점가]",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/北新地駅",
+     "fix": null
+    },
+    {
+     "claim": "가게들이 20시 넘어 불을 켠다 [메모: 바·라운지 영업 시작이 19시(예: 월~토 19:00~)로 보인다는 개별 점포 정보. 일반화 근거 부족]",
+     "status": "unverified",
+     "url": "https://tabelog.com/osaka/A2701/A270101/27075770/",
+     "fix": null
+    },
+    {
+     "claim": "손님·호객 직원 얼굴은 피한다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "shinsaibashi": {
+   "refs": [
+    "https://www.shinsaibashi.or.jp/",
+    "https://osaka-info.jp/special/coolosaka/cool-move/1342/",
+    "https://ja.wikipedia.org/wiki/心斎橋筋商店街"
+   ],
+   "official": "https://www.shinsaibashi.or.jp/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "신사이바시는 과거 나가호리강에 걸린 다리 [메모: 에도시대 상인 오카다 신사이가 놓았다는 전승. 다리는 1964년 나가호리강 매립으로 철거]",
+     "status": "ok",
+     "url": "https://www.city.osaka.lg.jp/kensetsu/cmsfiles/contents/0000116/116189/007_shinsaibashihagenzonsuruka.pdf",
+     "fix": null
+    },
+    {
+     "claim": "신사이바시스지 아케이드 약 580m [메모: 2차 출처가 약 580m로 안내. 구로몬 시장 아케이드도 약 580m라 혼동 주의]",
+     "status": "unverified",
+     "url": "https://osaka-info.jp/special/coolosaka/cool-move/1342/",
+     "fix": null
+    },
+    {
+     "claim": "개점 직전 오전 [메모: 개점 시각은 가게마다 다름. 일률적 '개점 직전' 근거 없음]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분(훑기)·90분(쇼핑)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "osakamuseum": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/大阪歴史博物館",
+    "https://www.osakamushis.jp/"
+   ],
+   "official": "https://www.osakamushis.jp/",
+   "hours": "9:30~17:00 (입관 16:30까지, 특별전 기간 금요일 20:00까지)",
+   "closed": "화요일(공휴일이면 다음날), 12/28~1/4",
+   "fee": "상설전시 600엔(어른) · 고교·대학생 400엔 · 중학생 이하 무료",
+   "facts": [
+    {
+     "claim": "총 10층 건물 [메모: 상설전시가 10층~7층(10층 고대, 9층 중세·근세, 8층 '역사를 파다', 7층 근현대), 6층이 특별전. 건물 전체가 10층이라는 근거 없음]",
+     "status": "unverified",
+     "url": "https://ja.wikipedia.org/wiki/大阪歴史博物館",
+     "fix": null
+    },
+    {
+     "claim": "10층 전망 창에서 오사카성 천수각이 정면에 잡힌다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "실물 크기 나니와궁 대극전 복원이 10층에 있다",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/大阪歴史博物館",
+     "fix": null
+    },
+    {
+     "claim": "전시 일부 촬영 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "nationalart": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/国立国際美術館",
+    "https://www.nmao.go.jp/visit/requirement/",
+    "https://www.nmao.go.jp/visit/admission/"
+   ],
+   "official": "https://www.nmao.go.jp/",
+   "hours": "10:00~17:00 (입장 16:30), 금요일 야간 20:00까지(입장 19:30); 2026-11-08 전시 교체로 휴관 중",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "건물이 지하(주요 부분 전부 지하), 옆에 오사카 시립과학관",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/国立国際美術館",
+     "fix": null
+    },
+    {
+     "claim": "지상의 스테인리스 조형이 피사체 [메모: 시저 펠리 설계, 지상 조형은 대나무 모티프. 스테인리스 소재는 출처 못 찾음]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "기획전은 대부분 촬영 금지, 컬렉션전만 일부 허용",
+     "status": "wrong",
+     "url": "https://www.nmao.go.jp/visit/requirement/",
+     "fix": "공식: 1층 로비·B1 퍼블릭존은 촬영 가능, 컬렉션전은 촬영 가능(일부 작품 제외), 특별전은 전람회마다 다름. 동영상·플래시·삼각대·셀카봉은 자제"
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "expo70": {
+   "refs": [
+    "https://ja.wikipedia.org/wiki/万博記念公園",
+    "https://ja.wikipedia.org/wiki/太陽の塔",
+    "https://www.expo70-park.jp/guide/fee/",
+    "https://taiyounotou-expo70.jp/guide/fee/",
+    "https://taiyounotou-expo70.jp/guide/hours/",
+    "https://www.expo70-park.jp/cause/expo/tower-of-sun/"
+   ],
+   "official": "https://www.expo70-park.jp/",
+   "hours": "태양의 탑 10:00~17:00 (2026-11 영업, 연중무휴); 공원은 수요일 휴원 정보가 2차 출처에 있음(공식 페이지 미확인)",
+   "closed": "태양의 탑 2026-11 무휴",
+   "fee": "자연문화원·일본정원 450엔(고교생 이상, 2026-04-01 개정) · 중학생 이하 무료; 태양의 탑 입관 720엔(입원료 별도) 또는 세트 1,080엔",
+   "facts": [
+    {
+     "claim": "1970년 오사카 만박 철거지를 정비한 공원",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/万博記念公園",
+     "fix": null
+    },
+    {
+     "claim": "태양의 탑 뒷면의 검은 태양 [메모: 과거를 상징하는 직경 약 8m, 시가라키 타일]",
+     "status": "ok",
+     "url": "https://www.expo70-park.jp/cause/expo/tower-of-sun/",
+     "fix": null
+    },
+    {
+     "claim": "내부(사전예약)는 1층만 촬영 가능 [메모: 안전상 1층만 촬영 가능이라는 공식 동의서 PDF(2차 검색 요약). 다른 층은 전용 스마트폰 케이스 대여 이용 규정이 있음. 최신 운용은 현장 확인]",
+     "status": "ok",
+     "url": "https://taiyounotou-expo70.jp/sys/wp-content/uploads/Douisho_kojin.pdf",
+     "fix": null
+    },
+    {
+     "claim": "벚꽃·단풍철 주말 혼잡",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 30분·60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "nipponbashi": {
+   "refs": [
+    "https://osaka-info.jp/spot/nippombashi-denden-town/",
+    "https://ja.wikipedia.org/wiki/日本橋_(大阪市)"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "전자부품·피규어·게임·메이드 카페가 모인 오사카의 아키하바라",
+     "status": "ok",
+     "url": "https://osaka-info.jp/spot/nippombashi-denden-town/",
+     "fix": null
+    },
+    {
+     "claim": "난바 남쪽 1km [메모: 에비스초·닛폰바시·난바역에서 각각 도보 약 5분(2차 출처). 거리 1km는 확인 못 함]",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "구로몬 시장과 붙어 있다 [메모: 구로몬은 사카이스지에서 한 줄 동쪽, 센니치마에도리 남쪽 — 닛폰바시 1·2초메]",
+     "status": "ok",
+     "url": "https://ja.wikipedia.org/wiki/黒門市場",
+     "fix": null
+    },
+    {
+     "claim": "가게 안 피규어·진열은 촬영 금지 표시가 많다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "메이드 카페 전단 직원은 찍지 마라 [메모: 직원·코스플레이어는 촬영 전 허락 받으라는 일반 주의만 확인]",
+     "status": "unverified",
+     "url": "https://osaka-info.jp/spot/pop-culture-nippombashi-street-festa/",
+     "fix": null
+    },
+    {
+     "claim": "체류 60분·120분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,374 @@
+{
+ "fushimi": {
+  "refs": [
+   "https://en.wikipedia.org/wiki/Fushimi_Inari-taisha",
+   "https://ja.wikipedia.org/wiki/伏見稲荷大社",
+   "https://www.japan-guide.com/e/e3915.html",
+   "https://inari.jp/",
+   "https://inari.jp/en/faq/",
+   "https://kanpai-japan.com/kyoto/fushimi-inari-taisha"
+  ],
+  "official": "https://inari.jp/",
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "일본 교토부 이나리 산 기슭에 있는 신사",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Fushimi_Inari-taisha",
+    "fix": null
+   },
+   {
+    "claim": "伏見稲荷神社(후시미 이나리 타이샤) 명칭·소재 (교토시 후시미구)",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/伏見稲荷大社",
+    "fix": null
+   },
+   {
+    "claim": "이나리 산에는 약 4km의 등산길이 있다",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Fushimi_Inari-taisha",
+    "fix": null
+   },
+   {
+    "claim": "센본토리이 기둥 뒤(뒷면)에 기부자 글씨가 있다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3915.html",
+    "fix": null
+   },
+   {
+    "claim": "센본토리이는 내려오는 방향에서 찍으면 기부자 글씨가 다 보인다",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3915.html",
+    "fix": null
+   },
+   {
+    "claim": "올라가는 쪽을 보고 찍어라",
+    "status": "wrong",
+    "url": "https://www.japan-guide.com/e/e3915.html",
+    "fix": "기부자 글씨는 각 토리이 뒷면(신사 안쪽에서 내려오는 사람이 마주 보는 면)에 있다(japan-guide). 올라가는 쪽을 보면 글씨 없는 앞면이 찍히므로 앞 문장과 모순이다. 글씨를 담으려면 하산 방향(아래쪽)을 보고 찍는다. 방향 판단은 뒷면 위치에서의 추론이며 방향을 명시한 출처는 못 찾았다."
+   },
+   {
+    "claim": "24시간 개방",
+    "status": "ok",
+    "url": "https://en.wikipedia.org/wiki/Fushimi_Inari-taisha",
+    "fix": null
+   },
+   {
+    "claim": "7시 전이면 빈 터널이 나온다",
+    "status": "unverified",
+    "url": "https://kanpai-japan.com/kyoto/fushimi-inari-taisha",
+    "fix": null
+   },
+   {
+    "claim": "opts 참배길까지 30분 (참고: japan-guide는 요쓰쓰지 사거리까지 오르막 30~45분, 정상 왕복 2~3시간)",
+    "status": "unverified",
+    "url": "https://www.japan-guide.com/e/e3915.html",
+    "fix": null
+   },
+   {
+    "claim": "opts 경내 한 바퀴 50분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "tofukuji": {
+  "refs": [
+   "https://ja.wikipedia.org/wiki/東福寺",
+   "https://www.japan-guide.com/e/e3930.html",
+   "https://tofukuji.jp/",
+   "https://tofukuji.jp/guide/",
+   "https://www.keihan.co.jp/momiji/kyoto/spot/toufukuji.html",
+   "https://www.minnacamera.com/spots/1910",
+   "https://www.shift.jp.org/guide/?p=14246",
+   "https://japanactivity.com/tofukuji-temple-kyoto-guide"
+  ],
+  "official": "https://tofukuji.jp/",
+  "hours": "4/1~11/13 9:00~16:00(접수 마감 16:00·폐문 16:30) / 11/14~12/6 통천교 8:30~16:00·방장정원 9:00~16:00 / 12/7~3/31 9:00~15:30(폐문 16:00)",
+  "closed": null,
+  "fee": "방장정원 500엔(2026-11-01부터 600엔)·소인 300엔 / 통천교·개산당 600엔·소인 300엔, 가을(11/14~12/6) 1,000엔·소인 500엔 / 공통권 1,000엔·소인 500엔(가을 기간엔 공통권 없음)",
+  "facts": [
+   {
+    "claim": "임제종 도후쿠지파 대본산 사원",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/東福寺",
+    "fix": null
+   },
+   {
+    "claim": "산호는 에이닛산(慧日山)",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/東福寺",
+    "fix": null
+   },
+   {
+    "claim": "본존은 석가여래",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/東福寺",
+    "fix": null
+   },
+   {
+    "claim": "히가시야마구 혼마치 15초메",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/東福寺",
+    "fix": null
+   },
+   {
+    "claim": "쓰텐쿄 단풍은 11월 하순",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3930.html",
+    "fix": null
+   },
+   {
+    "claim": "피크 기간엔 다리 위 촬영이 금지",
+    "status": "ok",
+    "url": "https://tofukuji.jp/guide/",
+    "fix": null
+   },
+   {
+    "claim": "가에이몬 다리에서 쓰텐쿄를 측면으로",
+    "status": "wrong",
+    "url": "https://tofukuji.jp/guide/",
+    "fix": "다리 이름은 臥雲橋(가운쿄)다. 도후쿠지 3대 다리는 서쪽부터 臥雲橋·通天橋·偃月橋이고 '가에이몬'이라는 다리는 없다. 臥雲橋 쪽에서 通天橋와 골짜기 단풍을 같이 담는 구도는 맞다. 단 공식 사이트가 가을 혼잡기에 通天橋뿐 아니라 臥雲橋 위에서도 촬영을 자제시킬 수 있다고 밝혔으므로 臥雲橋 위에 멈춰 서 찍는 것은 피한다."
+   },
+   {
+    "claim": "臥雲橋 쪽에서 通天橋와 골짜기 단풍을 함께 담는 구도",
+    "status": "ok",
+    "url": "https://www.minnacamera.com/spots/1910",
+    "fix": null
+   },
+   {
+    "claim": "호조 정원 바둑판 이끼(市松 모양, 북정)",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/東福寺",
+    "fix": null
+   },
+   {
+    "claim": "바둑판 이끼는 툇마루에서",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "opts 경내만 30분 (참고: 일반 가이드는 통천교만 보고 나오는 빠른 방문도 약 1시간으로 봄)",
+    "status": "unverified",
+    "url": "https://japanactivity.com/tofukuji-temple-kyoto-guide",
+    "fix": null
+   },
+   {
+    "claim": "opts 경내+정원 60분 (참고: 한 가이드는 통천교+방장정원 60~120분)",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "sanjusangendo": {
+  "refs": [
+   "https://www.sanjusangendo.jp/visit/",
+   "https://www.sanjusangendo.jp/precincts/mainhall/",
+   "https://www.sanjusangendo.jp/precincts/garden/",
+   "https://www.sanjusangendo.jp/statue/",
+   "https://www.sanjusangendo.jp/history/",
+   "https://en.wikipedia.org/wiki/Sanj%C5%ABsangen-d%C5%8D",
+   "https://ja.wikipedia.org/wiki/三十三間堂",
+   "https://www.minnacamera.com/spots/1948",
+   "https://www.jeepe.jp/en/articles/sanjusangendo-guide-kyoto-1523"
+  ],
+  "official": "https://www.sanjusangendo.jp/",
+  "hours": "4/1~11/15 8:30~17:00 / 11/16~3/31 9:00~16:00 (접수 종료는 각 30분 전)",
+  "closed": "연중무휴",
+  "fee": "일반 600엔 / 중고생 400엔 / 초등생 300엔 (25인 이상 단체 550/350/250엔)",
+  "facts": [
+   {
+    "claim": "120m 길이 본당",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/precincts/mainhall/",
+    "fix": null
+   },
+   {
+    "claim": "천수관음 1,001구",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/statue/",
+    "fix": null
+   },
+   {
+    "claim": "12세기 창건(1164)",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/history/",
+    "fix": null
+   },
+   {
+    "claim": "현 건물은 1266년",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/precincts/mainhall/",
+    "fix": null
+   },
+   {
+    "claim": "내부 촬영 금지",
+    "status": "ok",
+    "url": "https://www.minnacamera.com/spots/1948",
+    "fix": null
+   },
+   {
+    "claim": "교토역에서 가까워 첫 일정으로 좋다 (시내버스 100·206·208계통 약 10분, 개문 8:30)",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/visit/",
+    "fix": null
+   },
+   {
+    "claim": "본당 동쪽 정원(동정 지센카이유식 정원)에서 본당 측면을 찍는다",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/precincts/garden/",
+    "fix": null
+   },
+   {
+    "claim": "120m 측면을 광각으로 끝까지 넣는다(원근으로 줄어드는 긴 외관)",
+    "status": "ok",
+    "url": "https://www.sanjusangendo.jp/precincts/mainhall/",
+    "fix": null
+   },
+   {
+    "claim": "opts 경내만 30분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "opts 경내+정원 60분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "kyotostation": {
+  "refs": [
+   "https://ko.wikipedia.org/wiki/%EA%B5%90%ED%86%A0%EC%97%AD",
+   "https://ja.wikipedia.org/wiki/京都駅",
+   "https://en.wikipedia.org/wiki/Kyoto_Station",
+   "https://www.japan-guide.com/e/e3922.html",
+   "https://www.kyoto-station-building.co.jp/service/square/",
+   "https://www.kyoto-station-building.co.jp/graphical_illumination/"
+  ],
+  "official": "https://www.kyoto-station-building.co.jp/",
+  "hours": "대계단 6:00~23:00 / 공중경로(SKYWAY, 10F) 10:00~22:00 / 대공광장(옥상) 6:00~23:00 / 烏丸小路広場(4F) 7:20~23:00 / 대계단 일루미네이션 15:00~22:00(계절별 변동, 3·4월·9월은 16:00 시작)",
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "교토부 교토시 시모교구와 미나미구에 있는 역",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EA%B5%90%ED%86%A0%EC%97%AD",
+    "fix": null
+   },
+   {
+    "claim": "JR 서일본·JR 도카이·긴키 닛폰 철도·교토시 교통국의 역",
+    "status": "ok",
+    "url": "https://ko.wikipedia.org/wiki/%EA%B5%90%ED%86%A0%EC%97%AD",
+    "fix": null
+   },
+   {
+    "claim": "대계단 꼭대기 공중경로(스카이웨이)",
+    "status": "wrong",
+    "url": "https://www.kyoto-station-building.co.jp/service/square/",
+    "fix": "공중경로(SKYWAY)는 대계단 꼭대기가 아니라 별도 시설이다. 10층, 높이 45m, 길이 185m로 건물 동서를 잇는다(10:00~22:00). 대계단 꼭대기는 옥상 大空広場(높이 59.8m)이다."
+   },
+   {
+    "claim": "철골 지붕과 콘코스를 내려다본다",
+    "status": "ok",
+    "url": "https://www.japan-guide.com/e/e3922.html",
+    "fix": null
+   },
+   {
+    "claim": "밤에는 대계단 LED가 켜진다",
+    "status": "ok",
+    "url": "https://www.kyoto-station-building.co.jp/graphical_illumination/",
+    "fix": null
+   },
+   {
+    "claim": "옥상 정원 이용(大空広場)",
+    "status": "wrong",
+    "url": "https://www.kyoto-station-building.co.jp/service/square/",
+    "fix": "옥상 大空広場는 공식 안내상 '11월 하순경부터 공사로 폐쇄'다. 그 이후 일정이면 못 간다. 교토타워를 가까이 보는 곳으로 공식이 소개하는 것은 4층 烏丸小路広場(7:20~23:00)다."
+   },
+   {
+    "claim": "옥상 정원에서 교토타워 정면",
+    "status": "unverified",
+    "url": "https://www.kyoto-station-building.co.jp/service/square/",
+    "fix": null
+   },
+   {
+    "claim": "opts 밖에서만 20분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   },
+   {
+    "claim": "opts 가까이 45분",
+    "status": "unverified",
+    "url": null,
+    "fix": null
+   }
+  ]
+ },
+ "kyotorailway": {
+  "refs": [
+   "https://ja.wikipedia.org/wiki/京都鉄道博物館",
+   "https://www.japan-guide.com/e/e3972.html",
+   "https://travel.watch.impress.co.jp/docs/news/20151202_733216.html",
+   "https://www.nta.co.jp/kokunai/kyoto/kyotorailwaymuseum/",
+   "https://www.jeepe.jp/en/articles/kyoto-railway-museum-guide-1531"
+  ],
+  "official": "https://www.kyotorailwaymuseum.jp/",
+  "hours": null,
+  "closed": null,
+  "fee": null,
+  "facts": [
+   {
+    "claim": "증기기관차 20량이 부채꼴 차고에 서 있다",
+    "status": "unverified",
+    "url": "https://ja.wikipedia.org/wiki/京都鉄道博物館",
+    "fix": null
+   },
+   {
+    "claim": "일본 최대 철도박물관",
+    "status": "wrong",
+    "url": "https://ja.wikipedia.org/wiki/京都鉄道博物館",
+    "fix": "2016년 개관 시점에는 면적·전시 차량 수에서 일본 최대였으나, 2018년 7월 철도박물관(사이타마)의 증축으로 면적 1위를 내줬다. '일본 최대급'이 맞다(NTA 소개문도 日本最大級)."
+   },
+   {
+    "claim": "실제 SL이 짧은 구간을 달린다",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/京都鉄道博物館",
+    "fix": null
+   },
+   {
+    "claim": "opts 한 바퀴 120분 / 아이 동반이면 반나절 아니면 1시간 (참고: jeepe는 본관+야외 전체 약 2시간)",
+    "status": "unverified",
+    "url": "https://www.jeepe.jp/en/articles/kyoto-railway-museum-guide-1531",
+    "fix": null
+   },
+   {
+    "claim": "3층 스카이 테라스에서 부채꼴 차고와 신칸센 선로를 함께 본다",
+    "status": "ok",
+    "url": "https://www.nta.co.jp/kokunai/kyoto/kyotorailwaymuseum/",
+    "fix": null
+   },
+   {
+    "claim": "부채꼴 차고 전체는 3층에서 내려다봐야 든다(다른 위치 불가)",
+    "status": "unverified",
+    "url": "https://www.jeepe.jp/en/articles/kyoto-railway-museum-guide-1531",
+    "fix": null
+   },
+   {
+    "claim": "1층 SL(본관 전시 증기기관차)을 정면에서 광각으로 낮게",
+    "status": "ok",
+    "url": "https://ja.wikipedia.org/wiki/京都鉄道博物館",
+    "fix": null
+   }
+  ]
+ }
+}
