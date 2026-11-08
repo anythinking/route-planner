@@ -1,0 +1,1668 @@
+{
+ "city": "rome",
+ "checked": "2026-11-08",
+ "places": {
+  "colosseum": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Colosseum",
+    "https://en.wikipedia.org/wiki/Arch_of_Constantine",
+    "https://en.wikipedia.org/wiki/Oppian_Hill",
+    "https://colosseum-rome.co/?p=14639",
+    "https://www.hellotickets.com/en-en/italy/rome/duration-visits-colosseum/sc-124-1831"
+   ],
+   "official": "https://colosseo.it/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "고대 로마 제국 시대에 지은 타원형 경기장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Colosseum",
+     "fix": null
+    },
+    {
+     "claim": "석회암·응회암·콘크리트 등으로 건축",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Colosseum",
+     "fix": null
+    },
+    {
+     "claim": "8만 명 이상 수용",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Colosseum",
+     "fix": "현대 추정은 5만~8만 명, 평균 약 6.5만 명. 354년 달력 기록의 8.7만은 과대로 본다. '8만 명 이상'은 상한을 넘는 표현."
+    },
+    {
+     "claim": "콘스탄티누스 개선문이 콜로세움과 팔라티노 언덕 사이에 있어 개선문과 외벽을 한 프레임에 담을 수 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Arch_of_Constantine",
+     "fix": null
+    },
+    {
+     "claim": "오피오 공원(콜레 오피오 공원)이 콜로세움을 높은 곳에서 내려다보는 전망 지점",
+     "status": "ok",
+     "url": "https://colosseum-rome.co/?p=14639",
+     "fix": null
+    },
+    {
+     "claim": "오피오 언덕 공원에서 중앙 대로가 콜로세움 쪽으로 내려간다(공원 입구에서 외관 전체 조망)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Oppian_Hill",
+     "fix": null
+    },
+    {
+     "claim": "내부 2층 회랑에서 아레나 바닥이 다 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부 한 바퀴 90분",
+     "status": "ok",
+     "url": "https://www.hellotickets.com/en-en/italy/rome/duration-visits-colosseum/sc-124-1831",
+     "fix": null
+    }
+   ]
+  },
+  "forum": {
+   "refs": [
+    "https://ko.wikipedia.org/wiki/포룸_로마눔",
+    "https://en.wikipedia.org/wiki/Roman_Forum",
+    "https://en.wikipedia.org/wiki/Arch_of_Septimius_Severus",
+    "https://en.wikipedia.org/wiki/Via_Sacra",
+    "https://www.designerjourneys.com/blog/capitoline-hill-rome-and-piazza-del-campidoglio/",
+    "https://community.ricksteves.com/travel-forum/italy/capitoline-hill",
+    "https://colosseum-rome.co/?p=14713"
+   ],
+   "official": "https://colosseo.it/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "이탈리아어 명칭이 포로 로마노(Foro Romano)",
+     "status": "ok",
+     "url": "https://ko.wikipedia.org/wiki/포룸_로마눔",
+     "fix": null
+    },
+    {
+     "claim": "로마 구도심 한가운데, 팔라티노·캄피돌리오 언덕 사이 골짜기에 위치",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Roman_Forum",
+     "fix": null
+    },
+    {
+     "claim": "셉티미우스 세베루스 개선문은 포로 북서쪽 끝, 캄피돌리오 언덕 기슭 근처(203년 헌정)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Arch_of_Septimius_Severus",
+     "fix": null
+    },
+    {
+     "claim": "개선문 앞에서 비아 사크라를 선(리딩 라인)으로 삼는다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "캄피돌리오 광장 뒤쪽 테라스에서 포로 전체가 내려다보이고 입장료가 없다",
+     "status": "ok",
+     "url": "https://community.ricksteves.com/travel-forum/italy/capitoline-hill",
+     "fix": null
+    },
+    {
+     "claim": "테라스 위치가 광장 안쪽(팔라초 세나토리오 옆·뒤)",
+     "status": "ok",
+     "url": "https://www.designerjourneys.com/blog/capitoline-hill-rome-and-piazza-del-campidoglio/",
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부 한 바퀴 90분",
+     "status": "ok",
+     "url": "https://colosseum-rome.co/?p=14713",
+     "fix": null
+    }
+   ]
+  },
+  "palatine": {
+   "refs": [
+    "https://it.wikipedia.org/wiki/Palatino",
+    "https://en.wikipedia.org/wiki/Palatine_Hill",
+    "https://visitrome.com/rome/travel-guides/roman-forum-palatine-hill-tickets-guide",
+    "https://colosseo.it/"
+   ],
+   "official": "https://colosseo.it/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "팔라티노는 로마 일곱 언덕 중 하나",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Palatino",
+     "fix": null
+    },
+    {
+     "claim": "일곱 언덕 중 가장 핵심적인 언덕",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Palatine_Hill",
+     "fix": null
+    },
+    {
+     "claim": "로마 왕정 시대부터 사람이 살았다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Palatine_Hill",
+     "fix": null
+    },
+    {
+     "claim": "로마 시내에서 가장 오래된 구역",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Palatine_Hill",
+     "fix": "가장 오래된 구역 중 하나. 기원전 10세기경부터 거주 흔적이 있고 오두막터는 기원전 9~7세기 것이라, 왕정 이전부터 사람이 살았다."
+    },
+    {
+     "claim": "파르네세 정원 테라스에서 포로 로마노를 내려다본다",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/travel-guides/roman-forum-palatine-hill-tickets-guide",
+     "fix": null
+    },
+    {
+     "claim": "스타디움 쪽 테라스에서 치르코 마시모가 통째로 보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "그늘이 적어 한낮은 피하는 게 좋다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부 한 바퀴 90분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/travel-guides/roman-forum-palatine-hill-tickets-guide",
+     "fix": null
+    }
+   ]
+  },
+  "pantheon": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Pantheon,_Rome",
+    "https://it.wikipedia.org/wiki/Pantheon_(Roma)",
+    "https://ko.wikipedia.org/wiki/판테온",
+    "https://www.pantheonroma.com/",
+    "https://en.wikipedia.org/wiki/Piazza_della_Rotonda"
+   ],
+   "official": "https://www.pantheonroma.com/",
+   "hours": "매일 9:00-19:00 (마지막 입장 18:30)",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마의 옛 신전이 7세기부터 성당으로 쓰이며 지금까지 전한다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Pantheon,_Rome",
+     "fix": null
+    },
+    {
+     "claim": "이름은 그리스어 판테이온에서 왔고 '모든 신의 신전'이라는 뜻",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Pantheon,_Rome",
+     "fix": null
+    },
+    {
+     "claim": "정면을 담으려면 광장의 분수 뒤까지 물러나야 한다(광장에 분수가 있다)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_della_Rotonda",
+     "fix": null
+    },
+    {
+     "claim": "내부에 오쿨루스(천장 중앙 구멍)가 있고 그 아래에서 위를 올려다볼 수 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Pantheon,_Rome",
+     "fix": null
+    },
+    {
+     "claim": "맑은 날 정오 전후 오쿨루스 빛의 원이 벽에 떨어진다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "삼각대 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부까지 45분",
+     "status": "ok",
+     "url": "https://www.pantheonroma.com/",
+     "fix": null
+    }
+   ]
+  },
+  "trevi": {
+   "refs": [
+    "https://fontanaditrevi.roma.it/en",
+    "https://www.turismoroma.it/en/places/trevi-fountain",
+    "https://en.wikipedia.org/wiki/Trevi_Fountain",
+    "https://it.wikipedia.org/wiki/Fontana_di_Trevi",
+    "https://departly.pages.dev/to/italy/trevi-fountain/"
+   ],
+   "official": "https://fontanaditrevi.roma.it/en",
+   "hours": "근접 구역(안쪽 둘레) 입장 월·금 11:30–22:00, 화~목·토·일 09:00–22:00, 마지막 입장 21:00. 일부 날짜(예: 11/9·11/23·12/7·12/21 월요일 14:00 시작, 12/25 09:00)는 시간이 다름. 입장 시간 밖에도 먼 곳에서 보는 건 무료",
+   "closed": null,
+   "fee": "2026-02-02부터 비거주자 2유로(안쪽 둘레 입장). 로마·광역시 거주자(신분증)·6세 미만·장애인+동반 1인·공인 가이드·Roma MIC Card 소지자 무료. 온라인·시민박물관·관광안내소·현장(현장은 카드만)에서 구매",
+   "facts": [
+    {
+     "claim": "높이 26.3m, 너비 49.15m",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Trevi_Fountain",
+     "fix": null
+    },
+    {
+     "claim": "건축가 니콜라 살비가 조성",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Trevi_Fountain",
+     "fix": "(참고) 살비가 설계했고 그가 죽은 뒤 주세페 판니니가 마무리해 1762년 준공"
+    },
+    {
+     "claim": "트레비 분수는 로마에 있다(트레비 지구, 세 길이 만나는 곳)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Trevi_Fountain",
+     "fix": null
+    },
+    {
+     "claim": "야간 조명이 켜지면 물이 밝게 뜬다(LED 조명)",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Fontana_di_Trevi",
+     "fix": null
+    },
+    {
+     "claim": "분수 가장자리에 앉기는 단속 대상",
+     "status": "ok",
+     "url": "https://fontanaditrevi.roma.it/en",
+     "fix": "(참고) 앉기·서성이기 모두 금지, 과태료 대상"
+    },
+    {
+     "claim": "물에 손 넣기는 단속 대상",
+     "status": "unverified",
+     "url": "https://fontanaditrevi.roma.it/en",
+     "fix": null
+    },
+    {
+     "claim": "분수에 들어가거나 물을 퍼가는 행위 금지(과태료 450유로부터)",
+     "status": "ok",
+     "url": "https://fontanaditrevi.roma.it/en",
+     "fix": "(참고) 공식 안내 기준. 손만 담그는 행위는 따로 언급 없음"
+    },
+    {
+     "claim": "정면 계단 맨 위 모퉁이에서 분수 전체가 들어온다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 20분",
+     "status": "ok",
+     "url": "https://departly.pages.dev/to/italy/trevi-fountain/",
+     "fix": null
+    },
+    {
+     "claim": "체류 가까이 45분",
+     "status": "unverified",
+     "url": "https://departly.pages.dev/to/italy/trevi-fountain/",
+     "fix": null
+    },
+    {
+     "claim": "(참고) 가까이 가려면 2026-02부터 입장권이 필요",
+     "status": "ok",
+     "url": "https://fontanaditrevi.roma.it/en",
+     "fix": "(참고) note·옵션에 입장료 언급 없음. 가까이 보기(안쪽 둘레)는 비거주자 2유로 입장권과 줄이 필요해 '가까이' 45분에는 대기가 포함됨"
+    }
+   ]
+  },
+  "spanish": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Spanish_Steps",
+    "https://www.turismoroma.it/en/events/mostra-delle-azalee-capitoline-piazza-di-spagna",
+    "https://www.finestresullarte.info/attualita/vietato-sedersi-scalinata-trinita-monti-roma"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "스페인 광장과 트리니타 데이 몬티 성당을 잇는 계단(135단)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Spanish_Steps",
+     "fix": null
+    },
+    {
+     "claim": "바르카차 분수는 계단 아래 스페인 광장에 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Spanish_Steps",
+     "fix": null
+    },
+    {
+     "claim": "계단에 앉는 건 금지",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Spanish_Steps",
+     "fix": null
+    },
+    {
+     "claim": "계단 위에서 먹거나 앉으면 벌금(앉기 250유로부터)",
+     "status": "ok",
+     "url": "https://www.finestresullarte.info/attualita/vietato-sedersi-scalinata-trinita-monti-roma",
+     "fix": null
+    },
+    {
+     "claim": "4월 말부터 진달래 화분이 계단을 덮는다",
+     "status": "wrong",
+     "url": "https://www.turismoroma.it/en/events/mostra-delle-azalee-capitoline-piazza-di-spagna",
+     "fix": "2026년 전시는 4/16~5/17(4월 중순 시작). 보통 4/21 직전 시작해 5월 초~중순까지. 식물은 흰색·연보라 아잘레아(철쭉류)."
+    },
+    {
+     "claim": "체류 앉았다 가기 30분",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Spanish_Steps",
+     "fix": "앉는 것이 금지(벌금 250유로)이므로 '앉았다 가기'는 성립하지 않음. 라벨을 '계단 위 전망까지 오르기' 등으로 바꾸고 30분은 오르기+사진 기준으로 유지 가능."
+    },
+    {
+     "claim": "체류 지나며 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "navona": {
+   "refs": [
+    "https://ko.wikipedia.org/wiki/나보나_광장",
+    "https://en.wikipedia.org/wiki/Piazza_Navona",
+    "https://it.wikipedia.org/wiki/Piazza_Navona",
+    "https://www.turismoroma.it/en/node/165558",
+    "https://visitrome.com/rome/neighborhoods/navona"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "테베레강과 코르소 거리 사이에 위치",
+     "status": "ok",
+     "url": "https://ko.wikipedia.org/wiki/나보나_광장",
+     "fix": null
+    },
+    {
+     "claim": "도미티아누스 경기장 터에 들어선 광장(경기장 형태를 따름)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_Navona",
+     "fix": null
+    },
+    {
+     "claim": "4대강 분수는 베르니니 작품이고 꼭대기에 오벨리스크가 선다(1651)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_Navona",
+     "fix": null
+    },
+    {
+     "claim": "산타녜세(산타녜제 인 아고네) 성당이 4대강 분수를 마주 본다",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Piazza_Navona",
+     "fix": null
+    },
+    {
+     "claim": "분수 뒤로 성당 정면을 잡으면 오벨리스크와 돔이 겹친다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "광장 모양이 긴 타원",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_Navona",
+     "fix": "(참고) (참고: 이탈리아어판은 긴 직사각형에 한쪽 짧은 변이 반원이라고 적음)"
+    },
+    {
+     "claim": "12월에 크리스마스 시장이 광장을 채운다(12월 초~1월 6일 베파나까지)",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/node/165558",
+     "fix": null
+    },
+    {
+     "claim": "체류 지나며 15분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/neighborhoods/navona",
+     "fix": null
+    },
+    {
+     "claim": "체류 앉았다 가기 30분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/neighborhoods/navona",
+     "fix": null
+    }
+   ]
+  },
+  "vatican": {
+   "refs": [
+    "https://www.museivaticani.va/content/museivaticani/en.html",
+    "https://www.museivaticani.va/content/museivaticani/en/organizza-visita/tariffe-e-biglietti.html",
+    "https://www.museivaticani.va/content/museivaticani/en/organizza-visita/consigli-utili.html",
+    "https://en.wikipedia.org/wiki/Vatican_Museums",
+    "https://visitingthevatican.com/how-much-time-do-you-need-for-the-vatican-museums/"
+   ],
+   "official": "https://www.museivaticani.va/",
+   "hours": "월~토 8:00~20:00(최종 입장 18:00). 매월 마지막 일요일은 9:00~14:00(최종 입장 12:30, 무료)",
+   "closed": "공식 안내상 월~토 운영, 일요일은 매월 마지막 일요일만 개방. 연중 휴관일은 공식 2026-27 개폐관 달력 참조",
+   "fee": "정가 20유로(현장 구매). 온라인 예약(줄서기 생략)은 +5유로. 감면 10유로. 당일만 유효, 환불 불가",
+   "facts": [
+    {
+     "claim": "바티칸 박물관은 세계 최대급 규모의 미술관 가운데 하나",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "비알레 바티카노에 위치",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "시스티나 예배당은 촬영 자체가 금지",
+     "status": "ok",
+     "url": "https://www.museivaticani.va/content/museivaticani/en/organizza-visita/consigli-utili.html",
+     "fix": null
+    },
+    {
+     "claim": "출구의 나선 계단을 위에서 내려다보며 촬영",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "지도의 방 천장 촬영(금박 스터코 아치 천장)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Vatican_Museums",
+     "fix": null
+    },
+    {
+     "claim": "솔방울 정원에서 성 베드로 돔이 보인다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Vatican_Museums",
+     "fix": null
+    },
+    {
+     "claim": "체류 핵심만 60분",
+     "status": "wrong",
+     "url": "https://visitingthevatican.com/how-much-time-do-you-need-for-the-vatican-museums/",
+     "fix": "시스티나까지 가는 핵심 동선만도 보통 2~3시간. 60분은 어렵다. 적정 120~150분."
+    },
+    {
+     "claim": "체류 한 바퀴 120분",
+     "status": "wrong",
+     "url": "https://visitingthevatican.com/how-much-time-do-you-need-for-the-vatican-museums/",
+     "fix": "전체를 여유 있게 보면 4~5시간. 적정 240분 안팎(최소 180분)."
+    }
+   ]
+  },
+  "stpeter": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/St._Peter%27s_Basilica",
+    "https://ko.wikipedia.org/wiki/성_베드로_대성전",
+    "https://it.wikipedia.org/wiki/Basilica_di_San_Pietro_in_Vaticano",
+    "https://www.basilicasanpietro.va/en/",
+    "https://www.basilicasanpietro.va/en/opening-hours",
+    "https://www.basilicasanpietro.va/en/rules-for-the-common-good",
+    "https://www.artvisitguide.com/st-peters-dome-rome-guide/",
+    "https://www.pixeoapp.com/photo-spots/europe/italy/via-della-conciliazione/"
+   ],
+   "official": "https://www.basilicasanpietro.va/en/",
+   "hours": "대성전 7:00-19:00 (2026-10-26~2027-03-28 겨울; 6/1~10/25은 7:00-20:00). 돔 겨울 7:30-17:00 (3/29~10/25 여름은 7:00-18:00)",
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "바티칸 시국 남동쪽에 있다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "세계 교회 중 가장 거대한 교회(실내 면적 기준 최대)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/St._Peter%27s_Basilica",
+     "fix": null
+    },
+    {
+     "claim": "콘칠리아치오네 대로는 산탄젤로 성에서 대성당 쪽으로 곧게 뻗어 그 끝에서 돔을 볼 수 있다",
+     "status": "ok",
+     "url": "https://www.pixeoapp.com/photo-spots/europe/italy/via-della-conciliazione/",
+     "fix": null
+    },
+    {
+     "claim": "돔 전망대에서 광장 타원과 대로가 한 줄로 보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "내부 삼각대 금지(공식 규정은 부피 큰 장비를 허가 없이 못 쓰게 함)",
+     "status": "ok",
+     "url": "https://www.basilicasanpietro.va/en/rules-for-the-common-good",
+     "fix": null
+    },
+    {
+     "claim": "돔은 계단 551개(엘리베이터 이용 시 320개)",
+     "status": "ok",
+     "url": "https://www.artvisitguide.com/st-peters-dome-rome-guide/",
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부까지 45분",
+     "status": "wrong",
+     "url": "https://www.artvisitguide.com/st-peters-dome-rome-guide/",
+     "fix": "대성당 내부만 약 60분 안내(보안 검색 줄 별도). 돔까지 하면 2.5시간 안팎"
+    }
+   ]
+  },
+  "castel": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Castel_Sant%27Angelo",
+    "https://it.wikipedia.org/wiki/Castel_Sant%27Angelo",
+    "https://www.turismoroma.it/it/luoghi/castel-santangelo",
+    "https://castelsantangelo.com/en/?p=16573"
+   ],
+   "official": "https://direzionemuseiroma.cultura.gov.it/museo-nazionale-di-castel-santangelo",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마 제국의 황제 하드리아누스가 자신과 가족을 위해 세운 무덤",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Castel_Sant%27Angelo",
+     "fix": null
+    },
+    {
+     "claim": "원통 모양의 건축물",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Castel_Sant%27Angelo",
+     "fix": null
+    },
+    {
+     "claim": "제국 멸망 후 교황청의 성곽 겸 요새로 사용",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Castel_Sant%27Angelo",
+     "fix": "(참고) 요새화는 1447–1527년 교황 시절 중심, 바티칸과 이어지는 파세토 통로도 이때 쓰임"
+    },
+    {
+     "claim": "현재는 군사 박물관으로 사용",
+     "status": "wrong",
+     "url": "https://www.turismoroma.it/it/luoghi/castel-santangelo",
+     "fix": "현재는 국립 박물관(Museo Nazionale di Castel Sant'Angelo)이자 기념물·고고 지구. 조각·회화·무기·가구·이탈리아 육군 유물을 전시. 군사공학 박물관은 1906년 개관해 1939년에 이전함"
+    },
+    {
+     "claim": "산탄젤로 다리 위 천사상(다리 난간의 천사 조각)",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Castel_Sant%27Angelo",
+     "fix": "(참고) 다리 천사 10기는 1667~69년 클레멘스 9세가 세웠고, 성 꼭대기 청동 천사상은 1753년 작"
+    },
+    {
+     "claim": "꼭대기 테라스에서 성 베드로 대성당이 보인다",
+     "status": "ok",
+     "url": "https://castelsantangelo.com/en/?p=16573",
+     "fix": "(참고) 공식 페이지 확인은 못 함(제3자 안내 기준). 위키는 '천사의 테라스'에서 도시가 넓게 보인다고만 적음"
+    },
+    {
+     "claim": "조명 켜진 뒤 강변에서 반영",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 밖과 정원 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부까지 90분",
+     "status": "ok",
+     "url": "https://castelsantangelo.com/en/?p=16573",
+     "fix": "(참고) 안내는 평균 1.5~2시간, 천천히 보면 2~3시간"
+    }
+   ]
+  },
+  "trastevere": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Trastevere",
+    "https://en.wikipedia.org/wiki/Santa_Maria_in_Trastevere",
+    "https://www.acea.it/en/press-releases/2020/07/roma-capitale-and-acea-inaugurate-the-new-artistic-lighting-system-of-the-basilica-of-santa-maria-in-trastevere",
+    "https://community.ricksteves.com/travel-forum/italy/approximate-time-to-do-trastevere-walk-in-rome"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "트라스테베레는 로마의 리오네(13번째, R. XIII)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Trastevere",
+     "fix": null
+    },
+    {
+     "claim": "note 말미 'R.'에서 끊긴 문장",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Trastevere",
+     "fix": "'R. XIII', 즉 13번째 리오네로 이어져야 하는 잘린 문장. 문장 완성 필요."
+    },
+    {
+     "claim": "산타 마리아 인 트라스테베레 정면(종탑 쪽 포함)에 중세 모자이크가 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Santa_Maria_in_Trastevere",
+     "fix": null
+    },
+    {
+     "claim": "성당 정면·모자이크·종탑 야간 조명 설비가 있어 저녁 촬영 가능",
+     "status": "ok",
+     "url": "https://www.acea.it/en/press-releases/2020/07/roma-capitale-and-acea-inaugurate-the-new-artistic-lighting-system-of-the-basilica-of-santa-maria-in-trastevere",
+     "fix": null
+    },
+    {
+     "claim": "골목 담쟁이 벽·빨랫줄이 피사체",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "사람 없는 골목은 아침뿐",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 한 바퀴 60분",
+     "status": "ok",
+     "url": "https://community.ricksteves.com/travel-forum/italy/approximate-time-to-do-trastevere-walk-in-rome",
+     "fix": null
+    },
+    {
+     "claim": "체류 골목까지 120분",
+     "status": "ok",
+     "url": "https://www.guruwalk.com/de/walks/39865-zweistundige-free-walking-tour-in-trastevere-zwischen-geschichte-und-legende",
+     "fix": null
+    }
+   ]
+  },
+  "campo": {
+   "refs": [
+    "https://ko.wikipedia.org/wiki/캄포_데_피오리",
+    "https://en.wikipedia.org/wiki/Campo_de'_Fiori",
+    "https://it.wikipedia.org/wiki/Campo_de'_Fiori",
+    "https://www.wantedinrome.com/yellowpage/campo-de-fiori-market.html",
+    "https://visitrome.com/rome/neighborhoods/campo-de-fiori"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "나보나 광장 남쪽의 직사각형 광장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Campo_de'_Fiori",
+     "fix": null
+    },
+    {
+     "claim": "시장은 오전~이른 오후만 서고 14시경 마감",
+     "status": "ok",
+     "url": "https://www.wantedinrome.com/yellowpage/campo-de-fiori-market.html",
+     "fix": null
+    },
+    {
+     "claim": "일요일 휴무(매체에 따라 일부 일요일 영업 언급도 있음)",
+     "status": "ok",
+     "url": "https://www.wantedinrome.com/yellowpage/campo-de-fiori-market.html",
+     "fix": null
+    },
+    {
+     "claim": "광장 중앙에 조르다노 브루노 동상(1889, 에토레 페라리)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Campo_de'_Fiori",
+     "fix": null
+    },
+    {
+     "claim": "밤엔 바·펍 테라스가 광장을 채운다",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Campo_de'_Fiori",
+     "fix": null
+    },
+    {
+     "claim": "체류 훑기 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 먹으며 90분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/neighborhoods/campo-de-fiori",
+     "fix": null
+    }
+   ]
+  },
+  "borghese": {
+   "refs": [
+    "https://it.wikipedia.org/wiki/Galleria_Borghese",
+    "https://en.wikipedia.org/wiki/Apollo_and_Daphne_(Bernini)",
+    "https://www.museionline.info/musei/galleria-borghese",
+    "https://www.voloscontato.it/informazioni-utili/galleria-borghese-come-comprare-i-biglietti-costo-riduzioni-orari.php",
+    "https://galleriaborghese.cultura.gov.it/"
+   ],
+   "official": "https://galleriaborghese.cultura.gov.it/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "보르게세 공원(빌라 보르게세 핀차나)에 있는 미술관",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Galleria_Borghese",
+     "fix": null
+    },
+    {
+     "claim": "이탈리아에서 바티칸 박물관 다음으로 소장품이 많다",
+     "status": "unverified",
+     "url": null,
+     "fix": "(참고) 뒷받침 없음. 위키는 베르니니 조각과 카라바조 회화의 수와 중요도로 세계적이라고만 서술."
+    },
+    {
+     "claim": "2시간 단위 입장(교대제)",
+     "status": "ok",
+     "url": "https://www.museionline.info/musei/galleria-borghese",
+     "fix": null
+    },
+    {
+     "claim": "내부 촬영은 플래시 없이 허용",
+     "status": "unverified",
+     "url": null,
+     "fix": "(참고) 공식 사이트를 열지 못했고 제3자 정보는 엇갈림(2017 포럼은 촬영 금지 보고). 공식 확인 필요."
+    },
+    {
+     "claim": "아폴로와 다프네의 다프네 손끝에서 잎이 돋는다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Apollo_and_Daphne_(Bernini)",
+     "fix": null
+    },
+    {
+     "claim": "아폴로와 다프네는 방 중앙에 있어 돌아가며 볼 수 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Apollo_and_Daphne_(Bernini)",
+     "fix": null
+    },
+    {
+     "claim": "체류 핵심만 60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 한 바퀴 120분(입장 교대 2시간 상한과 일치)",
+     "status": "ok",
+     "url": "https://www.voloscontato.it/informazioni-utili/galleria-borghese-come-comprare-i-biglietti-costo-riduzioni-orari.php",
+     "fix": null
+    }
+   ]
+  },
+  "villaborghese": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Villa_Borghese_gardens",
+    "https://www.thetrainline.com/via/europe/italy/rome/visiting-villa-borghese",
+    "https://turismoroma.it/en/node/31553",
+    "https://turismoroma.it/it/accoglienza/laghetto-di-villa-borghese-noleggio-barche"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마의 공원이다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Villa_Borghese_gardens",
+     "fix": null
+    },
+    {
+     "claim": "테르미니 역에서 20분 거리",
+     "status": "ok",
+     "url": "https://www.thetrainline.com/via/europe/italy/rome/visiting-villa-borghese",
+     "fix": null
+    },
+    {
+     "claim": "로마에서 가장 큰 공원",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Villa_Borghese_gardens",
+     "fix": "약 80ha로 로마 공공공원 중 세 번째 크기(빌라 도리아 팜필리, 빌라 아다 다음)"
+    },
+    {
+     "claim": "핀초 테라스가 공원 서쪽 끝에 있다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "핀초 테라스에서 포폴로 광장과 성 베드로 돔이 함께 보인다",
+     "status": "ok",
+     "url": "https://turismoroma.it/en/node/31553",
+     "fix": null
+    },
+    {
+     "claim": "호수 한가운데 아스클레피오스 신전이 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Villa_Borghese_gardens",
+     "fix": null
+    },
+    {
+     "claim": "호수에서 보트를 빌릴 수 있다(현재 영업 여부는 미확인)",
+     "status": "ok",
+     "url": "https://turismoroma.it/it/accoglienza/laghetto-di-villa-borghese-noleggio-barche",
+     "fix": null
+    },
+    {
+     "claim": "체류 지나며 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 한 바퀴 60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "popolo": {
+   "refs": [
+    "https://www.turismoroma.it/en/places/piazza-del-popolo",
+    "https://en.wikipedia.org/wiki/Piazza_del_Popolo",
+    "https://it.wikipedia.org/wiki/Piazza_del_Popolo_(Roma)",
+    "https://it.wikipedia.org/wiki/Obelisco_Flaminio",
+    "https://en.wikipedia.org/wiki/Flaminio_Obelisk"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "핀초 언덕과 테베레강 사이에 있다",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Piazza_del_Popolo_(Roma)",
+     "fix": "(참고) 핀초는 광장 동쪽, 테베레 쪽은 서쪽(리페타 길)"
+    },
+    {
+     "claim": "'민중의 광장'이라는 뜻",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_del_Popolo",
+     "fix": null
+    },
+    {
+     "claim": "아우구스투스가 이집트 정복을 기념해 오벨리스크를 가져왔다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/places/piazza-del-popolo",
+     "fix": null
+    },
+    {
+     "claim": "기원전 1세기에 가져왔다",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Obelisco_Flaminio",
+     "fix": "(참고) 기원전 10년 로마 도착, 키르쿠스 막시무스에 세웠고 1589년 식스투스 5세 때 이곳으로 옮김"
+    },
+    {
+     "claim": "36m 높이의 플라미니오 오벨리스크",
+     "status": "wrong",
+     "url": "https://it.wikipedia.org/wiki/Obelisco_Flaminio",
+     "fix": "오벨리스크 자체는 약 24~25.9m, 받침과 십자가를 포함하면 36.5m"
+    },
+    {
+     "claim": "핀초 테라스에서 내려다보면 광장 전체가 보인다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/places/piazza-del-popolo",
+     "fix": null
+    },
+    {
+     "claim": "오벨리스크와 쌍둥이 성당이 한 줄로 선다(핀초에서 볼 때)",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "쌍둥이 성당은 산타 마리아 데이 미라콜리·몬테산토로 광장 남쪽 코르소 길 입구 양옆에 있다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/places/piazza-del-popolo",
+     "fix": null
+    },
+    {
+     "claim": "오벨리스크 아래에 사자 분수가 있다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/places/piazza-del-popolo",
+     "fix": "(참고) 발라디에가 만든 사자 분수가 오벨리스크를 둘러쌈"
+    },
+    {
+     "claim": "체류 지나며 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 앉았다 가기 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "capitoline": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Capitoline_Museums",
+    "https://www.museicapitolini.org/en/informazioni_pratiche/orari_e_indirizzi",
+    "https://www.museicapitolini.org/en/informazioni_pratiche/biglietti_e_videoguide",
+    "https://www.museicapitolini.org/en/informazioni_pratiche/condizioni_di_accesso2",
+    "https://museicapitolini.org/en/node/2494",
+    "https://museicapitolini.org/en/node/166"
+   ],
+   "official": "https://www.museicapitolini.org/en",
+   "hours": "매일 9:30~19:30(입장 마감은 폐관 1시간 전, 12/24·12/31은 9:30~14:00)",
+   "closed": "5/1, 12/25",
+   "fee": "비거주자 일반 입장 15유로(할인 9.5유로), 전시 연계 입장 시 16.5유로. 로마·광역시 거주자 무료. 오디오가이드 4유로.",
+   "facts": [
+    {
+     "claim": "콘세르바토리 궁전과 누오보 궁전으로 이루어진 박물관",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Capitoline_Museums",
+     "fix": null
+    },
+    {
+     "claim": "두 궁전이 지하로 연결",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Capitoline_Museums",
+     "fix": null
+    },
+    {
+     "claim": "캄피돌리오 광장 바닥에 별 문양(12각 별, 1940년 시공)",
+     "status": "ok",
+     "url": "https://museicapitolini.org/en/node/2494",
+     "fix": null
+    },
+    {
+     "claim": "별 문양은 원로원 궁(팔라초 세나토리오) 계단 위에서 내려다봐야 보인다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "마르쿠스 아우렐리우스 기마상 원본은 박물관 안(광장 것은 복제)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Capitoline_Museums",
+     "fix": null
+    },
+    {
+     "claim": "안에서 창 너머로 포로 로마노가 보인다(타불라리움 갤러리)",
+     "status": "ok",
+     "url": "https://museicapitolini.org/en/node/166",
+     "fix": null
+    },
+    {
+     "claim": "플래시 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 핵심만 60분",
+     "status": "wrong",
+     "url": "https://headout.com/blog/capitoline-museums-rome",
+     "fix": "핵심만 훑어도 보통 90분 안팎, 권장 체류는 약 2시간. 60분은 짧다 → 90분."
+    },
+    {
+     "claim": "체류 한 바퀴 120분",
+     "status": "ok",
+     "url": "https://headout.com/blog/capitoline-museums-rome",
+     "fix": null
+    }
+   ]
+  },
+  "venezia": {
+   "refs": [
+    "https://ko.wikipedia.org/wiki/베네치아_광장",
+    "https://it.wikipedia.org/wiki/Piazza_Venezia",
+    "https://en.wikipedia.org/wiki/Piazza_Venezia",
+    "https://en.wikipedia.org/wiki/Vittoriano",
+    "https://it.wikipedia.org/wiki/Vittoriano",
+    "https://vive.cultura.gov.it/it/visita",
+    "https://vive.cultura.gov.it/it/info-e-orari-1",
+    "https://vive.cultura.gov.it/it/terrazza-panoramica",
+    "https://gettyimages.ca/detail/photo/glimpse-of-the-roman-forum-seen-from-the-terrace-of-royalty-free-image/1305604596"
+   ],
+   "official": "https://vive.cultura.gov.it/",
+   "hours": "매일 9:30–19:30 (마지막 입장 19:00, 매표 18:45; 공식 페이지에 시즌 구분 없음)",
+   "closed": null,
+   "fee": "비토리아노 본관·팔라초 베네치아 정원 무료. 테라스+박물관 등 통합권 정가 18유로(EU 18~24세 5유로, 7일 유효, 첫째 일요일 무료)",
+   "facts": [
+    {
+     "claim": "광장이 1871년 이탈리아 통일을 기념하려고 조성되었다",
+     "status": "wrong",
+     "url": "https://it.wikipedia.org/wiki/Piazza_Venezia",
+     "fix": "광장은 15세기 팔라초 베네치아(1455년 착공, 광장 이름의 유래) 앞 공간이 원형이고, 비토리아노 부지를 위해 19세기 말~1911년에 확장·대칭 정비됨. 1871년은 로마가 수도가 된 해에 가까움."
+    },
+    {
+     "claim": "광장 안(가장자리)에 비토리오 에마누엘레 2세 기념관이 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Piazza_Venezia",
+     "fix": null
+    },
+    {
+     "claim": "기념관 공사는 1885~1935, 1911년 6월 4일 일부 완공 상태로 개막",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Vittoriano",
+     "fix": null
+    },
+    {
+     "claim": "테르미니 역과 함께 교통 중심지",
+     "status": "unverified",
+     "url": "https://it.wikipedia.org/wiki/Piazza_Venezia",
+     "fix": "(참고) 광장은 5개 주요 도로가 만나는 중심 교차점이라는 서술은 확인됨. 테르미니와 병렬 비교한 부분은 근거 못 찾음."
+    },
+    {
+     "claim": "비토리아노는 매우 크다(너비 약 135m, 높이 약 70m)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Vittoriano",
+     "fix": null
+    },
+    {
+     "claim": "비아 델 코르소 입구 쪽으로 물러나야 전체가 든다(코르소와 기념관이 같은 축)",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Piazza_Venezia",
+     "fix": null
+    },
+    {
+     "claim": "옥상 테라스는 엘리베이터를 타고 올라가며 유료",
+     "status": "ok",
+     "url": "https://vive.cultura.gov.it/it/terrazza-panoramica",
+     "fix": "(참고) 엘리베이터 약 1분에 70m, 테라스는 통합권(정가 18유로)에 포함. 본관 입장은 무료."
+    },
+    {
+     "claim": "테라스에서 포로·콜로세움 방향 조망",
+     "status": "ok",
+     "url": "https://vive.cultura.gov.it/it/terrazza-panoramica",
+     "fix": null
+    },
+    {
+     "claim": "계단 앉기 금지",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 지나며 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 앉았다 가기 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    }
+   ]
+  },
+  "mouth": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Bocca_della_Verit%C3%A0",
+    "https://it.wikipedia.org/wiki/Bocca_della_Verit%C3%A0",
+    "https://turismoroma.it/it/node/35741",
+    "https://www.cosmedin.org",
+    "https://www.nomadotravel.app/it/attractions/bocca-della-verita"
+   ],
+   "official": "https://www.cosmedin.org",
+   "hours": "성당 매일 9:30~17:50(진실의 입은 포르티코에 있어 별도 시간 표기 없음)",
+   "closed": "1월 1일",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "진실의 입은 대리석 가면 조각",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Bocca_della_Verit%C3%A0",
+     "fix": null
+    },
+    {
+     "claim": "산타 마리아 인 코스메딘 성당의 서쪽 벽을 장식",
+     "status": "unverified",
+     "url": "https://en.wikipedia.org/wiki/Bocca_della_Verit%C3%A0",
+     "fix": "(참고) 정확히는 성당 현관 포르티코 안쪽 왼쪽 벽. '서쪽'은 확인되지 않음."
+    },
+    {
+     "claim": "가면 앞 줄이 길고 한 사람당 촬영 시간이 짧다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "개장 직후가 줄이 가장 짧다",
+     "status": "ok",
+     "url": "https://www.nomadotravel.app/it/attractions/bocca-della-verita",
+     "fix": null
+    },
+    {
+     "claim": "입구 기부함에 동전을 넣는 게 관례",
+     "status": "unverified",
+     "url": null,
+     "fix": "(참고) 공식·위키 어디에도 기부함 언급 없음."
+    },
+    {
+     "claim": "체류 밖에서만 20분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 가까이 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": "(참고) 줄·촬영·성당 내부 포함 20~40분으로 보는 글이 많음(출처 약함)."
+    }
+   ]
+  },
+  "lateran": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Archbasilica_of_St._John_Lateran",
+    "https://it.wikipedia.org/wiki/Basilica_di_San_Giovanni_in_Laterano",
+    "https://en.wikipedia.org/wiki/Lateran_Obelisk",
+    "https://turismoroma.it/en/places/lateran-obelisk",
+    "https://www.thegeographicalcure.com/post/guide-to-st-john-lateran",
+    "https://thebettervacation.com/basilica-of-san-giovanni/"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마 교구의 주교좌 성당(로마 대성당)이다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Archbasilica_of_St._John_Lateran",
+     "fix": null
+    },
+    {
+     "claim": "지붕 위에 조각상이 줄지어 서 있다(그리스도·두 요한·교회학자 등 15기, 각 약 7m)",
+     "status": "ok",
+     "url": "https://www.thegeographicalcure.com/post/guide-to-st-john-lateran",
+     "fix": null
+    },
+    {
+     "claim": "정면 광장이 넓어 파사드 전체가 한 프레임에 든다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "중앙 신랑 양옆에 사도상 12개가 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Archbasilica_of_St._John_Lateran",
+     "fix": null
+    },
+    {
+     "claim": "옆 광장의 오벨리스크가 로마에서 가장 높다(몸체 약 32m, 기단 포함 약 45.7m)",
+     "status": "ok",
+     "url": "https://turismoroma.it/en/places/lateran-obelisk",
+     "fix": null
+    },
+    {
+     "claim": "체류 밖에서만 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부까지 45분",
+     "status": "ok",
+     "url": "https://thebettervacation.com/basilica-of-san-giovanni/",
+     "fix": null
+    }
+   ]
+  },
+  "maggiore": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Basilica_of_Santa_Maria_Maggiore",
+    "https://ko.wikipedia.org/wiki/산타마리아_마조레_대성전",
+    "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Maggiore",
+    "https://www.turismoroma.it/it/luoghi/basilica-di-santa-maria-maggiore",
+    "https://turismoroma.it/en/places/esquiline-obelisk",
+    "https://eurovistatrips.com/how-to-visit-santa-maria-maggiore-basilica/",
+    "https://www.headout.com/blog/santa-maria-maggiore/"
+   ],
+   "official": "https://www.basilicasantamariamaggiore.va/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마 가톨릭교회의 대성당(교황 대성전)",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Basilica_of_Santa_Maria_Maggiore",
+     "fix": "(참고) 로마 4대 교황 대성전 중 하나"
+    },
+    {
+     "claim": "성모 대성당·성모 설지전이라고도 부른다",
+     "status": "ok",
+     "url": "https://ko.wikipedia.org/wiki/산타마리아_마조레_대성전",
+     "fix": null
+    },
+    {
+     "claim": "뒤쪽 에스퀼리노 광장에 오벨리스크가 있고 애프스 뒤에 선다",
+     "status": "ok",
+     "url": "https://turismoroma.it/en/places/esquiline-obelisk",
+     "fix": "(참고) 에스퀼리노 오벨리스크는 애프스 뒤 광장에 있고 높이 14.75m(받침 포함 25.53m), 1587년 식스투스 5세가 세움"
+    },
+    {
+     "claim": "내부 금박 천장",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Basilica_of_Santa_Maria_Maggiore",
+     "fix": "(참고) 16세기 격자 천장(상갈로 설계), 신대륙에서 온 첫 금으로 도금했다고 전해짐"
+    },
+    {
+     "claim": "내부에서 삼각대를 쓸 수 없다",
+     "status": "ok",
+     "url": "https://eurovistatrips.com/how-to-visit-santa-maria-maggiore-basilica/",
+     "fix": "(참고) 플래시도 금지, 플래시 없는 촬영만 허용(제3자 안내 기준)"
+    },
+    {
+     "claim": "8월 5일 흰 꽃잎이 내리는 눈 축제",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Basilica_of_Santa_Maria_Maggiore",
+     "fix": "(참고) 8월 5일 봉헌 축일 미사 때 돔에서 흰 장미 꽃잎을 뿌려 눈의 기적을 재현"
+    },
+    {
+     "claim": "체류 밖에서만 15분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 내부까지 45분",
+     "status": "ok",
+     "url": "https://eurovistatrips.com/how-to-visit-santa-maria-maggiore-basilica/",
+     "fix": "(참고) 자유 관람 45분~1시간, 가이드 투어는 30분 더(다른 안내는 약 2시간)"
+    }
+   ]
+  },
+  "appia": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Appian_Way",
+    "https://www.turismoroma.it/en/itineraries/la-appia-antica",
+    "http://www.italymagazine.com/featured-story/day-tripping-appia-antica-regional-park-rome",
+    "https://en.wikipedia.org/wiki/Tomb_of_Caecilia_Metella",
+    "https://www.parcoappiaantica.it/en/"
+   ],
+   "official": "https://www.parcoappiaantica.it/en/",
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "로마 공화정 시대(기원전 312년)에 건설",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Appian_Way",
+     "fix": null
+    },
+    {
+     "claim": "고대 로마에서 가장 먼저 만들어진 도로",
+     "status": "wrong",
+     "url": "https://en.wikipedia.org/wiki/Appian_Way",
+     "fix": "가장 오래된 도로가 아니라 '초기 도로 중 하나이자 군대 이동용으로 처음 놓은 장거리 간선도로'(아피우스 클라우디우스 카이쿠스가 감찰관 때 착수)."
+    },
+    {
+     "claim": "체칠리아 메텔라 영묘는 아피아 가도 위(약 3로마마일, 공원 안)에 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Tomb_of_Caecilia_Metella",
+     "fix": null
+    },
+    {
+     "claim": "영묘 남쪽에 원래 포장석(현무암 판석)과 소나무·사이프러스 가로수가 이어진다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/en/itineraries/la-appia-antica",
+     "fix": null
+    },
+    {
+     "claim": "일요일은 차량 통제",
+     "status": "ok",
+     "url": "http://www.italymagazine.com/featured-story/day-tripping-appia-antica-regional-park-rome",
+     "fix": null
+    },
+    {
+     "claim": "체류 지나며 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 한 바퀴 60분",
+     "status": "wrong",
+     "url": "https://www.turismoroma.it/en/itineraries/la-appia-antica",
+     "fix": "영묘~빌라 구간만 걸어도 2~4시간 잡는 게 일반적(외관만 훑는 최소 약 45분). '한 바퀴'는 120~180분이 적정."
+    }
+   ]
+  },
+  "testaccio": {
+   "refs": [
+    "https://www.mercatoditestaccio.it/",
+    "https://www.mercatoditestaccio.it/info/",
+    "https://italia.it/en/lazio/rome/testaccio-market",
+    "https://katieparla.com/mordi-e-vai-testaccio-market/",
+    "https://www.neverendingvoyage.com/testaccio-market-rome/",
+    "https://visitrome.com/rome/travel-guides/mercato-di-testaccio-rome-visitor-guide"
+   ],
+   "official": "https://www.mercatoditestaccio.it/",
+   "hours": "월~토 7:00–15:30 (일부 노점은 더 늦게 열거나 일찍 닫음)",
+   "closed": "일요일 (공식 안내는 월~토 개장만 적음)",
+   "fee": null,
+   "facts": [
+    {
+     "claim": "일요일 휴무",
+     "status": "ok",
+     "url": "https://www.mercatoditestaccio.it/info/",
+     "fix": null
+    },
+    {
+     "claim": "점심에 노점 파니니(Mordi e Vai 등)를 판다",
+     "status": "ok",
+     "url": "https://katieparla.com/mordi-e-vai-testaccio-market/",
+     "fix": null
+    },
+    {
+     "claim": "아침에 채소 노점이 선다",
+     "status": "ok",
+     "url": "https://italia.it/en/lazio/rome/testaccio-market",
+     "fix": null
+    },
+    {
+     "claim": "아침에 치즈 판매",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "관광객 없는 동네 시장",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "지붕이 덮인 시장 건물 안(사방은 트인 구조)",
+     "status": "ok",
+     "url": "https://italia.it/en/lazio/rome/testaccio-market",
+     "fix": null
+    },
+    {
+     "claim": "오전 11시 전엔 비어 있다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 훑기 45분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 먹으며 90분",
+     "status": "unverified",
+     "url": "https://visitrome.com/rome/travel-guides/mercato-di-testaccio-rome-visitor-guide",
+     "fix": "(참고) 한 안내서는 2~3시간을 권함. 90분이 틀렸다고 할 근거는 없으나 확인된 건 아님."
+    }
+   ]
+  },
+  "gianicolo": {
+   "refs": [
+    "https://it.wikipedia.org/wiki/Gianicolo",
+    "https://en.wikipedia.org/wiki/Janiculum",
+    "https://turismoroma.it/it/pagina/il-cannone-del-gianicolo",
+    "https://rome.us/fountains-and-squares/piazzale-garibaldi.html",
+    "https://reidsitaly.com/destinations/lazio/rome/sights/gianicolo.html"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "자니콜로는 로마의 언덕 중 하나(전통적 일곱 언덕에는 속하지 않음)",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Gianicolo",
+     "fix": null
+    },
+    {
+     "claim": "가리발디 광장 난간에서 시내 돔들이 한 줄로 보인다",
+     "status": "ok",
+     "url": "https://it.wikipedia.org/wiki/Gianicolo",
+     "fix": null
+    },
+    {
+     "claim": "비토리아노가 뚜렷하게 구분된다",
+     "status": "ok",
+     "url": "https://rome.us/fountains-and-squares/piazzale-garibaldi.html",
+     "fix": null
+    },
+    {
+     "claim": "판테온 돔이 구분된다",
+     "status": "ok",
+     "url": "https://rome.us/fountains-and-squares/piazzale-garibaldi.html",
+     "fix": "(참고) 돔 윗부분 계단 고리만 지붕 위로 보여 망원이 필요."
+    },
+    {
+     "claim": "정오 대포는 매일 12시",
+     "status": "ok",
+     "url": "https://turismoroma.it/it/pagina/il-cannone-del-gianicolo",
+     "fix": null
+    },
+    {
+     "claim": "정오 대포 연기까지 사진에 잡힌다",
+     "status": "unverified",
+     "url": null,
+     "fix": "(참고) 공포탄을 쏜다는 기록뿐 연기 언급 없음."
+    },
+    {
+     "claim": "파올라 분수 앞 조망",
+     "status": "unverified",
+     "url": "https://rome.us/fountains-and-squares/piazzale-garibaldi.html",
+     "fix": "(참고) 분수는 가리발디 광장에서 약 410m, 도보 8분. 분수 앞 조망은 근거 못 찾음."
+    },
+    {
+     "claim": "체류 전망만 30분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 천천히 60분",
+     "status": "ok",
+     "url": "https://reidsitaly.com/destinations/lazio/rome/sights/gianicolo.html",
+     "fix": "(참고) 트라스테베레에서 넘어가는 산책 전체는 60~90분."
+    }
+   ]
+  },
+  "monti": {
+   "refs": [
+    "https://en.wikipedia.org/wiki/Monti_(rione_of_Rome)",
+    "https://ko.wikipedia.org/wiki/몬티_(로마)",
+    "https://www.turismoroma.it/es/places/plaza-madonna-dei-monti",
+    "https://romewise.com/colosseum/finding-the-best-view-of-the-colosseum/",
+    "https://visitrome.com/tours/2-5-hour-rione-monti-private-guided-walking-tour"
+   ],
+   "official": null,
+   "hours": null,
+   "closed": null,
+   "fee": null,
+   "facts": [
+    {
+     "claim": "몬티는 로마의 리오네(행정 구역)다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/Monti_(rione_of_Rome)",
+     "fix": null
+    },
+    {
+     "claim": "note 문장이 'R.'에서 끊겨 있다",
+     "status": "wrong",
+     "url": "https://ko.wikipedia.org/wiki/몬티_(로마)",
+     "fix": "원문은 'R. I라고 표기되며 로마 1구에 속한다'까지 이어짐"
+    },
+    {
+     "claim": "마돈나 데이 몬티 광장 분수 둘레가 저녁 모임 자리다",
+     "status": "ok",
+     "url": "https://www.turismoroma.it/es/places/plaza-madonna-dei-monti",
+     "fix": null
+    },
+    {
+     "claim": "비아 파니스페르나에 담쟁이 덮인 벽이 있다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "비아 델리 안니발디 쪽에서 콜로세움이 보인다",
+     "status": "ok",
+     "url": "https://romewise.com/colosseum/finding-the-best-view-of-the-colosseum/",
+     "fix": null
+    },
+    {
+     "claim": "체류 한 바퀴 60분",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "체류 골목까지 120분",
+     "status": "ok",
+     "url": "https://visitrome.com/tours/2-5-hour-rione-monti-private-guided-walking-tour",
+     "fix": null
+    }
+   ]
+  },
+  "maxxi": {
+   "refs": [
+    "https://www.maxxi.art/en/",
+    "https://www.maxxi.art/en/indicazioni-per-i-visitatori/",
+    "https://www.turismoroma.it/it/luoghi/maxxi-museo-nazionale-delle-arti-del-xxi-secolo",
+    "https://www.italia.it/en/lazio/rome/maxxi-museum",
+    "https://en.wikipedia.org/wiki/MAXXI",
+    "https://visitrome.com/rome/travel-guides/maxxi-rome-visitor-guide"
+   ],
+   "official": "https://www.maxxi.art/en/",
+   "hours": "화~일 11:00–19:00(마지막 입장 18:00, 로마 관광청 안내)",
+   "closed": "월요일(5/1·12/25도 휴관, 로마 관광청 안내)",
+   "fee": "일반 15유로(현장)·14유로(온라인), 할인 12/11유로, 18세 미만 무료, 1년 오픈티켓 18유로. 2026-10-20~11-12 온라인 특가 10유로(공식 페이지 2026-11-08 기준)",
+   "facts": [
+    {
+     "claim": "자하 하디드가 설계",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/MAXXI",
+     "fix": null
+    },
+    {
+     "claim": "2010년 개관",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/MAXXI",
+     "fix": "(참고) 2010년 5월 개관"
+    },
+    {
+     "claim": "플라미니오 지구에 있다",
+     "status": "ok",
+     "url": "https://en.wikipedia.org/wiki/MAXXI",
+     "fix": null
+    },
+    {
+     "claim": "시내에서 트램 2번(메트로 A선 플라미니오역에서 환승)",
+     "status": "ok",
+     "url": "https://www.italia.it/en/lazio/rome/maxxi-museum",
+     "fix": "(참고) 트램 2번 아폴로도로 정류장 하차, 입구는 비아 구이도 레니 4a"
+    },
+    {
+     "claim": "콘크리트 곡면 램프가 건물 전체를 가로지른다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "상층 캔틸레버를 앞마당에서 올려다보는 각",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "내부에 검은 계단이 있다",
+     "status": "unverified",
+     "url": null,
+     "fix": null
+    },
+    {
+     "claim": "상설은 촬영 허용, 기획전은 제한이 붙기도 한다",
+     "status": "wrong",
+     "url": "https://www.maxxi.art/en/indicazioni-per-i-visitatori/",
+     "fix": "공식 안내: 광장·로비는 촬영 허용, 전시실 안은 사진·영상 촬영 불가(상설·기획 구분 없음). 상업·전문 촬영은 재단 허가 필요"
+    },
+    {
+     "claim": "체류 핵심만 60분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/travel-guides/maxxi-rome-visitor-guide",
+     "fix": "(참고) 안내는 1~2시간(건물 보기만 30~45분), 다른 안내는 2~3시간"
+    },
+    {
+     "claim": "체류 한 바퀴 120분",
+     "status": "ok",
+     "url": "https://visitrome.com/rome/travel-guides/maxxi-rome-visitor-guide",
+     "fix": "(참고) 전시 전체와 건축을 함께 보면 2~3시간 안내도 있음"
+    }
+   ]
+  }
+ }
+}
