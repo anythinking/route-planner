@@ -163,6 +163,7 @@ function renderTabs() {
     host.appendChild(b);
   }
   const who = document.getElementById('who'); who.innerHTML = '';
+  const ed = $('button', 'btn sm edit', '✎ 고치기'); ed.type = 'button'; ed.setAttribute('aria-pressed', editing); ed.title = '켜면 어느 화면에서든 고치는 단추가 붙어요 — 플랜의 역·구간·날, 홈·내 여행의 여행 카드'; ed.onclick = () => { editing = !editing; render(); }; who.appendChild(ed);
   if (curUser) { const b = $('button', 'btn sm user', `<span class="dot"></span>${esc(curUser.name)}`); b.type = 'button'; b.title = '내 계정'; b.onclick = () => setState({ tab: 'account', pr: null }); who.appendChild(b); }
   else { const b = $('button', 'btn sm', '로그인'); b.type = 'button'; b.onclick = () => setState({ tab: 'mine', pr: null }); who.appendChild(b); }
   // 단계 토글은 없다 — 플랜은 한 화면
@@ -298,6 +299,7 @@ function renderHome(side, projects, pub = []) {
       const card = $('a', 'card trip'); card.href = '#';
       card.innerHTML = `<img src="${esc(c.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}</b><span>${esc(c.name || p.city)} · 사진 ${p.photos.length}${p.id === curUser.prefs?.lastPr ? ' · 최근' : ''}</span></div>`;
       card.onclick = e => { e.preventDefault(); setState({ pr: p.id, tab: 'mine' }); };
+      if (editing) cardTools(card, p);
       grid.appendChild(card);
     }
     sec.appendChild(grid);
@@ -325,6 +327,13 @@ function renderHome(side, projects, pub = []) {
   }
   side.appendChild($('p', 'muted credits', '도시 사진: Wikimedia Commons (CC BY / CC BY-SA, <a href="assets/cities/credits.json">저작자</a>) · <a href="#tab=terms">이용약관</a> · <a href="#tab=privacy">개인정보처리방침</a>'));
   applyHomeFilter(side);
+}
+// 여행 카드 위 고치기 단추 — 이름 · 삭제 (홈과 내 여행 목록이 같이 쓴다)
+export function cardTools(card, p, st = store, after = () => { projectsCache = null; render(); }) {
+  const t = $('span', 'cardtools');
+  const nm = $('button', 'btn sm', '이름'); nm.type = 'button'; nm.onclick = async e => { e.preventDefault(); e.stopPropagation(); const n = prompt('여행 이름', p.name); if (!n || n === p.name) return; await st.updateProject(p.id, { name: n }); after(); };
+  const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = async e => { e.preventDefault(); e.stopPropagation(); if (!confirm(`「${p.name}」을 지울까요? 사진도 같이 지워져요.`)) return; await st.deleteProject(p.id); after(); };
+  t.append(nm, del); card.appendChild(t);
 }
 function applyHomeFilter(side) {
   const q = homeQuery.trim().toLowerCase();
@@ -451,7 +460,7 @@ async function render() {
     curProject = project;
     // 떼어 둔 상자에 그렸다가 마지막에 한 번에 바꿔 끼운다 — 그리는 도중 render가 또 불리면 두 벌이 섞여 붙었다
     const out = document.createElement('div');
-    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen: state.tab === 'account', backTo, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join, authNote });
+    await renderMine({ state, setState, city, $, side: out, store: withInvalidation(store), user: curUser, projects, project, canEdit, isOwner, CITIES, INDEX, loadCity, plan, resolvePlaces, hm, render, map, accountOpen: state.tab === 'account', backTo, setStep: n => { step = n; }, pickPhoto: fn => { pickPhotoFn = fn; }, fitPhotos: pts => { if (pts.length) map.fitBounds(pts, 40); }, saveToProject, joinPending: !!join, authNote, editing, cardTools });
     if (seq !== renderSeq) return;
     side.replaceChildren(...out.childNodes);
     bindMapClick(null); drawStart();
@@ -635,9 +644,6 @@ function renderPlan(side, entering) {
   const ttl = $('div', 'v2title');
   ttl.innerHTML = `<h2>${esc(city.name)}</h2><span>${state.d}일 · ${places.length}곳</span>`;
   head.appendChild(ttl);
-  const ed = $('button', 'btn sm edit', '✎ 고치기'); ed.type = 'button'; ed.setAttribute('aria-pressed', editing); ed.title = editing ? '고치기 끄기 — 보기만' : '역·구간·날을 고치는 단추를 켜요 (체류 바꾸기 · ★ · 빼기 · 끌어서 옮기기 · 이동수단 · 날 설정)';
-  ed.onclick = () => { editing = !editing; render(); };
-  ed.disabled = !places.length; head.appendChild(ed);
   const un = $('button', 'btn sm', '↶ 되돌리기'); un.type = 'button'; un.title = '방금 한 것 되돌리기 (⌘Z)'; un.disabled = !undoStack.length; un.onclick = undo;
   head.appendChild(un);
   const sv = $('button', 'btn primary', state.pr && curUser ? '저장' : '여행으로 저장'); sv.type = 'button';

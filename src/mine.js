@@ -322,6 +322,7 @@ function renderList(ctx) {
     const card = $('a', 'card trip'); card.href = '#';
     card.innerHTML = `<img src="${esc(ci.image || '')}" alt="" loading="lazy"><div class="cap"><b>${esc(p.name)}${p.id === user.prefs?.lastPr ? ' · 최근' : ''}</b><span>${legsOf(p.hash).map(h => esc(CITIES[decode('#' + h).c] || '')).join(' → ')} · 사진 ${p.photos.length} · 살 것 ${p.shopping.filter(x => !x.done).length} · ${fmtDate(p.updatedAt)}</span></div>`;
     card.onclick = e => { e.preventDefault(); setState({ pr: p.id }); };
+    if (ctx.editing) ctx.cardTools(card, p, store, render);   // 헤더 ✎ 고치기가 켜져 있으면 이름·삭제
     grid.appendChild(card);
   }
   side.appendChild(grid);

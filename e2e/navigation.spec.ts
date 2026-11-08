@@ -37,7 +37,7 @@ test.describe('이동·뒤로 가기', () => {
     await startWithTrip(page);
     await page.locator('.crumb a').click();
     await onList(page);
-    await page.locator('#who button').click();
+    await page.locator('#who .btn.user').click();
     await expect(page.getByRole('heading', { name: '내 계정' })).toBeVisible();
     expect(await hash(page)).toContain('tab=account');
     await page.reload();
@@ -48,7 +48,7 @@ test.describe('이동·뒤로 가기', () => {
 
   test('③ 계정을 벗어난 뒤 「내 여행」 탭은 목록을 연다', async ({ page }) => {
     await startWithTrip(page);
-    await page.locator('#who button').click();
+    await page.locator('#who .btn.user').click();
     await expect(page.getByRole('heading', { name: '내 계정' })).toBeVisible();
     await tab(page, '홈').click();
     await tab(page, '내 여행').click();
@@ -155,4 +155,17 @@ test.describe('플랜 — 브라우저 창 대신 화면 안 입력', () => {
     expect(await hash(page)).toMatch(/l=[^&]*%3A42|l=[^&]*:42/);
     await expect(page.locator('.line li.leg select').first().locator('option:checked')).toHaveText(/직접 42분/);
   });
+});
+
+test('⑪ ✎ 고치기는 헤더에 항상 있고, 켜면 홈·내 여행의 여행 카드에 이름·삭제가 붙는다', async ({ page }) => {
+  await startWithTrip(page);
+  await tab(page, '홈').click();
+  await expect(page.locator('#who .btn.edit')).toBeVisible();
+  await expect(page.locator('.card.trip .cardtools')).toHaveCount(0);
+  await page.locator('#who .btn.edit').click();
+  await expect(page.locator('.card.trip .cardtools').first()).toBeVisible();
+  await tab(page, '내 여행').click();
+  await expect(page.locator('.card.trip .cardtools').first()).toBeVisible();
+  await tab(page, '플랜').click();
+  await expect(page.locator('#who .btn.edit')).toHaveAttribute('aria-pressed', 'true');
 });

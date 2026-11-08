@@ -28,9 +28,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611081134","./src/config.js":"./src/config.js?v=202611081134","./src/edits.js":"./src/edits.js?v=202611081134","./src/engine.js":"./src/engine.js?v=202611081134","./src/html.js":"./src/html.js?v=202611081134","./src/map.js":"./src/map.js?v=202611081134","./src/mine.js":"./src/mine.js?v=202611081134","./src/pages.js":"./src/pages.js?v=202611081134","./src/search.js":"./src/search.js?v=202611081134","./src/shadow.js":"./src/shadow.js?v=202611081134","./src/state.js":"./src/state.js?v=202611081134","./src/store-map.js":"./src/store-map.js?v=202611081134","./src/store-supabase.js":"./src/store-supabase.js?v=202611081134","./src/store.js":"./src/store.js?v=202611081134","./src/timeline.js":"./src/timeline.js?v=202611081134","./src/travel.js":"./src/travel.js?v=202611081134","./src/ui.js":"./src/ui.js?v=202611081134"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611081134"><link rel="modulepreload" href="src/config.js?v=202611081134"><link rel="modulepreload" href="src/edits.js?v=202611081134"><link rel="modulepreload" href="src/engine.js?v=202611081134"><link rel="modulepreload" href="src/html.js?v=202611081134"><link rel="modulepreload" href="src/map.js?v=202611081134"><link rel="modulepreload" href="src/mine.js?v=202611081134"><link rel="modulepreload" href="src/pages.js?v=202611081134"><link rel="modulepreload" href="src/search.js?v=202611081134"><link rel="modulepreload" href="src/shadow.js?v=202611081134"><link rel="modulepreload" href="src/state.js?v=202611081134"><link rel="modulepreload" href="src/store-map.js?v=202611081134"><link rel="modulepreload" href="src/store-supabase.js?v=202611081134"><link rel="modulepreload" href="src/store.js?v=202611081134"><link rel="modulepreload" href="src/timeline.js?v=202611081134"><link rel="modulepreload" href="src/travel.js?v=202611081134"><link rel="modulepreload" href="src/ui.js?v=202611081134">
-<link rel="preload" href="data/cities.json?v=202611081134" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611081140","./src/config.js":"./src/config.js?v=202611081140","./src/edits.js":"./src/edits.js?v=202611081140","./src/engine.js":"./src/engine.js?v=202611081140","./src/html.js":"./src/html.js?v=202611081140","./src/map.js":"./src/map.js?v=202611081140","./src/mine.js":"./src/mine.js?v=202611081140","./src/pages.js":"./src/pages.js?v=202611081140","./src/search.js":"./src/search.js?v=202611081140","./src/shadow.js":"./src/shadow.js?v=202611081140","./src/state.js":"./src/state.js?v=202611081140","./src/store-map.js":"./src/store-map.js?v=202611081140","./src/store-supabase.js":"./src/store-supabase.js?v=202611081140","./src/store.js":"./src/store.js?v=202611081140","./src/timeline.js":"./src/timeline.js?v=202611081140","./src/travel.js":"./src/travel.js?v=202611081140","./src/ui.js":"./src/ui.js?v=202611081140"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611081140"><link rel="modulepreload" href="src/config.js?v=202611081140"><link rel="modulepreload" href="src/edits.js?v=202611081140"><link rel="modulepreload" href="src/engine.js?v=202611081140"><link rel="modulepreload" href="src/html.js?v=202611081140"><link rel="modulepreload" href="src/map.js?v=202611081140"><link rel="modulepreload" href="src/mine.js?v=202611081140"><link rel="modulepreload" href="src/pages.js?v=202611081140"><link rel="modulepreload" href="src/search.js?v=202611081140"><link rel="modulepreload" href="src/shadow.js?v=202611081140"><link rel="modulepreload" href="src/state.js?v=202611081140"><link rel="modulepreload" href="src/store-map.js?v=202611081140"><link rel="modulepreload" href="src/store-supabase.js?v=202611081140"><link rel="modulepreload" href="src/store.js?v=202611081140"><link rel="modulepreload" href="src/timeline.js?v=202611081140"><link rel="modulepreload" href="src/travel.js?v=202611081140"><link rel="modulepreload" href="src/ui.js?v=202611081140">
+<link rel="preload" href="data/cities.json?v=202611081140" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -64,11 +64,11 @@ h1{font-size:20px;margin:0;font-weight:700}h1 a{color:inherit;text-decoration:no
 details.panel>summary{cursor:pointer;list-style:none;font-size:15px}details.panel>summary::-webkit-details-marker{display:none}details.panel>summary::before{content:'▸ ';color:var(--muted)}details.panel[open]>summary::before{content:'▾ '}
 details.panel[open]>summary{margin-bottom:6px}.group>summary b{font-size:17px}
 .layout{flex:1;min-height:0;display:grid;grid-template-columns:3fr 2fr;gap:16px}
-.layout.nomap{grid-template-columns:1fr}.layout.nomap #mapwrap{display:none}.layout.nomap .side{max-width:860px;width:100%;margin-inline:auto}
+.layout.nomap{grid-template-columns:1fr}.layout.nomap #mapwrap{display:none}.layout.nomap .side{max-width:1280px;width:100%;margin-inline:auto}
 .hero{padding:28px 0 8px}.hero h2{font-size:30px;margin:0 0 6px;letter-spacing:-.01em}.hero p{margin:0 0 14px;color:var(--muted);font-size:15px}
 input.text.big{font-size:17px;padding:12px 16px;border-radius:6px;max-width:520px}
 .region h3{font-size:17px;margin:22px 0 10px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .card{display:block;position:relative;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--sunk);color:#fff;text-decoration:none;border:1px solid var(--line)}
 .card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}.card:hover img{transform:scale(1.04)}
 .card .cap{position:absolute;inset:auto 0 0 0;padding:28px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.65));display:flex;flex-direction:column;line-height:1.35}
@@ -242,7 +242,9 @@ body.v2 #sunbox .sun{font-size:14px}
 .v2zone{margin:12px 0 0;padding-left:12px;border-left:4px solid var(--c)}.v2zone>b{display:block;font-size:15.5px;margin-bottom:6px}.v2zone>b i{display:none}.v2zone .muted{font-weight:500;font-size:13.5px}
 .chip.w1{font-weight:800;border-color:var(--fg)}.chip[aria-pressed=true]{background:var(--fg);color:#fff;border-color:var(--fg)}.chip.on{background:var(--d1);color:#fff;border-color:var(--d1)}
 .v2pickbox{border:1px solid var(--line);border-radius:12px;padding:8px 14px 12px}.v2pickbox>summary{cursor:pointer;font-weight:700;list-style:none}.v2pickbox>summary::-webkit-details-marker{display:none}.v2pickbox>summary::before{content:'▸ ';color:var(--muted)}.v2pickbox[open]>summary::before{content:'▾ '}.v2pickbox .v2empty{margin-top:8px;padding:0;background:none}
-.startrow{margin:2px 0 4px}.startrow .chip{padding:3px 10px;font-size:13.5px}
+.startrow{margin:2px 0 4px}
+.cardtools{position:absolute;top:8px;right:8px;display:flex;gap:4px}.cardtools .btn{background:rgba(255,255,255,.92)}
+#who{display:flex;gap:6px;align-items:center}.startrow .chip{padding:3px 10px;font-size:13.5px}
 .zone{font:800 13px/1.2 "Wanted Sans Variable",sans-serif;color:var(--c);background:rgba(255,255,255,.92);border:1.5px solid var(--c);border-radius:6px;padding:3px 8px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15)}.zone span{font-weight:600;color:var(--muted)}
 </style>
 </head>
@@ -258,6 +260,6 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611081134"></script>
+<script type="module" src="src/ui.js?v=202611081140"></script>
 </body>
 </html>
