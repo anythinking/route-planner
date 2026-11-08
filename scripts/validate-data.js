@@ -26,7 +26,7 @@ for (const f of files.filter(f => existsSync(`data/${f}`))) {
     if (box && !(p.lat >= box[0] && p.lat <= box[1] && p.lng >= box[2] && p.lng <= box[3])) fail(tag, `좌표 ${p.lat},${p.lng} 도시 밖`);
     if (/<(?!\/?b>)/.test(p.note || '')) fail(tag, 'note에 <b> 외 태그');
     // 공개 데이터에 특정 여행의 맥락(동행·숙소·일정·개인 메모)이 새면 안 된다
-    const LEAK = /네 노트|형이 쉐프|형한테|(?<!할)아버지|이코이|복셀|호텔에서|식당 문 앞|어제|오늘|내일|이번 여행|이번엔|옮겼다|켜라|켜보면|꺼뒀다|투어|저녁 약속|끝나면/;
+    const LEAK = /네 노트|형이 쉐프|형한테|(?<!할)아버지|이코이|복셀|호텔에서|식당 문 앞|어제|오늘|내일|이번 여행|이번엔|옮겼다|켜라|켜보면|꺼뒀다|저녁 약속|끝나면/;   // 「투어」는 세부처럼 상품 자체가 투어인 도시에서 일반 어휘라 뺐다(2026-11-08)
     const m = (p.note || '').match(LEAK); if (m) fail(tag, `note에 여행 맥락 누출: "${m[0]}"`);
   }
   for (const k of ['pack', 'photo', 'gift']) if (!(k in c)) fail(f, `${k} 없음`);
