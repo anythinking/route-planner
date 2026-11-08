@@ -18,3 +18,16 @@ test('세부: 홈 카드가 있고, 플랜이 그려지며, 오슬롭 같은 시
   await expect(page.getByText('세부에서는 특히')).toBeVisible();
   await expect(page.getByText('내가 고른 곳')).toBeVisible();
 });
+
+test('세부: 빈 플랜을 열면 지도가 섬 전체가 아니라 세부시티·막탄에 맞는다', async ({ page }, testInfo) => {
+  await page.goto('/?local=1#c=cebu&d=3&tab=plan');
+  await expect(page.locator('.v2title h2')).toHaveText('세부');
+  await page.locator('#map canvas').waitFor();
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: testInfo.outputPath('cebu-empty.png') });
+  // 지도 안에 보이는 역 이름표: 도심(마젤란·톱스·슈라인)은 보이고 오슬롭은 화면 밖
+  const labels = await page.locator('#map .mk span').allTextContents();
+  expect(labels.some(t => t.includes('톱스') || t.includes('마젤란') || t.includes('슈라인'))).toBeTruthy();
+  const oslob = page.locator('#map .mk span', { hasText: '오슬롭' });
+  if (await oslob.count()) await expect(oslob.first()).not.toBeInViewport();
+});

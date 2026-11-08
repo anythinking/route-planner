@@ -1,4 +1,5 @@
 import { plan, hm, ALGOS } from './engine.js';
+import { distanceKm } from './travel.js';
 import { decode, encode, DEFAULTS, TABS, PAGES, resolvePlaces, legsOf, withLeg } from './state.js';
 import { renderPage } from './pages.js';
 import { esc } from './html.js';
@@ -794,7 +795,12 @@ function renderPlan(side, entering) {
     map.line('route', [[s0.lat, s0.lng], ...day.stops.map(x => [x.place.lat, x.place.lng])], { color: col, weight: 4, opacity: 0.85 });
     day.stops.forEach((x, k) => { map.html('route', x.place, `<div class="st" style="--c:${col}"><i>${k + 1}</i><span>${esc(x.place.name)}</span></div>`, { title: `${hm(x.arrive)} ${x.place.name}` }); bounds.push([x.place.lat, x.place.lng]); });
   });
-  if (entering || mapFitAsked) { mapFitAsked = false; map.fitBounds(bounds.length > 1 ? bounds : city.places.map(p => [p.lat, p.lng]), 40); }
+  // 처음 열 때 — 고른 곳이 없으면 도심 20km 안의 장소에 맞춘다. 세부처럼 당일 여행지가 100km 밖에 있는 도시는 전부 넣으면 섬 전체가 잡혀 도심이 점이 된다
+  if (entering || mapFitAsked) {
+    mapFitAsked = false;
+    const c = { lat: city.center[0], lng: city.center[1] }, core = city.places.filter(p => distanceKm(c, p) <= 20);
+    map.fitBounds(bounds.length > 1 ? bounds : (core.length >= 3 ? core : city.places).map(p => [p.lat, p.lng]), 40);
+  }
   if (sunOpen) mountSun(result.days.length ? result : { days }, start);
   if (pin) map.circle('places', pin, { radius: 9, color: '#1f4fa8', weight: 2.5, fillColor: '#fff', dashed: true, title: '찍은 자리' });
   bindMapClick(e => { pin = { lat: e.latlng.lat, lng: e.latlng.lng }; render(); setTimeout(() => document.querySelector('.pincard input.text')?.focus(), 50); });
