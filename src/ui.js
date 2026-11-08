@@ -723,7 +723,7 @@ function renderPlan(side, entering) {
       row.append(mustBtn, sel);
     } else { const d = pl.opts[pl.default]; if (d) row.appendChild($('span', 'muted dw', `${esc(d.label)} · ${d.min}분`)); }
     into.appendChild(row);
-    if (chosen && pl.note) { const note = $('p', 'muted note', esc(pl.note)); note.dataset.name = row.dataset.name; into.appendChild(note); }
+    if (chosen && pl.note) { const note = $('p', 'muted note', pl.note); note.dataset.name = row.dataset.name; into.appendChild(note); }
   };
   // 묶음 — 구역(areas)이 있으면 구역별(처음엔 다 펼침), 없으면 1·2·3순위별(처음엔 1순위만). 펼침은 묶음 이름으로 기억
   const groups = city.areas ? city.areas.map((ar, i) => ({ key: ar.id, name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, open: true, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
