@@ -35,6 +35,7 @@ for (const f of files.filter(f => existsSync(`data/${f}`))) {
   if (!Array.isArray(c.photo?.general) || !c.photo.general.length) fail(f, 'photo.general 비어 있음');
   for (const id of Object.keys(c.photo?.places || {})) if (!ids.has(id)) fail(f, `photo.places에 모르는 id ${id}`);
   const missing = [...ids].filter(id => !c.photo?.places?.[id]); if (missing.length) console.log(`  (${f}: 사진 팁 없는 장소 ${missing.length}곳)`);   // 있으면 좋지만 필수는 아니다
+  const nosrc = c.places.filter(p => !p.q && !p.src?.coord).map(p => p.id); if (nosrc.length) console.log(`  (${f}: 출처 없는 장소 ${nosrc.length}곳 — q 또는 src.coord: ${nosrc.slice(0, 5).join(', ')})`);   // research/README.md 규칙
   console.log(`${f}: ${(c.places || []).length}곳`);
 }
 if (bad) { console.error(`${bad}건 실패`); process.exit(1); }

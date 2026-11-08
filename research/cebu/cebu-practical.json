@@ -1,0 +1,180 @@
+{
+ "meta": {
+  "city": "Cebu (세부·막탄)",
+  "country": "PH",
+  "collected": "2026-11-08",
+  "note": "2025~2026 자료 우선. 공식(외교부 0404) 페이지는 봇 차단으로 직접 열지 못해 치안 항목은 보도·가이드 출처로 대체함."
+ },
+ "pack": [
+  {
+   "item": "플러그 어댑터(필요 시)·110V 기기 확인",
+   "why": "필리핀은 220V 60Hz, 콘센트 A형(납작 2핀)이 주류이고 B·C형 혼재. 한국 둥근 2핀(C)은 A형 전용 소켓엔 안 꽂혀 A형 어댑터 1개 권장. 충전기는 100~240V 프리볼트면 변압기 불필요",
+   "source": "https://www.worldstandards.eu/electricity/plug-voltage-by-country/philippines/"
+  },
+  {
+   "item": "유심/eSIM(글로브·스마트)",
+   "why": "막탄공항 입국장 바로 앞 Globe·Smart 부스(여권 필요, ~10분). 참고가 Globe 30GB/15일 ₱750, Smart 21GB/30일 ₱549. 공항 매장이 시내보다 2~3배 비쌀 수 있고 키오스크는 05:00~24:00라 새벽 도착이면 eSIM 사전 설치가 안전",
+   "source": "https://esim.holafly.com/ko/guides-sim-card/cebu-sim-card/ ; https://simbye.com/ko/blogs/blog/best-esim-for-philippines-2026-plans-prices-airport-guide"
+  },
+  {
+   "item": "현금(페소)·달러 신권",
+   "why": "공항에선 $50~100만 바꾸고 나머지는 아얄라센터 3층 X-change 등 시내 환전소 이용(공항 환율이 뚜렷이 나쁨). 원화→달러($100 신권)→페소가 가장 유리, 구권·소액권·낙서 지폐는 거부될 수 있음. 현지 ATM은 건당 ₱250 수수료, 1회 한도 보통 ₱10,000이라 한 번에 최대로 뽑을 것. 3박4일 성인 1인 현금 ₱10,000~15,000 권장",
+   "source": "https://www.tripstore.kr/blog/cebu-2026-currency-exchange-tips"
+  },
+  {
+   "item": "그랩(Grab) 앱 + 소액권",
+   "why": "공항 그랩 픽업: T1은 보통 출발층(위층) 도로, T2는 국제선 도착 커브 또는 출발층. 시내(아얄라·IT파크) ₱250~450, 막탄 리조트 ₱300~450. 요금은 앱에 선표시(CCLEX 톨 포함). 택시는 흰색 미터(기본 ₱50, km당 ₱13.5)가 노란 공항택시(₱300~500)보다 쌈. 기사가 거스름돈이 없는 일이 잦아 ₱20·50·100권 필수",
+   "source": "https://www.thetraveler.org/cebu-mactan-airport-grab-pickup-taxi-guide-2026/ ; https://cebuinsights.com/?p=52086 ; https://3d-universal.com/en/blogs/how-to-get-to-ayala-center-cebu-from-airport.html"
+  },
+  {
+   "item": "선크림(수중용은 리프세이프) + 래시가드",
+   "why": "오슬롭 고래상어 구역은 입수 전 오리엔테이션에서 '선크림 바르고 입수 금지·접촉 금지·플래시 금지·4~5m 거리' 규칙을 적용. 바다에선 선크림 대신 래시가드로 가리고, 바르더라도 미네랄(산화아연) 계열을 쓸 것. 3~5월이 가장 덥고 자외선 강함",
+   "source": "https://3d-universal.com/en/blogs/whale-shark-watching-in-oslob-rules-tips.html ; https://www.gmanetwork.com/news/lifestyle/healthandwellness/979708/what-does-reef-safe-sunscreen-mean-and-can-you-buy-it-in-the-philippines/story"
+  },
+  {
+   "item": "모기 기피제(DEET/피카리딘)",
+   "why": "세부주 뎅기 환자 2025년 1월~6월 14일 5,880건(전년 대비 +5%), 라푸라푸시는 2025년 1~7월 +35%. 우기(6~11월) 새벽·해질녘 야외와 리조트 정원에서 특히 주의",
+   "source": "https://www.magzter.com/ar/stories/newspaper/The-Freeman/DENGUE-CASES-IN-CV-UP-BY-5 ; https://www.magzter.com/en/stories/newspaper/The-Freeman/DENGUE-CASES-IN-LAPULAPU-UP-BY-35"
+  },
+  {
+   "item": "수영복·아쿠아슈즈·방수팩",
+   "why": "호핑(날루수안·힐루퉁안)·모알보알·카와산은 산호 조각과 성게가 많아 아쿠아슈즈 필요. 방수팩은 폰·여권 사본용. 우기엔 스콜이 짧고 굵게 와서 가방 방수도 함께",
+   "source": "https://www.tripstore.kr/blog/cebu-moalboal-malapascua-travel-essentials-tips"
+  },
+  {
+   "item": "얇은 긴팔·긴바지(성당·에어컨)",
+   "why": "산토니뇨 대성당은 반바지·민소매·등 파인 옷·찢어진 바지 입장 제한을 실제로 집행(2026년 1월에도 상원의원 논란). 어깨·무릎 가리는 옷 1벌이면 몰·그랩 냉방 대비도 됨",
+   "source": "https://newsinfo.inquirer.net/1979695/cebus-basilica-to-enforce-strict-dress-code/amp ; https://interaksyon.philstar.com/trends-spotlights/2026/01/14/307698/churchgoer-denied-cebu-dress-code-policy/"
+  },
+  {
+   "item": "eTravel QR(출발 72시간 이내 등록)",
+   "why": "etravel.gov.ph 무료(유료 대행 사이트는 가짜). 입국·출국 각각 72시간 이내 등록하고 QR을 캡처해 둘 것. 한국 여권은 30일 무비자, 6개월 이상 유효 여권 + 출국 항공권 필요",
+   "source": "https://blog.wego.com/philippines-etravel-registration/ ; https://bernepe.dfa.gov.ph/tourism-and-visa/visa"
+  },
+  {
+   "item": "팁용 잔돈(₱20·50·100)",
+   "why": "투어 가이드 1인당 ₱50~100, 호핑 보트맨 ₱100~200, 마사지는 서비스차지 없으면 10~20%(₱50~100 수준). 영수증에 service charge가 있는지 먼저 확인",
+   "source": "https://philippinestravelguides.com/?p=29382 ; https://primer.com.ph/tips-guides/?p=3852"
+  },
+  {
+   "item": "생수(수돗물 금지)",
+   "why": "여행 가이드들은 세부 수돗물 음용을 '고위험'으로 분류. 호텔 제공 정수·편의점 생수(저렴)로 양치까지 해결. 수도국(MCWD)은 안전하다고 주장하나 독립 검증 없음",
+   "source": "https://www.travelsafe-abroad.com/philippines/cebu-city/"
+  }
+ ],
+ "gift": [
+  {
+   "item": "7D 드라이망고 / 세부 베스트 망고",
+   "where": "아얄라센터 메트로 슈퍼마켓·SM 슈퍼마켓(시사이드·마볼로)·만다우에 7D 팩토리 아울렛·타보안 마켓(Cebu Best 저가)",
+   "note": "100g 약 ₱100~120(아얄라 기준). 공항은 30~50% 비쌈. 막탄 세이브모어·샹스몰은 시내보다 5~10% 비쌈",
+   "source": "https://www.tripstore.kr/blog/%EC%84%B8%EB%B6%80-%EA%B8%B0%EB%85%90%ED%92%88-%EC%87%BC%ED%95%91%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC ; https://3d-universal.com/en/blogs/why-dried-mango-is-the-1-souvenir-from-cebu-2025-edition.html"
+  },
+  {
+   "item": "오타프(Otap)·로스키요스(Titay's Rosquillos)",
+   "where": "샴록 파살루봉 센터(푸엔테 오스메냐 인근)·대형 슈퍼·Titay's 릴로안 본점(Poblacion, Liloan)",
+   "note": "오타프 1팩 ₱50~150. 로스키요스는 1907년부터 만든 릴로안 명물 도넛형 쿠키, 박스/팩 단위로 슈퍼에서도 구매 가능(가격 미확인)",
+   "source": "https://madmonkeyhostels.com/h2o_blog/10-cebu-treats-and-souvenirs-to-bring-home/ ; https://cebuchamber.org/titays-rosquillos-celebrating-a-century-old-pasalubong-favorite"
+  },
+  {
+   "item": "카르카르 치차론",
+   "where": "카르카르 현지(세부시티에서 남쪽 약 2시간)·시내 Zubuchon·슈퍼·공항 T1 파살루봉 센터",
+   "note": "돼지껍데기 튀김. 기름이 배어나므로 밀봉 포장 제품으로, 수하물에 넣을 것",
+   "source": "https://cebuinsights.com/?p=2201 ; https://penfires.com/cebu-pasalubong-treats-from-carcar-lechon-chicharon-ampao-atbp/"
+  },
+  {
+   "item": "필리핀 커피(바라코)",
+   "where": "SM·아얄라 슈퍼마켓, 공항 매장",
+   "note": "바라코는 세부가 아니라 바탕가스·카비테산 리베리카 커피 — '세부 특산'은 아니고 필리핀 기념품으로 살 것",
+   "source": "https://cebuinsights.com/?p=2201"
+  },
+  {
+   "item": "코코넛 오일·노니 비누 등 생활용품",
+   "where": "왓슨스·대형마트 뷰티 코너",
+   "note": "코코넛 오일 250ml 약 ₱200~300, 노니 비누 1개 약 ₱100, 비트레스 헤어에센스 50ml 약 ₱100",
+   "source": "https://www.tripstore.kr/blog/%EC%84%B8%EB%B6%80-%EA%B8%B0%EB%85%90%ED%92%88-%EC%87%BC%ED%95%91%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+  },
+  {
+   "item": "조개·카피스 공예, 막탄 기타(알레그레)",
+   "where": "라푸라푸 사당(막탄 슈라인) 주변 노점(흥정 가능)·막탄 조개 시장·알레그레 기타 공장",
+   "note": "몰보다 사당 주변이 싸고 흥정됨. 조개 제품은 반입 규정 확인. '막탄 진주' 전문 상점은 확인되지 않음",
+   "source": "https://sugbo.ph/2026/non-food-pasalubong-in-cebu-you-should-bring-home/ ; https://www.kkday.com/en/blog/23650/asia-philppines-pasalubong-items-you-should-bring-home-from-cebu"
+  },
+  {
+   "item": "공항 파살루봉 센터(마지막 구매)",
+   "where": "막탄공항 T1 국내선 체크인 북측 Airport Pasalubong Center·Islands Souvenirs(아얄라·SM·공항)",
+   "note": "치차론·건과일·키링 등 구색은 있으나 시내 슈퍼보다 30~50% 비쌈. 시내에서 사고 공항은 빠진 것만",
+   "source": "https://kubo.com.ph/ph-pasalubong-guide-cebu-souvenirs-you-can-bring-on-international-flight/ ; https://3d-universal.com/en/blogs/why-dried-mango-is-the-1-souvenir-from-cebu-2025-edition.html"
+  }
+ ],
+ "photoGeneral": [
+  {
+   "tip": "열대 정오 빛은 피한다 — 일출이 연중 05:20~06:10, 일몰 17:20~18:10이라 골든아워가 짧고 이르다. 아침 6~8시, 오후 4시 이후로 촬영을 몰고 11~14시는 실내·수중",
+   "source": "https://time.now/cebu-city/sun"
+  },
+  {
+   "tip": "막탄 리조트 해안(푼타엥가뇨·마리바고)은 동쪽을 봐서 일출 포인트다. 일몰은 수평선으로 지지 않고 만 너머 잔광만 남으니 노을 사진은 코르도바(CCLEX 쪽)나 세부시티 방향으로",
+   "source": "https://beachesforkings.pages.dev/mactan/for-sunset/"
+  },
+  {
+   "tip": "수중: 오슬롭 고래상어는 플래시 금지·접촉 금지·4~5m 거리·선크림 바르고 입수 금지가 규칙이고 위반 시 퇴장. 고프로+방수팩, 먹이 주기는 허가 어부만",
+   "source": "https://3d-universal.com/en/blogs/whale-shark-watching-in-oslob-rules-tips.html ; https://goasia.cc/en/article/whale-shark-watching-oslob"
+  },
+  {
+   "tip": "산토니뇨 대성당: 미사 중 셀피·촬영 자제 요청(아우구스티노 수도회 공식 당부), 플래시·삼각대 금지. 개인 촬영은 미사 시간 밖에서 조용히. 복장 규정 위반이면 입장 자체가 막힌다",
+   "source": "https://newsinfo.inquirer.net/1070580/sto-nino-devotees-asked-to-avoid-taking-selfies-during-masses ; https://newsinfo.inquirer.net/1979695/cebus-basilica-to-enforce-strict-dress-code/amp"
+  }
+ ],
+ "transport": {
+  "airportToCity": "막탄공항→세부시티(아얄라·IT파크) 13~15km. 한산할 때 25~35분, 출퇴근(07~10시·16~19시)·비 오면 45~60분, 최악 90분. 그랩 ₱250~450(앱 선표시, CCLEX 톨 포함), 흰색 미터택시 ₱250~400, 노란 공항택시 ₱400~550(+₱50 공항비), 마이버스 SM시티까지 ₱50 약 1시간",
+  "mactanToCity": "막탄 리조트(샹그릴라 기준 아얄라까지 약 17.9km)→세부시티: 공항 구간과 같은 다리(막탄–만다우에·마르셀로 페르난)를 건너므로 낮 30~45분, 퇴근 시간 45~60분+. 그랩 ₱300~500 수준(공항→마리바고 ₱300~450 보고 기준). 퇴근길 다리 정체가 변수라 저녁 시내 일정은 17시 전 출발",
+  "citySpeedKmh": 20,
+  "citySpeedNote": "직선거리 추정용 권장값. 근거: 공항→아얄라 13~15km가 25~35분(≈26~33km/h, 한산) / 45~60분(≈15~18km/h, 러시). 메트로세부 평균 차량속도 JICA 마스터플랜 30km/h, OpenTraffic 주중 평균 36km/h(2016). 도로가 아닌 직선거리 기준이면 우회계수(약 1.3)까지 먹혀 낮 25·러시 15·기본 20km/h가 맞음. 오슬롭·모알보알 등 시외 국도는 40~50km/h(모알보알→오슬롭 65km 1.5~2시간)",
+  "grabFare": "시내 단거리(IT파크↔아얄라 등) ₱120~180, 예약수수료 ₱40 포함 구조. 피크·우천 서지 2~3배. 공항→시내 ₱250~450, 프리미엄 ₱500~650",
+  "taxi": "흰색 미터택시 기본 ₱50(2025.1~, 종전 ₱40)+km당 ₱13.50+2분당 ₱2. 공항 노란택시는 기본요금 높음(시내 ₱300~500). 미터 리셋 확인, '공항비·야간할증' 추가 요구는 거절, 번호판 기록",
+  "jeepney": "기본 ₱13~15(출처 상충: 가이드 ₱13/4km, LTFRB-7 2024.5 '현행 최저 ₱15'), 이후 km당 ₱2~3. IT파크→아얄라 약 ₱15. 마이버스(공항↔SM시티) ₱50",
+  "ferryBohol": "오션젯 세부 Pier 1→보홀 탁빌라란 약 2시간, 투어리스트 ₱800·비즈니스 ₱1,200, 첫배 06:00·막배 17:40(하루 11편). 세부 터미널피 ₱25(현금), 보홀 ₱20~25. 기내 반입 15kg 제한. 그랩에서 Pier 1까지 시내 15~30분",
+  "rushHours": "07~09시·17~20시(T1 공항 혼잡 16~20시). 1월 시눌로그 축제 기간 시내 통제",
+  "sources": [
+   "https://3d-universal.com/en/blogs/how-to-get-to-ayala-center-cebu-from-airport.html",
+   "https://www.thetraveler.org/cebu-mactan-airport-grab-pickup-taxi-guide-2026/",
+   "https://blog.wego.com/cebu-airport-transfer/",
+   "https://cebuinsights.com/?p=52086",
+   "https://3d-universal.com/en/blogs/how-to-ride-a-taxi-in-cebu.html",
+   "https://3d-universal.com/en/cebu-transportation-guide",
+   "https://alpha.pna.gov.ph/articles/1224249",
+   "https://cebudailynews.inquirer.net/183657/5-projects-solve-traffic",
+   "https://abs-cbn.com/focus/v2/04/06/16/6-interesting-trivia-about-metro-manila-traffic",
+   "https://thepinaysolobackpacker.com/cebu-bohol-ferry-schedule/",
+   "https://bustickets.ph/oceanjet-cebu-to-bohol-ferry/",
+   "https://www.yeogi.com/accommodation/ph",
+   "https://3d-universal.com/en/blogs/getting-around-mandaue-cebu-transportation-guide.html"
+  ]
+ },
+ "season": {
+  "timezone": "Asia/Manila (UTC+8, 서머타임 없음, 한국보다 1시간 늦음)",
+  "dry": "12~5월. 12~2월 24~30°C로 가장 쾌적(성수기), 3~5월 25~33°C로 가장 덥고 자외선 강함",
+  "wet": "6~11월. 짧고 굵은 스콜형, 9~11월 강수 최다. 해상 투어 취소 가능성",
+  "typhoon": "PAGASA 기준 7~10월이 태풍 70% 집중 피크, 4분기(10~12월)에 강한 상륙 태풍 기록 많음(2025년 11월 태풍 Tino 후 남세부 투어 일시 중단 사례)",
+  "sunrise": "05:21(5월 말)~06:08(1월 말). 11월 05:35~05:45",
+  "sunset": "17:18(11~12월)~18:10(7월 초). 11월 17:18~17:20",
+  "source": "https://time.now/cebu-city/sun ; https://www.sunrisesunset.io/ph/bataan/cebu-city/ ; https://www.tripstore.kr/blog/cebu-weather-seasons-guide ; https://bagong.pagasa.dost.gov.ph/climate/tropical-cyclone-information ; https://mb.com.ph/2024/10/27/records-show-stronger-landfalling-cyclones-in-the-last-quarter"
+ },
+ "visa": "한국 여권 30일 무비자(EO 408 목록). 조건: 잔여 유효기간 6개월 이상 + 30일 내 출국 항공권. eTravel(etravel.gov.ph, 무료) 입국·출국 각 72시간 이내 등록 → QR 제시. 백신증명 2023.5 폐지. 연장은 현지 이민국(30일 단위, 약 ₱3,010~). 국제선 공항이용료 ₱850은 항공권에 포함(2019.6~) — 출처: https://bernepe.dfa.gov.ph/tourism-and-visa/visa ; https://blog.wego.com/philippines-etravel-registration/ ; https://www.globe.com.ph/blog/terminal-fee-and-travel-tax-guide-philippines",
+ "safety": [
+  "외교부 0404 공식 경보 단계는 이번 수집에서 직접 확인 못 함(사이트 접근 차단) — 출발 전 0404.go.kr에서 필리핀 페이지 확인 필요. 참고: 미 국무부 2025.5 필리핀 전역 Level 2(주의 강화), 민다나오 일부는 여행 재고. 세부·막탄은 2025.11 DOT가 '태풍·지진 영향 경미, 여행 취소 불필요' 발표",
+  "택시: 미터 리셋 확인, 정액·'공항비'·'야간할증' 요구는 거절, 기사명·번호판 기록 후 차내 게시 번호로 신고(LTFRB 벌금 1차 ₱5,000). 가능하면 그랩",
+  "소매치기·날치기: 콜론·카본 마켓 등 다운타운에서 폰·가방 앞으로, ATM 인출은 몰 안에서. 낯선 사람이 주는 음료 거절",
+  "ATM은 DCC(달러 결제) 선택 화면이 뜨면 반드시 PHP(현지통화) 선택",
+  "뎅기: 2025년 세부주 환자 증가(상반기 5,880건) — 기피제·긴팔, 고열 시 즉시 병원",
+  "수돗물 음용 금지, 생수·호텔 정수 사용",
+  "오슬롭·모알보알 해양 규칙 위반(접촉·선크림·플래시) 시 퇴장·벌금"
+ ],
+ "safetySources": [
+  "https://childabduction.state.gov/content/travel/en/traveladvisories/traveladvisories/philippines-travel-advisory.html",
+  "https://mb.com.ph/2025/11/11/dot-tells-tourists-do-not-cancel-cebu-flights-as-province-is-safe",
+  "https://cebuinsights.com/?p=52086",
+  "https://www.telltrip.com/news/%ED%95%9C%EA%B5%AD-%EC%97%AC%ED%96%89%EA%B0%9D%EC%9D%98-%EC%A0%88%EB%B0%98-%EC%9D%B4%EC%83%81%EC%9D%80-%EB%AA%A8%EB%A5%B4%EB%8A%94-%ED%95%B4%EC%99%B8%EC%97%AC%ED%96%89-%EC%8B%9C-%EB%82%98/",
+  "https://explore.atmfeesaver.com/community/money-travel-in-south-east-asia-currency-exchange/exchange-usd-at-airport-or-withdraw-from-atm-in-philippines/",
+  "https://www.travelsafe-abroad.com/philippines/cebu-city/"
+ ]
+}

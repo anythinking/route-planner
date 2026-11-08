@@ -60,6 +60,7 @@ data/cities.json      도시 색인 · data/<city>.json  장소 · data/packing.
 assets/               도시 사진(출처 credits.json) · 아이콘 · OG 이미지
 supabase/functions/   plan-chat Edge Function
 docs/                 Supabase 안내·SQL · 설계 문서 (docs/superpowers/)
+research/<city>/      조사 원자료(출처 URL 포함) — 장소의 src·도시의 sources가 여기를 가리킨다 (research/README.md)
 ```
 
 설계: `docs/superpowers/specs/2026-10-12-route-planner-design.md`
@@ -71,3 +72,4 @@ docs/                 Supabase 안내·SQL · 설계 문서 (docs/superpowers/)
 3. 나라가 처음이면 `scripts/country/<country>.json`에 준비물·기념품·사진 공통 팁.
 4. `node scripts/build-city.js <id>` → `data/<id>.json` 초안. 설명(`note`)·사진 팁(`photo.places`)이 빈 곳은 손으로 채우고 `npm run validate`. 이미 있는 파일의 note·opts·photo는 다시 돌려도 지켜진다.
 5. 도시 사진은 Wikimedia Commons에서 CC BY/BY-SA로 골라 `assets/cities/<id>.jpg`(560×420 안팎)에 두고 `credits.json`에 출처를 적는다.
+6. 웹 조사로 만든 도시는 조사 JSON을 `research/<id>/`에 두고, 장소마다 `src`(좌표 출처·참고 URL), 파일 아래 `sources`(조사일·뺀 곳)를 적는다. 조사하기 전에 `research/`부터 본다 — 같은 걸 두 번 찾지 않게.

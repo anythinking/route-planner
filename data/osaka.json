@@ -507,7 +507,10 @@
    ],
    "default": 0,
    "note": "오사카의 아키하바라. 전자부품·피규어·게임·메이드 카페가 난바 남쪽 1km 거리에 모여 있다. 구로몬 시장과 붙어 있다.",
-   "cat": "district"
+   "cat": "district",
+   "src": {
+    "coord": "시드에 손으로 적은 좌표 (scripts/seeds/osaka.json) — 위키데이터에 항목이 없거나 상자 밖이라 직접 넣음"
+   }
   }
  ],
  "pack": [

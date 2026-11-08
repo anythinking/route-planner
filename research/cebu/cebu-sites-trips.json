@@ -1,0 +1,751 @@
+{
+  "places": [
+    {
+      "ko": "오슬롭 고래상어 관람",
+      "en": "Oslob Whale Shark Watching (Tan-awan)",
+      "lat": 9.4616,
+      "lng": 123.378,
+      "coordSource": "OpenStreetMap Nominatim — 바랑가이 Tan-awan 중심점(관람 브리핑장 소재지)",
+      "howToGo": "세부시티에서 남쪽 약 120km. 투어 밴/렌터카 3~3.5시간(새벽 2:30~4:00 출발이 관례 — 6시 개장 직후 줄이 짧고 10시 이후엔 2~3시간 대기). 대중교통은 남부버스터미널 Ceres 'Bato via Oslob' 약 4시간(일반 ₱269·에어컨 ₱330, 2026-05 기준), Tan-awan 하차.",
+      "oneWayMinutes": 200,
+      "hours": "매일 06:00~12:00(현지 안내상 입수 접수는 10시경 마감되기도 함)",
+      "fee": "외국인 스노클링 ₱1,000 / 내국인 ₱500(보트·스포터 포함). 보트 위 관람만은 더 저렴. 라이프재킷·마스크 포함, 수중촬영 별도",
+      "season": "연중(먹이주기로 상주). 단 2026-05에 며칠간 출현 안 한 기록 있음 — 목격 보장 없음",
+      "booking": "개인 방문은 현장 선착순. 투어 예약 시 보통 세부시티 픽업 포함",
+      "stay": "현장 2~3시간(브리핑+대기+입수 30분)",
+      "dayShare": "하루",
+      "light": {
+        "label": "보트 위에서 관람만(입수 안 함)",
+        "min": 90
+      },
+      "full": {
+        "label": "스노클링 입수 30분 + 투말록 폭포·수밀론 연계",
+        "min": 180
+      },
+      "history": "2011년부터 어민들이 작은 새우(uyap)를 뿌려 고래상어를 해안 가까이 머물게 하며 관광지가 됐고, 읍은 2022년 한 해 ₱3,100만을 벌었다. LAMAVE 등 연구진은 먹이주기로 상주 개체의 행동이 바뀌었고 2m 거리규칙 미준수율이 2012년 79%→2014년 97%로 올랐다고 보고해 윤리 논란이 계속된다.",
+      "photo": "수면 아래 입 벌린 고래상어 정면샷(스포터가 뿌리는 먹이 쪽으로 다가옴). 수중카메라/고프로 필수, 플래시 금지",
+      "caution": "선크림 금지(래시가드 착용) · 고래상어와 4~5m 거리·접촉 금지 · 플래시 금지 · 입수 30분 제한 · 멀미약 미리 · 새벽 왕복 6~7시간 차량 피로 · 귀중품은 차량에",
+      "weight": 1,
+      "sources": [
+        "https://suroy.ph/whale-shark-watching-oslob-cebu/",
+        "https://whycebu.com/oslob-whale-shark-price-and-entrance-fee/",
+        "https://en.wikipedia.org/wiki/Oslob",
+        "https://peerj.com/articles/1452",
+        "https://lamave-rip.squarespace.com/news/long-term-study-shows-impact-on-whale-sharks-oslob-philippines",
+        "https://www.waug.com/ko/activities/102497"
+      ]
+    },
+    {
+      "ko": "투말록 폭포",
+      "en": "Tumalog Falls",
+      "lat": 9.4859,
+      "lng": 123.3694,
+      "coordSource": "OpenStreetMap Nominatim (Tumalog Falls, Oslob)",
+      "howToGo": "고래상어 관람장에서 차로 10분. 주차장에서 가파른 길을 하발하발(오토바이) 왕복 ₱50 또는 도보 10~15분 하산.",
+      "oneWayMinutes": 10,
+      "hours": "06:00~17:00(출처별 07:00~16:00도 있음). 매월 둘째 주 수요일 청소 휴무 보고",
+      "fee": "입장 ₱50(바랑가이 징수) + 하발하발 왕복 ₱50 + 주차비 별도",
+      "season": "연중. 건기(12~5월) 말엔 수량이 줄고 우기엔 커튼 폭포가 가장 풍성",
+      "booking": "불필요",
+      "stay": "40~60분",
+      "dayShare": "반나절",
+      "light": {
+        "label": "폭포 앞 사진만",
+        "min": 30
+      },
+      "full": {
+        "label": "얕은 풀 물놀이",
+        "min": 60
+      },
+      "history": "절벽 전체를 가는 물줄기가 커튼처럼 덮는 형태라 '안개 폭포'로 불린다. 고래상어 관람 뒤 몸을 식히는 동선으로 거의 모든 오슬롭 투어에 포함된다.",
+      "photo": "폭포 하단 바위에서 커튼 물줄기를 배경으로. 8시 이후 고래상어 단체가 몰리니 7시 전이 한산",
+      "caution": "바닥 미끄러움(아쿠아슈즈) · 풀 수심 얕아 수영은 제한적 · 하산길 급경사",
+      "weight": 2,
+      "sources": [
+        "https://sugbo.ph/2026/tumalog-falls-travel-guide-2026-fees-tips-and-directions/",
+        "https://www.weseektravel.com/tumalog-falls/",
+        "https://lakbaypinas.com/?p=18919"
+      ]
+    },
+    {
+      "ko": "수밀론 섬",
+      "en": "Sumilon Island",
+      "lat": 9.4321,
+      "lng": 123.3893,
+      "coordSource": "Wikipedia 'Sumilon Island' infobox (9.432111, 123.389333)",
+      "howToGo": "오슬롭 Bangcogon 선착장에서 보트 10~15분. 세부시티에서는 오슬롭 경유 3.5시간+보트.",
+      "oneWayMinutes": 220,
+      "hours": "공영 샌드바 주간. Bluewater 리조트 데이패스 보트 08:00~15:00. 샌드바는 수요일 휴장 보고(셋째 수요일이라는 출처도)",
+      "fee": "공영 샌드바: 환경세 ₱20~50 + 보트 대절 약 ₱1,500/척. 리조트 데이투어: 평일 ₱1,500 / 주말 ₱2,000(왕복 보트·점심·시설 포함, 플랫폼가 ~US$79)",
+      "season": "연중. 샌드바 모양은 조석·계절에 따라 이동",
+      "booking": "리조트 데이패스는 사전 예약 권장, 공영 샌드바는 현장",
+      "stay": "2~3시간",
+      "dayShare": "반나절",
+      "light": {
+        "label": "샌드바 산책·사진",
+        "min": 90
+      },
+      "full": {
+        "label": "스노클링 + 리조트 데이패스(점심·라군)",
+        "min": 240
+      },
+      "history": "1974년 실리만대학이 필리핀 최초의 해양보호구역을 세운 섬이다. 1980년대 지방정부가 어업을 허용해 무로아미식 파괴 어업이 있었고, 2006년 Bluewater 리조트가 섬 일부(약 17ha)를 임차해 개장했다.",
+      "photo": "보트에서 본 흰 샌드바 곡선과 두 색의 바다. 드론 포인트",
+      "caution": "샌드바엔 그늘·매점 없음(우산·물 지참) · 보트 멀미 · 조류 강한 날 스노클링 주의 · 기상 악화 시 보트 취소",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sumilon_Island",
+        "https://www.jonnymelon.com/sumilon-island-cebu/",
+        "https://sugbo.ph/2023/sumilon-day-tour",
+        "https://www.pelago.com/en/activity/pqbc1mmvi-bluewater-sumilon-day-pass-cebu"
+      ]
+    },
+    {
+      "ko": "카와산 폭포 (바디안)",
+      "en": "Kawasan Falls, Badian",
+      "lat": 9.802,
+      "lng": 123.3739,
+      "coordSource": "OpenStreetMap Nominatim (Kawasan Falls, Balha-an/Badian, Cebu); Wikipedia 9.800/123.367",
+      "howToGo": "세부시티 남부버스터미널 Ceres 'Bato via Barili' 약 3시간(에어컨 ₱210), Matutinao 교회 앞 하차 후 도보 15~20분. 투어 밴 2.5~3시간. 모알보알에서 30분.",
+      "oneWayMinutes": 170,
+      "hours": "주간(대략 06:00~17:00)",
+      "fee": "폭포 입장(레벨1 수영) ₱200 안팎 출처 다수(₱50만 별도 징수한다는 출처도). 대나무 뗏목 별도",
+      "season": "연중. 우기(6~10월) 큰비 뒤엔 탁해지고 캐녀닝 중단 가능",
+      "booking": "폭포만은 불필요. 캐녀닝은 공인 업체 예약",
+      "stay": "1.5~2시간(폭포만)",
+      "dayShare": "반나절",
+      "light": {
+        "label": "1단 폭포 구경·뗏목",
+        "min": 60
+      },
+      "full": {
+        "label": "2·3단까지 트레킹 + 수영",
+        "min": 120
+      },
+      "history": "청록색 물의 3단 폭포로 가장 큰 1단이 약 40m. 2023년 세부주가 무허가 캐녀닝 업체 허가를 취소하고 3개월 재정비 후 10월 재개장했으며, 2026년 6월 주정부가 환경 복원·안전에 ₱1억1천만을 배정했다.",
+      "photo": "1단 폭포 앞 대나무 뗏목, 청록 물빛은 정오 전후 가장 선명",
+      "caution": "큰비 뒤 급류·황토물 · 바위 미끄러움 · 구명조끼 대여 가능 · 가방은 방수백",
+      "weight": 1,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kawasan_Falls",
+        "https://www.weseektravel.com/kawasan-falls-cebu/",
+        "https://whycebu.com/kawasan-falls-cebu/"
+      ]
+    },
+    {
+      "ko": "카와산 캐녀닝",
+      "en": "Kawasan Canyoneering (Badian/Alegria route)",
+      "lat": 9.802,
+      "lng": 123.3739,
+      "coordSource": "종점 = 카와산 폭포 좌표(OpenStreetMap Nominatim). 출발점은 Kanlaob 강 상류(별도 좌표 미확보)",
+      "howToGo": "세부시티에서 투어 픽업 보통 새벽 4~5시, 바디안까지 3시간. 모알보알 숙박 시 30분. 업체 사무소에서 장비 착용 후 하발하발로 출발점 이동.",
+      "oneWayMinutes": 180,
+      "hours": "오전 출발(보통 08:00~11:00 사이 입수 시작)",
+      "fee": "LGU 규제 요금 ₱2,000~2,100/인(헬멧·구명조끼·가이드·입장 포함) — ₱1,500 표기 업체도 있음. 세부시티 왕복 포함 패키지 ₱2,500~4,000. 고프로 촬영 추가",
+      "season": "연중. 우기 큰비·태풍 땐 당일 취소",
+      "booking": "필수(공인 업체만 가능)",
+      "stay": "3~5시간(강 구간 3~4시간)",
+      "dayShare": "하루",
+      "light": {
+        "label": "짧은 코스(점프 생략, 걸어서 우회)",
+        "min": 180
+      },
+      "full": {
+        "label": "풀코스 — 점프 최대 10m + 카와산 폭포 도착",
+        "min": 300
+      },
+      "history": "Kanlaob 강 협곡을 뛰어내리고 헤엄치며 내려와 카와산 폭포로 나오는 코스다. 2023년 사고 뒤 주정부가 업체를 재인가하고 가이드 자격을 의무화했다.",
+      "photo": "가이드가 찍어주는 협곡 점프 순간, 청록 수로 부감",
+      "caution": "수영 못 하면 구명조끼로 가능하나 체력 소모 큼 · 임산부·심장질환 불가 · 점프 거부 가능(우회로) · 휴대폰은 방수팩, 귀중품은 사무소 보관 · 비 오면 즉시 중단",
+      "weight": 1,
+      "sources": [
+        "https://whycebu.com/kawasan-falls-canyoneering/",
+        "https://www.philippinestourism.org/kawasan-falls/",
+        "https://cebudestinations.com/guide/kawasan-falls-canyoneering-guide/",
+        "https://en.wikipedia.org/wiki/Kawasan_Falls"
+      ]
+    },
+    {
+      "ko": "모알보알 파나그사마 비치 정어리떼",
+      "en": "Moalboal Sardine Run, Panagsama Beach",
+      "lat": 9.9466,
+      "lng": 123.3662,
+      "coordSource": "OpenStreetMap Nominatim (Panagsama Beach, natural/beach)",
+      "howToGo": "세부시티 남부버스터미널 Ceres 'Bato via Barili' 약 3시간(에어컨 ₱210) → 모알보알 정류장에서 트라이시클 10~15분. 투어 밴 2.5~3시간. 새벽 4~5시 출발 패키지가 보통(카와산과 묶음).",
+      "oneWayMinutes": 170,
+      "hours": "상시(해변 진입). 오전 광량이 좋음",
+      "fee": "정어리떼는 해안에서 20~30m라 무료. 해양보호구역 환경세 ₱25~100 출처 혼재. 스노클 장비 대여 ₱100. 보트 거북이 포인트 묶음 ₱500~1,500/인",
+      "season": "연중 상주(회유가 아님). 시야는 건기 11~5월이 좋음",
+      "booking": "불필요(프리다이빙 가이드는 예약)",
+      "stay": "1~2시간(스노클만)",
+      "dayShare": "반나절",
+      "light": {
+        "label": "해변에서 스노클로 정어리떼",
+        "min": 60
+      },
+      "full": {
+        "label": "보트로 거북이 포인트+페스카도르 묶음",
+        "min": 180
+      },
+      "history": "수백만 마리 정어리 떼가 해안 절벽 바로 앞에 상주해 걸어 들어가 볼 수 있는 세계적으로 드문 곳이다. 콘데나스트 트래블러는 2024년 파나그사마를 동남아 최고 해변에 선정했다.",
+      "photo": "정어리 토네이도 아래에서 역광으로 위를 향해. 거북이는 아침에 많음",
+      "caution": "해변 바로 앞이 급경사 드롭오프(수심 깊음) · 2026-05 혼자 나간 스노클러 익사 사고 — 구명조끼·동행 권장 · 아쿠아슈즈(바위·성게)",
+      "weight": 1,
+      "sources": [
+        "https://www.weseektravel.com/moalboal-sardine-run-panagsama-beach/",
+        "https://en.wikipedia.org/wiki/Moalboal",
+        "https://whycebu.com/moalboal-cebu/",
+        "https://www.thediscoveriesof.com/moalboal-sardine-run/"
+      ]
+    },
+    {
+      "ko": "페스카도르 섬",
+      "en": "Pescador Island",
+      "lat": 9.923,
+      "lng": 123.3435,
+      "coordSource": "Wikipedia 'Pescador Island' (9.923, 123.3435)",
+      "howToGo": "파나그사마 선착장에서 방카 보트 15~30분. 거북이 포인트·정어리떼와 묶는 아일랜드 호핑이 표준.",
+      "oneWayMinutes": 20,
+      "hours": "주간 보트",
+      "fee": "환경세 ₱100/인(옛 ₱25 조례 미갱신, 실제 징수 ₱100) + 보트 대절 약 ₱2,500/척(최대 ~24인) 또는 1인 ₱500~1,500",
+      "season": "연중. 조류 강한 날 보트 취소 가능",
+      "booking": "당일 현장 또는 전날 예약",
+      "stay": "1~1.5시간(섬 주변)",
+      "dayShare": "반나절",
+      "light": {
+        "label": "보트에서 스노클 1포인트",
+        "min": 60
+      },
+      "full": {
+        "label": "다이빙(캐시드럴 동굴·40m 드롭오프)",
+        "min": 150
+      },
+      "history": "타뇬 해협에 떠 있는 작은 석회암 섬으로 현지명 Agad-Agad. 1990년 모알보알 의회가 해양공원·어류보호구역으로 지정했고 다이빙 숍이 다이버당 요금을 내 보전비로 쓴다.",
+      "photo": "섬 외벽 산호 드롭오프, 햇살 내려오는 '캐시드럴' 동굴",
+      "caution": "섬 상륙 불가(스노클 전용) · 외해라 멀미·조류 · 구명조끼 착용 보트 규정",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pescador_Island",
+        "https://thebackpackingfamily.com/pescador-island-hopping-tour-from-cebu-city-full-guide/",
+        "https://3d-universal.com/en/blogs/the-ultimate-guide-to-pescador-island.html"
+      ]
+    },
+    {
+      "ko": "모알보알 화이트 비치 (바스다쿠)",
+      "en": "White Beach (Basdaku), Moalboal",
+      "lat": 9.9854,
+      "lng": 123.3689,
+      "coordSource": "OpenStreetMap Nominatim (Basdaku White Beach, Saavedra)",
+      "howToGo": "파나그사마에서 트라이시클 15분(편도 ₱30/인~, 왕복 대기 포함 ₱350 흥정 사례). 세부시티에서는 모알보알 경유 3시간.",
+      "oneWayMinutes": 15,
+      "hours": "상시",
+      "fee": "입장 ₱10~20/인 + 차량 ₱20~50 · 코티지 ₱300~2,500",
+      "season": "연중. 주말·성수기엔 현지인 가족 많음",
+      "booking": "불필요",
+      "stay": "1.5~2시간",
+      "dayShare": "반나절",
+      "light": {
+        "label": "해변 산책·물놀이",
+        "min": 60
+      },
+      "full": {
+        "label": "코티지 빌려 반나절 휴식",
+        "min": 180
+      },
+      "history": "약 2km의 백사장으로 원래 현지인 해변이었으나 국제 관광객이 늘었다. 북단에 Magpayong 바위가 있고 파나그사마와 달리 모래 진입이 완만하다.",
+      "photo": "북단 Magpayong 바위, 저녁 노을",
+      "caution": "그늘 적음 · 영수증 보관(재입장) · 성수기 쓰레기",
+      "weight": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Moalboal",
+        "https://www.philippinebeaches.org/basdaku-beach-cebu-important-tips/",
+        "https://cebuinsights.com/?p=47556"
+      ]
+    },
+    {
+      "ko": "시말라 성당 (린도곤 성모 성지)",
+      "en": "Simala Shrine (Monastery of the Holy Eucharist), Sibonga",
+      "lat": 9.9792,
+      "lng": 123.5999,
+      "coordSource": "Wikipedia 'Monastery of the Holy Eucharist' (9.979194, 123.599917)",
+      "howToGo": "세부시티 남부버스터미널 Ceres로 Sibonga 약 2~2.5시간(₱100~150) → 하발하발/트라이시클 15분. 렌터카·밴 1.5~2시간. 오슬롭 가는 길에 들르기 좋음.",
+      "oneWayMinutes": 110,
+      "hours": "08:00~17:00(출처별 18:00·20:00까지). 매월 13일·주말 혼잡",
+      "fee": "무료(주차 ₱20~50, 초 봉헌 별도)",
+      "season": "연중. 9월 8일(성모 탄생일)·매월 13일 순례 집중",
+      "booking": "불필요",
+      "stay": "1~1.5시간",
+      "dayShare": "반나절",
+      "light": {
+        "label": "성 외관·계단 사진",
+        "min": 45
+      },
+      "full": {
+        "label": "성모상 참배 줄 + 미사",
+        "min": 120
+      },
+      "history": "1998년 팜팡가 출신 성체조배 마리아 수도회(MMEA)가 세웠다. 원래 파티마 성모상이던 린도곤 성모상이 1998년 눈물을 흘렸고 뎅기 치유 사례가 알려지며 순례지가 됐으며, 2016-09-08까지 네 차례 더 눈물 보고가 있다. 성채 같은 외관은 계속 증축 중이다.",
+      "photo": "정면 계단에서 올려본 성채 파사드, 내부 돔 천장",
+      "caution": "복장 규정 엄격(어깨·무릎 가림, 민소매·반바지 입장 불가 — 입구에서 가리개 대여) · 일부 구역 맨발 · 성모상 참배 줄 1시간 이상",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Monastery_of_the_Holy_Eucharist",
+        "https://suroy.ph/simala-church",
+        "https://lakbaypinas.com/?p=16941"
+      ]
+    },
+    {
+      "ko": "카르카르 (치차론·레촌 시장)",
+      "en": "Carcar City (Chicharon & Lechon Market)",
+      "lat": 10.12,
+      "lng": 123.63,
+      "coordSource": "Wikipedia 'Carcar' infobox 10.12N 123.63E(소수 2자리까지만 제공 — 로툰다/시장 정밀 좌표 미확보)",
+      "howToGo": "세부시티 남부버스터미널에서 버스 약 1시간(₱60~80), 로툰다 하차. 렌터카 45~60분. 남부 투어 귀로에 들르는 게 보통.",
+      "oneWayMinutes": 60,
+      "hours": "시장 레촌은 오전~정오 전이 많고 오후엔 품절. 치차론 노점은 종일",
+      "fee": "무료(치차론 ₱500/kg 안팎, 레촌 kg 단위 판매)",
+      "season": "연중",
+      "booking": "불필요",
+      "stay": "45~60분",
+      "dayShare": "반나절",
+      "light": {
+        "label": "로툰다 노점 치차론 사기",
+        "min": 30
+      },
+      "full": {
+        "label": "시장 레촌 점심 + 유산 가옥·성당 산책",
+        "min": 90
+      },
+      "history": "19세기 유산 가옥(Mercado 저택·Balay na Tisa 등)과 무데하르 양식의 성 카타리나 성당이 남은 세부 남부의 옛 도시다. 로툰다 조각은 Ramon Abellana 작품이고 '세부 신발의 수도'로도 불린다.",
+      "photo": "로툰다 원형 광장과 치차론 봉지 산, 성당 파사드",
+      "caution": "시장 주변 주차난 · 레촌은 현금·저울 확인 · 치차론은 기내 반입 시 냄새",
+      "weight": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Carcar",
+        "https://mycebu.ph/article/carcar-delicacies-lechon-chicharon/",
+        "https://newsinfo.inquirer.net/?p=1123256"
+      ]
+    },
+    {
+      "ko": "오스메냐 피크",
+      "en": "Osmeña Peak, Dalaguete",
+      "lat": 9.8202,
+      "lng": 123.4424,
+      "coordSource": "OpenStreetMap Nominatim (Osmeña Peak, Dalaguete)",
+      "howToGo": "세부시티 남부버스터미널 Ceres로 Dalaguete 약 2.5~3시간 → 하발하발로 Mantalongon 시장 30~40분(₱100~250) → 등산로 입구 10분. 투어 밴은 보통 카와산·모알보알과 묶어 새벽 출발. 일출 산행이면 전날 모알보알 숙박.",
+      "oneWayMinutes": 210,
+      "hours": "등록소 주간(일출 산행은 새벽 입산 관행)",
+      "fee": "입장 ₱30~50(2026년 가이드 포함 ₱150 표기 출처도) + 가이드 ₱100~150",
+      "season": "연중. 우기엔 안개·진흙, 12~2월 아침 서늘",
+      "booking": "불필요(현장 등록)",
+      "stay": "1.5~2시간(왕복 산행 30분씩)",
+      "dayShare": "반나절",
+      "light": {
+        "label": "입구에서 정상 왕복 1시간",
+        "min": 60
+      },
+      "full": {
+        "label": "정상 + 카와산까지 트래버스(4~5시간)",
+        "min": 300
+      },
+      "history": "해발 약 1,013m로 세부 섬 최고봉이다. 석회암 봉우리들이 톱니처럼 늘어선 풍경이 보홀 초콜릿 힐과 비교되고, 남쪽으로 네그로스와 타뇬 해협이 보인다.",
+      "photo": "톱니 봉우리 능선 너머 타뇬 해협, 일출·운해",
+      "caution": "바람 강하고 기온 낮음(겉옷) · 정상 절벽 가장자리 · 하발하발 비포장 급경사 · 안개 시 시야 0",
+      "weight": 2,
+      "sources": [
+        "https://3d-universal.com/en/blogs/ultimate-guide-to-osmena-peak-2025-edition.html",
+        "https://www.jonnymelon.com/osmena-peak-cebu/",
+        "https://www.pinoymountaineer.com/?p=1162"
+      ]
+    },
+    {
+      "ko": "반타얀 섬",
+      "en": "Bantayan Island (Santa Fe)",
+      "lat": 11.15,
+      "lng": 123.8,
+      "coordSource": "Wikipedia 'Santa Fe, Cebu' infobox 11.15N 123.8E(소수 2자리)",
+      "howToGo": "세부시티 북부버스터미널 Ceres로 Hagnaya 항 3~3.5시간(₱325 안팎) → Super Shuttle/Island Shipping 페리 1~1.5시간(₱185~330, 02:00~16:30 사이 9편 안팎) → Santa Fe. 당일 투어는 새벽 3:30 출발 16시간 코스.",
+      "oneWayMinutes": 300,
+      "hours": "섬 상시. 페리 첫배 02:00·막배 16:30 안팎(Hagnaya 기준)",
+      "fee": "해변 대부분 무료(Kota 비치 무료). Virgin Island 입장료·보트 별도(현 요금 미확인)",
+      "season": "건기 11~5월. 성주간(Holy Week) 극혼잡",
+      "booking": "페리는 현장 구매 가능, 성수기 예약 권장",
+      "stay": "최소 4~5시간(섬), 왕복 포함 16시간",
+      "dayShare": "하루",
+      "light": {
+        "label": "Santa Fe 해변·Kota 비치만",
+        "min": 240
+      },
+      "full": {
+        "label": "Virgin Island 호핑 + Kota Park(Madridejos) 노을",
+        "min": 480
+      },
+      "history": "세부 북단의 어업·양계 섬으로 하루 50만 개 넘는 달걀을 내보낸다. 2013년 태풍 욜란다(하이옌)로 섬 전체가 큰 피해를 입었으나 인명 피해는 적었고, 2024년 Santa Fe 항 ₱5억 확장이 발표됐다.",
+      "photo": "Kota 비치 샌드바, Virgin Island 투명 물빛, Kota Park 노을",
+      "caution": "편도 5시간이라 당일치기는 무리(1박 권장) · 페리 기상 결항 · 북부 도로 야간 운전 피하기",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Santa_Fe,_Cebu",
+        "https://en.wikipedia.org/wiki/Bantayan_Island",
+        "https://pamasahe.com/routes/hagnaya-santa-fe-super-shuttle-ferry-schedule-fares",
+        "https://www.jonnymelon.com/cebu-to-bantayan-island/",
+        "https://www.clicatour.com/en/excursion/philippines/cebu-city/from-cebu-bantayan-island-and-virgin-island-day-tour-1741955703"
+      ]
+    },
+    {
+      "ko": "말라파스쿠아 섬",
+      "en": "Malapascua Island",
+      "lat": 11.3347,
+      "lng": 124.1161,
+      "coordSource": "Wikipedia 'Malapascua' (11.33472, 124.11611)",
+      "howToGo": "세부시티 북부버스터미널 Ceres/White Stallion으로 New Maya 항 약 4시간(밴·택시 3~3.5시간) → 공영 보트 30~45분(₱200 + 환경세 ₱140, 약 05:00~17:00). 막배 놓치면 전세 보트.",
+      "oneWayMinutes": 270,
+      "hours": "보트 주간만. 환도상어 다이빙은 새벽 04:30~05:00 출항",
+      "fee": "보트 ₱200 + 환경세 ₱140/인. 다이빙 1회 ₱1,500~2,500 안팎(업체별)",
+      "season": "환도상어 연중(건기 11~5월 시야 좋음). 7~10월 풍랑",
+      "booking": "다이빙 필수 예약. 보트는 현장",
+      "stay": "1박 2일 이상(당일치기 사실상 불가)",
+      "dayShare": "하루",
+      "light": {
+        "label": "Bounty 비치 + 등대 산책",
+        "min": 240
+      },
+      "full": {
+        "label": "새벽 환도상어 다이빙(자격증 필요) + 칼랑가만",
+        "min": 600
+      },
+      "history": "1990년대 초 Monad Shoal(섬에서 약 7.8km)에서 일출 전 환도상어를 매일 볼 수 있다는 사실이 알려지며 다이빙 섬이 됐다. 그 전엔 넓은 백사장(Bounty 비치)으로 알려진 어촌이었고, 2026-05 기준 주 관찰지는 Kimud Shoal로 옮겨졌다.",
+      "photo": "일출 전 수심 12~20m 청소 스테이션의 환도상어 긴 꼬리, Bounty 비치 노을",
+      "caution": "세부시티에서 편도 4.5시간 — 당일 왕복 불가, 1박 필수 · 환도상어는 어드밴스드 자격·새벽 · 보트 마지막 시각 확인 · 섬 ATM 부족",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Malapascua",
+        "https://www.geckoroutes.com/philippines/cebu-to-malapascua/",
+        "https://girlonazebra.com/how-to-get-to-malapascua/",
+        "https://suroy.ph/northern-cebu-ferry-guide-hagnaya-maya-malapascua/"
+      ]
+    },
+    {
+      "ko": "보홀 초콜릿 힐 (카르멘 전망대)",
+      "en": "Chocolate Hills Complex, Carmen, Bohol",
+      "lat": 9.7988,
+      "lng": 124.1673,
+      "coordSource": "OpenStreetMap Nominatim (Chocolate Hills Complex, Poblacion Norte, Carmen)",
+      "howToGo": "세부 Pier 1에서 OceanJet 고속선 Tagbilaran 약 2시간(05:10·06:00·07:00·08:20… 하루 12~13편, 투어리스트 ₱800~960·비즈니스 ₱1,200~1,450, 연료할증 변동) → 항구에서 밴 약 1시간 15분(55km). 세부발 당일 투어는 06:00 배 → 귀항 17:40 배가 표준.",
+      "oneWayMinutes": 200,
+      "hours": "06:00~18:00",
+      "fee": "₱50~100/인(카르멘 읍이 2025-10-01 예정했던 인상 유예 — 현행 ₱100 표기 다수)",
+      "season": "건기 말(3~5월) 풀이 말라 갈색 '초콜릿'. 우기엔 초록",
+      "booking": "불필요(투어 밴은 예약)",
+      "stay": "45~60분",
+      "dayShare": "하루",
+      "light": {
+        "label": "전망대 계단(약 214단) 올라 사진",
+        "min": 40
+      },
+      "full": {
+        "label": "전망대 + 인근 ATV·Sagbayan 피크",
+        "min": 120
+      },
+      "history": "후기 플라이오세~초기 플라이스토세 해성 석회암이 빗물에 녹아 생긴 원추 카르스트 언덕 1,268~1,776개다. 1988년 국가지질기념물, 2006년 유네스코 잠정목록, 2018년 국립공원 지정. 2013년 보홀 지진으로 전망대가 무너져 재건됐다.",
+      "photo": "전망대 정상 360도 파노라마, 아침 안개 낀 언덕",
+      "caution": "계단 급경사 · 정오 그늘 없음 · 왕복 페리 시간 엄수(막배 놓치면 1박) · 멀미(고속선)",
+      "weight": 1,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Chocolate_Hills",
+        "https://pamasahe.com/routes/cebu-tagbilaran-oceanjet-schedule-fares",
+        "https://boholcountrysidetour.com/costs/",
+        "https://suroy.ph/chocholate-hills-bohol/"
+      ]
+    },
+    {
+      "ko": "보홀 필리핀 안경원숭이 보호구역 (코렐라)",
+      "en": "Philippine Tarsier Sanctuary, Corella, Bohol",
+      "lat": 9.6915,
+      "lng": 123.9526,
+      "coordSource": "OpenStreetMap Nominatim (Philippine Tarsier Sanctuary, Canapnapan, Corella)",
+      "howToGo": "Tagbilaran 항에서 차 약 30분(14km). 초콜릿 힐 가는 길목이라 컨트리사이드 투어 2번째 정차가 보통.",
+      "oneWayMinutes": 30,
+      "hours": "08:30/09:00~16:00(마지막 입장 15:30 안팎)",
+      "fee": "₱60~150/인(출처 혼재, 최근 ₱80~150)",
+      "season": "연중(야행성이라 낮엔 잠자는 모습)",
+      "booking": "불필요",
+      "stay": "30~40분",
+      "dayShare": "하루",
+      "light": {
+        "label": "가이드 따라 3~5마리 관찰",
+        "min": 30
+      },
+      "full": {
+        "label": "방문자센터 전시 + 숲길 산책",
+        "min": 60
+      },
+      "history": "1996년 설립된 필리핀안경원숭이재단이 운영하는 8.4ha 보호림으로 '안경원숭이 아저씨' Carlito Pizarras가 1998년부터 관리한다. 로복 도로변의 상업 전시장과 달리 반야생 상태라 이곳을 권장한다.",
+      "photo": "나뭇가지에 매달린 안경원숭이 클로즈업(무플래시·줌렌즈)",
+      "caution": "플래시·큰 소리·접촉·먹이 금지(스트레스로 자해 사례) · 모기 · 로복 '보존센터'와 혼동 주의",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Philippine_Tarsier_Foundation",
+        "https://www.weseektravel.com/tarsiers-in-bohol",
+        "https://bohol-philippines.com/attractions/tarsier-sanctuary-corella/"
+      ]
+    },
+    {
+      "ko": "보홀 로복강 크루즈",
+      "en": "Loboc River Cruise, Bohol",
+      "lat": 9.6009,
+      "lng": 124.0088,
+      "coordSource": "Wikipedia 'Loboc River' (9.600872, 124.008780)",
+      "howToGo": "Tagbilaran 항에서 차 약 40분(24km). 코렐라 → 로복 → 카르멘 순 또는 역순.",
+      "oneWayMinutes": 40,
+      "hours": "점심 크루즈 약 10:00~14:30 사이 30분 간격 출항(출처별 11:00~14:00)",
+      "fee": "₱1,200/인(2026-04-16부터 인상, 뷔페 포함). 이전 ₱850~950",
+      "season": "연중. 우기엔 강물 탁함",
+      "booking": "투어 포함 시 자동, 개별은 선착장 현장",
+      "stay": "60~90분",
+      "dayShare": "하루",
+      "light": {
+        "label": "강변 산책·로복 성당",
+        "min": 30
+      },
+      "full": {
+        "label": "뷔페 선상 크루즈 + 부사이 폭포 회차",
+        "min": 90
+      },
+      "history": "떠다니는 식당 배가 로복 읍내에서 상류 부사이 폭포까지 갔다 돌아오며 뷔페와 현지 공연을 제공한다. 2013년 지진 전엔 야간 조명 크루즈도 있었으나 조명 시설이 크게 파손됐다. 반딧불 투어·패들보드도 운영.",
+      "photo": "배 위에서 양안 야자수 터널, 부사이 폭포 회차점 공연",
+      "caution": "뷔페 품질 기대 낮추기 · 주말 대기 · 멀미는 거의 없음(잔잔)",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Loboc_River",
+        "https://boholislandnews.com/2026/04/08/loboc-river-cruise-raises-rates-to-p1200-starting-april-16/",
+        "https://bohol-philippines.com/loboc-river-cruise-guide/"
+      ]
+    },
+    {
+      "ko": "보홀 바클라욘 성당",
+      "en": "Baclayon Church (Immaculate Conception), Bohol",
+      "lat": 9.6227,
+      "lng": 123.9122,
+      "coordSource": "Wikipedia 'Baclayon Church' (9.6227, 123.9122)",
+      "howToGo": "Tagbilaran 항에서 차 15~20분(6km). 투어 첫 정차 또는 귀항 직전 정차.",
+      "oneWayMinutes": 20,
+      "hours": "주간(미사 시간엔 관람 제한). 박물관 08:00~17:00 안팎",
+      "fee": "성당 기부금 ₱30 / 박물관 ₱50(₱80 표기도)",
+      "season": "연중",
+      "booking": "불필요",
+      "stay": "30분",
+      "dayShare": "하루",
+      "light": {
+        "label": "외관·내부 10분",
+        "min": 15
+      },
+      "full": {
+        "label": "박물관 + 종탑 유적",
+        "min": 45
+      },
+      "history": "1596년 예수회가 세운 보홀 최초의 기독교 정착지로 현재의 산호석 성당은 1727년 완공됐다. 2013-10-15 지진으로 포르티코와 종탑이 무너졌고 2014~2018년 복원해 2018-02-27 재개장했으며 옛 사제관이 교회 박물관이다.",
+      "photo": "산호석 파사드 정면, 복원된 종탑, 내부 천장화",
+      "caution": "복장 단정 · 미사 중 촬영 금지 · 박물관 내 촬영 제한",
+      "weight": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Baclayon_Church",
+        "https://boholcountrysidetour.com/costs/"
+      ]
+    },
+    {
+      "ko": "보홀 혈맹 기념비 (볼·탁빌라란)",
+      "en": "Blood Compact Shrine (Sandugo), Bool, Tagbilaran",
+      "lat": null,
+      "lng": null,
+      "coordSource": "미확보 — Wikipedia·OSM 모두 좌표 없음. 2024-04 구조물 철거 보고로 현장 상태 미확인",
+      "howToGo": "Tagbilaran 항에서 차 10~15분, 바클라욘 가는 해안도로변. 투어 첫 정차(10분)였음.",
+      "oneWayMinutes": 15,
+      "hours": "노천(상시)",
+      "fee": "무료",
+      "season": "연중",
+      "booking": "불필요",
+      "stay": "10분",
+      "dayShare": "하루",
+      "light": {
+        "label": "조형물 앞 사진",
+        "min": 10
+      },
+      "full": {
+        "label": "로아이(Loay) Hinawanan 공식 유적지까지 이동",
+        "min": 60
+      },
+      "history": "1565-03-16 레가스피와 다투 시카투나가 피를 섞어 마신 '산두고'를 기리는 조형물이다. 국가역사위원회는 2005년 실제 장소가 로아이(Villalimpia/Hinawanan)라며 탁빌라란 기념비를 목록에서 제외했고, 2024-04 이 '잘못된 장소'의 구조물이 철거됐으며 로아이 유적지 정비가 진행 중이다.",
+      "photo": "(철거 전) 해협 배경 청동 군상. 현재는 로아이 유적지 기념 공간",
+      "caution": "2024년 철거 보고 — 투어 일정에 남아 있어도 현장 확인 필요. 관광 가치 낮음",
+      "weight": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sandugo",
+        "https://theboholtimes.com/?p=18205",
+        "https://tourism.bohol.gov.ph/?p=7897"
+      ]
+    },
+    {
+      "ko": "날루수안 섬",
+      "en": "Nalusuan Island",
+      "lat": 10.1878,
+      "lng": 124.0015,
+      "coordSource": "OpenStreetMap Nominatim (Nalusuan Island, Cordova)",
+      "howToGo": "막탄(Cordova·Punta Engaño·Marigondon) 선착장에서 방카 30~45분. 힐루뚱안과 묶는 반나절 호핑이 표준.",
+      "oneWayMinutes": 40,
+      "hours": "주간 보트",
+      "fee": "입장 ₱100~300/인(₱200 다수) · 리조트 해산물 뷔페 ₱850(입장 포함) · 보트 1~10인 ₱3,500~6,000/척",
+      "season": "연중. 7~10월 풍랑 시 취소",
+      "booking": "보트·투어 전날 예약 권장",
+      "stay": "1.5~2시간",
+      "dayShare": "반나절",
+      "light": {
+        "label": "긴 잔교 걷고 스노클",
+        "min": 60
+      },
+      "full": {
+        "label": "스노클 + 리조트 점심",
+        "min": 150
+      },
+      "history": "긴 나무 잔교가 상징인 작은 섬으로 해양보호구역이 지정돼 있어 잔교 주변에 물고기가 많다. 섬 안에 리조트 하나가 있고 호핑 투어의 점심 장소로 쓰인다.",
+      "photo": "바다 위로 뻗은 잔교 일직선 구도, 잔교 아래 물고기 떼",
+      "caution": "리조트 외 그늘·매점 없음 · 썰물엔 산호 노출(밟지 말 것) · 멀미",
+      "weight": 2,
+      "sources": [
+        "https://sugbo.ph/?p=37594",
+        "https://3d-universal.com/blogs/2025/08/nalusuan-island.html",
+        "https://www.inmactan.com/guides/mactan-island-hopping"
+      ]
+    },
+    {
+      "ko": "힐루뚱안 섬 해양보호구역",
+      "en": "Hilutungan (Gilutongan) Island Marine Sanctuary",
+      "lat": 10.2065,
+      "lng": 123.9887,
+      "coordSource": "OpenStreetMap Nominatim (Gilutongan Island, Cordova)",
+      "howToGo": "막탄 선착장에서 방카 약 30분. 호핑 첫 포인트가 보통.",
+      "oneWayMinutes": 30,
+      "hours": "주간 보트",
+      "fee": "스노클 ₱100~200/인 · 다이빙 ₱300. 보트비 별도",
+      "season": "연중. 건기 시야 양호",
+      "booking": "투어로 묶어 예약",
+      "stay": "1시간(수중)",
+      "dayShare": "반나절",
+      "light": {
+        "label": "보트 옆 스노클 + 물고기 먹이",
+        "min": 45
+      },
+      "full": {
+        "label": "체험 다이빙",
+        "min": 120
+      },
+      "history": "코르도바 읍이 지정한 해양보호구역으로 수심 2m 산호 상단에서 급경사로 떨어지는 지형이다. 어업 금지 덕에 큰 물고기 떼가 보트 밑에 모인다.",
+      "photo": "보트 아래 물고기 구름(빵 먹이 때)",
+      "caution": "섬 상륙 안 함(수중만) · 산호 접촉 금지 · 조류 있는 날 구명조끼 필수 · 화장실 없음",
+      "weight": 2,
+      "sources": [
+        "https://3d-universal.com/en/blogs/ultimate-guide-to-hilutungan-marine-sanctuary.html",
+        "https://sugbo.ph/?p=37594",
+        "https://www.philippinestourism.org/mactan-island/"
+      ]
+    },
+    {
+      "ko": "판다논 섬",
+      "en": "Pandanon Island (Getafe, Bohol)",
+      "lat": 10.18,
+      "lng": 124.085,
+      "coordSource": "Wikipedia 'Pandanon Island' (10.18, 124.085)",
+      "howToGo": "막탄(Cordova/Punta Engaño)에서 방카 1~1.5시간. 힐루뚱안·날루수안 호핑에 추가하면 보트 할증 ₱700~1,000.",
+      "oneWayMinutes": 80,
+      "hours": "주간",
+      "fee": "입장 ₱150~200/인(₱20~50 표기 출처는 이상치) · 코티지 ₱250~800",
+      "season": "연중. 썰물 때 샌드바 넓어짐",
+      "booking": "보트 예약",
+      "stay": "2시간",
+      "dayShare": "하루",
+      "light": {
+        "label": "샌드바 산책·물놀이",
+        "min": 90
+      },
+      "full": {
+        "label": "호핑 3섬(힐루뚱안·날루수안·판다논)",
+        "min": 420
+      },
+      "history": "행정상 보홀 Getafe 소속이지만 막탄에서 더 가까워 세부 호핑에 포함된다. 필리핀 유일의 이중 보초 Danajon Bank 안에 있으며 0.07km²에 2,300명이 사는 고밀도 어촌과 긴 백사 샌드바가 공존한다.",
+      "photo": "썰물 샌드바 끝에서 두 색 바다, 야자수 해변",
+      "caution": "보트 왕복 2.5~3시간이라 멀미 대비 · 그늘은 코티지뿐 · 마을 쓰레기 구역 있음",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Pandanon_Island",
+        "https://3d-universal.com/en/blogs/pandanon-island-guide-a-white-sand-paradise-near-cebu.html",
+        "https://www.cebutours.ph/package/mactan-island-hopping/"
+      ]
+    },
+    {
+      "ko": "칼랑가만 섬",
+      "en": "Kalanggaman Island (Palompon, Leyte)",
+      "lat": 11.1146,
+      "lng": 124.2508,
+      "coordSource": "Wikipedia 'Kalanggaman Island' (11.1146, 124.2508)",
+      "howToGo": "말라파스쿠아에서 보트 1.5~2시간(전세 ₱3,000~/척 15인 — 미확인 구형 자료) 또는 레이테 Palompon 항에서 45분. 세부시티발 당일 패키지는 Maya 항 경유 US$265~, 17시간 코스.",
+      "oneWayMinutes": 390,
+      "hours": "주간. Palompon 생태관광사무소 사전 등록 필수",
+      "fee": "외국인 당일 ₱1,000 / 비거주 내국인 ₱300(2024-01 PNA) — 업체는 ₱850 추가 징수 표기. 코티지·그릴 별도",
+      "season": "건기 11~5월. 7~10월 풍랑으로 결항 잦음",
+      "booking": "필수(Palompon 온라인/사무소 등록, 인원 제한)",
+      "stay": "3~4시간(섬)",
+      "dayShare": "하루",
+      "light": {
+        "label": "샌드바 양끝 걷기",
+        "min": 120
+      },
+      "full": {
+        "label": "스노클 + 바비큐 + 말라파스쿠아 연계",
+        "min": 480
+      },
+      "history": "레이테 Palompon 서쪽 10km 바다에 양쪽으로 긴 샌드바를 뻗은 무인도다. 2018년 환경부가 방문객 과밀을 우려했고 읍이 화장실·그릴장을 설치했으나 전기는 없다.",
+      "photo": "섬 동쪽 끝 샌드바를 드론/높은 곳에서 — 필리핀 대표 샌드바 사진",
+      "caution": "외해 2시간 보트 — 멀미약·구명조끼 · 그늘 없음 · 세부시티 당일은 17시간이라 말라파스쿠아 1박 후 가는 게 현실적 · 물·음식 지참",
+      "weight": 2,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kalanggaman_Island",
+        "https://alpha.pna.gov.ph/articles/1216536",
+        "https://www.pelago.com/en/activity/pu6o3z9l5-kalanggaman-island-day-tour-package-from-cebu-city-or-mactan-tagbilaran-city/",
+        "https://www.nomadicexperiences.com/2026/07/kalanggaman-island-travel-guide.html"
+      ]
+    },
+    {
+      "ko": "올랑고 섬 야생조류 보호구역",
+      "en": "Olango Island Wildlife Sanctuary",
+      "lat": 10.27,
+      "lng": 124.05,
+      "coordSource": "Wikipedia 'Olango Island Wildlife Sanctuary' 10.27N 124.05E(소수 2자리)",
+      "howToGo": "막탄 Punta Engaño(옛 Hilton 항·Mövenpick 옆) 또는 Angasil 항에서 공영 방카 20분(₱15~30) → Santa Rosa 선착장에서 트라이시클 15~20분. 렌터카는 Angasil까지.",
+      "oneWayMinutes": 45,
+      "hours": "08:00~17:00",
+      "fee": "입장 ₱100(아동 ₱50, 옛 자료 ₱25) + 카메라비 · 가이드 ₱500~800/팀",
+      "season": "철새 9월~5월, 피크 11~2월(최대 4만 마리). 간조 전후 2시간이 관찰 적기",
+      "booking": "불필요(가이드는 현장)",
+      "stay": "1.5~2시간",
+      "dayShare": "반나절",
+      "light": {
+        "label": "전망대·버드하이드에서 망원경",
+        "min": 60
+      },
+      "full": {
+        "label": "간조 맞춰 갯벌 가이드 워크 + 섬 자전거",
+        "min": 180
+      },
+      "history": "920ha 갯벌·맹그로브로 1994-07-01 필리핀 최초의 람사르 습지가 됐다. 시베리아·중국 북부·일본에서 오는 동아시아-대양주 철새 이동로의 기착지이며 중국백로 등 희귀종이 온다.",
+      "photo": "간조 갯벌 위 도요새 떼 비상, 맹그로브 보드워크",
+      "caution": "조석표 확인 필수(만조엔 새 없음) · 그늘 거의 없음 · 망원렌즈/쌍안경 · 보트 막배 시각 확인",
+      "weight": 3,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Olango_Island_Wildlife_Sanctuary",
+        "https://3d-universal.com/en/blogs/olango-island-guide-a-nature-filled-day-trip-from-cebu.html",
+        "https://birdwatch.ph/2011/11/10/birding-in-olango-wildlife-sanctuary/",
+        "https://bohol-philippines.com/olango-island-wildlife-sanctuary.html"
+      ]
+    }
+  ]
+}

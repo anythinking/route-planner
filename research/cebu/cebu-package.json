@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "collected": "2026-11-08",
+    "note": "한국 패키지 여행사 세부(막탄) 상품 상세 페이지 조사. count = 그 장소/활동이 '포함 일정 또는 포함 특전'으로 적힌 상품 수(선택관광으로만 나온 건 별도 표기). 롯데관광·교원투어·온라인투어·인터파크는 상품 페이지가 동적 렌더링이거나 만료돼 일자별 일정표를 못 열었고 포함사항·선택관광·쇼핑 정보만 확보했다. 인터파크(NOL)는 상품 상세를 하나도 열지 못했다.",
+    "productsOpened": [
+      {"id": "P1", "agency": "모두투어", "product": "[$410상당특전+노쇼핑+노팁+노옵션+마사지3종] 세부 샹그릴라 오션윙 오션클럽룸 3박5일", "url": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "itinerary": "full"},
+      {"id": "P2", "agency": "참좋은여행", "product": "[오전출발][호핑투어 포함/비 리조트] 세부 5일 #자체비치보유/자유시간/마사지", "url": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "itinerary": "full"},
+      {"id": "P3", "agency": "모두투어", "product": "[하이랜드+노쇼핑+노팁+왕복픽업] 세부 벨몬트 슈페리어디럭스 3박5일", "url": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287", "itinerary": "full"},
+      {"id": "P4", "agency": "모두투어", "product": "[청주출발][$150상당특전+노쇼핑+노팁+하이랜드+자유일정] 세부 제이파크 디럭스가든 3박5일", "url": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323", "itinerary": "full"},
+      {"id": "P5", "agency": "하나투어", "product": "세부 5일 #제이파크리조트 #디럭스룸 #호핑투어 #전신마사지 #SM몰자유시간 #망고1KG #특식3회 (하나팩2.0 스탠다드, APP2202506017CD)", "url": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "itinerary": "full"},
+      {"id": "P6", "agency": "노랑풍선", "product": "세부 3박4일 #솔레아 #250불상당혜택 #호핑투어 #라군파크 #스톤마사지 #성장마사지 #리조트석식 #전일정식사 #망고2KG #세부퍼시픽 (APP4098)", "url": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "itinerary": "full"},
+      {"id": "P7", "agency": "에어텔닷컴(참고)", "product": "[세부][세부퍼시픽_오후출발] 솔레아 리조트 체험다이빙+마사지1시간+자유일정2일 세미패키지 5일", "url": "https://m.airteltour.com/packages/750599", "itinerary": "full"},
+      {"id": "P8", "agency": "에어텔닷컴(참고)", "product": "[세부][세부퍼시픽] 솔레아 리조트 호핑투어+반나절자유일정2일 호핑투어 패키지 4일", "url": "https://airteltour.com/packages/755104", "itinerary": "full"},
+      {"id": "P9", "agency": "에어텔닷컴(참고)", "product": "[저녁출발][부산출발] 세부 에어텔 / 3박5일 / 모벤픽 호텔 막탄 / 진에어", "url": "https://airteltour.com/airtels/751054", "itinerary": "options-only"},
+      {"id": "P10", "agency": "롯데관광", "product": "★출발확정★[OZ][THE슬림] 세부 5일 ▶[솔레아 막탄 리조트]", "url": "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010", "itinerary": "highlights-only"},
+      {"id": "P11", "agency": "롯데관광", "product": "[KE][세미패키지] 세부 5일 ▶[쉐라톤 리조트][오션뷰UP]", "url": "https://m.lottetour.com/evtDetail?evtCd=B02A260626KE000", "itinerary": "options+shopping"},
+      {"id": "P12", "agency": "롯데관광", "product": "[OZ][세미패키지] 세부 5일 ▶[제이파크 리조트]", "url": "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004", "itinerary": "options+shopping"},
+      {"id": "P13", "agency": "참좋은여행", "product": "■$80 상당 호핑 포함■ [5성 막탄 샹그릴라 리조트] 세부 5일 #자유일정/슬림패키지", "url": "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP276-250713LJ&PriceSeq=0", "itinerary": "options+shopping"},
+      {"id": "P14", "agency": "참좋은여행", "product": "[오전출발][탐불리 리조트/호핑투어 포함] 세부 5일 ＃리조트석식/전신마사지", "url": "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1", "itinerary": "options+shopping"},
+      {"id": "P15", "agency": "참좋은여행", "product": "[솔레아 막탄 리조트] 세부 5일 #자유시간/리조트석식/마사지1회", "url": "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP3512-2507147C3&PriceSeq=0", "itinerary": "options+shopping"},
+      {"id": "P16", "agency": "참좋은여행(트립스토어)", "product": "[호핑투어 포함/비 리조트] 세부 4일", "url": "https://www.tripstore.kr/products/T0B9D103FDD6B", "itinerary": "highlights-only"},
+      {"id": "P17", "agency": "참좋은여행(트립스토어)", "product": "[5성 쉐라톤 리조트] 세부 3박5일 #자유시간/마사지60분/세미패키지", "url": "https://www.tripstore.kr/products/T728886AC0FA6", "itinerary": "highlights-only"},
+      {"id": "P18", "agency": "교원투어(여행이지)", "product": "세부 5일 #진에어 #부산출발 #솔레아리조트 #세미패키지 (APP901260304LJ01)", "url": "https://www.kyowontour.com/goods/goodsEventDetail?tourCode=APP901260304LJ01", "itinerary": "none(여행일정 미확정)"},
+      {"id": "P19", "agency": "온라인투어", "product": "[부산출발/몽땅투어] 세부 5일 (하이랜드+호핑투어+어메이징쇼+마사지)", "url": "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "itinerary": "highlights-only(검색 스니펫, 페이지 만료)"},
+      {"id": "P20", "agency": "온라인투어", "product": "세부 4일/5일/6일 두짓타니 리조트 (OPAS19000131)", "url": "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131", "itinerary": "highlights-only"},
+      {"id": "P21", "agency": "노랑풍선(트립스토어)", "product": "세부 5일 #제주항공 #솔레아 #250불상당혜택 #호핑투어 #라군파크 #스톤마사지 #성장마사지 #리조트석식 #망고2KG", "url": "https://tripstore.kr/products/T584B5A0E91A9", "itinerary": "tags-only"},
+      {"id": "P22", "agency": "하나투어", "product": "세부 4,5,6일 기획전 목록(솔레아·소토그란데·제이파크·티샤인·샹그릴라·래디슨블루·두짓타니·퀘스트)", "url": "https://www.hanatour.com/mkt/fet/PL00113003", "itinerary": "list-only"},
+      {"id": "P23", "agency": "모두투어", "product": "[세부][모알보알+하이랜드] 두짓타니 디럭스가든뷰룸 3박5일 (APP4047CD3)", "url": "https://www.modetour.com/package/70822795", "itinerary": "title-tags-only"}
+    ]
+  },
+  "sites": [
+    {"ko": "아일랜드 호핑투어", "en": "Island Hopping Tour (Mactan / Olango / Hilutungan / San Vicente)", "count": 11, "minutes": 240, "activity": "필리핀 전통 방카선 탑승, 스노클링, 줄낚시, 선상 또는 섬 내 씨푸드 BBQ 중식. 하나투어 표준 코스: 09:00~09:30 리조트 로비 미팅→선착장, 09:30~11:30 산빈센트 포인트 스노클링·줄낚시, 11:30~12:00 올랑고섬 식당 이동, 12:00~13:00 BBQ 중식, 13:00~13:40 리조트 복귀. 노랑풍선 3~4시간, 참좋은여행 4시간, 하나투어 4~6시간.", "when": "2일차 또는 3일차 오전 09:00 출발~오후 1~2시 종료 (조식 후 가이드 미팅)", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://airteltour.com/packages/755104", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP276-250713LJ&PriceSeq=0", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1", "https://www.tripstore.kr/products/T0B9D103FDD6B", "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://tripstore.kr/products/T584B5A0E91A9", "https://www.modetour.com/package/70822795"], "alsoOptionalIn": ["P3", "P4", "P7", "P9", "P10", "P11", "P12"], "optionPrice": "$60~$80 (출발 전 선결제 시 50,000원)"},
+    {"ko": "전신마사지", "en": "Full-body massage (Hilot / aroma oil)", "count": 11, "minutes": 60, "activity": "마사지(성인 한정, 아동은 성장마사지로 대체). 1시간이 기본, 모두투어 샹그릴라 상품은 2시간. 팁 별도.", "when": "2일차 오후(체험다이빙 강습·과일시장 뒤) 또는 3일차 오후. 에어텔은 11:00~20:30 예약제.", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP3512-2507147C3&PriceSeq=0", "https://www.tripstore.kr/products/T0B9D103FDD6B", "https://www.tripstore.kr/products/T728886AC0FA6", "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"]},
+    {"ko": "막탄 슈라인 (라푸라푸 기념공원)", "en": "Mactan Shrine / Lapu-Lapu Monument & Magellan Marker", "count": 9, "minutes": null, "activity": "관람·사진. 마젤란을 물리친 라푸라푸 추장 동상과 마젤란 기념비가 있는 공원. 에어텔·온라인투어는 '막탄슈라인, 라푸라푸기념비'로 따로 적음.", "when": "마지막 관광일(5일 상품 4일차 / 4일 상품 4일차) 체크아웃 후 오후, 공항 이동 전 '막탄 시내관광'의 첫 코스", "sources": ["https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010", "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004", "https://www.tripstore.kr/products/T0B9D103FDD6B", "https://www.tripstore.kr/products/T728886AC0FA6", "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"]},
+    {"ko": "막탄 성당", "en": "Mactan Church (Virgen de la Regla Parish, Lapu-Lapu City)", "count": 9, "minutes": null, "activity": "관람·사진. 막탄 슈라인과 묶여 '막탄 시내관광'을 구성. 참좋은여행은 '막탄 성당(산토니뇨 성당)'이라고 표기해 세부시티 산토니뇨 성당과 혼용함 — 실제 동선은 막탄섬 안.", "when": "마지막 관광일 오후, 막탄 슈라인 직후", "sources": ["https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010", "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004", "https://www.tripstore.kr/products/T0B9D103FDD6B", "https://www.tripstore.kr/products/T728886AC0FA6", "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"]},
+    {"ko": "체험다이빙 강습 (스킨스쿠버 무료 강습)", "en": "Intro scuba lesson (theory + pool practice)", "count": 9, "minutes": null, "activity": "리조트/다이빙샵 수영장에서 이론교육+실습. 무료 강습까지만 포함이고 실제 바다 체험다이빙은 선택관광($75~$120). 에어텔은 강습 약 4시간으로 표기.", "when": "2일차 조식 후 오전 (이어서 과일시장·마사지)", "sources": ["https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010", "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP276-250713LJ&PriceSeq=0", "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131", "https://www.modetour.com/package/70822795"]},
+    {"ko": "세부 열대과일 시장 / 디스커버리 투어 (재래시장·과일가게)", "en": "Tropical fruit market / local market visit (Maribago, Mactan)", "count": 9, "minutes": 60, "activity": "현지 시장 구경, 열대과일(망고 등) 구매 체험. 하나투어는 마리바고 열대과일 시장이라 명시하고 객실당 망고 1kg 증정. 에어텔 '디스커버리투어 약 1시간'.", "when": "2일차 오전(강습 뒤) 또는 호핑투어 끝난 3일차 오후", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010", "https://www.tripstore.kr/products/T0B9D103FDD6B", "https://www.tripstore.kr/products/T728886AC0FA6", "https://www1.onlinetour.co.kr/tour/w/goods/view?goodCode=OPAS19000131"]},
+    {"ko": "쇼핑센터 3회 방문", "en": "Three guided shop stops (latex, vitamins/noni, souvenirs)", "count": 9, "minutes": 30, "activity": "쇼핑. 매장당 30분~1시간. 노쇼핑 상품(하나팩2.0, 모두투어 노쇼핑)은 0회.", "when": "마지막 관광일 막탄 시내관광과 묶어 공항 이동 전", "sources": ["https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104", "https://m.lottetour.com/evtDetail?evtCd=B02A260626KE000", "https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP276-250713LJ&PriceSeq=0", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP3512-2507147C3&PriceSeq=0"]},
+    {"ko": "레아 신전", "en": "Temple of Leah (Busay, Cebu City)", "count": 6, "minutes": null, "activity": "관람·사진. '하이랜드 투어' 코스(도교사원→레아신전→시라오가든→탑오브세부) 일부, 전체 약 4시간, 선택관광 시 $50.", "when": "3일차 또는 4일차 오후(12시 체크아웃 후), 탑오브세부 석식 전", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323", "https://airteltour.com/airtels/751054", "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://www.modetour.com/package/70822795"]},
+    {"ko": "시라오 가든 (시라오 플라워 가든)", "en": "Sirao Flower Garden (Busay)", "count": 6, "minutes": null, "activity": "관람·사진(포토스팟). 하이랜드 투어 일부.", "when": "3~4일차 오후, 레아신전 전후", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323", "https://airteltour.com/airtels/751054", "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://www.modetour.com/package/70822795"]},
+    {"ko": "탑 오브 세부 (전망대)", "en": "Tops of Cebu / Top of Cebu lookout (Busay)", "count": 5, "minutes": null, "activity": "야경 관람 + 석식(모두투어: 현지식 특식, 청주 상품은 1인 1,000페소 식사 버짓). 하이랜드 투어의 마지막 코스.", "when": "3~4일차 저녁(석식 장소), 이후 공항 이동", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323", "https://airteltour.com/airtels/751054", "https://www.modetour.com/package/70822795"]},
+    {"ko": "도교사원", "en": "Cebu Taoist Temple (Beverly Hills)", "count": 4, "minutes": null, "activity": "관람·사진. 하이랜드 투어 첫 코스.", "when": "3~4일차 오후", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287", "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323", "https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://www.modetour.com/package/70822795"]},
+    {"ko": "솔레아 라군파크 (워터파크)", "en": "Solea Mactan Resort Lagoon Park", "count": 4, "minutes": null, "activity": "리조트 내 워터파크 1회 이용권($10 상당), 라군 카약 30분 무료.", "when": "자유시간(2일차 또는 호핑 끝난 오후)", "sources": ["https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP3512-2507147C3&PriceSeq=0", "https://tripstore.kr/products/T584B5A0E91A9", "https://www.hanatour.com/mkt/fet/PL00113003"]},
+    {"ko": "스톤 마사지", "en": "Hot stone massage", "count": 3, "minutes": 60, "activity": "마사지. 노랑풍선 1시간($80 상당), 모두투어 샹그릴라 2시간. 아동은 성장마사지로 대체. 선택관광 시 $45~$100.", "when": "2일차 오후", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450", "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098", "https://tripstore.kr/products/T584B5A0E91A9"]},
+    {"ko": "올랑고섬", "en": "Olango Island (hopping lunch stop / bird sanctuary)", "count": 3, "minutes": null, "activity": "호핑투어 중식 장소 또는 호핑 목적지. 올랑고 버드 생츄어리는 하나투어 '프리미엄 호핑' 옵션($80)에 포함, 생츄어리 단독 옵션 $20 약 2시간.", "when": "호핑투어 날 11:30~13:00", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://m.airteltour.com/packages/750599", "https://airteltour.com/packages/755104"]},
+    {"ko": "산 페드로 요새", "en": "Fort San Pedro", "count": 2, "minutes": null, "activity": "관람·사진. 세부시티 역사 관광. 일요일·공휴일 휴관 시 입구만.", "when": "4일차 12시 체크아웃 후 중식 뒤 오후(세부시티 코스 첫 순서)", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://airteltour.com/airtels/751054"]},
+    {"ko": "산토니뇨 성당 (성 어거스틴 교회)", "en": "Basilica Minore del Santo Niño (Cebu City)", "count": 2, "minutes": null, "activity": "관람·사진. 복장 규정(민소매·반바지·모자 불가) 안내. 참좋은여행 상품의 '산토니뇨 성당' 표기는 막탄 성당을 가리키므로 여기선 세부시티 동선이 확인된 2개만 셈.", "when": "4일차 오후, 산페드로 요새·마젤란 십자가 직후", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://airteltour.com/airtels/751054"]},
+    {"ko": "마젤란 십자가", "en": "Magellan's Cross", "count": 1, "minutes": null, "activity": "관람·사진. 산토니뇨 성당 옆 팔각정.", "when": "4일차 오후", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"]},
+    {"ko": "SM 몰 (SM City Cebu)", "en": "SM City Cebu", "count": 2, "minutes": null, "activity": "쇼핑 자유시간. 하나투어 추천 매장: 브레드토크, 말디타, 쿨투라 필리피노(기념품), SM 슈퍼마켓. 래디슨 블루 호텔 도보 2분.", "when": "4일차 오후 시티 관광 뒤~석식 전", "sources": ["https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD", "https://www.hanatour.com/mkt/fet/PL00113003"]},
+    {"ko": "아얄라 몰", "en": "Ayala Center Cebu", "count": 1, "minutes": 180, "activity": "쇼핑·개별 석식 자유시간 3시간(에어텔 세부 시티투어 옵션 마지막 코스).", "when": "3일차 저녁", "sources": ["https://airteltour.com/airtels/751054"]},
+    {"ko": "씨사이드 몰 (SM Seaside)", "en": "SM Seaside City Cebu", "count": 1, "minutes": null, "activity": "쇼핑 자유시간(모두투어 노쇼핑 상품에서 쇼핑센터 대신 몰 자유시간).", "when": "3일차 중식 후 오후", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"]},
+    {"ko": "디스코보트 / UFO", "en": "Disco boat (UFO ride)", "count": 1, "minutes": 10, "activity": "해양 액티비티. 모두투어 샹그릴라 상품 포함($40 상당), 타 상품은 옵션 $40.", "when": "호핑투어 날", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"]},
+    {"ko": "황제마사지", "en": "Emperor massage (2h)", "count": 1, "minutes": 120, "activity": "마사지. 모두투어 샹그릴라 '마사지 3종' 중 하나. 옵션가 $60.", "when": "4일차 하이랜드 투어 뒤 공항 가기 전", "sources": ["https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"]},
+    {"ko": "어메이징쇼", "en": "Amazing Show (transgender cabaret)", "count": 1, "minutes": 60, "activity": "공연 관람 + 음료 1잔. 온라인투어 몽땅투어엔 포함($60), 나머지는 옵션 $50~$65. 일요일 휴무.", "when": "저녁", "sources": ["https://www.onlinetour.co.kr/tour/w/event/view?eventCode=260204756484", "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"]},
+    {"ko": "오슬롭 고래상어 투어 + 투말록 폭포", "en": "Oslob whale shark snorkeling + Tumalog Falls", "count": 1, "minutes": 720, "activity": "새벽 02:30~03:30 출발, 06:30~09:00 고래상어 스노클링, 투말록 폭포, 오슬롭 성당, 13:00~16:00 복귀. 하나투어 래디슨블루·차박 상품엔 포함, 대부분 옵션 $120~$200.", "when": "새벽 출발 종일(2일차 또는 3일차)", "sources": ["https://www.hanatour.com/mkt/fet/PL00113003", "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"]},
+    {"ko": "모알보알 (정어리떼·거북이 스노클링)", "en": "Moalboal sardine run / Panagsama Beach", "count": 1, "minutes": 480, "activity": "스노클링. 오슬롭과 묶어 옵션 $160~$210, 단독 $100~$200. 모두투어 두짓타니 상품명에 포함.", "when": "종일", "sources": ["https://www.modetour.com/package/70822795", "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"]}
+  ],
+  "itineraries": [
+    {
+      "agency": "하나투어",
+      "product": "세부 5일 #제이파크리조트 #디럭스룸 #호핑투어 #전신마사지 #SM몰자유시간 #망고1KG #특식3회 (하나팩2.0 스탠다드 · 노쇼핑 · 상품코드 APP2202506017CD · 제주항공 · 2025.06.01 출발 기준 979,000원)",
+      "url": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD",
+      "days": [
+        ["Day1 18:20 인천공항 T1 미팅", "20:50 인천 출발 7C2113 (석식 기내 유료)", "00:20(+1) 세부 막탄공항 T2 도착 → 건물 밖 하나투어 피켓 가이드 미팅", "리조트(제이파크 아일랜드 리조트 & 워터파크, 디럭스 가든뷰) 이동 후 휴식 — 리조트 소개문: 세부 공항에서 차량 약 20분"],
+        ["Day2 조식 리조트식", "오전 자유일정(워터파크·전용해변·제이 액티비티존, 가이드 미동행)", "중식 불포함", "[스페셜포함] 전신 마사지 1시간(성인) / 아동 성장 마사지 1시간", "석식 샤브샤브", "리조트 이동 후 휴식"],
+        ["Day3 조식 리조트식", "리조트 로비 가이드 미팅", "[스페셜포함] 아일랜드 호핑투어: 09:00~09:30 선착장 이동 / 09:30~11:30 산빈센트 포인트 스노클링·줄낚시 / 11:30~12:00 올랑고섬 식당 이동 / 12:00~13:00 BBQ 중식 / 13:00~13:40 리조트 복귀", "세부 열대 과일 시장(마리바고) 방문, 객실당 망고 1kg 증정", "리조트 휴식", "석식 특식 무제한 삼겹살"],
+        ["Day4 조식 리조트식", "오전 자유일정(가이드 미동행)", "12시 이전 체크아웃 후 가이드 미팅", "중식 특식 7107 레스토랑(마리바고, 퓨전 필리핀식)", "산페드로요새", "마젤란 십자가", "성 어거스틴 교회(산토니뇨상) — 복장 규정 강화", "SM 몰 자유시간(브레드토크·말디타·쿨투라·SM슈퍼마켓)", "석식 특식 씨푸드 보일 그릴 레스토랑(요트 정박장 앞)", "공항 이동 및 출국 수속 (기내박)"],
+        ["Day5 01:20 세부 출발 7C2114", "06:55 인천 도착 (조식 기내 유료)"]
+      ]
+    },
+    {
+      "agency": "모두투어",
+      "product": "[$410상당특전+노쇼핑+노팁+노옵션+마사지3종] 세부 샹그릴라 오션윙 오션클럽룸 3박5일 (대한항공 KE601/602 · 2026.02.04~02.08 · 성인 2,829,000원)",
+      "url": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450",
+      "days": [
+        ["Day1 18:50 인천 출발 KE601 (석식 기내식)", "22:20 세부 도착, 한국인 가이드 미팅", "리조트(샹그릴라 막탄) 이동·체크인은 현지 가이드 안내"],
+        ["Day2 조식 리조트식", "아일랜드 호핑투어(전통 방카선, 줄낚시 포함, 중식 호핑투어식)", "디스코보트", "스톤마사지 2시간", "석식 엉클잭 알리망고 씨푸드 세트 특식"],
+        ["Day3 조식 리조트식(세트메뉴)", "오전 리조트 자유시간", "중식 리조트식 후 가이드 미팅", "씨사이드몰 자유시간", "전신마사지 2시간", "석식 리조트식"],
+        ["Day4 조식 리조트식", "오전 자유시간, 12시 체크아웃 후 가이드 미팅", "중식 카바나 레스토랑(지중해식)", "하이랜드 시티투어: 레아신전 → 시라오가든 → 탑오브세부", "석식 탑오브세부 현지식 특식", "황제마사지 2시간", "공항 이동(가이드는 공항 내부 미동행, 개별 수속)"],
+        ["Day5 00:15 세부 출발 KE602 (조식 기내식)", "05:35 인천 도착"]
+      ]
+    },
+    {
+      "agency": "참좋은여행",
+      "product": "[오전출발][호핑투어 포함/비 리조트] 세부 5일 #자체비치보유/자유시간/마사지 (필리핀항공 PR487/486 · 2025.08.02~08.06 · 상품코드 APP3421-250802PR · 쇼핑 3회)",
+      "url": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR",
+      "days": [
+        ["Day1 04:10 인천공항 미팅", "07:05 인천 출발 PR487 (조식 기내식)", "10:45 세부 막탄공항 도착, 가이드 미팅 → 리조트(비 리조트 막탄, 비쿨룸) 이동, 체크인·휴식", "중식 한식 / 석식 현지식"],
+        ["Day2 조식 리조트식", "해양스포츠 체험: 수영장 체험다이빙 무료 강습(이론 포함)", "디스커버리 투어: 재래시장·과일가게 방문", "전신마사지 1시간(아동 제외)", "중식 한식 / 석식 현지식 후 리조트 휴식"],
+        ["Day3 조식 리조트식", "아일랜드 호핑투어 약 4시간: 방카 탑승, 스노클링, 줄낚시, 씨푸드 BBQ 중식 (2일차와 순서 바뀔 수 있음)", "리조트 부대시설 이용 및 선택관광", "석식 특식 후 휴식"],
+        ["Day4 조식 리조트식 후 가이드 미팅, 체크아웃", "세부 막탄 시내관광: 막탄 슈라인(라푸라푸 기념공원), 막탄 성당(산토니뇨 성당)", "쇼핑센터 방문(마무하이 진주·비타민·잡화 / 마무하이 라텍스 / 블루 비타민·노니·토산품, 각 50분~1시간)", "중식 현지식 / 석식 특식", "공항 이동"],
+        ["Day5 00:25 세부 출발 PR486", "06:00 인천 도착 (조식 기내식)"]
+      ]
+    },
+    {
+      "agency": "노랑풍선",
+      "product": "세부 3박4일 #솔레아 #250불상당혜택 #호핑투어 #라군파크 #스톤마사지 #성장마사지 #리조트석식 #전일정식사 #망고2KG #세부퍼시픽 (APP4098-2611225J00 · 2026.11.22~11.25 · 579,900원 · 쇼핑 3회 · 가이드경비 USD40)",
+      "url": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098",
+      "days": [
+        ["Day1 인천공항 T1 3층 A카운터 미팅", "21:35 인천 출발 5J131", "01:20(+1) 세부 막탄국제공항 도착, 건물 밖 '노랑풍선' 피켓 가이드 미팅", "리조트(솔레아 리조트, 시티뷰) 이동·체크인·휴식 (공항↔리조트는 미니버스/벤, 일정 중 이동은 멀티캡·지프니)"],
+        ["Day2 리조트 조식 후 가이드 미팅", "스킨스쿠버 다이빙 강습(이론+실습) — 선택관광 체험다이빙 $120 1시간30분", "열대과일가게 방문 체험(세부 디스커버리 투어: 열대과일시장·재래시장)", "스톤 마사지 1회(소아는 성장 마사지)", "중식 현지식 / 석식 리조트 석식 후 휴식"],
+        ["Day3 리조트 조식 후 가이드 미팅", "아일랜드 호핑투어(스노클링+줄낚시+호핑투어식 중식) 3~4시간, 방카 이용", "석식 특식 후 리조트 휴식"],
+        ["Day4 리조트 조식 후 체크아웃", "세부 막탄 시내관광(막탄 슈라인, 막탄 성당)", "쇼핑센터 3회(사보텐 비타민·노니·진주 / 라텍스 / 토산품점 153, 각 약 30분)", "중식 현지식", "공항 이동, 14:50 세부 출발 5J130 → 20:25 인천 도착"]
+      ]
+    },
+    {
+      "agency": "모두투어",
+      "product": "[청주출발][$150상당특전+노쇼핑+노팁+하이랜드+자유일정] 세부 제이파크 디럭스가든 3박5일 (에어로케이 RF523/524 · 2026.02.25~03.01)",
+      "url": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323",
+      "days": [
+        ["Day1 21:20 청주 출발 RF523", "01:00(+1) 세부 도착, 한국인 가이드 미팅, 리조트(제이파크) 체크인"],
+        ["Day2 조식 리조트식", "전일 리조트 자유시간 (중식·석식 불포함)"],
+        ["Day3 조식 리조트식", "리조트 자유시간 (경비행기 선택관광 안내)", "중식 세트메뉴 / 석식 리조트식"],
+        ["Day4 조식 후 체크아웃, 가이드 미팅", "하이랜드 투어(약 4시간): 도교사원 → 레아신전 → 시라오 플라워 가든 → 탑 오브 세부 전망대", "석식: 탑 오브 세부에서 1인 1,000페소 식사 버짓", "공항 이동(가이드 공항 내 미동행)"],
+        ["Day5 02:00 세부 출발 RF524 → 07:15 청주 도착"]
+      ]
+    },
+    {
+      "agency": "에어텔닷컴(참고 · 8개사 외)",
+      "product": "[세부][세부퍼시픽] 솔레아 리조트 호핑투어+반나절자유일정2일 호핑투어 패키지 4일 (755104 · 쇼핑 3회 · 가이드팁 $40)",
+      "url": "https://airteltour.com/packages/755104",
+      "days": [
+        ["Day1 21:35 인천 출발 5J131 → 01:20(+1) 세부 막탄 도착, 가이드 미팅, 리조트(솔레아 막탄) 이동, 객실당 망고 1kg"],
+        ["Day2 조식 후 가이드 미팅", "체험다이빙 강습(이론+수영장 실습, 약 4시간)", "중식 현지식", "열대과일 구매체험(디스커버리투어 약 1시간)", "전신마사지 1시간(성인, 팁 별도)", "석식 현지식"],
+        ["Day3 조식 후 09:00 미팅", "올랑고섬 호핑투어 약 4시간 + 중식 현지식", "호텔 복귀 또는 선택관광", "석식 현지식"],
+        ["Day4 조식 후 가이드 미팅, 체크아웃", "막탄 시내관광: 막탄성당, 막탄슈라인, 라푸라푸기념비", "쇼핑센터 3회(라텍스, 토산품, 잡화점, 각 약 20분)", "중식 현지식", "공항 복귀, 14:45 세부 출발 5J130 → 20:25 인천"]
+      ]
+    }
+  ],
+  "options": [
+    {"ko": "아일랜드 호핑투어", "price": "$60(모두투어)~$80(참좋은·롯데·노랑·에어텔); 선결제 50,000원", "minutes": 240, "desc": "스노클링+줄낚시+씨푸드 BBQ 중식. 최소 2명.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287 ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR ; https://www.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250521OZ010"},
+    {"ko": "프리미엄 호핑투어 + 올랑고 버드 생츄어리", "price": "$80 (아동 $60)", "minutes": 360, "desc": "하나투어: 09:00 미팅→산빈센트 1차 스노클링·줄낚시→산빈센트 BBQ 중식→올랑고 버드 생츄어리→힐루뚱안 2차 스노클링→16:00 종료, 라면·맥주 간식. 최소 4명.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "모알보알 호핑/스노클링", "price": "$100(노랑, 오슬롭 신청자)~$120(모두)~$200(참좋은·롯데)", "minutes": 480, "desc": "파나그사마 해변 정어리떼·바다거북 스노클링. 최소 4명.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323 ; https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098"},
+    {"ko": "오슬롭 고래상어 투어(+투말록 폭포)", "price": "$120(하나)~$130(모두, 선결제 9만원)~$180(롯데·에어텔)~$200(참좋은·노랑, 선결제 16만원)", "minutes": 720, "desc": "새벽 02:30~03:30 출발, 고래상어 스노클링, 투말록 폭포, 오슬롭 성당, 현지식 중식, 13:00~16:00 복귀. 약 8~15시간. 최소 4명. 패스트트랙 유료.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR ; https://m.lottetour.com/evtDetail?evtCd=B02A260626KE000"},
+    {"ko": "오슬롭 고래상어 데이투어 + 모알보알 스노클링", "price": "$160", "minutes": 960, "desc": "하나투어: 03:00 출발, 고래상어, 투말록 폭포, 모알보알 스노클링, 19:00 복귀.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "오슬롭 고래상어 체험다이빙 데이투어", "price": "$180 (모알보알 포함 $210)", "minutes": 720, "desc": "고래상어와 체험다이빙(만 10세 이상), 투말록 폭포, 오슬롭 성당.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "수밀론 아일랜드 투어", "price": "$100", "minutes": 120, "desc": "오슬롭 투어와 함께만 진행.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "보홀 데이투어", "price": "$120(하나, 아동 $115)~$130(모두)~$180(참좋은·롯데)~$200(노랑)", "minutes": 600, "desc": "초콜릿힐, 안경원숭이(타르시어), 로복강 점심 크루즈, 혈맹기념비. 8~12시간, 최소 4명.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "하이랜드 투어(도교사원·레아신전·시라오가든·탑오브세부)", "price": "$50 (선결제 5만원)", "minutes": 240, "desc": "모두투어 선택관광. 성인·아동 동일, 최소 2명.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "세부 시티투어(에어텔)", "price": "사전예약 비용 문의", "minutes": null, "desc": "탑 오브 세부(개별 중식) → 산페드로요새 → 산토니뇨 성당 → 시라오가든 → 레아신전 → 아얄라 몰 자유시간 3시간 → 리조트 복귀 또는 공항 샌딩.", "source": "https://airteltour.com/airtels/751054"},
+    {"ko": "체험다이빙", "price": "$75(하나)~$100(모두, 선결제 6.5만원)~$110(에어텔)~$120(참좋은·롯데·노랑, 선결제 155,000원)", "minutes": 60, "desc": "수영장 강습 후 한국인 강사와 스쿠버 약 20분, 수중 사진 제공.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "체험다이빙 패키지(다이빙+제트스키+바나나보트)", "price": "$105(하나)~$160(참좋은·롯데·에어텔)", "minutes": 90, "desc": "해양스포츠 3종 세트.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "헬멧다이빙 / 씨워크", "price": "$70(하나)~$90(모두)~$110(에어텔)~$120(참좋은)", "minutes": 30, "desc": "투명 헬멧 쓰고 해저 산책.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "제트스키", "price": "$30(하나)~$40(모두·에어텔)~$60(참좋은·노랑)", "minutes": 15, "desc": "탑승 15~20분.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "바나나보트", "price": "$15(하나)~$20(모두·참좋은·에어텔)~$25(노랑)", "minutes": 15, "desc": "10세 미만·고령자 불가.", "source": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098"},
+    {"ko": "제트보트 / 토네이도 제트보트", "price": "$60(하나)~$80(모두·참좋은·노랑)", "minutes": 20, "desc": "고속 보트.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "파라세일링", "price": "$60(하나)~$80(참좋은·에어텔)", "minutes": 15, "desc": "짝수 인원.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "씨라이딩", "price": "$90", "minutes": 20, "desc": "모두투어.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "워터볼", "price": "$25", "minutes": 10, "desc": "모두투어.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "UFO(디스코보트)", "price": "$40", "minutes": 10, "desc": "모두투어.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "요트 선셋투어", "price": "$200", "minutes": 120, "desc": "참좋은여행.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "선셋 낭만투어", "price": "$60 (아동 $50)", "minutes": 150, "desc": "하나투어: 15:30 선착장 출발→산빈센트 정박 선셋 감상→18:00 복귀, 과일·스낵·맥주·와인, 스노클링·낚시 장비 무료.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "경비행기 투어", "price": "$170(하나)~$200(모두)~$200/$250(참좋은 30분/40~50분)", "minutes": 60, "desc": "세부·막탄·보홀 초콜릿힐 상공 비행, 수료증. 최소 4명.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "산타로사 에코투어 / 올랑고 생츄어리 투어", "price": "$20(하나)~$60(참좋은·롯데)", "minutes": 120, "desc": "올랑고 철새 도래지 관람.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR ; https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "어메이징쇼", "price": "$50(하나, 아동 $40)~$60(모두·롯데·에어텔)~$65(참좋은·노랑); 선결제 4만원", "minutes": 60, "desc": "필리핀 트랜스젠더 버라이어티 쇼, 음료 1잔. 일요일 휴무.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "나이트투어 / 야경투어", "price": "$50(하나)~$60(모두·롯데쉐라톤·참좋은탐불리)~$80(참좋은·노랑·에어텔)", "minutes": 180, "desc": "전망대 야경, 야시장, 노천맥주, 카지노 등 택일, 음료 1잔. 17~19시 시작, 2~4시간, 최소 4명.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "세부 골프", "price": "$150(참좋은, 주말 +$20) / 모두투어 주중 $170·주말 $220", "minutes": 360, "desc": "6시간 이상, 최소 4명.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "전신마사지 1시간", "price": "$30(모두, 선결제 2만원) / 2시간 $45(하나)", "minutes": 60, "desc": "힐롯·아로마 오일.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "필리핀 전통 마사지", "price": "$50 / $80 / $100 (1시간 / 2시간 / 2시간 이상)", "minutes": 60, "desc": "참좋은여행.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "스톤 마사지", "price": "$45(90분)·$55(2시간, 하나) / $70(모두, 2시간 선결제 5만원) / $100(롯데·에어텔)", "minutes": 120, "desc": "아로마 오일 + 온열 스톤 전신.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "스톤&페이셜 마사지", "price": "$90(모두)~$100/$120(참좋은)", "minutes": 120, "desc": "", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "포시즌 마사지", "price": "$70(하나)~$90(모두)~$130(참좋은)", "minutes": 140, "desc": "열대과일 바디랩 + 전신·발·얼굴 마사지.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "황제마사지 / 황제스파", "price": "황제마사지 $60, 황제스파 $120(모두) / 황제 스파 마사지 $90(하나)", "minutes": 120, "desc": "바나나잎 바디랩+페이셜+스톤+반신욕.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "럭셔리 스톤&스파 / 포핸드 마사지", "price": "$160 / $160", "minutes": 150, "desc": "참좋은여행.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "태반(플라센타) 마사지", "price": "$70(하나)~$80(모두)", "minutes": 120, "desc": "", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "노니 마사지 / 허벌 마사지 / 밤부(대나무) 마사지", "price": "노니 $60, 허벌 $70(하나) / 밤부 $100(모두)", "minutes": 120, "desc": "", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "발마사지", "price": "$15(모두, 30분)~$25(하나, 1시간)", "minutes": 30, "desc": "", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"},
+    {"ko": "아동 성장마사지 / 키즈마사지", "price": "80분 $30, 120분 $40(하나) / $30(모두)", "minutes": 60, "desc": "성인 불가.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "정어리 스노클링 / 스킨스쿠버 / 프리다이빙 (모알보알)", "price": "$60 / $100 / $100", "minutes": 90, "desc": "모두투어 청주 상품.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323"},
+    {"ko": "오슬롭 고래상어 체험다이빙(오슬롭 투어 포함 시)", "price": "$100", "minutes": 60, "desc": "모두투어.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=72342287"}
+  ],
+  "stay": {
+    "areas": "조사한 23개 상품 전부 막탄섬(라푸라푸시티) 리조트 숙박: 솔레아 막탄(가장 많음: 노랑풍선·참좋은·롯데·교원·온라인투어·에어텔·하나투어), 제이파크 아일랜드(하나투어·모두투어·롯데), 샹그릴라 막탄(모두투어·참좋은·하나투어), 두짓타니(모두투어·온라인투어·하나투어), 쉐라톤 세부 막탄(롯데·참좋은·하나투어), 비 리조트·탐불리·알테라·플랜테이션베이·모벤픽·벨몬트·카사블루·소토그란데·티샤인·래디슨블루(세부시티, 하나투어 오슬롭 상품만). 세부시티 호텔은 모두투어 '세부시티 누스타 필리호텔 자유여행' 등 자유여행형에서만 등장. 트립스토어 가이드: 휴양=막탄 리조트(1박 15~35만원), 쇼핑·시티투어·가성비=세부시티 호텔(1박 5~12만원).",
+    "airportToHotel": "하나투어 제이파크 소개문: '세부 공항에서 차량으로 약 20분 거리'. 그 외 상품 페이지는 소요 시간을 적지 않고 '공항↔리조트 왕복 픽업 포함(미니버스/벤)'만 명시. 에어텔 모벤픽은 복귀 픽업 불포함(리조트 셔틀 / 현지사무소 샌딩 $10~15 / 택시 $15~20). 출처: https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD , https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098 , https://airteltour.com/airtels/751054",
+    "cityToMactan": null,
+    "cityToMactanNote": "열어 본 어느 일정표에도 시티↔막탄 이동 시간이 숫자로 적혀 있지 않음. 간접 단서: 시티 관광(산페드로·산토니뇨·SM몰 또는 하이랜드)은 항상 '12시 체크아웃 → 중식 → 관광 → 석식 → 공항'으로 마지막 반나절에 한 번만 배치되고, 막탄 시내관광(슈라인·성당)과 같은 날 묶이지 않음. 일정 중 이동은 멀티캡·지프니(노랑풍선·참좋은), 하나팩2.0은 에어컨 차량."
+  },
+  "foodShop": [
+    {"ko": "쇼핑센터 — 마무하이/마부하이 (Mabuhay)", "what": "진주, 비타민, 잡화, 라텍스. 50분~1시간. 참좋은여행 1·2회차, 롯데 제이파크 1회차.", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR ; https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004"},
+    {"ko": "쇼핑센터 — 블루 (Blue)", "what": "비타민, 노니, 토산품. 참좋은여행 3회차(또는 1회차).", "source": "https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR ; https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP6700-260303PR&PriceSeq=1"},
+    {"ko": "쇼핑센터 — 샤보텐/사보텐 (Saboten)", "what": "남양 천연진주, 코코넛 술, 커피, 망고, 비타민, 노니, 로얄제리, 오일, 패션쥬얼리. 노랑풍선 1회차 약 30분.", "source": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098 ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "쇼핑센터 — 라텍스 매장", "what": "천연 라텍스 매트리스·베개 침구류. 노랑풍선 2회차, 에어텔 1회차.", "source": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098 ; https://airteltour.com/packages/755104"},
+    {"ko": "쇼핑센터 — 토산품점 153", "what": "필리핀 꿀, 전통주, 산호 액세서리, 무좀약, 목각, 은제품, 수공예품, 조개류. 노랑풍선 3회차.", "source": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098"},
+    {"ko": "쇼핑센터 — T샵/티샵, 비다샵", "what": "침향, 벌집, 잡화(T샵); 비타민·노니·토산품·라텍스(비다). 참좋은 탐불리·솔레아 상품 2·3회차, 롯데 제이파크 2·3회차(티샵·비다샵 각 50분). 롯데 쉐라톤: 노니·화장품 2회 + 잡화 1회.", "source": "https://m.verygoodtour.com/Product/PackageDetail?ProCode=APP3512-2507147C3&PriceSeq=0 ; https://m.lottetour.com/evtDetail/826/857/1059/1062?evtCd=B02A250523OZ004 ; https://m.lottetour.com/evtDetail?evtCd=B02A260626KE000"},
+    {"ko": "망고 증정", "what": "객실당 망고 1kg(하나투어·에어텔) 또는 2kg(노랑풍선) + 7D 망고젤리·마스크팩 선물세트(노랑풍선). 열대과일 시장 방문과 세트.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098"},
+    {"ko": "마리바고 열대과일 시장", "what": "망고 등 열대과일 저가 구매, 생활잡화·간식. 하나투어 3일차 호핑 뒤.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "SM City 몰 추천 매장", "what": "브레드토크(베이커리, 노스윙 1층), 말디타(로컬 패션, 메인윙 2층), 쿨투라 필리피노(기념품·건망고·노니비누, 노스윙 1층), SM 슈퍼마켓(지하 1층).", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "씨사이드몰 / 아얄라몰 자유시간", "what": "노쇼핑 상품의 쇼핑 대체. 아얄라몰은 개별 석식 포함 3시간 자유시간.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450 ; https://airteltour.com/airtels/751054"},
+    {"ko": "식사 — 호핑투어 씨푸드 BBQ", "what": "호핑 중식 표준. 올랑고섬 식당 또는 산빈센트 섬.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.verygoodtour.com/Product/PackageDetail?ProCode=APP3421-250802PR"},
+    {"ko": "식사 — 샤브샤브 특식", "what": "하나투어 2일차 석식, 참좋은여행 업그레이드 식사.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.tripstore.kr/products/T0B9D103FDD6B"},
+    {"ko": "식사 — 무제한 삼겹살 특식", "what": "하나투어 3일차 석식, 참좋은여행 4개 상품, 노랑풍선 리뷰에도 등장.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD ; https://www.tripstore.kr/products/T728886AC0FA6"},
+    {"ko": "식사 — 7107 레스토랑 (마리바고)", "what": "뉴욕 미쉐린 출신 셰프의 퓨전 필리핀식: 모닝글로리, 갈릭라이스, 깔라마리 파스타, 씨푸드 스프, 망고 쉬림프, 포멜로 치킨. 하나투어 4일차 중식.", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "식사 — 씨푸드 보일 그릴 레스토랑", "what": "요트 정박장 앞, 마늘버터 해산물 플래터. 하나투어 4일차 석식(공항 가기 전).", "source": "https://www.hanatour.com/trp/pkg/CHPC0PKG0200M200?pkgCd=APP2202506017CD"},
+    {"ko": "식사 — 엉클잭 알리망고 씨푸드 세트", "what": "알리망고(머드크랩) 씨푸드. 모두투어 샹그릴라 2일차 석식 특식.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"},
+    {"ko": "식사 — 카바나 레스토랑(지중해식)", "what": "모두투어 샹그릴라 4일차 중식.", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450"},
+    {"ko": "식사 — 탑 오브 세부 석식", "what": "하이랜드 투어 마지막, 야경 보며 석식(현지식 특식 또는 1인 1,000페소 버짓).", "source": "https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=97951450 ; https://tripstore.modetour.co.kr/pkg/itinerary/?Pnum=101113323"},
+    {"ko": "식사 — 리조트 석식 1회", "what": "솔레아 리조트 석식 포함 상품(노랑풍선·참좋은·온라인투어·여기어때 목록).", "source": "https://prdt.ybtour.co.kr/product/detailPackage?menu=PKG&dspSid=AABZ000&goodsCd=APP4098 ; https://www.yeogi.com/package/overseas/553248635977031358"},
+    {"ko": "레촌 (Lechon)", "what": "조사한 어떤 패키지 일정표·식사 메뉴에도 등장하지 않음(미확인).", "source": null}
+  ]
+}

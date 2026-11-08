@@ -1,0 +1,925 @@
+{
+ "places": [
+  {
+   "ko": "마젤란 십자가",
+   "en": "Magellan's Cross",
+   "lat": 10.2936,
+   "lng": 123.902,
+   "coordSource": "OSM way 94081127 (Magellan's Cross Pavilion) · Wikipedia 10.2935,123.9020",
+   "hours": "매일 08:00–18:00 (블로그·가이드 공통, 공식 공지 없음)",
+   "closed": "없음",
+   "fee": "무료(기부함)",
+   "dress": "없음(옆 산토니뇨 성당 들어가려면 성당 규정 적용)",
+   "stay": "10~20분",
+   "light": {
+    "label": "정자 안 십자가·천장 세례 벽화만 보기",
+    "min": 10
+   },
+   "full": {
+    "label": "산토니뇨 성당·산 페드로 요새까지 묶어 도보 헤리티지 워크",
+    "min": 90
+   },
+   "history": "1521년 4월 마젤란 원정대가 라자 후마본과 주민 세례를 기념해 십자가를 세운 자리다. 원본은 신도들이 조각을 떼어가는 것을 막기 위해 틴달로 나무 십자가 안에 봉인됐다고 전해지며, 팔각 정자(1834년)의 천장에는 1521년 세례 장면 벽화가 있다.",
+   "photo": "정자 정면(산토니뇨 성당 쪽)에서 오전 광선 / 천장 벽화는 정자 안에서 위로",
+   "caution": "촛불 파는 할머니들 호객이 집요함(춤 기도 후 돈 요구) — 원치 않으면 처음부터 거절. 피크 시간 혼잡. 시눌록(1월 3주)엔 접근 제한",
+   "nearby": "산토니뇨 성당 1분 · 세부 시청 1분 · 산 페드로 요새 8분 · 대성당 5분 · 콜론 거리 10분",
+   "weight": 1,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Magellan%27s_Cross_Pavilion",
+    "https://suroy.ph/magellans-cross/",
+    "https://lakbaypinas.com/?p=16801",
+    "https://www.tripstore.kr/blog/세부-산-페드로-요새-시티투어-반나절-코스"
+   ]
+  },
+  {
+   "ko": "산토니뇨 성당(바실리카 미노레 델 산토니뇨)",
+   "en": "Basilica Minore del Santo Niño de Cebu",
+   "lat": 10.2939,
+   "lng": 123.9014,
+   "coordSource": "Wikipedia infobox 10°17′38″N 123°54′5″E",
+   "hours": "매일 04:00–21:00 (2025 가이드) · 순례자센터 08:00–11:45, 13:00–16:45 · 미사 평일 07:00(세부아노)·08:00(영어)·12:15 외 다수",
+   "closed": "없음(1월 시눌록 주간은 통제 심함)",
+   "fee": "무료(기부) · 부속 박물관 소액(미확인)",
+   "dress": "2024-10-01부터 엄격 적용: 민소매·반바지·짧은 치마·크롭티·슬리퍼 입장 불가, 숄 대여 중단 → 어깨·무릎 가리기",
+   "stay": "20~40분",
+   "light": {
+    "label": "산토니뇨상 참배·촛불 예배당만",
+    "min": 15
+   },
+   "full": {
+    "label": "성당+박물관+광장, 금요 노베나 미사 참관",
+    "min": 60
+   },
+   "history": "1565년 레가스피 원정대의 아우구스티노회 수사 안드레스 데 우르다네타가 창건한 필리핀 최고(最古) 교회다. 1521년 마젤란이 후마본 왕비에게 선물한 산토니뇨(아기 예수)상을 1565년 불탄 마을에서 병사가 되찾은 자리에 세웠고, 현재 석조 건물은 1735~1739년 것이다. 1965년 교황 바오로 6세가 바실리카로 승격했고, 2013년 지진으로 무너진 종탑을 복원했으며 2021년 국가문화재(National Cultural Treasure)로 지정됐다.",
+   "photo": "필라르 광장에서 파사드(오전 순광) / 촛불 예배당의 붉은 촛불 / 산토니뇨상은 유리관 앞 줄 서서(플래시 금지)",
+   "caution": "금요일(노베나)·일요일 미사 극혼잡, 보안검색(큰 가방 X), 입구 호객·구걸, 광장 비둘기·더위. 1월 시눌록 축제 주간은 도심 전체 통제",
+   "nearby": "마젤란 십자가 1분 · 세부 대성당 3~5분 · 산 페드로 요새 8~10분 · 콜론 거리 8분",
+   "weight": 1,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Basilica_del_Santo_Ni%C3%B1o",
+    "https://www.lakwatserangligaw.com/2014/10/cebubasilica-santo-nino-2025-guide.html",
+    "https://philstar.com/cebu-news/2024/09/02/2382293/strict-dress-code-be-implemented-basilica-minore-del-santo-nio",
+    "https://santoninodecebubasilica.org/"
+   ]
+  },
+  {
+   "ko": "세부 대성당(세부 메트로폴리탄 대성당)",
+   "en": "Cebu Metropolitan Cathedral",
+   "lat": 10.2958,
+   "lng": 123.9029,
+   "coordSource": "Wikipedia infobox 10.295814,123.902869",
+   "hours": "방문 06:00–20:00(가이드) · 미사 평일 06:00·07:00·08:00 등 · 부속 박물관 화~일 09:00–12:00, 14:00–17:00(2010 자료, 미확인)",
+   "closed": "없음(박물관 월요일)",
+   "fee": "성당 무료 · 박물관 소액(미확인)",
+   "dress": "단정한 복장 권고(무릎 위 반바지·민소매·크롭티 제한 — 블로그)",
+   "stay": "15~30분",
+   "light": {
+    "label": "내부 제단·천장만 보고 나오기",
+    "min": 15
+   },
+   "full": {
+    "label": "대성당+대성당 박물관(Cathedral Museum of Cebu)",
+    "min": 60
+   },
+   "history": "1565년 요새 옆에 세워진 교회가 1595년 8월 14일 세부 교구 설립과 함께 주교좌가 됐다. 자금난으로 공사가 거듭 중단되다 1689년 본격 착공해 1786년 파사드가 완성되고 1815년 봉헌됐다. 1944년 9월 2차대전 폭격으로 종탑·파사드·벽만 남았고 1945년부터 호세 마 사라고사 설계로 1950년대에 재건했다.",
+   "photo": "P. Burgos 거리 쪽 파사드와 종탑(오전) / 내부 중앙 통로에서 제단",
+   "caution": "미사 중 관광 사진 자제, 일요일 오전 혼잡, 주차 불가",
+   "nearby": "산토니뇨 성당 3~5분 · 마젤란 십자가 5분 · 헤리티지 모뉴먼트 6분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_Metropolitan_Cathedral",
+    "https://philippinechurches.com/cebu-metropolitan-cathedral",
+    "https://cebuinsights.com/?p=47102"
+   ]
+  },
+  {
+   "ko": "산 페드로 요새",
+   "en": "Fort San Pedro (Fuerza de San Pedro)",
+   "lat": 10.2922,
+   "lng": 123.9058,
+   "coordSource": "Wikipedia infobox 10°17′32″N 123°54′21″E · OSM way 332819231 (10.2927,123.9059)",
+   "hours": "매일 08:00–17:00~19:00 (자료 상충: 블로그 08–19, 2025 가이드 08–17 / 08–20)",
+   "closed": "없음(2025-09-30 지진 피해로 일부 구역 통제 가능)",
+   "fee": "성인 ₱30 · 학생/노인 ₱20~24 (2009 조례 기준; 2026년 ₱50/₱40 인상안 제출됨) · 현금",
+   "dress": "없음",
+   "stay": "30~45분",
+   "light": {
+    "label": "성벽 한 바퀴 걷고 대포·안뜰 보기",
+    "min": 20
+   },
+   "full": {
+    "label": "박물관실+플라자 인디펜덴시아+국립박물관 세부까지",
+    "min": 90
+   },
+   "history": "1565년 미겔 로페스 데 레가스피가 목책 요새로 짓기 시작했고 현재의 삼각형 석조 요새는 정문에 새겨진 1738년 것이다. 보루 세 개(라 콘셉시온·산 이그나시오 데 로욜라·산 미겔)와 대포 14문이 남아 있고, 1898년 혁명군 점령, 미군 병영, 1957년부터 시립 동물원을 거쳐 1968년 산호석으로 복원됐다. 2008년 역사공원이 됐으며 2013·2025년 지진과 2021년 태풍 오데트로 거듭 피해를 입었다.",
+   "photo": "성벽 위에서 안뜰·항구(오후 4시 노을이 산호석 벽에 붉게) / 정문 문장과 1738 표지 / 원형 망루",
+   "caution": "성벽 위 그늘 없어 한낮 더움, 현금·잔돈 준비, 안내판 적음, 지진 후 통제 구역 확인",
+   "nearby": "플라자 인디펜덴시아 0분 · 국립박물관 세부 2분 · 마젤란 십자가 8분 · 산토니뇨 성당 10분 · 카본 마켓 10분",
+   "weight": 1,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fort_San_Pedro",
+    "https://suroy.ph/fort-san-pedro/",
+    "https://www.sunstar.com.ph/cebu/cebu-city-moves-to-update-fort-san-pedro-fees-after-17-years",
+    "https://www.tripstore.kr/blog/세부-산-페드로-요새-시티투어-반나절-코스"
+   ]
+  },
+  {
+   "ko": "콜론 거리",
+   "en": "Colon Street",
+   "lat": 10.2964,
+   "lng": 123.8985,
+   "coordSource": "OSM way 236322790 (도로 중앙부) · Sygic/Wikipedia 10.2968,123.8990",
+   "hours": "상시(상점 10:00 전후~저녁, 야시장은 12~2월 한시 운영 이력)",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "15~30분",
+   "light": {
+    "label": "동쪽 끝에서 서쪽 끝까지 걷기",
+    "min": 15
+   },
+   "full": {
+    "label": "파리안 헤리티지 워크(모뉴먼트·야프·카사 고로르도)와 묶기",
+    "min": 180
+   },
+   "history": "콜럼버스(Colón) 이름을 딴 1.17km 거리로 1961·1999년 정부 표지는 1565년 레가스피 정착 때 열린 '필리핀 최고(最古) 거리'라 적고 있으나, 이 거리가 나타나는 가장 오래된 지도는 1873년이라 역사학자들은 이 주장을 의심한다. 1896년 테아트로 훈케라를 시작으로 1950년대까지 세부의 영화관 거리였고 지금은 서민 상가·우카이우카이(중고옷) 거리다.",
+   "photo": "오스메냐 대로 코너의 메트로 콜론 백화점과 옛 극장 건물 / 간판 가득한 거리 풍경(오전)",
+   "caution": "2023년 경찰 지정 소매치기 다발 지역 — 폰 앞주머니·가방 앞으로, 밤·12월 주말 피하기, 호객",
+   "nearby": "헤리티지 모뉴먼트 5분 · 야프-산디에고 5분 · 카사 고로르도 6분 · 산토니뇨 8분 · 산 페드로 요새 15분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Colon_Street",
+    "https://suroy.ph/colon-street-cebu/",
+    "https://cebudailynews.inquirer.net/624252/explainer-why-colon-might-not-be-the-oldest-street-in-ph"
+   ]
+  },
+  {
+   "ko": "카본 마켓",
+   "en": "Carbon Market",
+   "lat": 10.2914,
+   "lng": 123.8992,
+   "coordSource": "Wikipedia infobox 10°17′29″N 123°53′57″E · OSM way 335725779 (Carbon Interim Public Market)",
+   "hours": "사실상 24시간(새벽~오전이 가장 활발, 야시장 구역 저녁)",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "20~40분",
+   "light": {
+    "label": "과일·건어물·꽃 골목 구경",
+    "min": 20
+   },
+   "full": {
+    "label": "현지식 아침(푸소·바비큐)+시장 전체+항구 쪽 재개발 구역",
+    "min": 60
+   },
+   "history": "1900년대 초 석탄(carbón) 저장소 자리에서 이름이 유래한 세부시 최대·중부 비사야 최고(最古)의 공설시장이다. 2021년부터 메가와이드가 재개발을 맡아 임시 시장과 신축 건물이 섞여 있고, 2026년에는 민영화 반대 상인 운동이 이어지고 있다.",
+   "photo": "과일·꽃 매대 클로즈업(오전) / 재개발 구역 Freedom Park 쪽 야경",
+   "caution": "소매치기 1순위 지역, 비좁고 미끄럽고 냄새 강함, 귀중품·카메라 노출 금지, 어두워지면 피하기",
+   "nearby": "산 페드로 요새 10분 · 마젤란 십자가 7분 · 콜론 거리 8분",
+   "weight": 3,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Carbon_Market",
+    "https://3d-universal.com/en/blogs/is-cebu-safe-crime-rates-and-safety-tips-by-area.html",
+    "https://www.philstar.com/cebu-news/2026/04/29/2524404/move-against-carbon-privatization-vendors-launch-nationwide-campaign"
+   ]
+  },
+  {
+   "ko": "야프-산디에고 조상가옥",
+   "en": "Yap-Sandiego Ancestral House",
+   "lat": 10.2993,
+   "lng": 123.904,
+   "coordSource": "OSM way 407368310",
+   "hours": "매일 09:00–18:00 (일부 자료 19:00, 마지막 입장 17:30)",
+   "closed": "없음",
+   "fee": "₱50 (학생·노인 ₱30, 7세 미만 무료)",
+   "dress": "없음",
+   "stay": "20~30분",
+   "light": {
+    "label": "1층 안뜰과 2층 거실만",
+    "min": 15
+   },
+   "full": {
+    "label": "가이드 설명 들으며 집 전체+바로 옆 카사 고로르도",
+    "min": 75
+   },
+   "history": "1675~1700년 사이 푸젠 출신 중국 상인 돈 후안 얍과 아내 도냐 마리아 플로리도가 지은 산호석·몰라베 목재 2층집으로 필리핀에서 가장 오래된 주택 중 하나다. 1880년대 장녀 마리아가 파리안의 카베사(구역장) 마리아노 산디에고와 결혼하며 지금 이름이 됐고, 2008년 후손인 안무가 발 산디에고가 사설 박물관으로 열었다.",
+   "photo": "Mabini 거리에서 산호석 외벽과 나무 창살 / 2층 거실의 골동품(허락 후)",
+   "caution": "집이 작아 단체 겹치면 혼잡, 사진 규정 그때그때 확인, 바닥 삐걱임",
+   "nearby": "헤리티지 모뉴먼트 1분 · 카사 고로르도 2분 · 1730 예수회 하우스 2분 · 콜론 거리 5분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yap-San_Diego_House",
+    "https://3d-universal.com/en/blogs/ultimate-guide-to-yap-sandiego-ancestral-house-cebu.html",
+    "https://www.mycebu.ph/article/yap-sandiego-ancestral-home-parian/"
+   ]
+  },
+  {
+   "ko": "카사 고로르도 박물관",
+   "en": "Casa Gorordo Museum",
+   "lat": 10.2999,
+   "lng": 123.9048,
+   "coordSource": "OSM way 721502852 · Wikipedia 10.301,123.905",
+   "hours": "09:00–17:00 (2025 블로그 다수: 화~일 / 공식 사이트: 월~토 — 상충, 방문 전 확인)",
+   "closed": "월요일(블로그 기준) 또는 일요일(공식 사이트 기준)",
+   "fee": "₱100~150 (2024-05 ₱100, 가이드 투어 ₱150; 학생·노인 할인)",
+   "dress": "없음",
+   "stay": "45~60분",
+   "light": {
+    "label": "2층 생활공간만 훑기",
+    "min": 30
+   },
+   "full": {
+    "label": "가이드 투어+1층 전시+카페",
+    "min": 75
+   },
+   "history": "1850년대 알레한드로 레이네스 이 로살레스가 파리안에 지은 바하이 나 바토 저택으로, 세부 최초의 필리핀인 주교 후안 고로르도 집안이 4대에 걸쳐 살았다. 2차대전 때 일본군 장교 클럽으로 징발된 덕에 시내가 파괴되는 와중에도 무사했고, 1979년 라몬 아보이티스 재단(RAFI)이 매입해 1983년 12월 세부 첫 공공박물관으로 열었다.",
+   "photo": "2층 발코니(ventanilla)와 안뜰(평일 오전 한산) / 1층 산호석 벽",
+   "caution": "단체 투어와 겹치면 비좁음, 내부 사진 규정 확인",
+   "nearby": "야프-산디에고 2분 · 헤리티지 모뉴먼트 2분 · 콜론 거리 6분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Casa_Gorordo_Museum",
+    "https://casagorordomuseum.org/",
+    "https://suroy.ph/casa-gorordo/",
+    "https://www.travelcebu.ph/blog/casa-gorordo-museum/"
+   ]
+  },
+  {
+   "ko": "세부 헤리티지 모뉴먼트",
+   "en": "Heritage of Cebu Monument",
+   "lat": 10.2989,
+   "lng": 123.9036,
+   "coordSource": "Wikipedia infobox 10°17′56″N 123°54′13.1″E",
+   "hours": "24시간 야외(야간 조명)",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "10~15분",
+   "light": {
+    "label": "한 바퀴 돌며 장면 찾기",
+    "min": 10
+   },
+   "full": {
+    "label": "파리안 3곳(야프·카사·예수회 하우스)과 묶기",
+    "min": 120
+   },
+   "history": "조각가 에두아르도 카스트리요가 1997년 7월 착공해 2000년 12월 8일 제막한 콘크리트·청동 군상으로, 1878년경 철거된 산후안바우티스타 교회 터인 옛 파리안 광장에 서 있다. 1521년 막탄 전투, 라자 후마본의 세례, 산토니뇨 신심, 세르히오 오스메냐 대통령 취임, 페드로 칼룽소드 시복 등 세부사의 장면들을 한 덩어리에 담았다.",
+   "photo": "Mabini·Lopez Jaena 코너에서 전체(아침·늦은 오후) / 갤리온선·막탄 전투 부분 클로즈업",
+   "caution": "교차로라 차량 주의, 한낮 그늘 없음, 주변 잡상인",
+   "nearby": "야프-산디에고 1분 · 카사 고로르도 2분 · 1730 예수회 하우스 2분 · 콜론 거리 5분 · 대성당 6분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Heritage_of_Cebu_Monument",
+    "https://sugbo.ph/?p=47924"
+   ]
+  },
+  {
+   "ko": "1730 예수회 하우스(무세오 파리안 사 수그보)",
+   "en": "1730 Jesuit House (Museo Parian sa Sugbo)",
+   "lat": 10.2987,
+   "lng": 123.905,
+   "coordSource": "OSM node 5833764441",
+   "hours": "월~토 08:00–12:00, 13:00–17:00 (일부 자료 08–17 연속)",
+   "closed": "일요일·공휴일(확인 필요)",
+   "fee": "₱100 (가이드 포함; 옛 자료 ₱30~50)",
+   "dress": "없음",
+   "stay": "30~45분",
+   "light": {
+    "label": "1층 모형·2층 목조 공간 훑기",
+    "min": 25
+   },
+   "full": {
+    "label": "가이드 투어 전체",
+    "min": 60
+   },
+   "history": "정문 위 1730년 표기대로 예수회 숙소로 지어진 것으로 알려진 산호석 2층 건물로, 1768년 예수회 추방 이후 민간 소유가 됐다. 지금은 호통(Ho Tong) 철물점 창고 부지 안에 있어 철물점을 통과해 들어가며, 2008년 소유주 가족이 박물관으로 열었고 2018년 에스쿠엘라 탈레르가 보존 작업을 맡았다.",
+   "photo": "철물점 안쪽에서 드러나는 반전 입구 / 2층 목조 바닥과 갤리온 모형",
+   "caution": "입구 찾기 어려움(Zulueta St. 26, 철물점 안), 영업시간 자주 바뀜",
+   "nearby": "헤리티지 모뉴먼트 2분 · 야프-산디에고 2분 · 콜론 거리 4분",
+   "weight": 3,
+   "sources": [
+    "https://cebuinsights.com/explore-cebu/museums/jesuit-house-museum-history/",
+    "https://penfires.com/cebus-hidden-museo-parian-sa-sugbo-1730-jesuit-house/",
+    "https://sugbo.ph/?p=15852"
+   ]
+  },
+  {
+   "ko": "템플 오브 레아(레아 신전)",
+   "en": "Temple of Leah",
+   "lat": 10.3689,
+   "lng": 123.8733,
+   "coordSource": "OSM way 614656886 · 블로그 GPS 10.368822,123.873330",
+   "hours": "매일 06:00–23:00 (다수) · 07:00–18:00 자료도 있음 — 상충",
+   "closed": "없음",
+   "fee": "평일 ₱120 · 주말 ₱150 (노인·PWD·아동 ₱80~100) · 주차 ₱50 · 현금만 (옛 ₱50은 2017 가격)",
+   "dress": "없음",
+   "stay": "30~60분",
+   "light": {
+    "label": "정면 계단에서 사진+도시 전망",
+    "min": 25
+   },
+   "full": {
+    "label": "내부 24실 골동품 전시+카페, 일몰까지",
+    "min": 60
+   },
+   "history": "사업가 테오도리코 아다르나가 2012년 별세한 아내 레아 알비노-아다르나를 기려 2012년 부사이 언덕에 착공한 로마 양식 기념관으로, 배우 엘렌 아다르나의 조부모다. 사자상·검투사상·도리아식 기둥과 24개 방에 레아의 수집품을 두었고 '세부의 타지마할'로 불리며 아직 완공 전이다.",
+   "photo": "정면 대계단 아래에서 신전+사자상(오후 늦게 순광) / 테라스에서 세부 시내·막탄 전망(일몰)",
+   "caution": "그늘 적어 한낮 더움, 주말·휴일 혼잡, 산길이라 돌아갈 택시 잡기 어려움(그랩 대기 요청), 가격 수시 변동",
+   "nearby": "톱스 전망대 차 5~10분 · 시라오 가든 차 15~20분 · 라 파리지엔 스카이 차 5분",
+   "weight": 1,
+   "sources": [
+    "https://suroy.ph/temple-of-leah/",
+    "https://www.lakwatsero.com/?p=21476",
+    "https://abs-cbn.com/life/09/06/17/look-temple-of-leah-the-taj-mahal-of-cebu"
+   ]
+  },
+  {
+   "ko": "톱스 전망대(탑스)",
+   "en": "Tops Lookout (TOPS Cebu)",
+   "lat": 10.3706,
+   "lng": 123.8709,
+   "coordSource": "OSM way 65600726",
+   "hours": "24시간(공식 topscebu.ph, 공휴일 포함)",
+   "closed": "없음",
+   "fee": "₱100 (노인·PWD ₱70, 2세 미만 무료) · IT파크 셔틀 왕복+입장 ₱200 · 현금",
+   "dress": "없음(밤엔 겉옷)",
+   "stay": "30~60분",
+   "light": {
+    "label": "전망대에서 시내·막탄 조망만",
+    "min": 20
+   },
+   "full": {
+    "label": "일몰~야경까지 카페·데크에서 머물기",
+    "min": 90
+   },
+   "history": "부사이 산 해발 약 600m의 세부 대표 전망대로 1980년대부터 야경 명소였다. 2022년 10월 재개발을 위해 폐쇄했다가 2024년 2월 14일 새 데크·카페·화장실을 갖추고 재개장했으며 입장료 ₱100은 유지됐다.",
+   "photo": "메인 데크에서 세부 시내~막탄 야경(일몰 직후 블루아워) / 재개장 후 원형 데크 구조물",
+   "caution": "밤에 쌀쌀함, 우기 안개로 조망 불가 가능, 대중교통 없음(택시 편도 ₱400~600 또는 IT파크 셔틀), 현금",
+   "nearby": "템플 오브 레아 차 5~10분 · 라 파리지엔 스카이 차 5분 · 시라오 가든 차 20분",
+   "weight": 1,
+   "sources": [
+    "https://topscebu.ph/",
+    "https://philstar.com/cebu-business/2024/01/31/2329850/tops-reopens-valentines-day",
+    "https://www.tripstore.kr/blog/탑스-언덕-전망대-세부-야경-코스-총정리"
+   ]
+  },
+  {
+   "ko": "시라오 가든(시라오 플라워 가든, 리틀 암스테르담)",
+   "en": "Sirao Garden / Sirao Flower Farm (Little Amsterdam)",
+   "lat": 10.407,
+   "lng": 123.8665,
+   "coordSource": "OSM relation 14140744 (Sirao Garden) · Sirao Pictorial Garden은 OSM node 5891851187 (10.4061,123.8655)",
+   "hours": "07:00~08:00–17:30~18:00 (원조 농장) · Pictorial Garden 06:00–18:30",
+   "closed": "없음",
+   "fee": "원조 Sirao Flower Farm ₱100 (노인·PWD ₱80, 3세 미만 무료) · Sirao Pictorial Garden ₱50~60",
+   "dress": "없음",
+   "stay": "30~60분",
+   "light": {
+    "label": "꽃밭 한 바퀴+손 조형물 사진",
+    "min": 30
+   },
+   "full": {
+    "label": "원조 농장+픽토리얼 가든 둘 다, 카페",
+    "min": 90
+   },
+   "history": "2010년대 초 시라오 마을 부부가 채소 대신 셀로시아(맨드라미)를 심은 작은 농장이 2015년 SNS로 유명해졌고, 네덜란드 튤립밭을 닮아 '리틀 암스테르담'이라 불린다. 바로 옆에 2016년경 문을 연 시라오 픽토리얼 가든 & 캠핑 사이트가 있어 두 곳이 혼동된다. 세부시 산악 바랑가이에 있어 시내에서 차로 40~60분이다.",
+   "photo": "거대한 손 조형물·풍차(대기 30분 각오, 아침 일찍) / 꽃밭 뒤 산 능선",
+   "caution": "한낮 더위·그늘 없음, 우기엔 꽃 상태 들쭉날쭉, 산길이라 택시 대기 필요, 두 가든 중 어디로 갈지 기사에게 명시",
+   "nearby": "템플 오브 레아 차 15~20분 · 톱스 차 20분",
+   "weight": 2,
+   "sources": [
+    "https://sugbo.ph/?p=85149",
+    "https://suroy.ph/sirao-garden-the-little-amsterdam-of-cebu/",
+    "https://kr.trip.com/things-to-do/detail/92191644/"
+   ]
+  },
+  {
+   "ko": "세부 도교 사원(타오이스트 템플)",
+   "en": "Cebu Taoist Temple",
+   "lat": 10.3338,
+   "lng": 123.8877,
+   "coordSource": "Wikipedia infobox 10.3338,123.8877",
+   "hours": "09:00–17:00 (다수) · 08:00–17:00 자료도 — 공식 공지 없음",
+   "closed": "없음",
+   "fee": "무료(기부)",
+   "dress": "단정하게(반바지·민소매 피함), 예배당은 맨발·사진 금지 구역 있음",
+   "stay": "30~45분",
+   "light": {
+    "label": "81계단 올라 사원과 도시 전망만",
+    "min": 25
+   },
+   "full": {
+    "label": "사원 전체+소원 점치기+인근 비벌리힐스 산책",
+    "min": 60
+   },
+   "history": "1972년 세부 화교 공동체가 해발 300m 비벌리힐스 주택가에 세운 노자 숭배 사원이다. 입구의 81계단은 도덕경 81장을 상징하며 수요일·일요일에 신도들이 올라 향을 피우고 운세를 본다. 비신도에게도 열려 있고 용 조각 입구와 탑에서 세부 시내가 내려다보인다.",
+   "photo": "용 장식 정문과 81계단 아래에서 위로(오전) / 상층 테라스에서 시내 전망",
+   "caution": "주택가라 택시 기사에게 대기 요청(돌아올 차 없음), 예배 중 소음·사진 자제, 가파른 계단",
+   "nearby": "라 파리지엔(라라비아) 차 10분 · IT 파크 차 10~15분 · 템플 오브 레아 차 20분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_Taoist_Temple",
+    "https://www.klook.com/en-PH/blog/cebu-taoist-temple-guide/",
+    "https://suroy.ph/cebu-taoist-temple/"
+   ]
+  },
+  {
+   "ko": "10000 로지스 카페(만 송이 장미)",
+   "en": "10,000 Roses Café & More",
+   "lat": 10.2567,
+   "lng": 123.9323,
+   "coordSource": "OSM way 491522125 (10,000 Roses 노드 4834405638: 10.2565,123.9328)",
+   "hours": "14:00–22:00 (다수) · 10:30–23:00, 13:00–21:30 자료도 — 상충",
+   "closed": "없음",
+   "fee": "₱20 (환경부담금) + 주차비 · 음료 ₱150 안팎",
+   "dress": "없음",
+   "stay": "30~60분",
+   "light": {
+    "label": "점등 직후 장미밭 사진",
+    "min": 30
+   },
+   "full": {
+    "label": "일몰 보고 점등까지 머문 뒤 옆 란타우에서 저녁",
+    "min": 120
+   },
+   "history": "2017년 2월 코르도바 다이아스 해안의 코르도바 관광센터 부지에 문을 연 카페로, 바다를 향해 LED 흰 장미 1만 송이를 심어 밤에 점등한다. 코로나로 휴업했다가 2023년 재개장했고 막탄 남단 란타우 플로팅 레스토랑 바로 옆이다.",
+   "photo": "일몰 직후 점등 순간, 바다와 세부 시내 불빛 배경 / 장미밭 사이 산책로",
+   "caution": "주말 저녁 극혼잡·주차난, 막탄 호텔가에서 차 30~40분, 낮엔 볼 게 없음",
+   "nearby": "란타우 플로팅 레스토랑 1분 · CCLEX 교량 차 5분 · 막탄 슈라인 차 35분",
+   "weight": 2,
+   "sources": [
+    "https://www.lakwatsero.com/spots/10000-roses-cafe-cordova-cebu/",
+    "https://cebuinsights.com/food/cafe/cordova-10000-roses-cafe-reopens/",
+    "https://sugbo.ph/?p=74148"
+   ]
+  },
+  {
+   "ko": "막탄 슈라인(라푸라푸 사당·리버티 슈라인)",
+   "en": "Mactan Shrine (Liberty Shrine / Lapu-Lapu Monument)",
+   "lat": 10.3111,
+   "lng": 124.0153,
+   "coordSource": "Wikipedia infobox 10.31111,124.01528 · OSM way 538178017 (10.3110,124.0151)",
+   "hours": "자료 상충: 08:00–17:00/18:00 (가이드) · 새벽 4시~22시 개방(조깅객, 블로그) — 낮 방문 권장",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "20~45분",
+   "light": {
+    "label": "라푸라푸 동상·마젤란 오벨리스크 사진",
+    "min": 20
+   },
+   "full": {
+    "label": "모든 표지판 읽기+해안 산책+옆 해산물 식당",
+    "min": 75
+   },
+   "history": "1521년 4월 27일 라푸라푸가 마젤란을 전사시킨 막탄 전투 터로, 1866년 스페인이 마젤란 기념 산호석 오벨리스크를 세웠다. 1969년 공화국법 5695호로 국가 사당이 됐고 1981년 약 6m 청동 라푸라푸상이 세워졌으며, 2021년 500주년에 맞춰 복원되고 새 기념관 기공식이 있었다(2026년 현재 미완공).",
+   "photo": "라푸라푸 동상 정면(오전 순광) / 1866 오벨리스크 아치 꼭대기 / 해안 500주년 표지",
+   "caution": "그늘 없어 10시 전·16시 후 권장, 4월 27일 카다우간 축제 주간 인파·노점, 공항 15~20분 거리라 첫날·마지막날 끼우기 좋음",
+   "nearby": "막탄 뉴타운 차 5분 · 공항 차 15~20분 · 해산물 식당 거리 도보 1분 · 세부 시내 차 45~60분",
+   "weight": 1,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mactan_Shrine",
+    "https://suroy.ph/mactan-shrine/",
+    "https://www.tripstore.kr/blog/라푸라푸-시티-1박-2일-여행-일정-막탄-호캉스"
+   ]
+  },
+  {
+   "ko": "막탄 뉴타운",
+   "en": "The Mactan Newtown",
+   "lat": 10.3074,
+   "lng": 124.0135,
+   "coordSource": "OSM way 1220663134",
+   "hours": "타운십 상시 · 뉴타운 비치 데이유즈 06:00/07:00–18:00(자료 상충, 18시 이후 무료 입장 언급)",
+   "closed": "없음",
+   "fee": "뉴타운 비치 ₱150 평일 / ₱200 주말 (2018~2023 자료, 사보이 호텔 운영 전환 후 미확인) · 상가 무료",
+   "dress": "없음",
+   "stay": "60~180분",
+   "light": {
+    "label": "비치워크 산책+카페",
+    "min": 60
+   },
+   "full": {
+    "label": "비치 데이유즈+식사+쇼핑",
+    "min": 180
+   },
+   "history": "메가월드가 마닐라 밖에 처음 지은 타운십으로 2014년 28.8ha로 확장하고 300억 페소를 투자했다. 사보이·벨몬트 호텔, 오피스, 2023년 개장한 비치워크, 옛 포르토피노 해변 자리의 뉴타운 비치가 있고 막탄 엑스포 센터와 막탄 월드 뮤지엄이 2025~26년 공사 중이다.",
+   "photo": "비치워크 야자수 산책로(해질녘) / 뉴타운 비치에서 마젤란 만 쪽",
+   "caution": "비치 요금·운영 주체가 자주 바뀜(현장 확인), 주말 가족 인파, 상가는 평범함",
+   "nearby": "막탄 슈라인 차 5분 · 공항 차 15분 · 푼타 엔가뇨 리조트가 도보권",
+   "weight": 3,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mactan_Newtown",
+    "https://megaworldcorp.com/townships/mactan-newtown",
+    "https://sugbo.ph/?p=8685",
+    "https://cebu.ahroundph.com/blog/2023/05/21/mactan-newtown-beach/"
+   ]
+  },
+  {
+   "ko": "아얄라 센터 세부(아얄라몰)",
+   "en": "Ayala Center Cebu",
+   "lat": 10.3178,
+   "lng": 123.905,
+   "coordSource": "Wikipedia infobox 10.31778,123.90500",
+   "hours": "일~목 10:00–21:00 · 금·토 10:00–22:00",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "60~180분",
+   "light": {
+    "label": "더 테라스 야외 정원 식사·카페",
+    "min": 60
+   },
+   "full": {
+    "label": "쇼핑+식사+영화",
+    "min": 180
+   },
+   "history": "1994년 11월 아얄라 랜드가 세부 비즈니스 파크 안 9ha에 연 세부 최초의 대형 쇼핑몰로, 7개 층 29만㎡에 매장 680개가 있고 하루 6만 명이 찾는다. 야외 정원형 식당가 '더 테라스'가 대표 공간이다.",
+   "photo": "더 테라스 분수·정원(저녁 조명) / 크리스마스 시즌 장식",
+   "caution": "금·토 저녁 택시 줄 김(그랩 픽업 지정 구역), 환전소 혼잡",
+   "nearby": "세부 비즈니스 파크 0분 · IT 파크 차 10분 · SM 시티 차 10분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ayala_Center_Cebu",
+    "https://www.kupi.com/en-ae/explore/philippines/cebu-city/ayala-center-cebu"
+   ]
+  },
+  {
+   "ko": "SM 시티 세부",
+   "en": "SM City Cebu",
+   "lat": 10.3111,
+   "lng": 123.9181,
+   "coordSource": "Wikipedia infobox 10.31111,123.91806",
+   "hours": "월~목 10:00–21:00 · 금~일 10:00–22:00 (SM 공식)",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "60~180분",
+   "light": {
+    "label": "푸드코트·마트 장보기",
+    "min": 60
+   },
+   "full": {
+    "label": "노스윙 포함 쇼핑+영화",
+    "min": 180
+   },
+   "history": "1993년 11월 27일 북부 매립지에 문을 연 SM 프라임의 4번째 슈퍼몰로, 2007년 노스윙 증축으로 26만 8천㎡가 됐다. 항구·버스터미널과 가까워 세부 섬 남북행 교통 거점 역할도 한다.",
+   "photo": "노스윙 아트리움 / 크리스마스 장식",
+   "caution": "노스 버스터미널 쪽 택시 호객, 주말 극혼잡",
+   "nearby": "아얄라 센터 차 10분 · 노스 버스터미널 도보 5분 · 피어 1 차 10분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/SM_City_Cebu",
+    "https://www.smsupermalls.com/mall-directory/sm-city-cebu/information"
+   ]
+  },
+  {
+   "ko": "SM 시사이드 시티 세부",
+   "en": "SM Seaside City Cebu",
+   "lat": 10.2804,
+   "lng": 123.8818,
+   "coordSource": "Wikipedia infobox 10.280389,123.881833",
+   "hours": "매일 10:00–21:00 (SM 공식; 금·토 22:00 연장 자료 있음)",
+   "closed": "없음",
+   "fee": "무료(스카이파크·아이스링크 별도)",
+   "dress": "없음",
+   "stay": "90~240분",
+   "light": {
+    "label": "큐브·스카이파크 산책+식사",
+    "min": 90
+   },
+   "full": {
+    "label": "쇼핑+아이스링크/볼링+오션파크 연계",
+    "min": 240
+   },
+   "history": "2015년 11월 27일 남부 매립지(SRP)에 개장한 47만㎡ 규모로 세부 최대, 필리핀 4위, 세계 19위 쇼핑몰이다. 옥상 스카이파크와 '큐브' 구조물, 169m 시사이드 타워, 올림픽 규격 아이스링크와 18레인 볼링장이 있다.",
+   "photo": "큐브 외관(야간 조명) / 스카이파크에서 바다·시내 전망",
+   "caution": "시내에서 차 20~30분(SRP 정체), 돌아올 택시 줄 김, 몰이 커서 동선 계획 필요",
+   "nearby": "세부 오션 파크 도보 5분 · 시내 차 20~30분 · 막탄 CCLEX 경유 차 30분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/SM_Seaside_City_Cebu",
+    "https://www.smsupermalls.com/mall-directory/sm-seaside-city-cebu/information"
+   ]
+  },
+  {
+   "ko": "IT 파크 / 슈가보 메르카도",
+   "en": "Cebu IT Park / Sugbo Mercado",
+   "lat": 10.3304,
+   "lng": 123.9074,
+   "coordSource": "Wikipedia infobox 10.3304,123.9074 · Sugbo Mercado OSM way 392889028 (10.3322,123.9056) · Ayala Malls Central Bloc OSM way 156416254 (10.3307,123.9076)",
+   "hours": "구역 24시간 · 슈가보 메르카도 목~일 17:00–01:00(구 자료; 2026년 JP모건 옆 부지로 이전 중, 재개장일 미공표) · 센트럴 블록 몰 10:00–21:00",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "60~150분",
+   "light": {
+    "label": "센트럴 블록 식사+가든 블록 산책",
+    "min": 60
+   },
+   "full": {
+    "label": "슈가보 메르카도 야시장 저녁+바",
+    "min": 150
+   },
+   "history": "1938년 개항해 1966년 막탄으로 옮겨간 라훅 공항 터로, 1981년 교황 요한 바오로 2세가 활주로에서 미사를 집전했다. 2000년 PEZA 경제구역 승인을 받아 아얄라 랜드 계열이 27ha IT 업무지구로 개발했고 2019년 아얄라 몰 센트럴 블록이 들어섰다. 야외 푸드마켓 슈가보 메르카도가 2015년부터 주말 밤을 대표했다.",
+   "photo": "가든 블록 야경 / 슈가보 메르카도 천막 조명(저녁)",
+   "caution": "사설 경비 구역이라 치안 양호, 금·토 밤 그랩 대기 김, 톱스 셔틀 승차장(Geonzon St.) 여기",
+   "nearby": "아얄라 센터 차 10분 · 도교 사원 차 10~15분 · 라 파리지엔 도보 10분 · 톱스 셔틀 출발",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_IT_Park",
+    "https://suroy.ph/cebu-it-park-guide/",
+    "https://www.arveesblog.com/2018/03/sugbo-mercado-it-park-schedule.html"
+   ]
+  },
+  {
+   "ko": "라 파리지엔(옛 라비 파리지엔, '라라비아')",
+   "en": "La Parisienne (formerly La Vie Parisienne)",
+   "lat": 10.3263,
+   "lng": 123.8981,
+   "coordSource": "OSM node 4161676290 (371 Gorordo Ave.)",
+   "hours": "09:00–01:00 (주말 02:00~04:00 자료도 — 상충)",
+   "closed": "없음",
+   "fee": "입장 무료(음료·빵 주문)",
+   "dress": "없음",
+   "stay": "45~90분",
+   "light": {
+    "label": "정원 조명 사진+커피",
+    "min": 45
+   },
+   "full": {
+    "label": "와인·치즈 저녁",
+    "min": 90
+   },
+   "history": "2013년경 라훅 고로르도 애비뉴 371번지에 문을 연 프랑스 베이커리·와인바로, 저녁이면 정원 전구 조명이 켜져 세부의 대표 사진 명소가 됐다. 산 위에 전망형 분점 '라 파리지엔 스카이'가 있다. 한국 블로그에서 '라라비아 마운틴 리조트'로 적힌 곳은 이 스카이 지점 또는 인근 산장 카페를 가리키는 경우가 많다.",
+   "photo": "정원 조명(일몰 후) / 빵 진열대",
+   "caution": "주말 저녁 자리 경쟁, 이름이 바뀌어 지도 검색은 'La Parisienne'로",
+   "nearby": "IT 파크 도보 10분 · 도교 사원 차 10분 · 세부 비즈니스 파크 차 5분",
+   "weight": 3,
+   "sources": [
+    "https://cebuinsights.com/?p=27463",
+    "https://www.zoytotheworld.com/blog/cebu-food-trip-la-parisienne",
+    "https://sugbo.ph/?p=15606"
+   ]
+  },
+  {
+   "ko": "푸엔테 오스메냐 서클",
+   "en": "Fuente Osmeña Circle",
+   "lat": 10.31,
+   "lng": 123.8925,
+   "coordSource": "OSM way 235634863",
+   "hours": "24시간",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "10~20분",
+   "light": {
+    "label": "분수 보고 지나가기",
+    "min": 10
+   },
+   "full": {
+    "label": "주변 로빈슨·카페·야간 분수쇼",
+    "min": 45
+   },
+   "history": "1912년 2월 부히산 댐 상수도 완공을 기념해 세운 분수로, 당시 필리핀 의회 의장이던 세르히오 오스메냐 1세의 이름을 붙였다. 시내 간선 오스메냐 대로의 로터리이자 교통 중심이며, 2010년대 재정비 후 음악 분수가 설치됐다.",
+   "photo": "분수 정면(저녁 조명) / 로터리 전경은 주변 건물 상층에서",
+   "caution": "차량 많은 로터리라 횡단 주의, 밤 노숙·구걸, 소매치기",
+   "nearby": "로빈슨 푸엔테 1분 · 세부 주청사 도보 10분 · 세부 닥터스 병원 인접 · 산토니뇨 성당 차 10분",
+   "weight": 3,
+   "sources": [
+    "https://suroy.ph/fuente-osmena-circle-cebu-city/",
+    "https://cebuinsights.com/?p=21400",
+    "https://philstar.com/cebu-news/2012/02/12/776388/buhisan-dam-fuente-osmea-mark-100-years"
+   ]
+  },
+  {
+   "ko": "세부 비즈니스 파크",
+   "en": "Cebu Business Park",
+   "lat": 10.3158,
+   "lng": 123.9058,
+   "coordSource": "Wikipedia infobox 10.31583,123.90583",
+   "hours": "24시간(상가는 몰 시간)",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "30~120분",
+   "light": {
+    "label": "아얄라 센터 주변 산책",
+    "min": 30
+   },
+   "full": {
+    "label": "아얄라 센터+호텔 바+카페",
+    "min": 120
+   },
+   "history": "클럽 필리피노 골프장 45ha를 1980년대 말 세부 주정부(리토 오스메냐 주지사)가 매각해 1989년 아얄라 계열 세부 홀딩스가 개발을 시작, 1992년 부지 조성을 마쳤다. 아얄라 센터 세부(1994), 세다 호텔(1997, 옛 메리어트), 고층 주상복합이 모인 세부의 중심 업무지구다.",
+   "photo": "고층 빌딩 스카이라인(저녁) / 아얄라 센터 더 테라스",
+   "caution": "특별한 위험 없음, 보행 신호 짧음",
+   "nearby": "아얄라 센터 0분 · IT 파크 차 10분 · 푸엔테 오스메냐 차 10분",
+   "weight": 3,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_Business_Park"
+   ]
+  },
+  {
+   "ko": "세부 오션 파크",
+   "en": "Cebu Ocean Park",
+   "lat": 10.2811,
+   "lng": 123.8783,
+   "coordSource": "Wikipedia infobox 10.28105,123.87834",
+   "hours": "매일 10:00–18:00 (매표 17:00까지; 월요일 휴무 자료 1건 상충)",
+   "closed": "없음(월요일 휴무 자료 1건 — 확인)",
+   "fee": "공식 온라인 프로모 평일 ₱750 · 주말/공휴일 ₱900 (블로그 ₱650/₱800) · 체험 추가요금",
+   "dress": "없음",
+   "stay": "120~180분",
+   "light": {
+    "label": "수중 터널·해양 수조 위주",
+    "min": 90
+   },
+   "full": {
+    "label": "버드쇼·악어·정글 트레일+가오리 체험",
+    "min": 180
+   },
+   "history": "2019년 8월 24일 SM 시사이드 옆 남부 매립지에 문을 연 필리핀 최대 해양공원으로 마닐라 오션파크의 3배 규모다. 3,500㎥·깊이 7.2m 심해 수조와 수중 터널, 조류·파충류관, 씨트렉 체험이 있고 SM 프라임이 공동 소유한다.",
+   "photo": "수중 터널 가오리 머리 위 지날 때 / 심해 수조 전면",
+   "caution": "시내에서 차 20~30분, 주말·휴일 가격 더 비쌈, 온라인 구매가 저렴, 어린이 동반 아니면 체감 만족도 갈림",
+   "nearby": "SM 시사이드 도보 5분 · 시내 차 20~30분",
+   "weight": 2,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_Ocean_Park",
+    "https://www.cebuoceanpark.com/",
+    "https://lakbaypinas.com/?p=13163"
+   ]
+  },
+  {
+   "ko": "라훅 도교 사원(푸시안 사원)",
+   "en": "Phu Sian Temple (Lahug)",
+   "lat": null,
+   "lng": null,
+   "coordSource": "미확인 — OSM·위키 미등록, 일반 비공개 사원",
+   "hours": "일반 비공개",
+   "closed": "상시 비공개",
+   "fee": null,
+   "dress": null,
+   "stay": "해당 없음(외관만)",
+   "light": {
+    "label": "세부 도교 사원 가는 길에 외관만",
+    "min": 5
+   },
+   "full": {
+    "label": "없음",
+    "min": 0
+   },
+   "history": "비벌리힐스 25번지, 세부 도교 사원 아래쪽에 있는 또 다른 도교 사원으로 신도 전용이라 관광객에게 열려 있지 않다. 한국 블로그의 '라훅 도교 사원'은 대부분 위쪽의 세부 도교 사원(1972)을 가리킨다.",
+   "photo": "없음",
+   "caution": "입장 불가 — 세부 도교 사원과 혼동 주의",
+   "nearby": "세부 도교 사원 도보 5분",
+   "weight": 3,
+   "sources": [
+    "https://suroy.ph/cebu-taoist-temple/",
+    "https://www.phtourguide.com/?p=837"
+   ]
+  },
+  {
+   "ko": "플라자 인디펜덴시아",
+   "en": "Plaza Independencia",
+   "lat": 10.2931,
+   "lng": 123.9057,
+   "coordSource": "OSM way 242564999",
+   "hours": "24시간",
+   "closed": "없음",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "10~20분",
+   "light": {
+    "label": "레가스피 기념비 보고 요새로",
+    "min": 10
+   },
+   "full": {
+    "label": "산 페드로 요새+국립박물관과 묶기",
+    "min": 90
+   },
+   "history": "스페인기 플라사 데 아르마스, 미국기 플라사 리베르타드로 불리다 1946년 독립 후 지금 이름이 됐다. 레가스피 오벨리스크와 2008년 지하차도 공사 때 출토된 스페인기 유골·도자기로 알려졌고 산 페드로 요새 정문 앞 광장이다.",
+   "photo": "레가스피 오벨리스크와 요새 벽(오후) / 가로수 길",
+   "caution": "밤엔 어둡고 노숙, 낮에만",
+   "nearby": "산 페드로 요새 0분 · 국립박물관 세부 2분 · 마젤란 십자가 8분",
+   "weight": 3,
+   "sources": [
+    "https://suroy.ph/plaza-independencia/",
+    "https://cebuinsights.com/?p=4648"
+   ]
+  },
+  {
+   "ko": "국립박물관 세부(옛 세관청사)",
+   "en": "National Museum of the Philippines – Cebu",
+   "lat": 10.2918,
+   "lng": 123.9044,
+   "coordSource": "OSM way 332819318",
+   "hours": "화~일 09:00–17:00 (국립박물관 공통 기준, 세부 분관 개별 확인 필요)",
+   "closed": "월요일",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "45~60분",
+   "light": {
+    "label": "1층 고고학·막탄 전투 전시",
+    "min": 30
+   },
+   "full": {
+    "label": "전층+요새·광장 묶기",
+    "min": 90
+   },
+   "history": "1910년 지은 아두아나(세관청사) 건물을 개조해 2021년 마젤란 도착 500주년에 맞춰 문을 연 국립박물관 세부 분관이다. 세부 고고학·민족지·미술 전시가 있고 산 페드로 요새 바로 옆이다.",
+   "photo": "회색 네오클래식 파사드(오전) / 중앙 홀",
+   "caution": "큰 가방 보관, 월요일 휴관",
+   "nearby": "산 페드로 요새 2분 · 마젤란 십자가 8분",
+   "weight": 2,
+   "sources": [
+    "https://suroy.ph/fort-san-pedro/",
+    "https://suroy.ph/colon-street-cebu/"
+   ]
+  },
+  {
+   "ko": "무세오 수그보(세부 주립박물관)",
+   "en": "Museo Sugbo",
+   "lat": 10.3038,
+   "lng": 123.9067,
+   "coordSource": "OSM way 609212079",
+   "hours": "월~토 09:00–17:00 (자료 상충: 월~금 09:00–16:30 / 월~토 09:00–17:30) — 2025-08 재개관 후 확인 필요",
+   "closed": "일요일",
+   "fee": "필리핀인 ₱30 · 외국인 ₱75 (학생 ₱10/₱50)",
+   "dress": "없음",
+   "stay": "45~90분",
+   "light": {
+    "label": "감옥 안뜰+2차대전관",
+    "min": 45
+   },
+   "full": {
+    "label": "전관(고고학·스페인기·혁명·일제기)",
+    "min": 90
+   },
+   "history": "1870년 세워져 2004년까지 쓰인 세부 주 감옥(Carcel de Cebu) 건물을 개조해 2008년 8월 5일 문을 연 주립박물관이다. 2년 휴관 끝에 2025년 8월 28일 재개관했으며 산호석 감방동이 전시실이다.",
+   "photo": "산호석 감방동 복도 / 중앙 안뜰",
+   "caution": "M.J. Cuenco 대로변이라 택시로, 재개관 후 운영시간 변동",
+   "nearby": "카사 고로르도 도보 8분 · 헤리티지 모뉴먼트 도보 10분",
+   "weight": 3,
+   "sources": [
+    "https://www.philstar.com/the-freeman/cebu-news/2025/08/26/2468125/museo-sugbo-reopen-after-2-year-closure",
+    "https://cebucitytour.com/cebu-destinations/cebu-museo-sugbo/"
+   ]
+  },
+  {
+   "ko": "세부 주청사",
+   "en": "Cebu Provincial Capitol",
+   "lat": 10.3167,
+   "lng": 123.8907,
+   "coordSource": "OSM node 8960487917",
+   "hours": "외관 24시간 · 내부 평일 업무시간",
+   "closed": "없음(외관)",
+   "fee": "무료",
+   "dress": "없음",
+   "stay": "10~15분",
+   "light": {
+    "label": "정면 사진만",
+    "min": 10
+   },
+   "full": {
+    "label": "오스메냐 대로 끝 조망+내부 로비",
+    "min": 30
+   },
+   "history": "1937~38년 후안 아레야노가 설계한 네오클래식 청사로 오스메냐 대로의 북쪽 끝을 막고 서 있다. 2차대전 뒤 복원됐고 2008년 국가역사기념물로 지정됐다.",
+   "photo": "오스메냐 대로에서 정면 축선(아침·야간 조명)",
+   "caution": "차도 한가운데 축선 사진은 신호 때만",
+   "nearby": "푸엔테 오스메냐 도보 10분 · 세부 비즈니스 파크 차 5분",
+   "weight": 3,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cebu_Provincial_Capitol"
+   ]
+  },
+  {
+   "ko": "란타우 플로팅 레스토랑(코르도바)",
+   "en": "Lantaw Floating Native Restaurant (Cordova)",
+   "lat": 10.2556,
+   "lng": 123.9329,
+   "coordSource": "OSM way 1032775425",
+   "hours": null,
+   "closed": "없음",
+   "fee": "식사비(1인 ₱400~700 안팎, 미확인)",
+   "dress": "없음",
+   "stay": "60~90분",
+   "light": {
+    "label": "일몰 보며 음료",
+    "min": 45
+   },
+   "full": {
+    "label": "해산물 저녁+10000 로지스 점등",
+    "min": 120
+   },
+   "history": "코르도바 다이아스 해안 위에 지은 수상 필리핀 식당으로 10000 로지스 카페와 같은 관광센터 부지에 있다. 세부 시내·부사이에도 지점이 있고 코르도바점이 바다 전망으로 가장 유명하다.",
+   "photo": "데크에서 세부 시내 야경과 CCLEX 다리",
+   "caution": "주말 저녁 대기 김(예약), 모기",
+   "nearby": "10000 로지스 1분",
+   "weight": 3,
+   "sources": [
+    "https://www.lakwatsero.com/spots/10000-roses-cafe-cordova-cebu/"
+   ]
+  }
+ ]
+}
