@@ -30,11 +30,13 @@ test('세부: 빈 플랜을 열면 지도가 섬 전체가 아니라 세부시�
   // 빈 상태 — 구역 4개가 목록과 지도 이름표에 같이 나오고, 「전체 목록」은 숨는다
   await expect(page.locator('.v2zone')).toHaveCount(4);
   await expect(page.locator('#map .zone')).toHaveCount(4);
-  await expect(page.locator('.v2rec')).toHaveCount(0);   // 전체 목록은 담기에 합쳐졌다
-  // 칩을 눌러도 담기 상자는 남고, 고른 칩은 눌린 모양·고치기는 켜진다
-  await page.locator('.v2zone .chip', { hasText: '마젤란 십자가' }).click();
+  await expect(page.locator('.v2rec')).toHaveCount(0);   // 전체 목록의 상세 행은 담기 안으로
+  // 체크하면 담기 상자는 남고, 고른 행엔 꼭·체류 선택이 붙고, 노선엔 역이 선다
+  await page.locator('.v2zone .place', { hasText: '마젤란 십자가' }).locator('input').check();
   await expect(page.locator('.v2zone')).toHaveCount(4);
-  await expect(page.locator('.v2zone .chip[aria-pressed="true"]')).toHaveCount(1);
+  await expect(page.locator('.v2zone .place input:checked')).toHaveCount(1);
+  await expect(page.locator('.v2zone .place', { hasText: '마젤란 십자가' }).locator('select')).toBeVisible();
+  await expect(page.locator('.v2lines .addday')).toHaveText('+ 하루 추가');
   await expect(page.locator('.line .addhere').first()).toBeVisible();   // 수정 모드가 기본
   await expect(page.locator('.startrow')).toContainText('출발점(숙소)');
   const labels = await page.locator('#map .mk span').allTextContents();

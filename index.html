@@ -28,9 +28,9 @@
 <link rel="preconnect" href="https://cmuwxferuawquipjighm.supabase.co" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- modules -->
-<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611081159","./src/config.js":"./src/config.js?v=202611081159","./src/edits.js":"./src/edits.js?v=202611081159","./src/engine.js":"./src/engine.js?v=202611081159","./src/html.js":"./src/html.js?v=202611081159","./src/map.js":"./src/map.js?v=202611081159","./src/memo.js":"./src/memo.js?v=202611081159","./src/mine.js":"./src/mine.js?v=202611081159","./src/pages.js":"./src/pages.js?v=202611081159","./src/search.js":"./src/search.js?v=202611081159","./src/shadow.js":"./src/shadow.js?v=202611081159","./src/state.js":"./src/state.js?v=202611081159","./src/store-map.js":"./src/store-map.js?v=202611081159","./src/store-supabase.js":"./src/store-supabase.js?v=202611081159","./src/store.js":"./src/store.js?v=202611081159","./src/timeline.js":"./src/timeline.js?v=202611081159","./src/travel.js":"./src/travel.js?v=202611081159","./src/ui.js":"./src/ui.js?v=202611081159"}}</script>
-<link rel="modulepreload" href="src/ai.js?v=202611081159"><link rel="modulepreload" href="src/config.js?v=202611081159"><link rel="modulepreload" href="src/edits.js?v=202611081159"><link rel="modulepreload" href="src/engine.js?v=202611081159"><link rel="modulepreload" href="src/html.js?v=202611081159"><link rel="modulepreload" href="src/map.js?v=202611081159"><link rel="modulepreload" href="src/memo.js?v=202611081159"><link rel="modulepreload" href="src/mine.js?v=202611081159"><link rel="modulepreload" href="src/pages.js?v=202611081159"><link rel="modulepreload" href="src/search.js?v=202611081159"><link rel="modulepreload" href="src/shadow.js?v=202611081159"><link rel="modulepreload" href="src/state.js?v=202611081159"><link rel="modulepreload" href="src/store-map.js?v=202611081159"><link rel="modulepreload" href="src/store-supabase.js?v=202611081159"><link rel="modulepreload" href="src/store.js?v=202611081159"><link rel="modulepreload" href="src/timeline.js?v=202611081159"><link rel="modulepreload" href="src/travel.js?v=202611081159"><link rel="modulepreload" href="src/ui.js?v=202611081159">
-<link rel="preload" href="data/cities.json?v=202611081159" as="fetch" crossorigin>
+<script type="importmap">{"imports":{"./src/ai.js":"./src/ai.js?v=202611081347","./src/config.js":"./src/config.js?v=202611081347","./src/edits.js":"./src/edits.js?v=202611081347","./src/engine.js":"./src/engine.js?v=202611081347","./src/html.js":"./src/html.js?v=202611081347","./src/map.js":"./src/map.js?v=202611081347","./src/memo.js":"./src/memo.js?v=202611081347","./src/mine.js":"./src/mine.js?v=202611081347","./src/pages.js":"./src/pages.js?v=202611081347","./src/search.js":"./src/search.js?v=202611081347","./src/shadow.js":"./src/shadow.js?v=202611081347","./src/state.js":"./src/state.js?v=202611081347","./src/store-map.js":"./src/store-map.js?v=202611081347","./src/store-supabase.js":"./src/store-supabase.js?v=202611081347","./src/store.js":"./src/store.js?v=202611081347","./src/timeline.js":"./src/timeline.js?v=202611081347","./src/travel.js":"./src/travel.js?v=202611081347","./src/ui.js":"./src/ui.js?v=202611081347"}}</script>
+<link rel="modulepreload" href="src/ai.js?v=202611081347"><link rel="modulepreload" href="src/config.js?v=202611081347"><link rel="modulepreload" href="src/edits.js?v=202611081347"><link rel="modulepreload" href="src/engine.js?v=202611081347"><link rel="modulepreload" href="src/html.js?v=202611081347"><link rel="modulepreload" href="src/map.js?v=202611081347"><link rel="modulepreload" href="src/memo.js?v=202611081347"><link rel="modulepreload" href="src/mine.js?v=202611081347"><link rel="modulepreload" href="src/pages.js?v=202611081347"><link rel="modulepreload" href="src/search.js?v=202611081347"><link rel="modulepreload" href="src/shadow.js?v=202611081347"><link rel="modulepreload" href="src/state.js?v=202611081347"><link rel="modulepreload" href="src/store-map.js?v=202611081347"><link rel="modulepreload" href="src/store-supabase.js?v=202611081347"><link rel="modulepreload" href="src/store.js?v=202611081347"><link rel="modulepreload" href="src/timeline.js?v=202611081347"><link rel="modulepreload" href="src/travel.js?v=202611081347"><link rel="modulepreload" href="src/ui.js?v=202611081347">
+<link rel="preload" href="data/cities.json?v=202611081347" as="fetch" crossorigin>
 <!-- /modules -->
 <script>
 // GitHub Pages는 이 파일을 10분 캐시한다 — 새 배포가 있으면 한 번만 새로고침해 새 모듈을 받는다
@@ -245,6 +245,11 @@ body.v2 #sunbox .sun{font-size:14px}
 .startrow{margin:2px 0 4px}
 .cardtools{position:absolute;top:8px;right:8px;display:flex;gap:4px;opacity:.55;transition:opacity .15s}.card:hover .cardtools,.cardtools:focus-within{opacity:1}.cardtools .btn{background:rgba(255,255,255,.92)}
 #who{display:flex;gap:6px;align-items:center}.startrow .chip{padding:3px 10px;font-size:13.5px}
+/* 담기 — 상세 행(11-02 전체 목록) · 구역 묶음 · + 하루 추가 */
+.v2zone details.group{border-top:0;padding:2px 0}.v2zone details.group>summary{font-size:15px}.v2zone details.group>summary b{font-size:15.5px}
+.row.place{margin:3px 0;gap:6px 10px;padding:2px 0}.row.place label{font-weight:600;cursor:pointer}.row.place.w1 label{font-weight:800}.row.place .dw{font-size:12.5px;margin-left:auto}.row.place input[type=checkbox]{width:16px;height:16px;margin:0;accent-color:var(--c,var(--d1))}
+.v2pickbox .note{margin:-2px 0 8px 26px;font-size:13px;line-height:1.45}
+.addday{display:block;width:100%;margin:2px 0 10px;font:inherit;font-size:14.5px;font-weight:700;color:var(--muted);background:none;border:1.5px dashed var(--line);border-radius:10px;padding:10px;cursor:pointer}.addday:hover{color:var(--d1);border-color:var(--d1)}
 .zone{font:800 13px/1.2 "Wanted Sans Variable",sans-serif;color:var(--c);background:rgba(255,255,255,.92);border:1.5px solid var(--c);border-radius:6px;padding:3px 8px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15)}.zone span{font-weight:600;color:var(--muted)}
 </style>
 </head>
@@ -260,7 +265,7 @@ body.v2 #sunbox .sun{font-size:14px}
     <aside class="side" id="side"></aside>
   </div>
 </div>
-<script type="module" src="src/ui.js?v=202611081159"></script>
+<script type="module" src="src/ui.js?v=202611081347"></script>
 <script defer src="src/memo.js"></script><!-- 📝 고칠 것 · 클로드 — 로컬 서버(scripts/serve.py)로 열 때만 그려진다 -->
 </body>
 </html>

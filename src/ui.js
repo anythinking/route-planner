@@ -566,7 +566,7 @@ let query = '', results = null, searching = false, searchErr = '';   // 검색 �
 function applyFilter(side) {
   const q = query.trim().toLowerCase();
   side.querySelectorAll('[data-name]').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); });
-  side.querySelectorAll('.v2zone').forEach(z => { z.hidden = !!q && ![...z.querySelectorAll('.chip')].some(c => !c.hidden); });
+  side.querySelectorAll('.v2zone').forEach(z => { z.hidden = !!q && ![...z.querySelectorAll('.place')].some(c => !c.hidden); const g = z.querySelector('details.group'); if (q && !z.hidden && g) g.open = true; });
   const pk = side.querySelector('.v2pickbox'); if (pk && q) pk.open = true;
 }
 
@@ -616,6 +616,7 @@ function renderAiBox(host) {
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
 let pickOpen = true;   // 담기 상자 접힘 (화면 상태)
+const openGroups = new Map();   // 담기 묶음 펼침 — 「도시:묶음」 → 열림 (화면 상태)
 let lastFit = null;                     // 마지막으로 지도를 맞춘 점들 — 창 크기가 바뀌면 다시 맞춘다
 let pin = null;        // 지도에서 찍은 자리 {lat,lng} — 이름·시간을 적는 칸이 뜬다 (옛 prompt 둘 대신)
 let askSave = false;   // 「여행으로 저장」 이름 칸
@@ -701,20 +702,49 @@ function renderPlan(side, entering) {
   if (FEATURES.ai) renderAiBox(add);   // 서버 함수(plan-chat)를 배포한 뒤 config.js에서 켠다
   side.appendChild(add);
 
-  // 담기 — 구역별(areas) 또는 1순위 칩. 고른 건 채워진 모양으로 남고, 눌러서 넣고 뺀다. 접어 둘 수 있다
+  // 담기 — 구역별(areas, 지도 테두리와 같은 색) 또는 1·2·3순위별 묶음. 행마다 체크, 고르면 꼭·체류·설명이 붙고, 끌어서 날에 놓는다 (11-02의 전체 목록 그대로)
   const pk = $('details', 'v2pickbox'); pk.open = pickOpen; pk.ontoggle = () => { pickOpen = pk.open; };
-  pk.appendChild($('summary', null, `담기 <span class="muted">${city.places.length}곳 중 ${places.length} 골랐어요${city.areas ? ' · 굵은 것이 1순위' : ''}</span>`));
+  pk.appendChild($('summary', null, `담기 <span class="muted">${city.places.length}곳 중 ${places.length} 골랐어요 · 체크하고 체류를 골라요</span>`));
   const e = $('div', 'v2empty');
   if (!places.length) e.appendChild($('p', null, `<b>가고 싶은 곳을 골라 보세요.</b> 고른 순서대로 며칠에 어떻게 돌지 바로 짜 드려요.`));
-  const chipOf = pl => { const on = pl.id in state.p; const c = $('button', 'chip' + (pl.weight === 1 ? ' w1' : ''), `${on ? '✓ ' : ''}${esc(pl.name)}`); c.type = 'button'; c.dataset.name = pl.name.toLowerCase(); c.setAttribute('aria-pressed', on); c.title = on ? '누르면 빼요' : (pl.opts[pl.default]?.label ? `${pl.opts[pl.default].label} · ${pl.opts[pl.default].min}분` : ''); c.onclick = () => togglePlace(pl.id); return c; };
-  // 묶음 — 구역(areas)이 있으면 구역별(지도 테두리와 같은 색), 없으면 1·2·3순위별. 체류 선택지·★·빼기는 담긴 뒤 노선의 역에서
-  const groups = city.areas ? city.areas.map((ar, i) => ({ name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
-    : [1, 2, 3].map(w => ({ name: WEIGHT_LABEL[w], blurb: '', color: ['', 'var(--gold)', 'var(--d1)', 'var(--line)'][w], list: city.places.filter(p => p.weight === w) })).filter(g => g.list.length);
+  const rowOf = (pl, into) => {
+    const chosen = pl.id in state.p, must = state.m.includes(pl.id);
+    const row = $('div', 'row place drag' + (pl.weight === 1 ? ' w1' : '')); row.dataset.name = pl.name.toLowerCase(); row.draggable = true;
+    row.ondragstart = ev => { ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'copyMove'; };
+    const cb = $('input'); cb.type = 'checkbox'; cb.checked = chosen; cb.id = 'cb-' + pl.id; cb.onchange = () => togglePlace(pl.id);
+    const lab = $('label', null, esc(pl.name)); lab.htmlFor = cb.id;
+    row.append(cb, lab);
+    if (chosen) {
+      const mustBtn = $('button', 'btn sm' + (must ? ' primary' : ''), '꼭'); mustBtn.type = 'button'; mustBtn.title = must ? '꼭 가기 해제' : '꼭 가기 — 시간이 모자라도 안 빠져요';
+      mustBtn.onclick = () => setState({ m: must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
+      const sel = $('select', 'quiet');
+      pl.opts.forEach((o, i) => { const op = $('option', null, `${o.label} · ${o.min}분`); op.value = i; op.selected = state.p[pl.id] === i; sel.appendChild(op); });
+      sel.onchange = () => setState({ p: { ...state.p, [pl.id]: Number(sel.value) } });
+      row.append(mustBtn, sel);
+    } else { const d = pl.opts[pl.default]; if (d) row.appendChild($('span', 'muted dw', `${esc(d.label)} · ${d.min}분`)); }
+    into.appendChild(row);
+    if (chosen && pl.note) { const note = $('p', 'muted note', esc(pl.note)); note.dataset.name = row.dataset.name; into.appendChild(note); }
+  };
+  // 묶음 — 구역(areas)이 있으면 구역별(처음엔 다 펼침), 없으면 1·2·3순위별(처음엔 1순위만). 펼침은 묶음 이름으로 기억
+  const groups = city.areas ? city.areas.map((ar, i) => ({ key: ar.id, name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, open: true, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
+    : [1, 2, 3].map(w => ({ key: 'w' + w, name: WEIGHT_LABEL[w], blurb: '', color: ['', 'var(--gold)', 'var(--d1)', 'var(--line)'][w], open: w === 1, list: city.places.filter(p => p.weight === w) })).filter(g => g.list.length);
   for (const g of groups) {
     const z = $('div', 'v2zone'); z.style.setProperty('--c', g.color);
-    z.appendChild($('b', null, `<i></i>${esc(g.name)} <span class="muted">${esc(g.blurb)}</span>`));
-    const chips = $('div', 'v2chips'); for (const pl of g.list) chips.appendChild(chipOf(pl));
-    z.appendChild(chips); e.appendChild(z);
+    const panel = $('details', 'group'); const k = `${state.c}:${g.key}`;
+    panel.open = openGroups.has(k) ? openGroups.get(k) : g.open; panel.ontoggle = () => openGroups.set(k, panel.open);
+    const chosenN = g.list.filter(p => p.id in state.p).length;
+    panel.appendChild($('summary', null, `<b>${esc(g.name)}</b> <span class="muted">${g.list.length}곳${chosenN ? ` · 고른 ${chosenN}` : ''}${g.blurb ? ` — ${esc(g.blurb)}` : ''}</span>`));
+    for (const pl of g.list) rowOf(pl, panel);
+    z.appendChild(panel); e.appendChild(z);
+  }
+  if (state.u.length) {   // 지도에서 찍은 내 장소
+    const panel = $('details', 'group'); panel.open = true; panel.appendChild($('summary', null, `<b>내 장소</b> <span class="muted">${state.u.length}곳</span>`));
+    state.u.forEach((u, i) => {
+      const row = $('div', 'row place', `<b>${esc(u.name)}</b> <span class="muted">${esc(u.min)}분</span>`); row.dataset.name = u.name.toLowerCase();
+      const del = $('button', 'btn sm', '삭제'); del.type = 'button'; del.onclick = () => setState({ u: state.u.filter((_, j) => j !== i), o: null });
+      row.appendChild(del); panel.appendChild(row);
+    });
+    e.appendChild(panel);
   }
   pk.appendChild(e); side.appendChild(pk);
   applyFilter(pk);
@@ -792,6 +822,7 @@ function renderPlan(side, entering) {
     }
     lines.appendChild(ln);
   });
+  if (state.d < 10) { const ad = $('button', 'addday', '+ 하루 추가'); ad.type = 'button'; ad.onclick = () => setState({ d: state.d + 1, o: state.o ? [...state.o.map(d => [...d]), []] : null }); lines.appendChild(ad); }
   if (a.auto && places.length && editing) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
   // 비거나 두 시간이 안 되는 날이 있으면 — 장소가 일수에 비해 적다는 뜻
   if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나 「균등」으로 나누거나, ✎ 고치기를 켜고 날 머리의 ×로 하루를 빼면 알차져요.'));
