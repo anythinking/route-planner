@@ -666,6 +666,8 @@ function renderPlan(side, entering) {
   more.appendChild(menu);
   head.append(sv, more);
   side.appendChild(head);
+  // 도시 소개 — 무엇으로 유명하고 크게 어디로 나뉘나 (11-08 영철: 「세부는 자연 관광이 유명하다, 크게 4군데」 같은 칸)
+  if (city.intro) side.appendChild($('p', 'v2intro', esc(city.intro)));
   if (askSave && curUser && !state.pr) {   // 「여행으로 저장」 — 이름을 적는 칸 (브라우저 창 대신)
     const box = $('div', 'result ask'); box.appendChild($('div', null, '<b>여행 이름</b> <span class="muted">내 여행 목록에 이렇게 보여요</span>'));
     const r = $('div', 'row'); const inp = $('input', 'text'); inp.type = 'text'; inp.value = `${CITIES[state.c]} ${state.d}일`; inp.maxLength = 60;
@@ -728,6 +730,8 @@ function renderPlan(side, entering) {
   // 묶음 — 구역(areas)이 있으면 구역별(처음엔 다 펼침), 없으면 1·2·3순위별(처음엔 1순위만). 펼침은 묶음 이름으로 기억
   const groups = city.areas ? city.areas.map((ar, i) => ({ key: ar.id, name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, open: true, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
     : [1, 2, 3].map(w => ({ key: 'w' + w, name: WEIGHT_LABEL[w], blurb: '', color: ['', 'var(--gold)', 'var(--d1)', 'var(--line)'][w], open: w === 1, list: city.places.filter(p => p.weight === w) })).filter(g => g.list.length);
+  // 구역은 보편적인 말이 아니라서 묶음 위에 한 줄 풀어 둔다 (11-08)
+  if (city.areas) e.appendChild($('p', 'muted zonehint', `<b>구역</b>은 서로 가까운 곳끼리 묶은 동네예요. 지도에도 같은 색 점선 테두리로 그려 두었어요 — 한 구역 안은 걷거나 짧게 타고, 구역 사이는 차로 옮겨 가요.`));
   for (const g of groups) {
     const z = $('div', 'v2zone'); z.style.setProperty('--c', g.color);
     const panel = $('details', 'group'); const k = `${state.c}:${g.key}`;
@@ -901,7 +905,7 @@ function drawAreas(opacity = 0.55) {
 function renderSearch() {
   const p = $('div', 'search');
   const row = $('div', 'row');
-  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 검색 — 글자로 담기 목록을 거르고, Enter로 지도(OpenStreetMap·위키데이터)에서 찾아요'; inp.value = query;
+  const inp = $('input', 'text'); inp.type = 'search'; inp.placeholder = '장소 검색 (예: 마젤란, Ayala)'; inp.value = query;
   inp.oninput = () => { query = inp.value; applyFilter(document.getElementById('side')); };
   const go = $('button', 'btn', '지도에서 찾기'); go.type = 'button';
   const run = async () => {
@@ -912,6 +916,8 @@ function renderSearch() {
   };
   go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); run(); } };
   row.append(inp, go); p.appendChild(row);
+  // 검색 범위 — 자리표시에 길게 넣었더니 칸 폭에서 잘렸다(11-08). 칸 아래 한 줄로
+  if (!results && !searching && !searchErr) p.appendChild($('p', 'muted hint', '글자를 치면 아래 담기 목록을 거르고, Enter는 지도(OpenStreetMap·위키데이터)에서 찾아요. 가게·카페는 잘 안 나올 수 있어요.'));
   if (searching) p.appendChild($('p', 'muted', '찾는 중…'));
   if (searchErr) p.appendChild($('p', null, `<b style="color:var(--warn)">${esc(searchErr)}</b>`));
   if (results) {
