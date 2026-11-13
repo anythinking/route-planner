@@ -72,7 +72,12 @@ async function resolve(p) {
   return { q: e.id, ko, en, lat: coord?.latitude, lng: coord?.longitude, extract, sitelinks: Object.keys(e.sitelinks || {}).length };
 }
 
-const out = { city: cityId, name: meta.name, center: meta.center, places: [] };
+const out = { city: cityId, name: meta.name };
+if (prev?.intro || seed.intro) out.intro = prev?.intro || seed.intro;   // 도시 소개 — 손으로 쓴 것을 지킨다
+out.center = meta.center;
+// 구역(areas) — 서로 가까운 곳끼리 묶은 동네. 시드에 있으면 그대로 옮긴다(없으면 화면이 1·2·3순위로 묶는다)
+const areas = seed.areas || prev?.areas; if (areas) out.areas = areas;
+out.places = [];
 for (const p of seed.places) {
   const r = await resolve(p); await sleep(300);
   const old = prevPlace(p.id);
@@ -84,6 +89,7 @@ for (const p of seed.places) {
     note: old?.note || p.note || r.extract || '',
     q: r.q, cat: p.cat,
   };
+  const area = p.area ?? old?.area; if (area) place.area = area;
   if (!(place.lat && place.lng)) console.error(`⚠ 좌표 없음: ${p.id} (${r.q})`);
   const box = meta.bbox; if (place.lat && !(place.lat >= box[0] && place.lat <= box[1] && place.lng >= box[2] && place.lng <= box[3])) console.error(`⚠ 도시 밖: ${p.id} ${place.lat},${place.lng}`);
   out.places.push(place);

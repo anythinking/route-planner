@@ -731,7 +731,7 @@ function renderPlan(side, entering) {
   const groups = city.areas ? city.areas.map((ar, i) => ({ key: ar.id, name: ar.name, blurb: ar.blurb || '', color: `var(${DAY_COLORS[i] || '--d1'})`, open: true, list: [...city.places.filter(p => p.area === ar.id)].sort((a, b) => a.weight - b.weight) }))
     : [1, 2, 3].map(w => ({ key: 'w' + w, name: WEIGHT_LABEL[w], blurb: '', color: ['', 'var(--gold)', 'var(--d1)', 'var(--line)'][w], open: w === 1, list: city.places.filter(p => p.weight === w) })).filter(g => g.list.length);
   // 구역은 보편적인 말이 아니라서 묶음 위에 한 줄 풀어 둔다 (11-08)
-  if (city.areas) e.appendChild($('p', 'muted zonehint', `<b>구역</b>은 서로 가까운 곳끼리 묶은 동네예요. 지도에도 같은 색 점선 테두리로 그려 두었어요 — 한 구역 안은 걷거나 짧게 타고, 구역 사이는 차로 옮겨 가요.`));
+  if (city.areas) e.appendChild($('p', 'muted zonehint', `<b>구역</b>은 서로 가까운 곳끼리 묶은 동네예요. 지도에도 같은 색 점선 테두리로 그려 두었어요 — 한 구역 안은 걷거나 짧게 타고, 구역 사이는 차나 전철로 옮겨 가요.`));
   for (const g of groups) {
     const z = $('div', 'v2zone'); z.style.setProperty('--c', g.color);
     const panel = $('details', 'group'); const k = `${state.c}:${g.key}`;
