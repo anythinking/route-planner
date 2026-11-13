@@ -124,7 +124,7 @@ const NAV_KEYS = ['tab', 'pr', 'c'];
 export function setState(patch) {
   if ('pr' in patch && patch.pr && patch.pr !== state.pr && curUser) store.updateUser({ prefs: { lastPr: patch.pr } }).catch(() => {});   // 마지막 여행 기억
   const nav = NAV_KEYS.some(k => k in patch && patch[k] !== state[k]);
-  if (('c' in patch && patch.c !== state.c) || ('lg' in patch && patch.lg !== state.lg)) { hidden.clear(); pin = null; askSave = false; legCustom = null; results = null; query = ''; searchErr = ''; }   // 다른 도시의 검색 결과·고치기 상태가 남지 않게
+  if (('c' in patch && patch.c !== state.c) || ('lg' in patch && patch.lg !== state.lg)) { hidden.clear(); pin = null; askSave = false; legCustom = null; atEdit = null; results = null; query = ''; searchErr = ''; }   // 다른 도시의 검색 결과·고치기 상태가 남지 않게
   const before = encode(state);
   state = { ...state, ...patch };
   const after = encode(state);
@@ -510,9 +510,10 @@ function makeManual() { if (state.o) return state.o; const a = assignment(); con
 function togglePlace(id) {
   const p = { ...state.p }, m = state.m.filter(x => x !== id);
   let o = state.o ? state.o.map(d => d.filter(x => x !== id)) : null;
+  const at = { ...state.at }; delete at[id];
   if (id in p) delete p[id];
   else { p[id] = city.places.find(x => x.id === id).default; if (o) { while (o.length <= activeDay) o.push([]); o[activeDay].push(id); } }
-  setState({ p, m, o });
+  setState({ p, m, o, at });
 }
 // 내 장소 추가 — day가 숫자면 그날로(직접 배정으로 굳음), null이면 직접 모드일 때 활성 날, 자동 모드면 자동
 function addUserPlace(u, day = null) {
@@ -553,6 +554,12 @@ function renderDayCfg(i) {
   return cfg;
 }
 // id를 i번째 날로 — 고른 적 없는 장소면 고르면서, 이미 다른 날에 있으면 옮기면서. 직접 배정으로 굳는다
+// id 를 i일차의 역 refId 앞(before=true)이나 뒤에 끼운다 — 끌어 놓기와 「옮기기」가 같이 쓴다
+function moveTo(id, i, refId, before) {
+  const o = makeManual().map(d => d.filter(x => x !== id)); while (o.length <= i) o.push([]);
+  const p = { ...state.p }; if (!id.startsWith('u') && !(id in p)) { const q = city.places.find(x => x.id === id); if (!q) return; p[id] = q.default; }
+  const at = o[i].indexOf(refId); o[i].splice(at < 0 ? o[i].length : at + (before ? 0 : 1), 0, id); activeDay = i; setState({ p, o });
+}
 function dropToDay(id, i) {
   const o = makeManual().map(d => d.filter(x => x !== id)); while (o.length <= i) o.push([]);
   const p = { ...state.p };
@@ -615,6 +622,7 @@ function renderAiBox(host) {
 
 // ───── 플랜: 노선도 한 화면 — 날 = 노선, 장소 = 역. 고르기와 결과가 같은 자리에 있다 ─────
 let dragId = null;
+let atEdit = null;   // 「이 시각부터」를 적는 중인 역 (화면 상태)
 let pickOpen = true;   // 담기 상자 접힘 (화면 상태)
 const openGroups = new Map();   // 담기 묶음 펼침 — 「도시:묶음」 → 열림 (화면 상태)
 let lastFit = null;                     // 마지막으로 지도를 맞춘 점들 — 창 크기가 바뀌면 다시 맞춘다
@@ -661,7 +669,7 @@ function renderPlan(side, entering) {
   mi('하루 추가', () => setState({ d: Math.min(10, state.d + 1), o: state.o ? [...state.o.map(d => [...d]), []] : null }));
   if (!a.auto) mi('자동으로 다시 나누기', () => setState({ o: null }));
   mi('도시 바꾸기', () => setState({ tab: 'home' }));
-  mi('플랜 비우기', () => { if (places.length && !confirm('고른 장소와 날짜 배정을 모두 지울까요? 「↶ 되돌리기」로 다시 살릴 수 있어요.')) return; setState({ p: {}, m: [], u: [], o: null, l: {}, ds: null }); });
+  mi('플랜 비우기', () => { if (places.length && !confirm('고른 장소와 날짜 배정을 모두 지울까요? 「↶ 되돌리기」로 다시 살릴 수 있어요.')) return; setState({ p: {}, m: [], u: [], o: null, l: {}, ds: null, at: {} }); });
   const set = $('div', 'v2set'); renderSettings(set); menu.appendChild(set);
   more.appendChild(menu);
   head.append(sv, more);
@@ -797,17 +805,23 @@ function renderPlan(side, entering) {
       ls.onchange = () => { if (ls.value === 'custom') { legCustom = key; render(); return; } const l = { ...state.l }; if (ls.value) l[key] = ls.value; else delete l[key]; setState({ l }); };
       leg.appendChild(ls); ol.appendChild(leg);
       }
-      const li = $('li', 'stn'); li.draggable = editing;
-      if (editing) li.ondragstart = ev => { dragId = pl.id; ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'move'; };
-      if (editing) li.ondrop = ev => {   // 역 위에 떨어뜨리면 그 앞으로
-        ev.preventDefault(); ev.stopPropagation(); ln.classList.remove('over');
-        const id = ev.dataTransfer.getData('text/place') || dragId; if (!id || id === pl.id) return;
-        const o = makeManual().map(d => d.filter(x => x !== id)); while (o.length <= i) o.push([]);
-        const p = { ...state.p }; if (!id.startsWith('u') && !(id in p)) { const q = city.places.find(x => x.id === id); if (!q) return; p[id] = q.default; }
-        o[i].splice(Math.max(0, o[i].indexOf(pl.id)), 0, id); activeDay = i; setState({ p, o });
-      };
+      const li = $('li', 'stn' + (st2.late ? ' late' : '')); li.draggable = editing;
+      if (editing) {
+        li.ondragstart = ev => { dragId = pl.id; ev.dataTransfer.setData('text/place', pl.id); ev.dataTransfer.effectAllowed = 'move'; li.classList.add('dragging'); };
+        li.ondragend = () => { li.classList.remove('dragging'); document.querySelectorAll('.line li.stn.before,.line li.stn.after,.line.over').forEach(x => x.classList.remove('before', 'after', 'over')); };
+        // 끌고 지나갈 때 — 위 절반이면 앞에, 아래 절반이면 뒤에 들어간다는 표시
+        const half = ev => ev.clientY < li.getBoundingClientRect().top + li.offsetHeight / 2;
+        li.ondragover = ev => { ev.preventDefault(); ev.stopPropagation(); ln.classList.remove('over'); const b = half(ev); li.classList.toggle('before', b); li.classList.toggle('after', !b); };
+        li.ondragleave = () => li.classList.remove('before', 'after');
+        li.ondrop = ev => {
+          ev.preventDefault(); ev.stopPropagation(); const b = half(ev); li.classList.remove('before', 'after'); ln.classList.remove('over');
+          const id = ev.dataTransfer.getData('text/place') || dragId; if (!id || id === pl.id) return;
+          moveTo(id, i, pl.id, b);
+        };
+      }
       const who = curProject?.edits?.[pl.id]?.by;
-      li.innerHTML = `<time>${hm(st2.arrive)}</time><i class="dot"></i>`;
+      li.innerHTML = `<time>${hm(st2.arrive)}${st2.wait ? `<small title="${hm(st2.arrive - st2.wait)}에 닿아 기다려요">대기 ${st2.wait >= 60 ? `${Math.floor(st2.wait / 60)}시간${st2.wait % 60 ? ' ' + st2.wait % 60 + '분' : ''}` : st2.wait + '분'}</small>` : ''}${st2.late ? `<small class="warn" title="그 시각보다 ${st2.late}분 늦게 닿아요">${st2.late}분 늦음</small>` : ''}</time><i class="dot"></i>`;
+      if (editing) { const g = $('span', 'grip', '⋮⋮'); g.title = '잡아 끌어 순서나 날을 바꿔요'; li.appendChild(g); }
       const body = $('div', 'body');
       body.appendChild($('div', 'nm', `${esc(pl.name)}${pl.must ? ' <span class="star" title="꼭 가기">★</span>' : ''}${who ? ` <span class="who">${esc(who)}</span>` : ''}`));
       const meta = $('div', 'meta');
@@ -816,7 +830,33 @@ function renderPlan(side, entering) {
       else meta.appendChild($('span', null, `${esc(pl.opts[0].min)}분`));
       const star = $('button', 'ic', pl.must ? '★' : '☆'); star.type = 'button'; star.title = pl.must ? '꼭 가기 해제' : '꼭 가기 — 시간이 모자라도 안 빠져요'; if (!pl.user) star.onclick = () => setState({ m: pl.must ? state.m.filter(x => x !== pl.id) : [...state.m, pl.id] });
       const rm = $('button', 'ic', '×'); rm.type = 'button'; rm.title = '빼기'; rm.onclick = () => pl.user ? setState({ u: state.u.filter((_, j) => `u${j}` !== pl.id), o: null }) : togglePlace(pl.id);
-      meta.append(star, rm); body.appendChild(meta); li.appendChild(body); ol.appendChild(li);
+      // 이 시각부터 — 노을·야경처럼 시간대가 있는 곳. 정하면 자동 순서도 그 시각에 맞춰 끼운다
+      const atv = state.at?.[pl.id];
+      if (atEdit === pl.id) {
+        const ti = $('input', 'text'); ti.type = 'time'; ti.step = 900; ti.value = hm(atv ?? Math.max(st2.arrive, 0)).padStart(5, '0'); ti.style.cssText = 'width:auto;min-width:0;padding:1px 6px;font-size:13.5px';
+        const ok = $('button', 'btn sm', '확인'); ok.type = 'button'; const no = $('button', 'btn sm', '취소'); no.type = 'button';
+        const commit = () => { const [h, m] = ti.value.split(':').map(Number); if (!Number.isInteger(h)) return; atEdit = null; setState({ at: { ...state.at, [pl.id]: h * 60 + (m || 0) } }); };
+        ok.onclick = commit; no.onclick = () => { atEdit = null; render(); }; ti.onkeydown = e => { if (e.key === 'Enter') commit(); if (e.key === 'Escape') { atEdit = null; render(); } };
+        const w = $('span', 'atedit'); w.append($('span', 'muted', '부터'), ti, ok, no);
+        if (atv != null) { const cl = $('button', 'btn sm', '지우기'); cl.type = 'button'; cl.onclick = () => { const a2 = { ...state.at }; delete a2[pl.id]; atEdit = null; setState({ at: a2 }); }; w.appendChild(cl); }
+        meta.appendChild(w);
+        setTimeout(() => ti.focus(), 30);
+      } else {
+        const at = $('button', 'ic at' + (atv != null ? ' on' : ''), atv != null ? `🕓 ${hm(atv)}부터` : '🕓'); at.type = 'button'; at.title = atv != null ? '이 시각부터 — 누르면 바꿔요' : '이 시각부터 가기 (노을·야경·예약)'; at.onclick = () => { atEdit = pl.id; render(); };
+        meta.appendChild(at);
+      }
+      // 옮기기 — 끌기 대신(휴대폰·키보드). 위로·아래로·다른 날로
+      const mv = $('select', 'quiet mv'); mv.title = '옮기기';
+      const opts = [['', '옮기기']]; if (k > 0) opts.push(['up', '↑ 위로']); if (k < day.stops.length - 1) opts.push(['down', '↓ 아래로']);
+      days.forEach((_, j) => { if (j !== i) opts.push([`d${j}`, `${j + 1}일차로`]); });
+      for (const [v, label] of opts) { const o = $('option', null, label); o.value = v; mv.appendChild(o); }
+      mv.onchange = () => {
+        const v = mv.value; if (!v) return;
+        if (v === 'up') moveTo(pl.id, i, day.stops[k - 1].place.id, true);
+        else if (v === 'down') moveTo(pl.id, i, day.stops[k + 1].place.id, false);
+        else dropToDay(pl.id, Number(v.slice(1)));
+      };
+      meta.append(star, rm, mv); body.appendChild(meta); li.appendChild(body); ol.appendChild(li);
     });
     ln.appendChild(ol);
     if (editing) {
@@ -827,7 +867,7 @@ function renderPlan(side, entering) {
     lines.appendChild(ln);
   });
   if (state.d < 10) { const ad = $('button', 'addday', '+ 하루 추가'); ad.type = 'button'; ad.onclick = () => setState({ d: state.d + 1, o: state.o ? [...state.o.map(d => [...d]), []] : null }); lines.appendChild(ad); }
-  if (a.auto && places.length && editing) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. 역을 끌어 다른 날에 놓거나 「+ 이 날에 추가」를 누르면 직접 정한 대로 바뀌어요.'));
+  if (a.auto && places.length && editing) lines.appendChild($('p', 'muted', '지금은 자동으로 나눴어요. ⋮⋮를 잡아 끌면 같은 날 안에서 순서를 바꾸거나 다른 날로 옮길 수 있고, 🕓로 「이 시각부터」(노을·야경)를 정하면 그 시각에 맞춰 끼워요.'));
   // 비거나 두 시간이 안 되는 날이 있으면 — 장소가 일수에 비해 적다는 뜻
   if (places.length && days.length > 1 && days.some(d => !d.stops.length || d.end - d.stops[0].arrive < 120)) lines.appendChild($('p', 'muted', '비거나 짧은 날이 있어요. 장소를 더 담거나 「균등」으로 나누거나, 날 머리의 ×로 하루를 빼면 알차져요.'));
   if (result.dropped?.length) lines.appendChild($('p', 'warnline', `시간이 모자라 뺀 곳: ${result.dropped.map(x => esc(x.place.name)).join(', ')} — ☆를 ★로 바꾸면 꼭 넣어요.`));

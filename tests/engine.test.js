@@ -339,3 +339,24 @@ test('algo: manual이 맞으면 algo와 무관하게 직접 순서', () => {
   const manual = [['stpaul', 'borough'], ['tower', 'towerbr', 'shard'], ['buck', 'garnier', 'soho', 'bm', 'traf']];
   for (const algo of Object.keys(ALGOS)) assert.deepEqual(ids(plan(LONDON, { days: 3, start: HOTEL, manual, algo })), manual);
 });
+
+// 「이 시각부터」(at) — 일찍 닿으면 기다리고, 자동 순서는 그 시각에 맞는 자리에 끼운다
+import { schedule as schedule2, order as order2, plan as plan2 } from '../src/engine.js';
+test('at: 일찍 닿으면 arrive가 at으로 밀리고 wait가 남는다', () => {
+  const a = { ...LONDON[0] }, b = { ...LONDON[2], at: 17 * 60 + 30 };   // 런던탑 17:30부터
+  const d = schedule2([a, b], HOTEL, 570);
+  assert.equal(d.stops[1].arrive, 1050); assert.ok(d.stops[1].wait > 0); assert.equal(d.stops[1].late, 0);
+});
+test('at: 늦게 닿으면 late 분이 남고 arrive는 안 바뀐다', () => {
+  const a = { ...LONDON[1] }, b = { ...LONDON[2], at: 9 * 60 + 40 };
+  const d = schedule2([a, b], HOTEL, 570);
+  assert.ok(d.stops[1].late > 0); assert.ok(d.stops[1].arrive > 580); assert.equal(d.stops[1].wait, 0);
+});
+test('at: 자동 순서에서 at이 있는 곳은 그 시각 직전 자리에 — 저녁 노을 명소가 맨 뒤로', () => {
+  const g = [LONDON[0], LONDON[1], { ...LONDON[2], at: 16 * 60 }, LONDON[3]];
+  const seq = order2(g, HOTEL, 'transit', 570);
+  assert.equal(seq.at(-1).id, 'tower');
+  const res = plan2(g, { days: 1, start: HOTEL, dayStart: 570, dayEnd: 1260 });
+  const t = res.days[0].stops.find(s => s.place.id === 'tower');
+  assert.ok(t.arrive >= 16 * 60, `arrive ${t.arrive}`);
+});

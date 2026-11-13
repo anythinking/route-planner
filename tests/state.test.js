@@ -141,3 +141,10 @@ test('a(나누는 방법): 기본 area는 해시에 안 쓰고, 다른 값은 �
   for (const a of ['route', 'even', 'priority']) { const h = encode({ ...DEFAULTS, a }); assert.match(h, new RegExp(`(^|&)a=${a}(&|$)`)); assert.equal(decode('#' + h).a, a); }
   assert.equal(decode('#a=zzz').a, 'area');
 });
+
+import { encode as enc2, decode as dec2 } from '../src/state.js';
+test('at: 해시 at=id:분 이 왕복하고, 범위 밖·모르는 형식은 버린다', () => {
+  const st = dec2('#c=london&d=1&p=tower:0,stpaul:0&at=tower:1050,stpaul:9999,bad');
+  assert.deepEqual(st.at, { tower: 1050 });
+  assert.match(enc2(st), /at=tower%3A1050|at=tower:1050/);
+});

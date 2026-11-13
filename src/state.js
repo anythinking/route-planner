@@ -1,6 +1,6 @@
 // URL 해시 ↔ 상태. 저장소 없음: 링크가 곧 저장.
 // v: 기본 이동수단(transit|taxi) · l: 구간 덮어쓰기 {'from>to': 'walk'|'metro'|'taxi'|분} · o: 직접 정한 날짜·순서 [[id,...],...] | null
-export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null, lg: 0, a: 'area' };
+export const DEFAULTS = { c: 'london', d: 3, t: 570, e: 1140, s: null, p: {}, m: [], u: [], v: 'transit', l: {}, o: null, tab: 'plan', pr: null, dt: null, ds: null, lg: 0, a: 'area', at: {} };
 // a: 자동으로 나누는 방법 — area(지역별) · route(한붓그리기) · even(균등) · priority(순위 우선). 직접 배정(o)이 있으면 안 쓴다
 export const ALGO_KEYS = ['area', 'route', 'even', 'priority'];
 // 여행(project.hash)은 도시 구간(플랜 해시) 여러 개를 줄바꿈으로 잇는다 — 런던→파리 같은 여행
@@ -18,6 +18,8 @@ export function encode(st) {
   const ids = Object.keys(st.p).sort();
   if (ids.length) q.set('p', ids.map(id => `${id}:${st.p[id]}`).join(','));
   if (st.m.length) q.set('m', [...st.m].sort().join(','));
+  const atk = Object.keys(st.at || {}).sort();
+  if (atk.length) q.set('at', atk.map(id => `${id}:${st.at[id]}`).join(','));
   if (st.u.length) q.set('u', st.u.map(x => [x.name, x.lat.toFixed(5), x.lng.toFixed(5), x.min].join('~')).join('|'));
   if (st.v === 'taxi') q.set('v', 'taxi');
   if (st.a && st.a !== 'area') q.set('a', st.a);
@@ -56,6 +58,10 @@ export function decode(hash) {
       st.p[id] = Math.max(0, parseInt(o) || 0);
   }
   st.m = (q.get('m') || '').split(',').filter(id => Object.hasOwn(st.p, id));
+  for (const tok of (q.get('at') || '').split(',').filter(Boolean)) {   // 이 시각부터 — 분(0~1439)
+    const [id, v] = tok.split(':'); const n = parseInt(v);
+    if (ID.test(id) && !(id in Object.prototype) && Number.isInteger(n) && n >= 0 && n < 1440) st.at[id] = n;
+  }
   for (const tok of (q.get('u') || '').split('|').filter(Boolean)) {
     const [name, lat, lng, min] = tok.split('~');
     if (name && Number.isFinite(+lat) && Number.isFinite(+lng) && parseInt(min) > 0)
@@ -106,11 +112,11 @@ export function resolvePlaces(st, city) {
   for (const place of [...city.places].sort((a, b) => a.id < b.id ? -1 : 1)) {
     if (!Object.hasOwn(st.p, place.id)) continue;
     const opt = Math.min(st.p[place.id], place.opts.length - 1);
-    out.push({ ...place, opt, must: st.m.includes(place.id) });
+    out.push({ ...place, opt, must: st.m.includes(place.id), at: st.at?.[place.id] });
   }
   st.u.forEach((u, i) => out.push({
     id: `u${i}`, name: u.name, lat: u.lat, lng: u.lng, weight: 1,
-    opts: [{ label: '머물기', min: u.min }], opt: 0, must: true, user: true,
+    opts: [{ label: '머물기', min: u.min }], opt: 0, must: true, user: true, at: st.at?.[`u${i}`],
   }));
   return out;
 }

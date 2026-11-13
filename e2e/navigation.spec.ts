@@ -161,3 +161,29 @@ test('⑪ 홈·내 여행의 여행 카드에 이름·삭제가 늘 붙어 있�
   await tab(page, '내 여행').click();
   await expect(page.locator('.card.trip .cardtools').first()).toBeAttached();
 });
+
+test.describe('플랜 — 역 옮기기와 이 시각부터', () => {
+  test('⑫ 역마다 ⋮⋮ 손잡이가 있고, 「옮기기」로 아래로·다른 날로 보내면 해시 o=가 생긴다', async ({ page }) => {
+    await page.goto('/?local=1#c=london&d=2&p=stpaul:0,tate:0,borough:0,tower:0');
+    await expect(page.locator('.line li.stn .grip').first()).toBeAttached();
+    const first = page.locator('.line').first().locator('li.stn').first();
+    const name = await first.locator('.nm').innerText();
+    await first.locator('select.mv').selectOption('down');
+    expect(await hash(page)).toContain('o=');
+    await expect(page.locator('.line').first().locator('li.stn').nth(1).locator('.nm')).toHaveText(name);
+    await page.locator('.line').first().locator('li.stn').nth(1).locator('select.mv').selectOption('d1');
+    await expect(page.locator('.line').nth(1).locator('li.stn .nm', { hasText: name.replace(/ ★.*$/, '') })).toBeAttached();
+  });
+
+  test('⑬ 🕓로 17:30부터를 정하면 해시 at=에 남고 그 역이 17:30 이후에 선다', async ({ page }) => {
+    await page.goto('/?local=1#c=london&d=1&p=stpaul:0,tate:0,tower:0');
+    const tower = page.locator('.line li.stn', { hasText: '런던탑' });
+    await tower.locator('button.at').click();
+    await tower.locator('.atedit input').fill('17:30');
+    await tower.locator('.atedit').getByRole('button', { name: '확인' }).click();
+    expect(await hash(page)).toMatch(/at=tower(%3A|:)1050/);
+    const t = page.locator('.line li.stn', { hasText: '런던탑' });
+    await expect(t.locator('button.at')).toContainText('17:30부터');
+    await expect(t.locator('time')).toContainText('17:30');
+  });
+});

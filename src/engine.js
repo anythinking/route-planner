@@ -83,7 +83,23 @@ function permutations(arr) {
 }
 
 // 하루 안 방문 순서. 7곳 이하 완전탐색, 그 위는 최근접 + 2-opt.
-export function order(group, start, pref = 'transit') {
+// 「이 시각부터」(at)가 있는 곳은 나머지를 먼저 줄 세운 뒤, 그 시각 직전에 닿는 자리에 끼운다(노을 명소는 저녁에).
+export function order(group, start, pref = 'transit', dayStart = null) {
+  const timed = group.filter(p => p.at != null).sort((a, b) => a.at - b.at);
+  if (timed.length && dayStart != null) {
+    const seq = order(group.filter(p => p.at == null), start, pref);
+    for (const p of timed) {
+      let k = seq.length;
+      for (let i = 0; i <= seq.length; i++) {   // 앞 i개를 돌고 났을 때 p 에 닿는 시각이 at 을 넘기 직전까지
+        const cand = [...seq.slice(0, i), p];
+        const reach = schedule(cand, start, dayStart, { pref }).stops.at(-1).arrive;
+        if (reach > p.at && i > 0) { k = i - 1; break; }
+        k = i;
+      }
+      seq.splice(k, 0, p);
+    }
+    return seq;
+  }
   const g = [...group].sort(byId);
   if (g.length === 0) return [];
   if (g.length <= 7) {
@@ -118,8 +134,9 @@ export function schedule(ordered, start, dayStart, { legs = {}, pref = 'transit'
     const ov = legs[`${prev.id ?? 'start'}>${p.id}`];
     const t = typeof ov === 'number' ? { min: ov, mode: 'custom', km: distanceKm(prev, p) }
             : ov ? travelMin(prev, p, { mode: ov }) : travelMin(prev, p, { pref });
-    const arrive = cur + t.min, depart = arrive + dwell(p);
-    stops.push({ place: p, arrive, depart, travelMin: t.min, travelMode: t.mode });
+    const reach = cur + t.min, wait = p.at != null && p.at > reach ? p.at - reach : 0;   // 「이 시각부터」 — 일찍 닿으면 기다린다
+    const arrive = reach + wait, depart = arrive + dwell(p);
+    stops.push({ place: p, arrive, depart, travelMin: t.min, travelMode: t.mode, wait, late: p.at != null && reach > p.at ? reach - p.at : 0 });
     if (t.mode === 'walk') walkKm += t.km;
     moveMin += t.min; cur = depart; prev = p;
   }
@@ -136,7 +153,7 @@ export function trim(day, ctx) {
     if (!cand) { d.over = true; break; }
     dropped.push({ place: cand, reason: `${ctx.dayIndex + 1}일차가 ${hm(ctx.dayEnd)}을 ${d.end - ctx.dayEnd}분 넘겨서` });
     stops = stops.filter(p => p !== cand);
-    d = schedule(order(stops, ctx.start, ctx.pref), ctx.start, ctx.dayStart, ctx);
+    d = schedule(order(stops, ctx.start, ctx.pref, ctx.dayStart), ctx.start, ctx.dayStart, ctx);
   }
   return { day: d, dropped };
 }
@@ -250,7 +267,7 @@ export function plan(places, { days, start, dayStart = 570, dayEnd = 1140, pref 
   const out = [];
   groups.forEach((g, i) => {
     const d = forDay(i);
-    const d0 = schedule(order(g, d.start, d.pref), d.start, d.dayStart, { legs, pref: d.pref });
+    const d0 = schedule(order(g, d.start, d.pref, d.dayStart), d.start, d.dayStart, { legs, pref: d.pref });
     const { day, dropped: dr } = trim(d0, { start: d.start, dayStart: d.dayStart, dayEnd: d.dayEnd, dayIndex: i, legs, pref: d.pref });
     dropped.push(...dr);
     day.why = day.stops.length ? (WHY[algo] ? WHY[algo](i) : why(day)) : '전부 예산을 넘겨 뺐다';   // 빈 날도 남겨 번호를 지킨다

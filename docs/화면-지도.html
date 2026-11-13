@@ -1,0 +1,242 @@
+<meta charset="utf-8">
+<title>알고트립 화면 지도</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 배치: 위에 프로그램의 목적 한 단락 → 가운데 Figma 식 판(화면 틀 + 잇는 선, 확대·이동) → 아래에 화면별 목적을 읽는 목록 */
+:root{
+  --ground:#e4e6ea; --panel:#ffffff; --panel2:#f1f3f6; --ink:#1b2430; --ink2:#4a5666; --ink3:#7a8696; --line:#cfd5dd;
+  --navy:#1f4f8f; --band:#b9732c; --link:#1aa5e0; --data:#e07a1a;
+  --ok:#2f8f4e; --ok-bg:#e2f3e7; --warn:#a86a00; --warn-bg:#fbefd2; --none:#c03a2b; --none-bg:#fbe4e0; --mute-bg:#e8ebf0;
+  --sans:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --ground:#1c2026; --panel:#272c34; --panel2:#313742; --ink:#e8ecf2; --ink2:#b3bdca; --ink3:#8491a1; --line:#3d4552;
+  --navy:#3f78c4; --band:#c98a45; --link:#4cc2f5; --data:#f09a45;
+  --ok:#6fcf8e; --ok-bg:#1f3a2a; --warn:#f0c060; --warn-bg:#40341a; --none:#f08a7c; --none-bg:#44231f; --mute-bg:#333a45; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --ground:#1c2026; --panel:#272c34; --panel2:#313742; --ink:#e8ecf2; --ink2:#b3bdca; --ink3:#8491a1; --line:#3d4552;
+  --navy:#3f78c4; --band:#c98a45; --link:#4cc2f5; --data:#f09a45;
+  --ok:#6fcf8e; --ok-bg:#1f3a2a; --warn:#f0c060; --warn-bg:#40341a; --none:#f08a7c; --none-bg:#44231f; --mute-bg:#333a45; color-scheme:dark }
+
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+h1{font-size:28px;line-height:1.25;margin:0;font-weight:700;text-wrap:balance}
+h2{font-size:19px;margin:0;font-weight:700}
+.lead{max-width:68ch;color:var(--ink2);margin:0}
+.chain{display:flex;flex-wrap:wrap;gap:6px 4px;align-items:center;font-weight:600}
+.chain span{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px 10px}
+.chain i{font-style:normal;color:var(--ink3)}
+
+/* 판 */
+.tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.tools .zoom{display:flex;gap:4px}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 12px;cursor:pointer}
+button:hover{border-color:var(--link)} button:focus-visible,.fr:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);margin-left:auto}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend svg{width:34px;height:10px}
+.view{overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--ground);max-height:78vh;cursor:grab;-webkit-overflow-scrolling:touch}
+.view.drag{cursor:grabbing}
+.sizer{position:relative}
+.board{position:absolute;left:0;top:0;transform-origin:0 0;width:3140px;height:1900px}
+.board svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.grp{position:absolute;font-size:26px;font-weight:700;color:var(--ink3);letter-spacing:.02em}
+.fr{position:absolute;width:240px;z-index:2;cursor:pointer}
+.fr .nm{font-size:22px;font-weight:700;line-height:1.2;color:var(--ink2);height:30px;white-space:nowrap}
+.fr .box{height:400px;background:var(--panel);border-radius:3px;box-shadow:0 1px 3px #0003;overflow:hidden;display:flex;flex-direction:column}
+.fr.none .box,.fr.draft .box{background:transparent;box-shadow:none;border:3px dashed var(--line)}
+.fr.none .box{border-color:var(--none)}
+.fr.on .box{outline:4px solid var(--link)} .board.pick .fr:not(.on):not(.near){opacity:.35}
+.wf{height:222px;display:flex;flex-direction:column;gap:7px;padding:0 0 8px}
+.wf .bar{height:22px;background:repeating-linear-gradient(135deg,var(--band) 0 9px,color-mix(in srgb,var(--band) 86%,#000) 9px 18px);display:flex;align-items:center;gap:4px;padding:0 8px;flex:none}
+.wf .bar b{width:54px;height:11px;border-radius:3px;background:var(--navy)}
+.wf .bar u{width:18px;height:5px;border-radius:2px;background:#fff9}
+.wf .in{flex:1;display:flex;flex-direction:column;gap:6px;padding:0 10px;min-height:0}
+.wf .r{height:9px;border-radius:2px;background:var(--mute-bg)} .wf .r.h{background:var(--line);width:55%}
+.wf .c{background:var(--panel2);border:1px solid var(--line);border-radius:4px;flex:1}
+.wf .row{display:flex;gap:6px;flex:1;min-height:0} .wf .grid{display:grid;gap:5px;flex:1}
+.wf .chip{background:var(--mute-bg);border-radius:3px} .wf .chip.a{background:color-mix(in srgb,var(--navy) 55%,var(--panel))}
+.wf .pill{height:14px;border-radius:7px;background:var(--mute-bg);flex:1} .wf .pill.a{background:var(--navy)}
+.wf svg{width:100%;height:100%;display:block}
+.wf.shot{padding:0;border-bottom:1px solid var(--line)} .wf.shot img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:top left;display:block}
+.fr.none .wf.shot{opacity:.75}
+.wf .ghost{flex:1;display:grid;place-items:center;font-size:20px;font-weight:700;color:var(--none)} .fr.draft .ghost{color:var(--ink3)}
+.fr .txt{padding:10px 12px 12px;border-top:1px solid var(--line);flex:1;display:flex;flex-direction:column;gap:8px;font-size:15.5px;line-height:1.45;color:var(--ink)}
+.fr.none .txt,.fr.draft .txt{border-top-style:dashed}
+.fr .ad{font-family:var(--mono);font-size:12.5px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st{align-self:flex-start;margin-top:auto;font-size:13.5px;font-weight:600;border-radius:4px;padding:1px 8px;background:var(--mute-bg);color:var(--ink2)}
+.st.live{background:var(--ok-bg);color:var(--ok)} .st.thin,.st.unused,.st.part{background:var(--warn-bg);color:var(--warn)} .st.none{background:var(--none-bg);color:var(--none)}
+.wires path{fill:none;stroke-width:3;opacity:.8} .wires .nav{stroke:var(--link)} .wires .dat{stroke:var(--data);stroke-dasharray:9 7} .wires .gap{stroke:var(--none);stroke-dasharray:4 7}
+.wires circle{fill:var(--panel);stroke-width:3} .wires .dim{opacity:.08}
+
+/* 고른 화면 설명 + 목록 */
+.pickbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:8px 28px}
+.pickbox h2{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline}
+.pickbox p{margin:0;min-width:0} .pickbox dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-content:start}
+dt{color:var(--ink3);font-size:13px;font-weight:600;white-space:nowrap;padding-top:2px} dd{margin:0}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.list section{grid-column:1/-1;margin-top:8px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.list section small{color:var(--ink3);font-size:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:flex;flex-direction:column;gap:6px;min-width:0;cursor:pointer;text-align:left}
+.card.none{border-style:dashed;border-color:var(--none);background:transparent} .card.draft{border-style:dashed;background:transparent}
+.card h3{margin:0;font-size:16px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.card p{margin:0;color:var(--ink2);font-size:14.5px}
+.card .st{margin-top:2px}
+.foot{color:var(--ink3);font-size:13px;max-width:80ch;margin:0}
+.pickbox .big{grid-column:1/-1;border:1px solid var(--line);border-radius:6px;max-height:520px;overflow:auto} .pickbox .big img{display:block;width:100%}
+.mx{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.mx table{border-collapse:collapse;width:100%;min-width:820px;font-size:14.5px}
+.mx th,.mx td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.mx tr:last-child td{border-bottom:0} .mx thead th{font-size:13px;color:var(--ink3);font-weight:600;white-space:nowrap} .mx tbody th{font-weight:700;white-space:nowrap}
+.mx .y{color:var(--ok);font-weight:600} .mx .h{color:var(--warn);font-weight:600} .mx .n{color:var(--none);font-weight:600}
+@media (max-width:720px){ h1{font-size:22px} .pickbox{grid-template-columns:minmax(0,1fr)} .legend{margin-left:0} }
+@media (prefers-reduced-motion:no-preference){ .fr,.wires path{transition:opacity .15s} }
+</style>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <h1>알고트립 화면 지도</h1>
+    <p class="lead">가고 싶은 곳을 고르면 며칠에 어떻게 나누고 하루에 어떤 순서로 돌지 계산해 주는 사이트다. 로그인 없이도 플랜을 끝까지 짤 수 있고 그때는 주소(링크)가 곧 저장이다. 로그인하면 플랜이 「여행」으로 쌓이고 살 것 · 사진 · 공유가 붙는다.</p>
+    <div class="chain"><span>도시 고르기</span><i>→</i><span>장소 담기</span><i>→</i><span>날로 나누기</span><i>→</i><span>여행으로 저장</span><i>→</i><span>공유</span></div>
+  </header>
+
+  <div class="tools">
+    <div class="zoom"><button id="zFit">전체 보기</button><button id="zOut" aria-label="축소">−</button><button id="zIn" aria-label="확대">＋</button><button id="z100">100%</button></div>
+    <span style="color:var(--ink3);font-size:13px">화면 틀을 누르면 그 화면에 닿는 선만 남는다. 판은 끌어서 옮긴다.</span>
+    <div class="legend">
+      <span><svg viewBox="0 0 34 10"><path d="M2 5H32" stroke="var(--link)" stroke-width="3"/></svg>화면 이동</span>
+      <span><svg viewBox="0 0 34 10"><path d="M2 5H32" stroke="var(--data)" stroke-width="3" stroke-dasharray="7 5"/></svg>저장한 것이 흘러감</span>
+      <span><svg viewBox="0 0 34 10"><path d="M2 5H32" stroke="var(--none)" stroke-width="3" stroke-dasharray="3 5"/></svg>이어져야 하는데 없음</span>
+    </div>
+  </div>
+
+  <div class="view" id="view"><div class="sizer" id="sizer"><div class="board" id="board"><svg class="wires" id="wires"></svg></div></div></div>
+
+  <div class="pickbox" id="pick" aria-live="polite"></div>
+
+  <h2>화면별 목적</h2>
+  <div class="list" id="list"></div>
+  <p class="foot">2026-11-14 기준. 화면 주소와 화면 사이 이동은 코드에서 읽었다. 틀 안의 그림은 이 맥에서 브라우저 저장 모드로 실제 화면을 찍은 것이고(런던, 12곳, 3일), 로그인 화면만 실제 계정 서버 쪽 화면이다. 공유 칸은 로그인해야 열려서 약도를 넣었고, 빨간 점선 틀은 꺼 두었거나 아직 없는 화면이다.</p>
+</div>
+
+<script>
+const G={짜기:'여행 짜기 (로그인 없이 된다)',내여행:'내 여행 (저장 · 계정)',문서:'문서',빈칸:'꺼 두었거나 아직 없는 화면'};
+const ST={live:'쓸 수 있음',thin:'로그인해야 열림',tool:'읽는 글',none:'꺼 두었거나 없음'};
+// x, y = 판 위의 자리. im = 실제 화면 캡처 · w = 약도 종류
+const F=[
+ {id:'home',g:'짜기',x:40,y:170,t:'홈',a:'#tab=home',im:'home',s:'live',p:'어느 도시로 갈지 고르는 문. 도시 사진 카드를 누르면 그 도시의 플랜이 열린다.',i:'도시 이름으로 거르기',o:'아시아 4곳, 유럽 4곳의 도시 카드',d:'도시 8곳. 로그인하면 이 화면에 내 여행과 다른 사람의 공개 플랜이 같이 뜬다'},
+ {id:'pick',g:'짜기',x:320,y:170,t:'플랜 · 담기',a:'#c=london',im:'pick',s:'live',p:'빈 플랜. 가고 싶은 곳에 체크하고 얼마나 머물지 고른다. 1 · 2 · 3순위로 묶여 있다.',i:'장소 체크, 체류 시간, 「꼭」 표시, 출발점(숙소)',o:'도시 소개, 순위별 장소 목록과 설명',d:'런던은 24곳 (1순위 9, 2순위 9, 3순위 6). 고르는 즉시 주소에 담긴다'},
+ {id:'plan',g:'짜기',x:600,y:170,t:'플랜 · 노선도',a:'#c=london&d=3&p=…',im:'plan',s:'live',p:'고른 곳을 날마다 한 노선으로 그린다. 날이 노선, 장소가 역이고 역마다 도착 시각이 붙는다.',i:'나누는 방법 네 가지, 체류 바꾸기, ★, 빼기, 끌어서 다른 날로, 구간 이동수단, 날 설정',o:'날별 순서와 시각, 이동 분, 지도 위 동선',d:'지역별 · 한붓그리기 · 균등 · 순위 우선. 끌어서 옮기면 직접 배정으로 바뀌고 ⌘Z로 되돌린다'},
+ {id:'search',g:'짜기',x:880,y:170,t:'장소 찾기',a:'플랜 안',im:'search',s:'live',p:'목록에 없는 곳을 지도(OpenStreetMap)에서 찾아 넣는다. 지도를 눌러 직접 찍을 수도 있다.',i:'검색어, 넣을 날, 머물 시간',o:'검색 결과, 「담기」와 「출발점으로」',d:'넣은 곳은 내 장소로 주소에 담기고 그 날에 꼭 들어간다'},
+ {id:'more',g:'짜기',x:1160,y:170,t:'더보기 · 기본값',a:'플랜 안 ⋯',im:'more',s:'live',p:'플랜 전체에 거는 일. 링크 복사, 하루 추가, 도시 바꾸기, 플랜 비우기, 그리고 하루의 시작 · 끝 시각과 이동수단.',i:'일수, 시작 · 끝 시각, 걷기+지하철 또는 택시',o:'지금 플랜의 링크',d:'「도시 바꾸기」는 홈으로 돌아간다'},
+ {id:'sun',g:'짜기',x:1440,y:170,t:'해와 그림자',a:'지도 ☀',im:'sun',s:'live',p:'여행 날짜와 시각을 주면 해의 방향과 건물 그림자를 지도에 그린다. 사진 찍을 시간을 고르는 데 쓴다.',i:'날짜, 시각 슬라이더, 건물 그림자 켜기, 3D',o:'해 뜨는 · 지는 시각, 그림자가 드리운 지도',d:'플랜 지도 위에 띠로 붙는다'},
+ {id:'guide',g:'짜기',x:1720,y:170,t:'가이드 · 준비물',a:'#tab=guide',im:'guide',s:'live',p:'떠나기 전에 챙길 것을 체크한다. 공통 목록 아래에 그 도시에서 특히 챙길 것이 붙는다.',i:'체크',o:'일곱 묶음 63가지, 도시별 준비물',d:'여행을 열어 두면 그 여행에, 아니면 이 브라우저에 저장된다'},
+ {id:'gphoto',g:'짜기',x:2000,y:170,t:'가이드 · 사진',a:'#tab=guide (사진)',im:'guide-photo',s:'live',p:'어디서 몇 시에 어떻게 찍으면 좋은지. 내가 고른 장소가 먼저 나온다.',i:'없음',o:'도시 공통 팁, 장소별 사진 팁',d:'플랜에서 고른 곳이 위, 나머지는 접혀 있다'},
+ {id:'ggift',g:'짜기',x:2280,y:170,t:'가이드 · 기념품',a:'#tab=guide (기념품)',im:'guide-gift',s:'live',p:'그 도시에서 살 만한 것. 마음에 들면 여행의 「살 것」에 담는다.',i:'「담기」',o:'기념품 목록과 어디서 사는지',d:'담기는 여행을 열어 둔 채여야 들어간다'},
+
+ {id:'login',g:'내여행',x:40,y:740,t:'로그인',a:'#tab=mine',im:'login',s:'live',p:'내 여행으로 들어가는 문. 이메일과 비밀번호, 또는 메일로 받은 링크로 들어간다.',i:'이메일, 비밀번호',o:'없음',d:'로그인 · 회원가입 · 비밀번호 찾기 세 걸음이 노선 모양 탭으로 붙어 있다'},
+ {id:'signup',g:'내여행',x:320,y:740,t:'회원가입',a:'#tab=mine (회원가입)',im:'signup',s:'live',p:'이름과 이메일, 비밀번호로 계정을 만든다. 약관과 개인정보처리방침으로 가는 링크가 있다.',i:'이름, 이메일, 비밀번호 두 번',o:'없음',d:'만 14세 미만은 가입하지 않도록 방침에 적혀 있다'},
+ {id:'asksave',g:'내여행',x:600,y:740,t:'여행으로 저장',a:'플랜 안',im:'asksave',s:'thin',p:'지금 플랜에 이름을 붙여 여행으로 만든다. 로그인하지 않았으면 로그인 화면으로 보낸다.',i:'여행 이름',o:'없음',d:'저장한 뒤에는 단추가 「저장」으로 바뀌고 플랜 머리에 「← 여행」이 생긴다'},
+ {id:'list',g:'내여행',x:880,y:740,t:'내 여행 목록',a:'#tab=mine',im:'list',s:'thin',p:'저장한 여행이 카드로 쌓인다. 새 여행을 만드는 길이 세 가지 있다.',i:'지금 플랜으로 새 여행, 구글 타임라인 파일, 플랜 링크 붙여넣기',o:'여행 카드 (도시, 일수, 곳 수)',d:'타임라인 파일은 브라우저 안에서만 읽어 도시별 여행으로 바꾼다'},
+ {id:'trip',g:'내여행',x:1160,y:740,t:'여행 하나',a:'#tab=mine&pr=<여행>',im:'trip',s:'thin',p:'여행 한 건의 대문. 날별 노선을 읽기 좋게 보여 주고 플랜으로 들어가 고친다.',i:'이름 바꾸기, 지금 플랜을 여기 저장, 삭제',o:'날별 일정, 지도, 「플랜 열기」',d:'도시 구간을 여러 개 이으면 런던 → 파리 같은 여행이 된다'},
+ {id:'triplow',g:'내여행',x:1440,y:740,t:'여행 · 살 것과 사진',a:'여행 화면 아래쪽',im:'trip-lower',s:'thin',p:'여행에 붙는 것들. 살 것 목록과, 올린 사진을 찍은 자리에 놓는 칸.',i:'살 것 적기, 사진 끌어다 놓기',o:'살 것 체크, 사진이 놓인 지도',d:'사진 안의 위치 정보로 자리를 잡고, 없으면 장소를 직접 고른다'},
+ {id:'share',g:'내여행',x:1720,y:740,t:'공유',a:'여행 화면 안',w:'form',s:'thin',p:'여행을 누구에게 열지 정한다. 비공개, 링크 초대, 공개 셋 중 하나.',i:'공개 범위, 초대 링크, 같이 보는 사람의 권한(보기 · 편집)',o:'같이 보는 사람 목록',d:'계정 서버에 로그인해야 열린다. 브라우저 저장에서는 「공유가 안 돼요」 한 줄만 뜬다'},
+ {id:'account',g:'내여행',x:2000,y:740,t:'내 계정',a:'#tab=account',im:'account',s:'thin',p:'이름과 기본 설정을 바꾸고, 내 데이터를 내려받고, 탈퇴한다.',i:'이름, 기본 도시 · 이동수단 · 하루 시간',o:'내 데이터 파일(JSON)',d:'기본 설정은 「기본값으로 새 플랜」을 누를 때 쓰인다'},
+
+ {id:'privacy',g:'문서',x:2280,y:740,t:'개인정보처리방침',a:'#tab=privacy',im:'privacy',s:'tool',p:'무엇을 받고 어디에 맡기며 언제 지우는지 적은 글.',i:'없음',o:'열 개 절',d:'시행일 2026년 11월 2일'},
+ {id:'terms',g:'문서',x:2560,y:740,t:'이용약관',a:'#tab=terms',im:'terms',s:'tool',p:'계산값은 참고값이라는 것, 올린 것의 권리, 공유의 범위를 적은 글.',i:'없음',o:'일곱 개 절',d:'시행일 2026년 11월 2일'},
+ {id:'notfound',g:'문서',x:2840,y:740,t:'없는 주소',a:'#tab=<모르는 값>',im:'notfound',s:'tool',p:'주소가 틀렸거나 지워진 여행을 열었을 때. 끊긴 노선 그림과 돌아갈 단추 둘.',i:'없음',o:'「홈으로」, 「내 여행」',d:'지워진 여행이면 문구가 「이 여행은 노선에 없어요」로 바뀐다'},
+
+ {id:'ai',g:'빈칸',x:40,y:1310,t:'AI에게 말하기',a:'플랜 안 (꺼 둠)',w:'ghost',s:'none',p:'「박물관은 빼고 야경을 넣어 줘」처럼 말로 플랜을 고치는 칸. 화면 코드는 있고 스위치가 꺼져 있다.',i:'문장',o:'고친 플랜',d:'서버 함수 plan-chat을 올리고 키를 넣은 뒤 설정에서 켜야 보인다'},
+ {id:'leave',g:'빈칸',x:320,y:1310,t:'탈퇴 처리',a:'계정 서버',w:'ghost',s:'none',p:'「탈퇴하기」를 눌렀을 때 계정 · 여행 · 사진을 실제로 지우는 서버 쪽 함수.',i:'「탈퇴」라고 적기',o:'없음',d:'함수가 아직 서버에 없어 지금은 준비 중이라는 안내만 하고 아무것도 지우지 않는다'},
+ {id:'lang',g:'빈칸',x:600,y:1310,t:'다른 언어',a:'내 계정 (준비 중)',w:'ghost',s:'none',p:'English와 日本語. 계정 화면에 단추는 있고 「준비 중」으로 잠겨 있다.',i:'언어 고르기',o:'없음',d:'지금은 한국어 한 가지'},
+];
+// [어디서, 어디로, 종류]  nav = 눌러서 이동 · dat = 기록이 흘러감 · gap = 이어져야 하는데 없음
+const E=[
+ ['home','pick','nav'],['home','login','nav'],['home','privacy','nav'],['home','terms','nav'],
+ ['pick','plan','nav'],['plan','search','nav'],['plan','more','nav'],['plan','sun','nav'],['plan','guide','nav'],['plan','asksave','nav'],['more','home','nav'],
+ ['guide','gphoto','nav'],['guide','ggift','nav'],
+ ['login','signup','nav'],['login','list','nav'],['asksave','login','nav'],['asksave','trip','nav'],
+ ['list','trip','nav'],['list','account','nav'],['list','home','nav'],['trip','plan','nav'],['trip','triplow','nav'],['triplow','share','nav'],
+ ['account','list','nav'],['account','privacy','nav'],['account','terms','nav'],['signup','terms','nav'],['notfound','home','nav'],['notfound','list','nav'],
+ ['plan','trip','dat'],['guide','trip','dat'],['ggift','triplow','dat'],['share','home','dat'],['account','pick','dat'],
+ ['ai','plan','gap'],['leave','account','gap'],['lang','account','gap'],
+];
+const EL={dat:{'plan>trip':'플랜 (주소에 담긴 그대로)','guide>trip':'준비물 체크','ggift>triplow':'살 것에 담기','share>home':'공개한 여행이 「다른 사람의 플랜」에','account>pick':'기본 도시 · 시간 · 이동수단'},
+          gap:{'ai>plan':'말로 고치기','leave>account':'실제로 지우기','lang>account':'언어 고르기'}};
+const W=240,H=430,$=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rows=(n,h)=>(h?'<div class="r h"></div>':'')+Array.from({length:n},(_,i)=>`<div class="r" style="width:${[100,92,97,84,95,88,99,90][i%8]}%"></div>`).join('');
+function wf(k){
+  const bar='<div class="bar"><b></b><u></u><u></u><u></u><u></u></div>', inn=h=>`<div class="in">${h}</div>`;
+  const svg=h=>`<svg viewBox="0 0 220 150" preserveAspectRatio="none">${h}</svg>`, ax='<path d="M8 6V142H214" fill="none" stroke="var(--line)" stroke-width="2"/>';
+  const body={
+    home:()=>inn('<div class="r h" style="margin-top:6px"></div><div class="grid" style="grid-template-columns:1fr 1fr">'+'<div class="c"></div>'.repeat(4)+'</div>'),
+    list:()=>inn('<div class="row" style="flex:none;height:14px"><div class="pill"></div><div class="pill" style="flex:.4"></div></div>'+rows(9,1)),
+    table:()=>inn('<div class="r h"></div><div class="row"><div style="flex:1;display:flex;flex-direction:column;gap:6px">'+rows(8)+'</div><div style="flex:1;display:flex;flex-direction:column;gap:6px">'+rows(8)+'</div></div>'),
+    detail:()=>inn('<div class="r h" style="margin-top:4px"></div><div class="row"><div class="c"></div><div class="c"></div></div><div class="c" style="flex:1.2">'+svg(ax+'<path d="M12 130C60 128 110 120 150 80S200 20 210 14" fill="none" stroke="var(--navy)" stroke-width="3"/>')+'</div>'+rows(2)),
+    form:()=>inn('<div class="r h" style="margin-top:4px"></div><div class="grid" style="grid-template-columns:1fr 1fr 1fr">'+'<div class="c"></div>'.repeat(9)+'</div><div class="row" style="flex:none;height:14px"><div style="flex:2"></div><div class="pill a"></div></div>'),
+    overview:()=>inn('<div class="row" style="flex:none;height:14px"><div class="pill a"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div></div><div class="row"><div class="c">'+svg(stack(110,26,9))+'</div><div style="flex:1;display:flex;flex-direction:column;gap:6px">'+rows(7,1)+'</div></div>'),
+    grid:()=>inn('<div class="r h" style="margin-top:4px"></div><div class="grid" style="grid-template-columns:repeat(4,1fr)">'+Array.from({length:20},(_,i)=>`<div class="chip${i%7==3?' a':''}"></div>`).join('')+'</div>'),
+    d3:()=>inn('<div class="row"><div class="c" style="flex:2">'+svg(stack(110,14,12)+'<circle cx="150" cy="58" r="5" fill="var(--none)"/><circle cx="78" cy="96" r="5" fill="var(--none)"/><circle cx="128" cy="118" r="5" fill="var(--none)"/>')+'</div><div style="flex:1;display:flex;flex-direction:column;gap:6px">'+rows(8,1)+'</div></div>'),
+    photos:()=>inn('<div class="row" style="flex:none;height:14px"><div class="pill a" style="flex:.5"></div><div class="pill" style="flex:.5"></div><div style="flex:1"></div></div><div class="grid" style="grid-template-columns:repeat(3,1fr)">'+'<div class="chip"></div>'.repeat(9)+'</div>'),
+    steps:()=>inn('<div class="row" style="flex:none;height:14px;margin-top:2px"><div class="pill a"></div><div class="pill"></div><div class="pill"></div></div><div class="row"><div style="flex:1;display:flex;flex-direction:column;gap:6px"><div class="c"></div><div class="c" style="flex:1.6"></div></div><div class="c" style="flex:1.2">'+svg(ax+'<path d="M12 136L208 16" fill="none" stroke="var(--navy)" stroke-width="3"/>')+'</div></div><div class="row" style="flex:none;height:18px"><div style="flex:2"></div><div class="pill a" style="height:18px;border-radius:5px"></div></div>'),
+    chart:()=>inn('<div class="row"><div style="flex:1;display:flex;flex-direction:column;gap:6px"><div class="c"></div><div class="c"></div><div class="c"></div></div><div class="c" style="flex:1.7">'+svg(ax+'<path d="M12 22C50 70 80 96 120 112S190 130 210 134" fill="none" stroke="var(--navy)" stroke-width="3"/><path d="M12 40C50 84 80 108 120 122S190 136 210 139" fill="none" stroke="var(--band)" stroke-width="2" stroke-dasharray="5 4"/>')+'</div></div>'),
+    flow:()=>inn(svg('<g fill="var(--panel2)" stroke="var(--line)" stroke-width="2"><rect x="8" y="14" width="56" height="30" rx="4"/><rect x="82" y="14" width="56" height="30" rx="4"/><rect x="156" y="14" width="56" height="30" rx="4"/><rect x="156" y="62" width="56" height="30" rx="4"/><rect x="82" y="62" width="56" height="30" rx="4"/><rect x="8" y="62" width="56" height="30" rx="4"/><rect x="8" y="110" width="56" height="30" rx="4"/><rect x="82" y="110" width="56" height="30" rx="4"/></g><path d="M64 29H82M138 29H156M184 44V62M156 77H138M82 77H64M36 92V110M64 125H82" stroke="var(--navy)" stroke-width="2.5" fill="none"/>')),
+    ladder:()=>inn(svg('<path d="M12 6V144M208 6V144" stroke="var(--ink3)" stroke-width="3"/>'+[22,48,74,100,126].map((y,i)=>`<path d="M12 ${y}H${60+i%2*30}M${76+i%2*30} ${y}H170M186 ${y}H208" stroke="var(--line)" stroke-width="2.5"/><path d="M${60+i%2*30} ${y-7}V${y+7}M${76+i%2*30} ${y-7}V${y+7}" stroke="var(--navy)" stroke-width="2.5"/><circle cx="178" cy="${y}" r="7" fill="none" stroke="var(--band)" stroke-width="2.5"/>`).join(''))),
+    ghost:()=>'<div class="ghost"></div>',
+  }[k]();
+  return `<div class="wf">${k==='ghost'?'':bar}${body}</div>`;
+}
+function stack(cx,top,n){ let s=''; for(let i=n-1;i>=0;i--) s+=`<ellipse cx="${cx}" cy="${top+i*(110/n)+8}" rx="62" ry="13" fill="var(--panel)" stroke="var(--navy)" stroke-width="2"/>`; return s; }
+
+const board=$('board'), by=Object.fromEntries(F.map(f=>[f.id,f]));
+board.insertAdjacentHTML('beforeend',
+  `<div class="grp" style="left:40px;top:70px">${G.짜기}</div><div class="grp" style="left:2280px;top:650px">${G.문서}</div><div class="grp" style="left:40px;top:650px">${G.내여행}</div><div class="grp" style="left:40px;top:1220px;color:var(--none)">${G.빈칸}</div>`
+  +F.map(f=>`<div class="fr ${f.s}" data-id="${f.id}" tabindex="0" role="button" style="left:${f.x}px;top:${f.y-30}px"><div class="nm">${esc(f.t)}</div><div class="box">${f.im?`<div class="wf shot"><img src="map-shots/${f.im}.jpg" alt="${esc(f.t)} 화면" loading="lazy"></div>`:wf(f.w)}<div class="txt"><div class="ad">${esc(f.a)}</div><div>${esc(f.p)}</div><span class="st ${f.s}">${ST[f.s]}</span></div></div></div>`).join(''));
+board.querySelectorAll('.fr.none .ghost').forEach(g=>g.textContent='아직 없음');
+
+// 잇는 선 — 같은 줄은 위(윗줄) · 아래(아랫줄)로 돌아가고, 줄이 다르면 틀 사이 빈 띠를 지난다
+function wires(sel){
+  const out={}, inn={}; let h='<defs>'+['nav','dat','gap'].map(k=>`<marker id="m-${k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--${k==='nav'?'link':k==='dat'?'data':'none'})"/></marker>`).join('')+'</defs>';
+  const slot=(m,k)=>(m[k]=(m[k]||0)+1)-1;
+  E.forEach(([a,b,k])=>{ const A=by[a],B=by[b], near=sel&&(a===sel||b===sel), dim=sel&&!near?' dim':''; let x1,y1,x2,y2,d;
+    const sx=f=>f.x+W/2+((slot(out,f.id+k)*22+ (k==='nav'?-50:k==='dat'?20:70))), ex=f=>f.x+W/2+(slot(inn,f.id)*20-60);
+    if(A.y===B.y){ const up=A.y<400||(A.y<1000&&Math.abs(B.x-A.x)<300), lift=Math.min(150,50+Math.abs(B.x-A.x)*.045);
+      x1=sx(A); x2=ex(B); y1=y2=up?A.y-34:A.y+H-28; const cy=up?y1-lift:y1+lift; d=`M${x1} ${y1}C${x1} ${cy} ${x2} ${cy} ${x2} ${y2}`; }
+    else { const down=B.y>A.y; x1=sx(A); x2=ex(B); y1=down?A.y+H-28:A.y-34; y2=down?B.y-34:B.y+H-28; const m=(y1+y2)/2; d=`M${x1} ${y1}C${x1} ${m+(down?40:-40)} ${x2} ${m-(down?40:-40)} ${x2} ${y2}`; }
+    h+=`<path class="${k}${dim}" d="${d}" marker-end="url(#m-${k})"/><circle class="${dim.trim()}" cx="${x1}" cy="${y1}" r="6" stroke="var(--${k==='nav'?'link':k==='dat'?'data':'none'})"/>`; });
+  $('wires').innerHTML=h;
+}
+
+// 고르기
+let SEL=null;
+function pick(id){ SEL=SEL===id?null:id; board.classList.toggle('pick',!!SEL);
+  const nb=new Set(E.filter(e=>e[0]===SEL||e[1]===SEL).flatMap(e=>[e[0],e[1]]));
+  board.querySelectorAll('.fr').forEach(e=>{ e.classList.toggle('on',e.dataset.id===SEL); e.classList.toggle('near',nb.has(e.dataset.id)); });
+  wires(SEL); info(); }
+function info(){ const f=by[SEL]; if(!f){ $('pick').innerHTML='<h2>화면을 하나 고르면 여기에 풀어서 보여 준다</h2><p style="color:var(--ink2)">판의 화면 틀이나 아래 목록의 칸을 누른다. 다시 누르면 풀린다.</p>'; return; }
+  const to=E.filter(e=>e[0]===f.id), from=E.filter(e=>e[1]===f.id), nm=(e,i)=>esc(by[e[i]].t)+(EL[e[2]]?.[e[0]+'>'+e[1]]?` (${esc(EL[e[2]][e[0]+'>'+e[1]])})`:'');
+  const li=(L,i,k)=>L.filter(e=>k.includes(e[2])).map(e=>nm(e,i)).join(', ')||'없음';
+  $('pick').innerHTML=`<h2>${esc(f.t)} <span class="ad" style="font:13px var(--mono);color:var(--ink3)">${esc(f.a)}</span> <span class="st ${f.s}" style="margin:0">${ST[f.s]}</span></h2>
+   <div style="display:flex;flex-direction:column;gap:8px;min-width:0"><p>${esc(f.p)}</p></div>
+   <dl><dt>넣는 것</dt><dd>${esc(f.i)}</dd><dt>꺼내 보는 것</dt><dd>${esc(f.o)}</dd><dt>지금 상태</dt><dd>${esc(f.d||ST[f.s])}</dd><dt>여기서 가는 화면</dt><dd>${li(to,1,['nav'])}</dd><dt>여기로 오는 화면</dt><dd>${li(from,0,['nav'])}</dd><dt>저장한 것이 흐르는 길</dt><dd>${[...to.filter(e=>e[2]==='dat').map(e=>'→ '+nm(e,1)),...from.filter(e=>e[2]==='dat').map(e=>'← '+nm(e,0))].join(', ')||'없음'}</dd>${[...to,...from].some(e=>e[2]==='gap')?`<dt>끊긴 곳</dt><dd>${[...to.filter(e=>e[2]==='gap').map(e=>'→ '+nm(e,1)),...from.filter(e=>e[2]==='gap').map(e=>'← '+nm(e,0))].join(', ')}</dd>`:''}</dl>${f.im?`<div class="big"><img src="map-shots/${f.im}.jpg" alt="${esc(f.t)} 화면"></div>`:''}`; }
+board.addEventListener('click',e=>{ const f=e.target.closest('.fr'); if(f&&!moved) pick(f.dataset.id); });
+board.addEventListener('keydown',e=>{ const f=e.target.closest('.fr'); if(f&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); pick(f.dataset.id); } });
+
+// 목록
+$('list').innerHTML=Object.keys(G).map(g=>`<section><h2>${G[g]}</h2><small>${F.filter(f=>f.g===g).length}개</small></section>`+F.filter(f=>f.g===g).map(f=>`<button class="card ${f.s}" data-id="${f.id}"><h3>${esc(f.t)} <span class="ad" style="font:12.5px var(--mono);color:var(--ink3)">${esc(f.a)}</span></h3><p>${esc(f.p)}</p>${f.d?`<p style="color:var(--ink3)">${esc(f.d)}</p>`:''}<span class="st ${f.s}">${ST[f.s]}</span></button>`).join('')).join('');
+$('list').addEventListener('click',e=>{ const c=e.target.closest('.card'); if(!c) return; if(SEL!==c.dataset.id) pick(c.dataset.id); const f=by[c.dataset.id]; $('view').scrollTo({left:Math.max(0,f.x*Z-40),top:Math.max(0,(f.y-60)*Z),behavior:'smooth'}); $('view').scrollIntoView({block:'nearest',behavior:'smooth'}); });
+
+// 확대 · 이동
+let Z=1; const BW=3140,BH=1900;
+function zoom(z){ Z=Math.max(.2,Math.min(1.4,z)); board.style.transform=`scale(${Z})`; $('sizer').style.width=BW*Z+'px'; $('sizer').style.height=BH*Z+'px'; }
+const fit=()=>zoom(($('view').clientWidth-2)/BW);
+$('zFit').onclick=fit; $('z100').onclick=()=>zoom(1); $('zIn').onclick=()=>zoom(Z*1.25); $('zOut').onclick=()=>zoom(Z/1.25);
+let drag=null, moved=false; const V=$('view');
+V.addEventListener('pointerdown',e=>{ if(e.pointerType==='touch') return; drag={x:e.clientX,y:e.clientY,l:V.scrollLeft,t:V.scrollTop}; moved=false; });
+addEventListener('pointermove',e=>{ if(!drag) return; const dx=e.clientX-drag.x, dy=e.clientY-drag.y; if(Math.abs(dx)+Math.abs(dy)>5){ moved=true; V.classList.add('drag'); } V.scrollLeft=drag.l-dx; V.scrollTop=drag.t-dy; });
+addEventListener('pointerup',()=>{ drag=null; V.classList.remove('drag'); setTimeout(()=>moved=false,0); });
+
+wires(null); info(); zoom(Math.max(.42,($('view').clientWidth-2)/BW));
+</script>

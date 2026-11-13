@@ -193,6 +193,7 @@ function renderAccount({ $, side, store, user, projects, setState, render, backT
 let mailSent = '';            // 보낸 메일 안내 (주소 + 무엇을 보냈나)
 let authMode = 'login';       // login · signup · reset
 const LEGAL = '<a href="#tab=terms">이용약관</a>과 <a href="#tab=privacy">개인정보처리방침</a>';
+let guestName = '';   // 브라우저 저장 모드의 이름 칸 — 다시 그려도 지워지지 않게 (화면 상태)
 function renderLogin({ $, side, store, render, state: ctxState, joinPending, authNote }) {
   const p = $('div', 'panel');
   if (authNote) p.appendChild($('p', 'authnote', `메일 링크를 쓸 수 없어요 (${esc(authNote)}). 링크는 한 번만 쓸 수 있고 시간이 지나면 끝나요. 아래에서 새로 받아 주세요.`));
@@ -253,9 +254,9 @@ function renderLogin({ $, side, store, render, state: ctxState, joinPending, aut
     p.appendChild($('h2', null, '내 여행'));
     p.appendChild($('p', null, '여행별로 플랜·살 것·사진을 모아 둔다. 지금은 <b>이 브라우저 안에만</b> 저장된다(기기를 바꾸면 안 보인다).'));
     const row = $('div', 'row');
-    const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '이름'; inp.maxLength = 40;
+    const inp = $('input', 'text'); inp.type = 'text'; inp.placeholder = '이름'; inp.maxLength = 40; inp.value = guestName; inp.oninput = () => { guestName = inp.value; };   // 치는 중에 화면이 다시 그려져도 이름이 남게
     const go = $('button', 'btn primary', '시작'); go.type = 'button';
-    const run = async () => { if (!inp.value.trim()) { inp.focus(); return; } await store.signIn({ name: inp.value }); render(); };
+    const run = async () => { if (!inp.value.trim()) { inp.focus(); return; } await store.signIn({ name: inp.value }); guestName = ''; render(); };
     go.onclick = run; inp.onkeydown = e => { if (e.key === 'Enter') run(); };
     row.append(inp, go); p.appendChild(row);
   }
